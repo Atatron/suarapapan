@@ -31,6 +31,21 @@ npm run dev
 3. Klik **Buka papan**, seret jendelanya ke proyektor, klik **Layar penuh**.
 4. Tahan tombol **Spasi** (atau clicker presentasi), ucapkan kalimat, lalu lepaskan.
 
+## Model IndoBERT (pemahaman kalimat)
+
+Bobot model (±500 MB) tidak disimpan di GitHub. Buat ulang dalam ±2 menit dengan GPU:
+
+```bash
+cd ml
+.venv\Scripts\pip install torch --index-url https://download.pytorch.org/whl/cu128
+.venv\Scripts\pip install transformers datasets seqeval accelerate matplotlib
+.venv\Scripts\python buat_dataset.py      # 3.200 kalimat berlabel → data/
+.venv\Scripts\python latih_ner.py         # → model/indobert-suarapapan, hasil/metrik_latih.json
+.venv\Scripts\python evaluasi.py          # IndoBERT vs LLM vs gabungan → hasil/perbandingan.md
+```
+
+Server memakai IndoBERT lebih dulu. Jika keyakinannya di bawah 85%, kalimat diteruskan ke LLM (Ollama).
+
 ## Struktur
 
 | Folder | Isi |

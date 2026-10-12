@@ -63,11 +63,11 @@ export default function Guru() {
     // karena guru biasanya akan menyetujuinya.
     const dasar = pratinjauRef.current?.adegan ?? papanRef.current;
     try {
-      const { hasil, ms, sumber } = await uraikan(kalimat, konteks(dasar));
+      const { hasil, ms, sumber, yakin } = await uraikan(kalimat, konteks(dasar));
       const r = terapkan(dasar, hasil);
       kirimCaption(kalimat, false, kataSorot(hasil));
       setLog((l) => [{
-        id: `${Date.now()}-${Math.random()}`, kalimat, ms, sumber,
+        id: `${Date.now()}-${Math.random()}`, kalimat, ms, sumber, yakin,
         ringkas: r.berubah ? deskripsi(r.adegan) : 'Hanya caption (tidak ada benda).',
         catatan: r.catatan,
       }, ...l].slice(0, 30));
@@ -155,7 +155,11 @@ export default function Guru() {
   };
   const kirimKetik = (e) => { e.preventDefault(); masukkan(ketik); setKetik(''); };
 
-  const status = kesehatan === null ? 'memeriksa…' : !kesehatan.server ? 'server ML mati' : !kesehatan.ollama ? 'Ollama belum siap' : 'siap';
+  const status = kesehatan === null ? 'memeriksa…'
+    : !kesehatan.server ? 'server ML mati'
+      : kesehatan.indobert && kesehatan.ollama ? 'siap'
+        : kesehatan.indobert ? 'IndoBERT siap, LLM cadangan mati'
+          : kesehatan.ollama ? 'hanya LLM (IndoBERT belum dilatih)' : 'model belum siap';
 
   return (
     <main className="guru">
@@ -242,7 +246,7 @@ export default function Guru() {
               {log.map((l) => (
                 <li key={l.id}>
                   <p className="log-kalimat">“{l.kalimat}”</p>
-                  <p className="log-hasil">{l.ringkas} <span>{l.sumber} · {l.ms} ms</span></p>
+                  <p className="log-hasil">{l.ringkas} <span>{l.sumber} · {Math.round(l.ms)} ms{l.yakin != null ? ` · yakin ${Math.round(l.yakin * 100)}%` : ''}</span></p>
                 </li>
               ))}
             </ol>

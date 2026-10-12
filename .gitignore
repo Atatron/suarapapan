@@ -7,4 +7,4 @@ __pycache__/
 .env.*
 ml/install_torch.log
 ml/model/
-ml/hasil/
+ml/hasil_latih.log

@@ -1,0 +1,39 @@
+[
+  {
+    "nama": "IndoBERT (model kami)",
+    "benar": 40,
+    "total": 40,
+    "akurasi": 1.0,
+    "latensi_median_ms": 9.1,
+    "latensi_p90_ms": 12.7,
+    "sumber": {
+      "indobert": 40
+    },
+    "salah": []
+  },
+  {
+    "nama": "LLM qwen2.5:7b-instruct",
+    "benar": 40,
+    "total": 40,
+    "akurasi": 1.0,
+    "latensi_median_ms": 749.0,
+    "latensi_p90_ms": 908,
+    "sumber": {
+      "qwen2.5:7b-instruct": 40
+    },
+    "salah": []
+  },
+  {
+    "nama": "Gabungan (IndoBERT, cadangan qwen2.5:7b-instruct)",
+    "benar": 40,
+    "total": 40,
+    "akurasi": 1.0,
+    "latensi_median_ms": 6.9,
+    "latensi_p90_ms": 9.9,
+    "sumber": {
+      "indobert": 39,
+      "qwen2.5:7b-instruct": 1
+    },
+    "salah": []
+  }
+]

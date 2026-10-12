@@ -7,11 +7,15 @@ import os
 import re
 import time
 from contextlib import asynccontextmanager
+from pathlib import Path
 
 import httpx
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 
+from bahasa import AKSI_KE_ENUM, normalkan_benda, tokenisasi
+
+MODEL_NER = Path(__file__).parent / "model" / "indobert-suarapapan"
 OLLAMA_URL = "http://127.0.0.1:11434/api/chat"
 OLLAMA_MODEL = os.environ.get("SUARAPAPAN_LLM", "qwen2.5:7b-instruct")
 
@@ -71,8 +75,7 @@ CONTOH = [
 def normalkan_jenis(teks: str) -> str:
     t = teks.strip().lower()
     t = re.sub(r"^(ekor|buah|biji|batang|lembar|orang)\s+", "", t)
-    m = re.fullmatch(r"(\w+)-\1", t)  # kelinci-kelinci → kelinci
-    return m.group(1) if m else t
+    return normalkan_benda(t)  # kelinci-kelinci → kelinci, tetapi kupu-kupu tetap kupu-kupu
 
 
 def rapikan(h: dict) -> dict:
@@ -101,11 +104,21 @@ class Permintaan(BaseModel):
 
 
 http = httpx.AsyncClient(timeout=180)
+AMBANG_YAKIN = float(os.environ.get("SUARAPAPAN_AMBANG", "0.85"))
+ner = None  # PengenalNER, dimuat saat server menyala jika model sudah dilatih
 
 
 @asynccontextmanager
 async def lifespan(_app):
-    # Memuat model ke GPU sekali di awal (bisa 30–60 detik), supaya kalimat
+    global ner
+    if MODEL_NER.exists():
+        from ner import PengenalNER
+        ner = PengenalNER(MODEL_NER)
+        ner.urai("pemanasan model", "kosong")
+        print(f"IndoBERT dimuat dari {MODEL_NER} ({ner.perangkat}).")
+    else:
+        print("Model IndoBERT belum ada; semua kalimat memakai LLM. Jalankan latih_ner.py dulu.")
+    # Memuat LLM ke GPU sekali di awal (bisa 30–60 detik), supaya kalimat
     # pertama guru di kelas tidak gagal karena menunggu model dimuat.
     try:
         await http.post(OLLAMA_URL, json={"model": OLLAMA_MODEL, "messages": [], "keep_alive": "30m"})
@@ -124,7 +137,7 @@ async def kesehatan():
         ollama = OLLAMA_MODEL in r.text
     except httpx.HTTPError:
         ollama = False
-    return {"server": True, "ollama": ollama, "model": OLLAMA_MODEL}
+    return {"server": True, "ollama": ollama, "model": OLLAMA_MODEL, "indobert": ner is not None}
 
 
 @app.post("/api/parse")
@@ -132,13 +145,30 @@ async def parse(req: Permintaan):
     kalimat = req.kalimat.strip()
     if not kalimat:
         raise HTTPException(400, "Kalimat kosong.")
-    return await tanya_llm(kalimat, req.konteks, OLLAMA_MODEL)
+    return await urai_gabungan(kalimat, req.konteks)
+
+
+async def urai_gabungan(kalimat: str, konteks: str) -> dict:
+    """IndoBERT dulu (±50 ms). LLM hanya untuk kalimat yang membuat IndoBERT ragu."""
+    if ner is not None:
+        r = ner.urai(kalimat, konteks)
+        if r["yakin"] >= AMBANG_YAKIN:
+            return {"hasil": r["hasil"], "sumber": "indobert", "ms": r["ms"], "yakin": r["yakin"]}
+        try:
+            llm = await tanya_llm(kalimat, konteks, OLLAMA_MODEL)
+        except HTTPException:
+            # LLM mati: lebih baik jawaban IndoBERT yang ragu daripada tidak ada apa-apa
+            return {"hasil": r["hasil"], "sumber": "indobert (LLM tidak tersedia)", "ms": r["ms"], "yakin": r["yakin"]}
+        llm["ms"] = round(llm["ms"] + r["ms"])
+        llm["yakin"] = r["yakin"]
+        return llm
+    return await tanya_llm(kalimat, konteks, OLLAMA_MODEL)
 
 
 async def tanya_llm(kalimat: str, konteks: str, model: str) -> dict:
     pesan = [{"role": "system", "content": SISTEM}]
-    for konteks, k, jawab in CONTOH:
-        pesan.append({"role": "user", "content": f"Adegan saat ini: {konteks}\nKalimat: {k}"})
+    for konteks_contoh, k, jawab in CONTOH:
+        pesan.append({"role": "user", "content": f"Adegan saat ini: {konteks_contoh}\nKalimat: {k}"})
         pesan.append({"role": "assistant", "content": jawab})
     pesan.append({"role": "user", "content": f"Adegan saat ini: {konteks}\nKalimat: {kalimat}"})
 
@@ -155,4 +185,10 @@ async def tanya_llm(kalimat: str, konteks: str, model: str) -> dict:
         hasil = rapikan(json.loads(r.json()["message"]["content"]))
     except (KeyError, ValueError) as e:
         raise HTTPException(502, f"Jawaban model tidak bisa dibaca: {e}")
+    # LLM kadang mengarang aksi ("kue berenang"). Aksi hanya dipakai jika kata
+    # kerjanya memang diucapkan guru.
+    kata = set(tokenisasi(kalimat))
+    for e in hasil["entitas"]:
+        if not any(AKSI_KE_ENUM.get(k) == e["aksi"] for k in kata):
+            e["aksi"] = "diam"
     return {"hasil": hasil, "sumber": model, "ms": round((time.perf_counter() - mulai) * 1000)}

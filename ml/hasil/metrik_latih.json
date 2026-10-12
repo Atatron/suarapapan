@@ -1,0 +1,178 @@
+{
+  "model_dasar": "indobenchmark/indobert-base-p1",
+  "konfigurasi": {
+    "lr": 3e-05,
+    "batch": 16,
+    "epoch": 5,
+    "max_len": 64,
+    "warmup": 0.1,
+    "seed": 2026
+  },
+  "perangkat": "NVIDIA GeForce RTX 5060 Laptop GPU",
+  "jumlah_data": {
+    "latih": 2560,
+    "validasi": 320,
+    "uji_templat": 320
+  },
+  "riwayat": [
+    {
+      "epoch": 1,
+      "loss": 0.3796,
+      "f1_validasi": 0.9952
+    },
+    {
+      "epoch": 2,
+      "loss": 0.0037,
+      "f1_validasi": 0.9976
+    },
+    {
+      "epoch": 3,
+      "loss": 0.0003,
+      "f1_validasi": 0.9976
+    },
+    {
+      "epoch": 4,
+      "loss": 0.0003,
+      "f1_validasi": 0.9988
+    },
+    {
+      "epoch": 5,
+      "loss": 0.0004,
+      "f1_validasi": 0.9988
+    }
+  ],
+  "f1_validasi_terbaik": 0.9988,
+  "uji_templat": {
+    "AKSI": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 58.0
+    },
+    "BENDA": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 281.0
+    },
+    "JUMLAH": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 270.0
+    },
+    "PERISTIWA": {
+      "precision": 0.9925,
+      "recall": 1.0,
+      "f1-score": 0.9962,
+      "support": 132.0
+    },
+    "POSISI": {
+      "precision": 1.0,
+      "recall": 0.9667,
+      "f1-score": 0.9831,
+      "support": 30.0
+    },
+    "TEMPAT": {
+      "precision": 0.988,
+      "recall": 1.0,
+      "f1-score": 0.9939,
+      "support": 82.0
+    },
+    "micro avg": {
+      "precision": 0.9977,
+      "recall": 0.9988,
+      "f1-score": 0.9982,
+      "support": 853.0
+    },
+    "macro avg": {
+      "precision": 0.9967,
+      "recall": 0.9944,
+      "f1-score": 0.9955,
+      "support": 853.0
+    },
+    "weighted avg": {
+      "precision": 0.9977,
+      "recall": 0.9988,
+      "f1-score": 0.9982,
+      "support": 853.0
+    }
+  },
+  "confusion_matrix": {
+    "label": [
+      "O",
+      "JUMLAH",
+      "BENDA",
+      "AKSI",
+      "TEMPAT",
+      "POSISI",
+      "PERISTIWA"
+    ],
+    "nilai": [
+      [
+        1289,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      [
+        0,
+        315,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        281,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        58,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        82,
+        0,
+        0
+      ],
+      [
+        2,
+        0,
+        0,
+        0,
+        1,
+        91,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        175
+      ]
+    ]
+  },
+  "durasi_detik": 70
+}
