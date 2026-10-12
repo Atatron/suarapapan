@@ -1,0 +1,19 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "api",
+      "runtimeExecutable": "C:\\Users\\ATA\\suarapapan\\ml\\.venv\\Scripts\\python.exe",
+      "runtimeArgs": ["-m", "uvicorn", "serve:app", "--port", "8000", "--app-dir", "C:\\Users\\ATA\\suarapapan\\ml"],
+      "cwd": "C:\\Users\\ATA\\suarapapan\\ml",
+      "port": 8000
+    },
+    {
+      "name": "web",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["--prefix", "C:\\Users\\ATA\\suarapapan\\web", "run", "dev"],
+      "cwd": "C:\\Users\\ATA\\suarapapan\\web",
+      "port": 5173
+    }
+  ]
+}
