@@ -67,6 +67,13 @@ Server memakai IndoBERT lebih dulu. Jika keyakinannya di bawah 85%, kalimat dite
 | `ml/serve.py` | Server `/api/parse`: kalimat → JSON adegan |
 | `ml/bandingkan_llm.py` | Uji akurasi dan kecepatan model pada kalimat uji |
 
+## Gambar
+
+192 benda + 22 tempat kartun ada di `web/public/aset/` (hasil generate, dipotong per
+benda). Dibuat ulang dari sprite sheet dengan `tools/bangun_aset.py`; pencarian
+kata → gambar ada di `web/src/scene/pustaka.js`. Benda tanpa gambar memakai
+emoji pilihan Gemini.
+
 ## Tes
 
 ```bash

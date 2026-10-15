@@ -70,7 +70,9 @@ Ubah SATU kalimat guru menjadi JSON adegan. Aturan:
   "pindah" jika benda dipindah ke letak lain; isi "posisi" dengan letak barunya.
   "posisi" pada peristiwa selain "pindah" diisi "".
   Jika kalimat mengubah benda yang sudah ada, isi "peristiwa" dan biarkan "entitas" kosong.
-- "latar" = tempat adegan (rumput, kolam, taman, langit, meja, kelas, pasar, kebun) atau "".
+- "latar" = tempat adegan, pilih SATU yang paling cocok dari: rumput, hutan, kebun, sawah, peternakan, gunung,
+  sungai, danau, kolam, laut, bawah-laut, pantai, dapur, kamar, kelas, sekolah, pasar, kota, jalan-desa, gurun,
+  salju, kebun-binatang, langit, taman. Jika tidak ada yang cocok atau tempat tidak disebut, isi "".
 - "konsep" = membilang (menghitung benda), penjumlahan, pengurangan, pecahan, posisi, atau tidak_ada.
 - "pertanyaan" = kalimat soal jika guru bertanya ("ada berapa kelinci sekarang?"), selain itu "".
   "tanya_benda" = benda yang ditanyakan jumlahnya, atau "" jika tidak ada.

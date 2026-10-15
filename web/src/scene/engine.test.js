@@ -1,6 +1,8 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { ADEGAN_KOSONG, terapkan, yangAda, konteks, deskripsi, uraiPosisi } from './engine.js';
+import { cariGambar, cariTempat, _untukTes } from './pustaka.js';
+import { existsSync } from 'node:fs';
 import { rapikan, urutkanModel, uraiGemini, _setelUlangUntukTes, emojiSah } from '../../api/_urai.js';
 
 const tigaKelinci = {
@@ -224,4 +226,30 @@ test('emoji: hanya emoji asli yang diterima, dan ikut ke benda yang ditambahkan'
   assert.equal(a.objek[0].emoji, '🐅');
   a = terapkan(a, { entitas: [], peristiwa: [{ tipe: 'tambah', target: 'harimau', jumlah: 1 }] }).adegan;
   assert.equal(a.objek[2].emoji, '🐅');
+});
+
+// ---------- pustaka gambar kartun ----------
+
+test('pustaka: semua file gambar ada dan semua alias menunjuk ke gambar yang ada', () => {
+  const { OBJ, TEMPAT, ALIAS_OBJ, ALIAS_TEMPAT } = _untukTes;
+  assert.equal(Object.keys(OBJ).length, 192);
+  assert.equal(Object.keys(TEMPAT).length, 22);
+  for (const n of Object.keys(OBJ)) assert.ok(existsSync(new URL(`../../public/aset/obj/${n}.webp`, import.meta.url)), `obj/${n}`);
+  for (const n of Object.keys(TEMPAT)) assert.ok(existsSync(new URL(`../../public/aset/tempat/${n}.webp`, import.meta.url)), `tempat/${n}`);
+  for (const [a, v] of Object.entries(ALIAS_OBJ)) assert.ok(OBJ[v], `alias ${a} → ${v}`);
+  for (const [a, v] of Object.entries(ALIAS_TEMPAT)) assert.ok(TEMPAT[v], `alias ${a} → ${v}`);
+});
+
+test('pustaka: pencarian benda dan tempat', () => {
+  assert.equal(cariGambar('harimau'), 'harimau');
+  assert.equal(cariGambar('Kelinci-kelinci'), 'kelinci');
+  assert.equal(cariGambar('kuda nil'), 'kuda-nil');
+  assert.equal(cariGambar('anak kucing'), 'kucing');
+  assert.equal(cariGambar('apel merah'), 'apel');
+  assert.equal(cariGambar('macan'), 'harimau');
+  assert.equal(cariGambar('bajaj'), null);
+  assert.equal(cariTempat('di hutan lebat'), 'hutan');
+  assert.equal(cariTempat('kebun binatang'), 'kebun-binatang');
+  assert.equal(cariTempat('langit'), null, 'tanpa gambar → tetap pakai latar CSS');
+  assert.equal(cariTempat(''), null);
 });

@@ -108,10 +108,10 @@ button { font: inherit; }
 
 .obj { position: relative; background: none; border: none; padding: 0; color: inherit; cursor: default; }
 .obj:not(:disabled) { cursor: pointer; }
-.obj.ukuran-besar { width: 22%; }
-.obj.ukuran-sedang { width: 14%; }
-.obj.ukuran-kecil { width: 10%; }
-.obj.ukuran-mini { width: 7.5%; }
+.obj.ukuran-besar { width: 27%; }
+.obj.ukuran-sedang { width: 19%; }
+.obj.ukuran-kecil { width: 12.5%; }
+.obj.ukuran-mini { width: 9%; }
 .obj-gerak { display: block; }
 .benda-svg { display: block; width: 100%; height: auto; overflow: visible; }
 .benda-cadangan { display: grid; justify-items: center; }
@@ -203,7 +203,7 @@ button { font: inherit; }
 .adegan-posisi { justify-content: flex-end; }
 .posisi { position: relative; z-index: 1; flex: 1; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; padding-top: 6%; touch-action: none; }
 /* Kotak acuan berukuran sama dengan gambar acuan (200×160), jadi zona bisa diatur dalam persen. */
-.posisi-acuan { position: relative; width: min(36cqw, 52cqh); aspect-ratio: 200 / 160; }
+.posisi-acuan { position: relative; width: min(34cqw, 42cqh); aspect-ratio: 200 / 160; }
 .posisi-acuan-gambar { position: absolute; inset: 0; }
 .posisi-acuan-gambar .benda-cadangan { height: 100%; align-content: end; }
 .posisi-zona { position: absolute; display: flex; align-items: flex-end; justify-content: center; gap: 4%; }
@@ -225,3 +225,12 @@ button { font: inherit; }
 @media (prefers-reduced-motion: no-preference) {
   .posisi-benda.status-datang { animation: masuk 0.6s ease-out both; animation-delay: var(--tunda); }
 }
+
+/* ---------- gambar kartun ---------- */
+.benda-img { display: block; width: 100%; height: auto; pointer-events: none; user-select: none; }
+/* Pemandangan ada di belakang benda dan dibuat redup, supaya yang dihitung siswa tetap yang paling jelas. */
+.adegan-pemandangan {
+  position: absolute; left: 4%; right: 4%; top: 4%; bottom: 14%; width: 92%; height: 82%;
+  object-fit: contain; object-position: center bottom; opacity: 0.5; z-index: 0; pointer-events: none; user-select: none;
+}
+.beranda-gambar { width: 100%; height: auto; border-radius: 14px; border: 1px solid var(--garis); }

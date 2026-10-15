@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Benda } from './aset.jsx';
 import { deskripsi, uraiPosisi } from './engine.js';
 import { Pecahan, PanggungPosisi } from './Matematika.jsx';
+import { cariTempat, urlTempat } from './pustaka.js';
 
 const ukuranUntuk = (n) => (n <= 3 ? 'besar' : n <= 6 ? 'sedang' : n <= 12 ? 'kecil' : 'mini');
 const slug = (s) => (s || 'kosong').toLowerCase().replace(/[^a-z]+/g, '-');
@@ -32,9 +33,11 @@ export default function Adegan({ adegan, interaktif = false, kecil = false }) {
     );
   }
 
+  const tempat = cariTempat(adegan.latar);
   return (
     <div className={kelas}>
       <p className="sr-only" aria-live="polite">{deskripsi(adegan)}</p>
+      {tempat ? <img className="adegan-pemandangan" src={urlTempat(tempat)} alt="" aria-hidden="true" draggable={false} /> : null}
       <div className="adegan-panggung">
         {adegan.objek.map((o, i) => (o.bagi ? (
           <div key={o.id} className={`obj obj-pecahan status-${o.status}`}>

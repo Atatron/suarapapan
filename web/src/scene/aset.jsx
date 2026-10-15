@@ -1,3 +1,5 @@
+import { cariGambar, urlGambar } from './pustaka.js';
+
 // Pustaka gambar benda. Semua digambar dengan bentuk sederhana dalam gaya yang
 // sama (viewBox 200×160), supaya adegan terasa konsisten bagi siswa autis.
 // Benda yang belum punya gambar memakai emoji + label teks.
@@ -182,6 +184,10 @@ const cariEmoji = (jenis) => EMOJI[jenis] || EMOJI[jenis.replace(/[\s-]+/g, '_')
 
 /** Gambar buatan sendiri dulu, lalu kamus emoji, lalu emoji pilihan Gemini. */
 export function Benda({ jenis, indeks = 0, emoji }) {
+  const nama = cariGambar(jenis);
+  if (nama) {
+    return <img src={urlGambar(nama)} className="benda-img" alt={jenis} draggable={false} decoding="async" />;
+  }
   const kunci = PETA_SINONIM[jenis] || jenis;
   const gambar = GAMBAR[kunci];
   if (gambar) {
