@@ -548,7 +548,7 @@ test('latar: dipilih dari benda saat guru tidak menyebut tempat', () => {
 });
 
 test('latar: yang paling banyak cocok menang; benda tak dikenal diabaikan', () => {
-  assert.equal(pilihLatar(ob('singa', 'gajah', 'harimau')).id, 'savanna', 'dua dari tiga cocok untuk sabana');
+  assert.equal(pilihLatar(ob('singa', 'gajah', 'harimau')).id, 'savanna', 'benda pertama menentukan');
   assert.equal(pilihLatar(ob('bajaj', 'bajaj', 'ikan')).id, 'underwater');
   assert.equal(pilihLatar(ob('bajaj')).id, 'classroom', 'tak ada yang dikenal dan tak ada tempat → ruang kelas');
 });
@@ -591,4 +591,90 @@ test('rapikan: "di dalam laut" adalah tempat, bukan pelajaran posisi; "di bawah 
   assert.equal(rapikan(dasar('di atas rumput', 'rumput'), 'x').entitas[0].posisi, '');
   assert.equal(rapikan(dasar('di bawah meja', ''), 'kucing di bawah meja').entitas[0].posisi, 'di bawah meja');
   assert.equal(rapikan(dasar('di atas kursi', 'kelas'), 'x').entitas[0].posisi, 'di atas kursi');
+});
+
+// ---------- menambah karakter ke adegan yang ada ----------
+
+const harimau = { entitas: [{ jenis: 'harimau', jumlah: 1, aksi: 'diam', posisi: '' }], peristiwa: [], latar: 'hutan' };
+const tigaKelinciBaru = { entitas: [{ jenis: 'kelinci', jumlah: 3, aksi: 'diam', posisi: '' }], peristiwa: [] };
+
+test('gabung: kelinci dimasukkan ke gambar berisi harimau, harimau tidak hilang', () => {
+  const a = terapkan(ADEGAN_KOSONG, harimau).adegan;
+  const r = terapkan(a, { ...tigaKelinciBaru, gabung: true });
+  assert.equal(yangAda(r.adegan, 'harimau').length, 1);
+  assert.equal(yangAda(r.adegan, 'kelinci').length, 3);
+  assert.equal(r.adegan.latar, 'hutan', 'latar lama dipertahankan');
+  assert.match(r.penjelasan.join(' '), /3 kelinci dimasukkan ke papan/);
+});
+
+test('gabung: pilihan guru di panel (opsi) sama dengan gabung dari kalimat; tanpa itu adegan diganti', () => {
+  const a = terapkan(ADEGAN_KOSONG, harimau).adegan;
+  const lewatOpsi = terapkan(a, tigaKelinciBaru, { gabung: true }).adegan;
+  assert.equal(yangAda(lewatOpsi, 'harimau').length, 1);
+  const tanpa = terapkan(a, tigaKelinciBaru).adegan;
+  assert.equal(yangAda(tanpa, 'harimau').length, 0, 'perilaku lama: benda baru memulai adegan baru');
+  assert.equal(yangAda(tanpa, 'kelinci').length, 3);
+});
+
+test('tambah: benda yang belum ada masuk tanpa soal "0 + n"', () => {
+  const a = terapkan(ADEGAN_KOSONG, harimau).adegan;
+  const r = terapkan(a, { entitas: [], peristiwa: [{ tipe: 'tambah', target: 'kelinci', jumlah: 3 }] });
+  assert.equal(yangAda(r.adegan, 'kelinci').length, 3);
+  assert.equal(yangAda(r.adegan, 'harimau').length, 1);
+  assert.equal(r.adegan.soal, null);
+  assert.equal(r.alternatif, null);
+});
+
+test('tambah: kelinci sudah 3, "datang 3" → 6 dengan penjelasan dan tafsir alternatif "hanya 3"', () => {
+  let a = terapkan(ADEGAN_KOSONG, harimau).adegan;
+  a = terapkan(a, { ...tigaKelinciBaru, gabung: true }).adegan;
+  const r = terapkan(a, { entitas: [], peristiwa: [{ tipe: 'tambah', target: 'kelinci', jumlah: 3 }] });
+  assert.equal(yangAda(r.adegan, 'kelinci').length, 6);
+  assert.equal(r.penjelasan[0], '3 kelinci + 3 kelinci yang datang = 6.');
+  assert.deepEqual(r.adegan.soal.teks, '3 + 3 = ?');
+  assert.equal(r.alternatif.label, 'Maksudnya hanya 3 kelinci');
+  assert.equal(yangAda(r.alternatif.adegan, 'kelinci').length, 3);
+  assert.equal(yangAda(r.alternatif.adegan, 'harimau').length, 1, 'benda lain tetap');
+  // papan asli tidak berubah
+  assert.equal(yangAda(a, 'kelinci').length, 3);
+});
+
+test('rapikan: satu kejadian dilaporkan dua kali (entitas dan tambah) dihitung sekali', () => {
+  const h = () => ({
+    entitas: [{ jenis: 'kelinci', jumlah: 3, aksi: 'diam', posisi: '', bagi: 0, emoji: '', emoji_acuan: '' }],
+    peristiwa: [{ tipe: 'tambah', target: 'kelinci', jumlah: 3, posisi: '' }],
+    latar: '', konsep: 'penjumlahan', pertanyaan: '', tanya_benda: '',
+  });
+  const r = rapikan(h(), 'adapun kelinci yang datang sebanyak 3', 'harimau: 1');
+  assert.equal(r.peristiwa.length, 0, 'hanya entitas yang tersisa');
+  assert.equal(r.entitas.length, 1);
+  assert.equal(r.gabung, true, '"datang" berarti masuk ke adegan yang ada');
+  // dua peristiwa sungguhan ("lalu ... lagi") tetap dua
+  const dua = rapikan(h(), 'lima apel, lalu tiga kelinci lagi', 'kosong');
+  assert.equal(dua.peristiwa.length, 1);
+  // jumlah berbeda juga tetap dua
+  const beda = h(); beda.peristiwa[0].jumlah = 2;
+  assert.equal(rapikan(beda, 'tiga kelinci datang dua lagi', 'kosong').peristiwa.length, 1);
+});
+
+test('rapikan: kata "juga/bersama/tambahkan" menandai gabung; kalimat biasa tidak', () => {
+  const dasar = { entitas: [{ jenis: 'kelinci', jumlah: 3, aksi: 'diam', posisi: '', bagi: 0, emoji: '', emoji_acuan: '' }], peristiwa: [], latar: '', konsep: 'membilang', pertanyaan: '', tanya_benda: '' };
+  assert.equal(rapikan({ ...dasar }, 'ada juga tiga kelinci', 'harimau: 1').gabung, true);
+  assert.equal(rapikan({ ...dasar }, 'tambahkan tiga kelinci', 'harimau: 1').gabung, true);
+  assert.equal(rapikan({ ...dasar }, 'ada tiga kelinci di rumput', 'kosong').gabung, false);
+  // bendera dari model saja tidak cukup: "ada tiga kelinci di rumput" membuka adegan baru
+  assert.equal(rapikan({ ...dasar, gabung: true, latar: 'rumput' }, 'ada tiga kelinci berlari di rumput', 'harimau: 1').gabung, false);
+});
+
+test('latar: menambah kelinci ke papan berisi harimau tetap di hutan', () => {
+  assert.equal(pilihLatar(ob('harimau', 'kelinci', 'kelinci', 'kelinci')).id, 'jungle');
+  assert.equal(pilihLatar(ob('kelinci', 'harimau')).id, 'farm', 'urutan masuk menentukan');
+});
+
+test('tambah dengan "lagi" tidak menawarkan tafsir "hanya N"', () => {
+  const a = terapkan(ADEGAN_KOSONG, { entitas: [{ jenis: 'kelinci', jumlah: 3, aksi: 'diam', posisi: '' }], peristiwa: [] }).adegan;
+  const r = terapkan(a, { entitas: [], peristiwa: [{ tipe: 'tambah', target: 'kelinci', jumlah: 2 }], tambahEksplisit: true });
+  assert.equal(yangAda(r.adegan, 'kelinci').length, 5);
+  assert.equal(r.alternatif, null);
+  assert.equal(r.penjelasan[0], '3 kelinci + 2 kelinci yang datang = 5.');
 });

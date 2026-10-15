@@ -6,7 +6,8 @@
 //   1. Guru menyebut tempat ("di hutan") → latar dari daftar calon tempat itu.
 //      Jika salah satu calon juga cocok untuk benda di papan, calon itu dipilih
 //      ("kelinci di rumput" → peternakan, bukan padang kosong).
-//   2. Tidak disebut → latar yang paling banyak cocok untuk benda di papan.
+//   2. Tidak disebut → latar untuk benda yang PERTAMA ada di papan. Menambah karakter
+//      lain ("tambahkan kelinci" ke papan berisi harimau) tidak mengganti pemandangan.
 //   3. Papan kosong atau benda belum dikenal → ruang kelas.
 import data from './latar.json' with { type: 'json' };
 import { cariGambar, bersih, cariTempat } from './pustaka.js';
@@ -106,8 +107,8 @@ export function pilihLatar(adegan) {
     id = calon.find((c) => suara.has(c)) ?? calon[0];
     alasan = 'tempat disebut guru';
   } else if (suara.size) {
-    id = [...suara.entries()].sort((a, b) => b[1] - a[1])[0][0];
-    alasan = 'cocok dengan benda di papan';
+    id = [...suara.keys()][0]; // Map menyimpan urutan masuk: benda yang pertama dikenal
+    alasan = 'cocok dengan benda pertama di papan';
   } else {
     // Papan kosong, atau benda yang belum ada gambarnya: ruang kelas yang tenang,
     // bukan papan hijau polos.

@@ -47,9 +47,10 @@ export const SKEMA = {
     },
     pertanyaan: { type: 'STRING' },
     tanya_benda: { type: 'STRING' },
+    gabung: { type: 'BOOLEAN' },
   },
-  required: ['entitas', 'latar', 'konsep', 'peristiwa', 'pertanyaan', 'tanya_benda'],
-  propertyOrdering: ['entitas', 'latar', 'konsep', 'peristiwa', 'pertanyaan', 'tanya_benda'],
+  required: ['entitas', 'latar', 'konsep', 'peristiwa', 'pertanyaan', 'tanya_benda', 'gabung'],
+  propertyOrdering: ['entitas', 'latar', 'konsep', 'peristiwa', 'pertanyaan', 'tanya_benda', 'gabung'],
 };
 
 export const SISTEM = `Kamu adalah pengurai kalimat guru SD (kelas 1–3, matematika) untuk aplikasi SuaraPapan.
@@ -64,12 +65,17 @@ Ubah SATU kalimat guru menjadi JSON adegan. Aturan:
   "emoji_acuan" = satu emoji untuk benda acuan di "posisi" ("di bawah pohon" → 🌳), atau "" jika posisi kosong.
 - "peristiwa": perubahan pada benda yang SUDAH ADA di adegan saat ini.
   "hapus" untuk pergi, terbang pergi, dimakan, hilang, diambil, pecah, meletus.
-  "tambah" untuk datang, diberi lagi, dibeli lagi, bertambah.
+  "tambah" untuk benda yang SUDAH ADA di papan lalu bertambah: datang lagi, diberi lagi, dibeli lagi, bertambah.
+  Jika benda yang datang BELUM ada di papan, itu benda baru: tulis di "entitas", BUKAN di "peristiwa".
+  Jangan pernah menulis benda yang sama (dengan jumlah yang sama) di "entitas" dan di "peristiwa" sekaligus.
   "bagi" jika benda yang sudah ada dipotong/dibagi menjadi beberapa bagian sama besar; "jumlah" = banyak potongan.
   "ambil" jika beberapa POTONG dari benda yang sudah dibagi diambil atau dimakan; "jumlah" = banyak potongan.
   "pindah" jika benda dipindah ke letak lain; isi "posisi" dengan letak barunya.
   "posisi" pada peristiwa selain "pindah" diisi "".
   Jika kalimat mengubah benda yang sudah ada, isi "peristiwa" dan biarkan "entitas" kosong.
+- "gabung" = true jika kalimat MEMASUKKAN benda baru ke adegan yang sudah ada tanpa mengganti adegannya, misalnya
+  "ada juga tiga kelinci", "tiga kelinci datang", "kelinci ikut bergabung", "tambahkan seekor kelinci", "masukkan
+  kucing ke gambar". false jika kalimat memulai adegan baru atau tidak memperkenalkan benda.
 - "latar" = tempat adegan, pilih SATU yang paling cocok dari: rumput, hutan, kebun, sawah, peternakan, gunung,
   sungai, danau, kolam, laut, bawah-laut, pantai, dapur, kamar, kelas, sekolah, pasar, kota, jalan-desa, gurun,
   salju, kebun-binatang, langit, taman, taman-bermain, malam, rumah, dalam-rumah, bandara, pelabuhan, stasiun,
@@ -80,7 +86,7 @@ Ubah SATU kalimat guru menjadi JSON adegan. Aturan:
 - Jika kalimat tidak menggambarkan benda (salam, instruksi, pujian), kembalikan entitas dan peristiwa kosong dan konsep "tidak_ada".
 - Jangan mengarang benda yang tidak disebut guru.`;
 
-const kosong = { entitas: [], latar: '', konsep: 'tidak_ada', peristiwa: [], pertanyaan: '', tanya_benda: '' };
+const kosong = { entitas: [], latar: '', konsep: 'tidak_ada', peristiwa: [], pertanyaan: '', tanya_benda: '', gabung: false };
 const j = (o) => JSON.stringify({ ...kosong, ...o });
 
 export const CONTOH = [
@@ -100,6 +106,12 @@ export const CONTOH = [
     j({ konsep: 'posisi', peristiwa: [{ tipe: 'pindah', target: 'kucing', jumlah: 1, posisi: 'di atas meja' }] })],
   ['ikan: 7', 'Coba hitung, ada berapa ikan di kolam?',
     j({ konsep: 'membilang', pertanyaan: 'Ada berapa ikan di kolam?', tanya_benda: 'ikan' })],
+  ['harimau: 1', 'Ada juga tiga kelinci di sana.',
+    j({ entitas: [{ jenis: 'kelinci', jumlah: 3, aksi: 'diam', posisi: '', bagi: 0, emoji: '🐇', emoji_acuan: '' }], konsep: 'membilang', gabung: true })],
+  ['harimau: 1', 'Adapun kelinci yang datang sebanyak tiga.',
+    j({ entitas: [{ jenis: 'kelinci', jumlah: 3, aksi: 'diam', posisi: '', bagi: 0, emoji: '🐇', emoji_acuan: '' }], konsep: 'membilang', gabung: true })],
+  ['kelinci: 3', 'Lalu datang tiga kelinci lagi.',
+    j({ konsep: 'penjumlahan', peristiwa: [{ tipe: 'tambah', target: 'kelinci', jumlah: 3, posisi: '' }] })],
   ['kosong', 'Selamat pagi, anak-anak. Ayo duduk yang rapi.', j({})],
 ];
 
@@ -108,6 +120,10 @@ export const CONTOH = [
 // Kata tempat: "di dalam laut" menyebut tempat, bukan letak relatif terhadap sebuah benda.
 const TEMPAT_BUKAN_ACUAN = new Set(['laut', 'sungai', 'kolam', 'danau', 'hutan', 'kelas', 'rumput', 'kebun', 'sawah', 'pantai',
   'gunung', 'langit', 'taman', 'kota', 'pasar', 'dapur', 'kamar', 'sekolah', 'peternakan', 'desa', 'gurun', 'salju', 'udara', 'air']);
+// Kata yang berarti "masukkan ke adegan yang ada", bukan "mulai adegan baru".
+const KATA_GABUNG = /\b(datang|muncul|juga|bersama|ikut|menyusul|bergabung|masuk|tambahkan|menambahkan|masukkan|memasukkan|ditambahkan)\b/i;
+const KATA_TAMBAH_EKSPLISIT = /\b(lagi|tambahan|lainnya|lain)\b/i;
+const KATA_DUA_PERISTIWA = /\b(lagi|lalu|kemudian|setelah itu|serta)\b/i;
 const KATA_ULANG_TETAP = new Set(['kupu-kupu', 'kura-kura', 'laba-laba', 'biri-biri', 'undur-undur', 'ubur-ubur', 'lumba-lumba']);
 const AKSI_KE_ENUM = {
   berlari: 'lari', lari: 'lari', berjalan: 'lari', berlarian: 'lari', berkejaran: 'lari',
@@ -172,6 +188,19 @@ export function rapikan(h, kalimat, konteks = '') {
   const adaDiPapan = new Set(String(konteks).split(',').map((x) => x.split(':')[0].trim()).filter(Boolean));
   const target = new Set(hasil.peristiwa.map((p) => p.target));
   hasil.entitas = hasil.entitas.filter((e) => !(target.has(e.jenis) && adaDiPapan.has(e.jenis)));
+
+  // Model kadang melaporkan satu kejadian dua kali: "kelinci yang datang sebanyak 3" menjadi
+  // entitas kelinci 3 DAN tambah kelinci 3 (hasilnya 6). Jika bendanya belum ada di papan dan
+  // jumlahnya sama, itu satu kejadian, kecuali kalimat jelas memuat dua peristiwa ("lalu", "lagi").
+  if (!KATA_DUA_PERISTIWA.test(String(kalimat))) {
+    hasil.peristiwa = hasil.peristiwa.filter((p) => !(p.tipe === 'tambah' && !adaDiPapan.has(p.target)
+      && hasil.entitas.some((e) => e.jenis === p.target && e.jumlah === p.jumlah)));
+  }
+  // "gabung" hanya dari kata yang jelas (terukur: model menandai kalimat pembuka adegan baru sebagai gabung
+  // juga). Guru juga bisa menyalakannya lewat kotak centang di panel.
+  hasil.gabung = KATA_GABUNG.test(String(kalimat));
+  // "dua kelinci LAGI" jelas penjumlahan: tidak perlu menawarkan tafsir "hanya dua".
+  hasil.tambahEksplisit = KATA_TAMBAH_EKSPLISIT.test(String(kalimat));
 
   if (hasil.entitas.some((e) => e.bagi)) hasil.konsep = 'pecahan';
   else if (hasil.entitas.some((e) => /^(di|ke) /.test(e.posisi) && e.jumlah === 1)) hasil.konsep = 'posisi';

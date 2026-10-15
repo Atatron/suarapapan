@@ -40,14 +40,18 @@ function opsiAngka(jawaban) {
  * Mengembalikan { adegan, berubah, catatan }. berubah=false berarti kalimat
  * tidak menggambarkan apa pun (misalnya salam), jadi cukup caption saja.
  */
-export function terapkan(adegan, hasil) {
+export function terapkan(adegan, hasil, opsi = {}) {
   const entitas = hasil?.entitas ?? [];
+  // gabung: benda baru dimasukkan ke papan tanpa menghapus yang sudah ada (dari kalimat
+  // "ada juga ...", "... datang", atau pilihan guru di panel).
+  const gabung = opsi.gabung === true || hasil?.gabung === true;
+  const penjelasan = [];
   const peristiwa = [...(hasil?.peristiwa ?? [])]; // salinan: "ambil" tanpa potongan ditambahkan sebagai "hapus"
   const catatan = [];
   const bertanya = Boolean(hasil?.pertanyaan) && yangAda(adegan).length > 0;
 
   if (!entitas.length && !peristiwa.length && !bertanya) {
-    return { adegan, berubah: false, catatan };
+    return { adegan, berubah: false, catatan, penjelasan, alternatif: null };
   }
 
   // Objek yang sudah pergi di langkah sebelumnya dibuang, sisanya dianggap diam di tempat.
@@ -60,7 +64,7 @@ export function terapkan(adegan, hasil) {
     // sama juga mengubah benda lain yang sudah ada di papan, benda itu dipertahankan.
     const baru = new Set(entitas.map((e) => e.jenis));
     const dipakai = new Set(peristiwa.map((p) => p.target));
-    objek = objek.filter((o) => dipakai.has(o.jenis) && !baru.has(o.jenis));
+    if (!gabung) objek = objek.filter((o) => dipakai.has(o.jenis) && !baru.has(o.jenis));
     for (const e of entitas) {
       const n = batasi(e.jumlah);
       for (let i = 0; i < n && objek.length < BATAS_OBJEK; i++) {
@@ -72,6 +76,15 @@ export function terapkan(adegan, hasil) {
       }
     }
     if (objek.some((o) => o.bagi)) konsep = 'pecahan';
+  }
+
+  // Satu benda yang sudah ada ditambah lagi lewat entitas ("ada juga dua kelinci" saat kelinci
+  // sudah ada) sama artinya dengan penjumlahan: dicatat di sini untuk penjelasan dan alternatif.
+  const tambahan = jenisTambahan(adegan, hasil, gabung);
+  if (tambahan && entitas.length) {
+    penjelasan.push(`${tambahan.sebelum} ${tambahan.jenis} + ${tambahan.n} ${tambahan.jenis} yang datang = ${tambahan.sebelum + tambahan.n}.`);
+  } else if (gabung && entitas.length && yangAda(adegan).length) {
+    for (const e of entitas) penjelasan.push(`${batasi(e.jumlah)} ${e.jenis} dimasukkan ke papan.`);
   }
 
   for (const p of peristiwa) {
@@ -138,8 +151,14 @@ export function terapkan(adegan, hasil) {
         objek.push(o);
       }
       if (ditambah < n) catatan.push(`Papan dibatasi ${BATAS_OBJEK} benda.`);
-      konsep = 'penjumlahan';
-      soal = { teks: `${sebelum} + ${ditambah} = ?`, jawaban: sebelum + ditambah };
+      if (sebelum > 0) {
+        konsep = 'penjumlahan';
+        soal = { teks: `${sebelum} + ${ditambah} = ?`, jawaban: sebelum + ditambah };
+        penjelasan.push(`${sebelum} ${p.target} + ${ditambah} ${p.target} yang datang = ${sebelum + ditambah}.`);
+      } else {
+        // Belum ada sebelumnya: ini benda baru yang masuk, bukan soal "0 + n".
+        penjelasan.push(`${ditambah} ${p.target} dimasukkan ke papan.`);
+      }
     }
   }
 
@@ -156,11 +175,43 @@ export function terapkan(adegan, hasil) {
   }
   if (soal && !soal.opsi) soal.opsi = opsiAngka(soal.jawaban);
 
+  // Tafsir lain untuk "N kelinci datang" saat kelinci sudah ada: yang dimaksud mungkin hanya N.
+  let alternatif = null;
+  if (tambahan && !hasil?.tambahEksplisit) {
+    const tanpa = { ...adegan, objek: adegan.objek.filter((o) => !(o.jenis === tambahan.jenis && o.status !== 'pergi')) };
+    const alt = terapkan(tanpa, {
+      entitas: [{ jenis: tambahan.jenis, jumlah: tambahan.n, aksi: tambahan.contoh.aksi, posisi: tambahan.contoh.posisi, emoji: tambahan.contoh.emoji, emoji_acuan: tambahan.contoh.emojiAcuan }],
+      peristiwa: [], konsep: 'membilang', latar: hasil.latar,
+    }, { gabung: true });
+    alternatif = { label: `Maksudnya hanya ${tambahan.n} ${tambahan.jenis}`, adegan: alt.adegan };
+  }
+
   return {
     adegan: { objek, latar: hasil.latar || adegan.latar, konsep, soal, versi: adegan.versi + 1 },
     berubah: true,
     catatan,
+    penjelasan,
+    alternatif,
   };
+}
+
+/** Jika kalimat menambah benda yang SUDAH ada di papan, mengembalikan {jenis, n, sebelum, contoh}. */
+function jenisTambahan(adegan, hasil, gabung) {
+  const entitas = hasil?.entitas ?? [];
+  const peristiwa = hasil?.peristiwa ?? [];
+  let jenis = null;
+  let n = 0;
+  if (!entitas.length && peristiwa.length === 1 && peristiwa[0].tipe === 'tambah') {
+    jenis = peristiwa[0].target;
+    n = batasi(peristiwa[0].jumlah);
+  } else if (gabung && entitas.length === 1 && !peristiwa.length) {
+    jenis = entitas[0].jenis;
+    n = batasi(entitas[0].jumlah);
+  }
+  if (!jenis) return null;
+  const ada = yangAda(adegan, jenis);
+  if (!ada.length) return null;
+  return { jenis, n, sebelum: ada.length, contoh: ada[0] };
 }
 
 /** Ringkasan untuk LLM, contoh: "kelinci: 3, apel: 2". */

@@ -284,3 +284,14 @@ button { font: inherit; }
 .papan-panggung > .adegan { width: min(100cqw, 177.78cqh); height: min(100cqh, 56.25cqw); flex: none; }
 .papan .adegan.dengan-latar { border-radius: 18px; }
 .dengan-latar .benda-label { background: rgba(22, 48, 42, 0.82); color: var(--kapur); padding: 0.05em 0.6em; border-radius: 10px; }
+
+/* ---------- tambah karakter + penjelasan ---------- */
+.penjelasan { margin: 0; font-size: 15px; color: var(--hijau); font-weight: 600; }
+.pilih-karakter { grid-column: 1 / -1; }
+.pilih-karakter > summary { cursor: pointer; font-family: var(--font-judul); font-weight: 600; font-size: 17px; }
+.pilih-cari input { width: 100%; max-width: 420px; padding: 10px 12px; border-radius: 8px; border: 2px solid var(--garis); font: inherit; background: #fff; margin: 10px 0 4px; }
+.pilih-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(96px, 1fr)); gap: 8px; margin: 6px 0 14px; }
+.pilih-item { display: grid; justify-items: center; gap: 2px; padding: 6px 4px; border: 1px solid var(--garis); border-radius: 10px; background: #fff; cursor: pointer; font: inherit; color: var(--tinta); }
+.pilih-item:hover { border-color: var(--hijau); background: #F4F8F5; }
+.pilih-item img { width: 76px; height: auto; background: #E9EFE9; border-radius: 8px; }
+.pilih-item span { font-size: 13px; text-align: center; line-height: 1.2; }

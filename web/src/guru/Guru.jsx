@@ -6,6 +6,7 @@ import { suaraDidukung, buatPendengar } from '../lib/suara.js';
 import { uraikan, cekKesehatan, transkripsi } from '../lib/api.js';
 import { rekamDidukung, mulaiRekam, siapkanMik, mikSudahDiizinkan, pesanMik } from '../lib/rekam.js';
 import { kosakata } from '../scene/pustaka.js';
+import PilihKarakter from './PilihKarakter.jsx';
 
 const KATA_ANGKA = 'satu dua tiga empat lima enam tujuh delapan sembilan sepuluh sebelas belas puluh seratus'.split(' ');
 const TOMBOL_CLICKER = new Set(['PageDown', 'PageUp']);
@@ -42,6 +43,8 @@ export default function Guru() {
   const [kesehatan, setKesehatan] = useState(null);
   const [akurat, setAkurat] = useState(bacaPilihan);
   const [memeriksa, setMemeriksa] = useState(false);
+  const [gabung, setGabung] = useState(false);
+  const [tafsir, setTafsir] = useState(null); // tafsir lain untuk kalimat terakhir yang sudah tampil di papan
 
   // Ref dipakai di dalam fungsi async supaya selalu membaca nilai terbaru.
   const papanRef = useRef(papan);
@@ -65,6 +68,8 @@ export default function Guru() {
   const sesiRef = useRef(0);
   const masukkanRef = useRef(() => {});
   akuratRef.current = akurat;
+  const gabungRef = useRef(false);
+  gabungRef.current = gabung;
 
   const kirimCaption = (teks, sementaraFlag, sorot = []) => {
     if (!jedaRef.current) kirim({ type: 'caption', teks, sementara: sementaraFlag, sorot });
@@ -77,6 +82,7 @@ export default function Guru() {
     kirim({ type: 'adegan', adegan });
     pratinjauRef.current = null;
     setPratinjau(null);
+    setTafsir(null);
   }, []);
 
   // `awal` = { konteks, janji }: hasil urai yang sudah dimulai lebih dulu dari teks Chrome.
@@ -92,18 +98,21 @@ export default function Guru() {
       const konteksIni = konteks(dasar);
       const dariAwal = awal && awal.konteks === konteksIni ? await awal.janji : null;
       const { hasil, ms, sumber, yakin } = dariAwal ?? await uraikan(kalimat, konteksIni);
-      const r = terapkan(dasar, hasil);
+      const r = terapkan(dasar, hasil, { gabung: gabungRef.current });
       kirimCaption(kalimat, false, kataSorot(hasil));
       setLog((l) => [{
         id: `${Date.now()}-${Math.random()}`, kalimat, ms, sumber, yakin,
-        ringkas: r.berubah ? deskripsi(r.adegan) : 'Hanya caption (tidak ada benda).',
+        ringkas: r.berubah
+          ? `${deskripsi(r.adegan)}${r.penjelasan.length ? ` (${r.penjelasan.join(' ')})` : ''}`
+          : 'Hanya caption (tidak ada benda).',
         catatan: r.catatan,
       }, ...l].slice(0, 30));
       if (!r.berubah) return;
       if (otomatisRef.current) {
         tampilkan(r.adegan);
+        if (r.alternatif) setTafsir({ ...r.alternatif, penjelasan: r.penjelasan });
       } else {
-        const p = { adegan: r.adegan, kalimat, ms, catatan: r.catatan };
+        const p = { adegan: r.adegan, kalimat, ms, catatan: r.catatan, penjelasan: r.penjelasan, alternatif: r.alternatif };
         pratinjauRef.current = p;
         setPratinjau(p);
       }
@@ -274,6 +283,26 @@ export default function Guru() {
     kirim({ type: 'adegan', adegan: sebelumnya });
   };
   const buang = () => { pratinjauRef.current = null; setPratinjau(null); };
+  // Tafsir lain di pratinjau: "3 kelinci datang" dibaca sebagai "hanya 3", bukan 3 + 3.
+  const pakaiAlternatifPratinjau = () => {
+    const p = pratinjauRef.current;
+    if (!p?.alternatif) return;
+    const baru = { ...p, adegan: p.alternatif.adegan, alternatif: null, penjelasan: [`Dibaca sebagai: ${p.alternatif.label.replace('Maksudnya ', '').toLowerCase()}.`] };
+    pratinjauRef.current = baru;
+    setPratinjau(baru);
+  };
+  // Memasukkan satu karakter dari daftar langsung ke papan, tanpa mengganti isinya.
+  const tambahKarakter = (nama, label) => {
+    const dasar = pratinjauRef.current?.adegan ?? papanRef.current;
+    const r = terapkan(dasar, { entitas: [], peristiwa: [{ tipe: 'tambah', target: label, jumlah: 1 }], konsep: 'membilang' });
+    if (!r.berubah) return;
+    tampilkan(r.adegan);
+    setLog((l) => [{
+      id: `${Date.now()}-${Math.random()}`, kalimat: `+ ${label}`, ms: 0, sumber: 'dipilih guru', yakin: null,
+      ringkas: deskripsi(r.adegan), catatan: r.catatan,
+    }, ...l].slice(0, 30));
+    kirimCaption(`Ditambahkan: ${label}`, false, [label]);
+  };
   const bersihkan = () => {
     tampilkan({ ...ADEGAN_KOSONG, versi: papanRef.current.versi + 1 });
     kirim({ type: 'caption', teks: '', sementara: false, sorot: [] });
@@ -332,6 +361,9 @@ export default function Guru() {
             <label title="Merekam suara dan memeriksanya dengan Gemini: lebih tepat untuk kata benda dan angka, tambah 1–3 detik.">
               <input id="opsi-akurat" type="checkbox" checked={akurat && Boolean(kesehatan?.suara)} disabled={!kesehatan?.suara} onChange={(e) => pilihAkurat(e.target.checked)} /> Pengenalan suara akurat (Gemini){kesehatan && !kesehatan.suara ? ' — tidak tersedia' : ''}
             </label>
+            <label title="Benda yang disebut ditambahkan ke papan; benda yang sudah ada tidak dihapus. Kalimat seperti “ada juga …” atau “… datang” melakukannya otomatis.">
+              <input id="opsi-gabung" type="checkbox" checked={gabung} onChange={(e) => setGabung(e.target.checked)} /> Masukkan ke papan tanpa mengganti yang sudah ada
+            </label>
             <label><input id="opsi-jeda" type="checkbox" checked={jeda} onChange={(e) => setJeda(e.target.checked)} /> Jeda caption di papan</label>
           </div>
         </section>
@@ -342,9 +374,13 @@ export default function Guru() {
             <>
               <Adegan adegan={pratinjau.adegan} kecil />
               <p className="ringkas">{deskripsi(pratinjau.adegan)}</p>
+              {(pratinjau.penjelasan || []).map((c) => <p key={c} className="penjelasan">{c}</p>)}
               {pratinjau.catatan.map((c) => <p key={c} className="catatan">{c}</p>)}
               <div className="baris-tombol">
                 <button type="button" className="tombol tombol-utama" onClick={() => tampilkan(pratinjau.adegan)}>Tampilkan di papan</button>
+                {pratinjau.alternatif ? (
+                  <button type="button" className="tombol" onClick={pakaiAlternatifPratinjau}>{pratinjau.alternatif.label}</button>
+                ) : null}
                 <button type="button" className="tombol" onClick={buang}>Buang</button>
               </div>
             </>
@@ -357,6 +393,14 @@ export default function Guru() {
           <h2>Di papan sekarang</h2>
           <Adegan adegan={papan} kecil />
           <p className="ringkas">{deskripsi(papan)}</p>
+          {tafsir ? (
+            <>
+              {tafsir.penjelasan.map((c) => <p key={c} className="penjelasan">{c}</p>)}
+              <div className="baris-tombol">
+                <button type="button" className="tombol" onClick={() => tampilkan(tafsir.adegan)}>{tafsir.label}</button>
+              </div>
+            </>
+          ) : null}
           <div className="baris-tombol">
             <button type="button" className="tombol" onClick={batalkan} disabled={!riwayat.length}>Batalkan</button>
             <button type="button" className="tombol" onClick={sematkan} disabled={!papan.objek.length}>Sematkan</button>
@@ -371,6 +415,8 @@ export default function Guru() {
             </div>
           ) : null}
         </section>
+
+        <PilihKarakter onPilih={tambahKarakter} />
 
         <section className="kartu guru-log" aria-label="Riwayat kalimat">
           <h2>Riwayat kalimat</h2>
