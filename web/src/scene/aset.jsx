@@ -1,4 +1,4 @@
-import { cariGambar, urlGambar } from './pustaka.js';
+import { cariGambar, urlGambar, urlPose } from './pustaka.js';
 
 // Pustaka gambar benda. Semua digambar dengan bentuk sederhana dalam gaya yang
 // sama (viewBox 200×160), supaya adegan terasa konsisten bagi siswa autis.
@@ -183,10 +183,18 @@ export function adaGambar(jenis) {
 const cariEmoji = (jenis) => EMOJI[jenis] || EMOJI[jenis.replace(/[\s-]+/g, '_')] || EMOJI[jenis.split(/\s+/)[0]];
 
 /** Gambar buatan sendiri dulu, lalu kamus emoji, lalu emoji pilihan Gemini. */
-export function Benda({ jenis, indeks = 0, emoji }) {
+export function Benda({ jenis, indeks = 0, emoji, aksi }) {
   const nama = cariGambar(jenis);
   if (nama) {
-    return <img src={urlGambar(nama)} className="benda-img" alt={jenis} draggable={false} decoding="async" />;
+    const pose = urlPose(nama, aksi);
+    // Pose yang gagal dimuat (file belum diunggah) kembali ke gambar biasa.
+    const cadangan = (e) => {
+      if (pose && !e.currentTarget.src.endsWith(urlGambar(nama))) e.currentTarget.src = urlGambar(nama);
+    };
+    return (
+      <img key={pose || nama} src={pose || urlGambar(nama)} className={`benda-img${pose ? ' benda-pose' : ''}`} alt={jenis}
+        draggable={false} decoding="async" onError={cadangan} />
+    );
   }
   const kunci = PETA_SINONIM[jenis] || jenis;
   const gambar = GAMBAR[kunci];

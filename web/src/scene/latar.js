@@ -78,7 +78,14 @@ export function calonLatar(latar) {
   return [];
 }
 
-const WILAYAH_LEBAR = [0.04, 0.96];
+// Aksi yang hanya masuk akal di permukaan tertentu. Jika latar benda sudah cocok
+// (ikan berenang di terumbu, elang terbang di langit), latar tidak diganti.
+const LATAR_AKSI = {
+  terbang: { latar: 'open-sky', cocok: ['air', 'sky'] },
+  berenang: { latar: 'river', cocok: ['water'] },
+};
+
+const WILAYAH_LEBAR =[0.04, 0.96];
 const WILAYAH_PECAHAN = { x: [0.1, 0.9], y: [0.12, 0.94] };
 const BANYAK = 4; // lebih dari ini: pakai area lebih lebar supaya benda (dan kelompoknya) muat satu baris
 const MELEBAR = 0.07; // area yang disarankan adalah titik awal; sedikit dilebarkan agar tiga benda muat satu baris
@@ -109,6 +116,13 @@ export function pilihLatar(adegan) {
   } else if (suara.size) {
     id = [...suara.keys()][0]; // Map menyimpan urutan masuk: benda yang pertama dikenal
     alasan = 'cocok dengan benda pertama di papan';
+    // Aksi bisa menuntut tempat lain: harimau berenang → sungai, burung terbang → langit.
+    const pertama = objek.find((o) => BENDA[cariGambar(o.jenis)]);
+    const tuntut = LATAR_AKSI[pertama?.aksi];
+    if (tuntut && !tuntut.cocok.includes(cocokPer.get(id).permukaan)) {
+      id = tuntut.latar;
+      alasan = `aksi ${pertama.aksi}`;
+    }
   } else {
     // Papan kosong, atau benda yang belum ada gambarnya: ruang kelas yang tenang,
     // bukan papan hijau polos.

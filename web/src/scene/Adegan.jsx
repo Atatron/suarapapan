@@ -76,7 +76,7 @@ export default function Adegan({ adegan, interaktif = false, kecil = false }) {
             aria-label={hitungan[o.id] ? `${o.jenis} nomor ${hitungan[o.id]}` : `${o.jenis}, ketuk untuk menghitung`}
           >
             <span className={`obj-gerak aksi-${o.aksi}`}>
-              <Benda jenis={o.jenis} indeks={i} emoji={o.emoji} />
+              <Benda jenis={o.jenis} indeks={i} emoji={o.emoji} aksi={o.aksi} />
             </span>
             {hitungan[o.id] ? <span className="obj-nomor">{hitungan[o.id]}</span> : null}
           </button>

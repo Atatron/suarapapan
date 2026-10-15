@@ -1,6 +1,7 @@
 // Pustaka gambar kartun (web/public/aset). Daftar file dibuat oleh
 // tools/bangun_aset.py; di sini hanya pencarian: kata dari parser → nama file.
 import pustaka from './pustaka.json' with { type: 'json' };
+import POSE from './aksi.json' with { type: 'json' };
 
 const OBJ = pustaka.obj;
 const TEMPAT = pustaka.tempat;
@@ -88,5 +89,14 @@ export function kosakata() {
 }
 
 export const urlGambar = (nama) => `/aset/obj/${nama}.webp`;
+
+/**
+ * Gambar pose untuk aksi ("harimau", "lari") → "/aset/aksi/harimau__lari.webp", atau null.
+ * Daftar dari tools/bangun_aksi.py; aksi tanpa pose memakai gambar biasa + animasi CSS.
+ */
+export const urlPose = (nama, aksi) => {
+  const pose = nama && POSE[nama]?.[aksi];
+  return pose ? `/aset/aksi/${nama}__${pose}.webp` : null;
+};
 export const urlTempat = (nama) => `/aset/tempat/${nama}.webp`;
 export const _untukTes = { OBJ, TEMPAT, ALIAS_OBJ, ALIAS_TEMPAT };

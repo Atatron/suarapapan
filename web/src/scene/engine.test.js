@@ -7,7 +7,8 @@ import { kelompokJenis } from './engine.js';
 import { pcmKeWav, hitungRms, normalkan, keBase64 } from '../lib/wav.js';
 import { pilihAlternatif } from '../lib/suara.js';
 import { bersihkanTranskrip, pecahKalimat, transkripsiGemini, sistemSuara, kosakata as kosakataServer } from '../../api/_suara.js';
-import { cariGambar, cariTempat, _untukTes } from './pustaka.js';
+import { cariGambar, cariTempat, urlPose, _untukTes } from './pustaka.js';
+import POSE_AKSI from './aksi.json' with { type: 'json' };
 import { existsSync } from 'node:fs';
 import { rapikan, urutkanModel, uraiGemini, _setelUlangUntukTes, emojiSah } from '../../api/_urai.js';
 
@@ -842,4 +843,30 @@ test('rapikan: tanya_jenis divalidasi dan dikosongkan bila tidak bertanya', () =
   assert.equal(rapikan(h({ tanya_jenis: 'total' }), 'berapa semuanya', 'kelinci: 3').tanya_jenis, 'total');
   assert.equal(rapikan(h({ tanya_jenis: 'ngawur' }), 'x', 'kosong').tanya_jenis, 'tidak_ada');
   assert.equal(rapikan(h({ pertanyaan: '', tanya_jenis: 'total' }), 'x', 'kosong').tanya_jenis, 'tidak_ada');
+});
+
+test('pose aksi: setiap pose di aksi.json punya file, aksi tanpa pose → null', () => {
+  for (const [nama, peta] of Object.entries(POSE_AKSI)) {
+    assert.ok(_untukTes.OBJ[nama], `${nama} ada di pustaka`);
+    for (const [aksi, pose] of Object.entries(peta)) {
+      assert.ok(['lari', 'lompat', 'terbang', 'berenang', 'jatuh'].includes(aksi), aksi);
+      assert.ok(existsSync(new URL(`../../public/aset/aksi/${nama}__${pose}.webp`, import.meta.url)), `${nama}__${pose}`);
+      assert.equal(urlPose(nama, aksi), `/aset/aksi/${nama}__${pose}.webp`);
+    }
+  }
+  assert.equal(urlPose('apel', 'jatuh'), null);
+  assert.equal(urlPose('harimau', 'diam'), null, 'diam memakai gambar biasa');
+  assert.equal(urlPose(null, 'lari'), null);
+});
+
+test('latar: aksi memindahkan tempat jika permukaannya tidak cocok', () => {
+  const beraksi = (jenis, aksi, latar = '') => ({ ...ob(jenis), objek: [{ ...ob(jenis).objek[0], aksi }], latar });
+  assert.equal(pilihLatar(beraksi('harimau', 'berenang')).id, 'river');
+  assert.equal(pilihLatar(beraksi('burung', 'terbang')).id, 'open-sky');
+  assert.equal(pilihLatar(beraksi('ikan', 'berenang')).id, 'underwater', 'ikan sudah di air');
+  assert.equal(pilihLatar(beraksi('bebek', 'berenang')).id, 'river');
+  assert.equal(pilihLatar(beraksi('elang', 'terbang')).id, 'open-sky');
+  assert.equal(pilihLatar(beraksi('harimau', 'lari')).id, 'jungle', 'lari tetap di darat');
+  assert.equal(pilihLatar(beraksi('harimau', 'berenang', 'hutan')).id, 'jungle', 'tempat dari guru menang');
+  assert.equal(pilihLatar(beraksi('burung', 'terbang')).permukaan, 'air');
 });

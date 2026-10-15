@@ -135,7 +135,7 @@ export function PanggungPosisi({ adegan, interaktif = false }) {
                   role={interaktif ? 'img' : undefined}
                   aria-label={`${o.jenis} ${tulisPosisi(relasi, acuan)}`}
                 >
-                  <span className={`obj-gerak aksi-${o.aksi}`}><Benda jenis={o.jenis} indeks={i} emoji={o.emoji} /></span>
+                  <span className={`obj-gerak aksi-${o.aksi}`}><Benda jenis={o.jenis} indeks={i} emoji={o.emoji} aksi={o.aksi} /></span>
                 </div>
               );
             })}
