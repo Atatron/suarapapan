@@ -7,6 +7,8 @@ import { uraikan, cekKesehatan, transkripsi } from '../lib/api.js';
 import { rekamDidukung, mulaiRekam, siapkanMik, mikSudahDiizinkan, pesanMik } from '../lib/rekam.js';
 import { kosakata } from '../scene/pustaka.js';
 import PilihKarakter from './PilihKarakter.jsx';
+import SebelumSesudah from './SebelumSesudah.jsx';
+import * as Sej from '../scene/sejarah.js';
 
 const KATA_ANGKA = 'satu dua tiga empat lima enam tujuh delapan sembilan sepuluh sebelas belas puluh seratus'.split(' ');
 const TOMBOL_CLICKER = new Set(['PageDown', 'PageUp']);
@@ -28,8 +30,10 @@ function kataSorot(hasil) {
 }
 
 export default function Guru() {
-  const [papan, setPapan] = useState(ADEGAN_KOSONG);
-  const [riwayat, setRiwayat] = useState([]);
+  // Riwayat papan (Batalkan/Ulangi): ref = sumber kebenaran (dibaca di fungsi async), state = untuk tampilan.
+  const [sejarah, setSejarahState] = useState(() => Sej.awalSejarah(ADEGAN_KOSONG));
+  const sejarahRef = useRef(sejarah);
+  const papan = sejarah.sekarang.adegan;
   const [pratinjau, setPratinjau] = useState(null);
   const [otomatis, setOtomatis] = useState(false);
   const [jeda, setJeda] = useState(false);
@@ -75,15 +79,20 @@ export default function Guru() {
     if (!jedaRef.current) kirim({ type: 'caption', teks, sementara: sementaraFlag, sorot });
   };
 
-  const tampilkan = useCallback((adegan) => {
-    setRiwayat((r) => [...r.slice(-29), papanRef.current]);
-    papanRef.current = adegan;
-    setPapan(adegan);
+  const setSejarah = useCallback((baru) => {
+    sejarahRef.current = baru;
+    papanRef.current = baru.sekarang.adegan;
+    setSejarahState(baru);
+  }, []);
+
+  // `label` = kalimat (atau tindakan) yang menghasilkan papan ini; tampil di "Sebelum dan sesudah".
+  const tampilkan = useCallback((adegan, label = '') => {
+    setSejarah(Sej.catat(sejarahRef.current, adegan, label));
     kirim({ type: 'adegan', adegan });
     pratinjauRef.current = null;
     setPratinjau(null);
     setTafsir(null);
-  }, []);
+  }, [setSejarah]);
 
   // `awal` = { konteks, janji }: hasil urai yang sudah dimulai lebih dulu dari teks Chrome.
   // Dipakai hanya jika konteks adegannya masih sama persis dengan sekarang.
@@ -109,7 +118,7 @@ export default function Guru() {
       }, ...l].slice(0, 30));
       if (!r.berubah) return;
       if (otomatisRef.current) {
-        tampilkan(r.adegan);
+        tampilkan(r.adegan, kalimat);
         if (r.alternatif) setTafsir({ ...r.alternatif, penjelasan: r.penjelasan });
       } else {
         const p = { adegan: r.adegan, kalimat, ms, catatan: r.catatan, penjelasan: r.penjelasan, alternatif: r.alternatif };
@@ -249,7 +258,13 @@ export default function Guru() {
   useEffect(() => {
     const diInput = (e) => ['INPUT', 'TEXTAREA', 'SELECT'].includes(e.target.tagName);
     const turun = (e) => {
-      if (diInput(e) || e.repeat) return;
+      if (diInput(e)) return;
+      if ((e.ctrlKey || e.metaKey) && !e.altKey) {
+        const k = e.key.toLowerCase();
+        if (k === 'z' && !e.shiftKey) { e.preventDefault(); batalkanRef.current(); return; }
+        if (k === 'y' || (k === 'z' && e.shiftKey)) { e.preventDefault(); ulangiRef.current(); return; }
+      }
+      if (e.repeat) return;
       if (e.code === 'Space') { e.preventDefault(); mulai(); }
       if (TOMBOL_CLICKER.has(e.key)) { e.preventDefault(); mendengarRef.current ? berhenti() : mulai(); }
     };
@@ -274,14 +289,24 @@ export default function Guru() {
     return () => clearInterval(t);
   }, []);
 
-  const batalkan = () => {
-    if (!riwayat.length) return;
-    const sebelumnya = riwayat[riwayat.length - 1];
-    setRiwayat((r) => r.slice(0, -1));
-    papanRef.current = sebelumnya;
-    setPapan(sebelumnya);
-    kirim({ type: 'adegan', adegan: sebelumnya });
+  // Batalkan / Ulangi: papan (dan /papan di proyektor) pindah ke keadaan sebelum / sesudahnya.
+  // Pratinjau yang menunggu disetujui dibangun di atas papan lama, jadi dibuang.
+  const pindahSejarah = (fungsi) => {
+    const lama = sejarahRef.current;
+    const baru = fungsi(lama);
+    if (baru === lama) return;
+    setSejarah(baru);
+    kirim({ type: 'adegan', adegan: baru.sekarang.adegan });
+    pratinjauRef.current = null;
+    setPratinjau(null);
+    setTafsir(null);
   };
+  const batalkan = () => pindahSejarah(Sej.batalkan);
+  const ulangi = () => pindahSejarah(Sej.ulangi);
+  const batalkanRef = useRef(batalkan);
+  const ulangiRef = useRef(ulangi);
+  batalkanRef.current = batalkan;
+  ulangiRef.current = ulangi;
   const buang = () => { pratinjauRef.current = null; setPratinjau(null); };
   // Tafsir lain di pratinjau: "3 kelinci datang" dibaca sebagai "hanya 3", bukan 3 + 3.
   const pakaiAlternatifPratinjau = () => {
@@ -296,7 +321,7 @@ export default function Guru() {
     const dasar = pratinjauRef.current?.adegan ?? papanRef.current;
     const r = terapkan(dasar, { entitas: [], peristiwa: [{ tipe: 'tambah', target: label, jumlah: 1 }], konsep: 'membilang' });
     if (!r.berubah) return;
-    tampilkan(r.adegan);
+    tampilkan(r.adegan, `+ ${label}`);
     setLog((l) => [{
       id: `${Date.now()}-${Math.random()}`, kalimat: `+ ${label}`, ms: 0, sumber: 'dipilih guru', yakin: null,
       ringkas: deskripsi(r.adegan), catatan: r.catatan,
@@ -304,7 +329,7 @@ export default function Guru() {
     kirimCaption(`Ditambahkan: ${label}`, false, [label]);
   };
   const bersihkan = () => {
-    tampilkan({ ...ADEGAN_KOSONG, versi: papanRef.current.versi + 1 });
+    tampilkan({ ...ADEGAN_KOSONG, versi: papanRef.current.versi + 1 }, 'Papan dibersihkan');
     kirim({ type: 'caption', teks: '', sementara: false, sorot: [] });
   };
   const sematkan = () => {
@@ -377,7 +402,7 @@ export default function Guru() {
               {(pratinjau.penjelasan || []).map((c) => <p key={c} className="penjelasan">{c}</p>)}
               {pratinjau.catatan.map((c) => <p key={c} className="catatan">{c}</p>)}
               <div className="baris-tombol">
-                <button type="button" className="tombol tombol-utama" onClick={() => tampilkan(pratinjau.adegan)}>Tampilkan di papan</button>
+                <button type="button" className="tombol tombol-utama" onClick={() => tampilkan(pratinjau.adegan, pratinjau.kalimat)}>Tampilkan di papan</button>
                 {pratinjau.alternatif ? (
                   <button type="button" className="tombol" onClick={pakaiAlternatifPratinjau}>{pratinjau.alternatif.label}</button>
                 ) : null}
@@ -397,12 +422,13 @@ export default function Guru() {
             <>
               {tafsir.penjelasan.map((c) => <p key={c} className="penjelasan">{c}</p>)}
               <div className="baris-tombol">
-                <button type="button" className="tombol" onClick={() => tampilkan(tafsir.adegan)}>{tafsir.label}</button>
+                <button type="button" className="tombol" onClick={() => tampilkan(tafsir.adegan, tafsir.label)}>{tafsir.label}</button>
               </div>
             </>
           ) : null}
           <div className="baris-tombol">
-            <button type="button" className="tombol" onClick={batalkan} disabled={!riwayat.length}>Batalkan</button>
+            <button type="button" className="tombol" onClick={batalkan} disabled={!Sej.bisaBatalkan(sejarah)} title="Ctrl+Z">↶ Batalkan</button>
+            <button type="button" className="tombol" onClick={ulangi} disabled={!Sej.bisaUlangi(sejarah)} title="Ctrl+Y atau Ctrl+Shift+Z">↷ Ulangi</button>
             <button type="button" className="tombol" onClick={sematkan} disabled={!papan.objek.length}>Sematkan</button>
             <button type="button" className="tombol" onClick={bersihkan}>Bersihkan</button>
           </div>
@@ -410,11 +436,13 @@ export default function Guru() {
             <div className="sematan">
               <h3>Disematkan</h3>
               {sematan.map((s) => (
-                <button key={s.id} type="button" className="tombol tombol-teks" onClick={() => tampilkan({ ...s.adegan, versi: papanRef.current.versi + 1 })}>{s.label}</button>
+                <button key={s.id} type="button" className="tombol tombol-teks" onClick={() => tampilkan({ ...s.adegan, versi: papanRef.current.versi + 1 }, 'Papan yang disematkan')}>{s.label}</button>
               ))}
             </div>
           ) : null}
         </section>
+
+        <SebelumSesudah sejarah={sejarah} onBatalkan={batalkan} onUlangi={ulangi} />
 
         <PilihKarakter onPilih={tambahKarakter} />
 

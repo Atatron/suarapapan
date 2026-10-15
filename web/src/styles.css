@@ -295,3 +295,16 @@ button { font: inherit; }
 .pilih-item:hover { border-color: var(--hijau); background: #F4F8F5; }
 .pilih-item img { width: 76px; height: auto; background: #E9EFE9; border-radius: 8px; }
 .pilih-item span { font-size: 13px; text-align: center; line-height: 1.2; }
+
+/* ---------- sebelum dan sesudah ---------- */
+.sebelum-sesudah { min-width: 0; }
+.bs-baris { display: flex; align-items: flex-start; gap: 8px; flex-wrap: wrap; }
+.bs-kolom { margin: 0; flex: 1 1 150px; min-width: 130px; display: grid; gap: 4px; align-content: start; }
+.bs-kolom figcaption { font-family: var(--font-judul); font-weight: 600; font-size: 14px; color: var(--redup); }
+.bs-sekarang figcaption { color: var(--hijau); }
+.bs-berikut { opacity: 0.85; }
+.bs-berikut figcaption { color: #7A4A00; }
+.bs-panah { align-self: center; font-size: 26px; color: var(--redup); flex: none; }
+.bs-teks { margin: 0; font-size: 14px; }
+.bs-label { margin: 0; font-size: 13px; font-style: italic; color: var(--redup); }
+.bs-beda { margin: 4px 0; font-size: 15px; }

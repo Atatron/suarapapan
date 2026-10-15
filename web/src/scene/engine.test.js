@@ -2,6 +2,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { ADEGAN_KOSONG, terapkan, yangAda, konteks, deskripsi, uraiPosisi } from './engine.js';
 import { hitungWer, normalisasi } from '../lib/wer.js';
+import * as Sej from './sejarah.js';
 import { pcmKeWav, hitungRms, normalkan, keBase64 } from '../lib/wav.js';
 import { pilihAlternatif } from '../lib/suara.js';
 import { bersihkanTranskrip, pecahKalimat, transkripsiGemini, sistemSuara, kosakata as kosakataServer } from '../../api/_suara.js';
@@ -677,4 +678,72 @@ test('tambah dengan "lagi" tidak menawarkan tafsir "hanya N"', () => {
   assert.equal(yangAda(r.adegan, 'kelinci').length, 5);
   assert.equal(r.alternatif, null);
   assert.equal(r.penjelasan[0], '3 kelinci + 2 kelinci yang datang = 5.');
+});
+
+// ---------- Batalkan / Ulangi dan perbandingan sebelum-sesudah ----------
+
+const papanDengan = (objek, extra = {}) => ({ ...ADEGAN_KOSONG, objek: objek.map((j, i) => ({ id: `${j}${i}`, jenis: j, aksi: 'diam', posisi: '', status: 'ada' })), ...extra });
+
+test('sejarah: batalkan lalu ulangi mengembalikan papan yang sama, bukan salinan yang rusak', () => {
+  const a = papanDengan(['harimau']);
+  const b = papanDengan(['harimau', 'kelinci']);
+  const c = papanDengan(['harimau', 'kelinci', 'kelinci']);
+  let s = Sej.awalSejarah(ADEGAN_KOSONG, '');
+  s = Sej.catat(s, a, 'ada harimau');
+  s = Sej.catat(s, b, 'ada juga kelinci');
+  s = Sej.catat(s, c, 'satu kelinci lagi');
+  assert.equal(s.sekarang.adegan, c);
+  s = Sej.batalkan(s);
+  assert.equal(s.sekarang.adegan, b);
+  assert.equal(s.sekarang.label, 'ada juga kelinci');
+  s = Sej.batalkan(s);
+  assert.equal(s.sekarang.adegan, a);
+  assert.equal(Sej.bisaUlangi(s), true);
+  s = Sej.ulangi(s);
+  assert.equal(s.sekarang.adegan, b);
+  s = Sej.ulangi(s);
+  assert.equal(s.sekarang.adegan, c);
+  assert.equal(Sej.bisaUlangi(s), false);
+});
+
+test('sejarah: perubahan baru setelah batalkan mengosongkan "ulangi"', () => {
+  let s = Sej.awalSejarah(ADEGAN_KOSONG);
+  s = Sej.catat(s, papanDengan(['ikan']), 'ikan');
+  s = Sej.catat(s, papanDengan(['ikan', 'paus']), 'paus');
+  s = Sej.batalkan(s);
+  assert.equal(s.maju.length, 1);
+  s = Sej.catat(s, papanDengan(['ikan', 'hiu']), 'hiu');
+  assert.equal(s.maju.length, 0);
+  assert.equal(Sej.ulangi(s), s, 'tidak ada yang bisa diulangi');
+});
+
+test('sejarah: batas awal/akhir tidak melempar dan tidak mengubah keadaan', () => {
+  const s = Sej.awalSejarah(ADEGAN_KOSONG);
+  assert.equal(Sej.batalkan(s), s);
+  assert.equal(Sej.ulangi(s), s);
+  assert.equal(Sej.bisaBatalkan(s), false);
+});
+
+test('sejarah: riwayat dibatasi dan keadaan lama tidak diubah (fungsi murni)', () => {
+  let s = Sej.awalSejarah(ADEGAN_KOSONG);
+  const awal = s;
+  for (let i = 0; i < 45; i++) s = Sej.catat(s, papanDengan(['bola']), `ke-${i}`);
+  assert.equal(s.lalu.length, Sej.MAKS_RIWAYAT);
+  assert.equal(awal.lalu.length, 0);
+  assert.equal(s.sekarang.label, 'ke-44');
+});
+
+test('beda: jumlah per jenis, benda yang pergi tidak dihitung, plus potongan dan tempat', () => {
+  const a = papanDengan(['harimau', 'kelinci', 'kelinci', 'kelinci'], { latar: 'hutan' });
+  const b = {
+    ...papanDengan(['harimau', 'kelinci', 'kelinci', 'kelinci', 'kelinci', 'kelinci', 'kelinci'], { latar: 'hutan' }),
+  };
+  assert.deepEqual(Sej.bedaAdegan(a, b), [{ jenis: 'kelinci', dari: 3, ke: 6, selisih: 3 }]);
+  assert.deepEqual(Sej.ringkasBeda(a, b), ['+3 kelinci']);
+  const c = { ...a, objek: a.objek.map((o, i) => (o.jenis === 'kelinci' && i < 3 ? { ...o, status: 'pergi' } : o)) };
+  assert.deepEqual(Sej.ringkasBeda(a, c), ['−2 kelinci']);
+  const pizza1 = { ...ADEGAN_KOSONG, objek: [{ id: 'p', jenis: 'pizza', status: 'ada', bagi: 4, diambil: 0 }] };
+  const pizza2 = { ...ADEGAN_KOSONG, objek: [{ id: 'p', jenis: 'pizza', status: 'ada', bagi: 4, diambil: 1 }], latar: 'dapur' };
+  assert.deepEqual(Sej.ringkasBeda(pizza1, pizza2), ['potongan diambil: 0 → 1', 'tempat: — → dapur']);
+  assert.deepEqual(Sej.ringkasBeda(a, a), []);
 });
