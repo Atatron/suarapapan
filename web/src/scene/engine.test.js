@@ -1,6 +1,9 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { ADEGAN_KOSONG, terapkan, yangAda, konteks, deskripsi, uraiPosisi } from './engine.js';
+import { pcmKeWav, hitungRms, normalkan, keBase64 } from '../lib/wav.js';
+import { pilihAlternatif } from '../lib/suara.js';
+import { bersihkanTranskrip, pecahKalimat, transkripsiGemini, sistemSuara, kosakata as kosakataServer } from '../../api/_suara.js';
 import { cariGambar, cariTempat, _untukTes } from './pustaka.js';
 import { existsSync } from 'node:fs';
 import { rapikan, urutkanModel, uraiGemini, _setelUlangUntukTes, emojiSah } from '../../api/_urai.js';
@@ -252,4 +255,250 @@ test('pustaka: pencarian benda dan tempat', () => {
   assert.equal(cariTempat('kebun binatang'), 'kebun-binatang');
   assert.equal(cariTempat('langit'), null, 'tanpa gambar → tetap pakai latar CSS');
   assert.equal(cariTempat(''), null);
+});
+
+// ---------- pengenalan suara ----------
+
+test('wav: header RIFF 16 kHz mono 16-bit dan panjang data', () => {
+  const pcm = new Float32Array([0, 0.5, -0.5, 1, -1, 2]); // 2 dipotong ke 1
+  const buf = pcmKeWav(pcm);
+  const v = new DataView(buf);
+  const teks = (o, n) => String.fromCharCode(...new Uint8Array(buf, o, n));
+  assert.equal(teks(0, 4), 'RIFF');
+  assert.equal(teks(8, 4), 'WAVE');
+  assert.equal(v.getUint16(22, true), 1, 'mono');
+  assert.equal(v.getUint32(24, true), 16000);
+  assert.equal(v.getUint16(34, true), 16);
+  assert.equal(v.getUint32(40, true), pcm.length * 2);
+  assert.equal(buf.byteLength, 44 + pcm.length * 2);
+  assert.equal(v.getInt16(44 + 5 * 2, true), 32767, 'nilai >1 dipotong');
+  assert.equal(v.getInt16(44 + 4 * 2, true), -32768);
+});
+
+test('rms dan normalisasi: hening tetap hening, suara pelan diperkuat tanpa memotong', () => {
+  assert.equal(hitungRms(new Float32Array(100)), 0);
+  const sedang = Float32Array.from({ length: 1000 }, (_, i) => 0.2 * Math.sin(i / 5));
+  const keras = normalkan(sedang);
+  const puncak = Math.max(...keras.map(Math.abs));
+  assert.ok(puncak > 0.85 && puncak <= 0.9001, `puncak ${puncak}`);
+  assert.ok(hitungRms(keras) > hitungRms(sedang) * 4);
+  // sangat pelan: penguatan dibatasi 8x supaya derau tidak ikut meledak
+  const sangatPelan = Float32Array.from({ length: 1000 }, (_, i) => 0.01 * Math.sin(i / 5));
+  assert.ok(Math.max(...normalkan(sangatPelan).map(Math.abs)) < 0.0801);
+  const hening = new Float32Array(10);
+  assert.equal(normalkan(hening), hening, 'hening tidak diubah');
+  const sudahKeras = Float32Array.from([0.95, -0.95]);
+  assert.equal(normalkan(sudahKeras), sudahKeras);
+});
+
+test('base64: panjang besar tidak membuat tumpukan panggilan meledak', () => {
+  const b = new Uint8Array(300000).fill(65);
+  const s = keBase64(b.buffer);
+  assert.equal(s.length, Math.ceil(300000 / 3) * 4);
+  assert.equal(Buffer.from(s, 'base64').length, 300000);
+});
+
+test('Web Speech: pilih alternatif yang memuat kata papan', () => {
+  const kosa = new Set(['gurita', 'tiga', 'laut', 'kuda-nil', 'kuda', 'nil']);
+  const alt = [
+    { transcript: 'ada tiga guru ita di laut', confidence: 0.9 },
+    { transcript: 'ada tiga gurita di laut', confidence: 0.7 },
+    { transcript: 'ada tiga gurita di lauk', confidence: 0.4 },
+  ];
+  assert.equal(pilihAlternatif(alt, kosa), 'ada tiga gurita di laut');
+  // tanpa kata dikenal, tetap kandidat pertama
+  assert.equal(pilihAlternatif([{ transcript: 'selamat pagi', confidence: 0.8 }, { transcript: 'selamat pagi anak', confidence: 0.5 }], kosa), 'selamat pagi');
+  assert.equal(pilihAlternatif([], kosa), '');
+});
+
+test('transkrip: dibersihkan dan dipecah per kalimat', () => {
+  assert.equal(bersihkanTranskrip('  "Ada tiga   kelinci."\n'), 'Ada tiga kelinci.');
+  assert.deepEqual(pecahKalimat('Ada tiga kelinci. Lalu dua pergi! Berapa sisanya?'), ['Ada tiga kelinci.', 'Lalu dua pergi!', 'Berapa sisanya?']);
+  assert.deepEqual(pecahKalimat(''), []);
+  assert.deepEqual(pecahKalimat('...'), []);
+});
+
+test('kosakata server memuat nama benda, tempat, bilangan; prompt memuatnya', () => {
+  const k = kosakataServer();
+  for (const w of ['gurita', 'kuda nil', 'kebun binatang', 'tiga', 'berlari']) assert.ok(k.includes(w), w);
+  assert.match(sistemSuara(), /gurita/);
+  assert.match(sistemSuara(), /PERSIS yang diucapkan/);
+});
+
+test('transkripsiGemini: kirim audio inline + konteks, kembalikan kalimat', async () => {
+  _setelUlangUntukTes();
+  let badan = null;
+  const fetchPalsu = async (url, opsi) => {
+    if (url.includes('/models?')) return Response.json({ models: [{ name: 'models/gemini-9-flash-lite' }] });
+    badan = JSON.parse(opsi.body);
+    return Response.json({ candidates: [{ content: { parts: [{ text: '{"transkrip":"Ada tiga gurita di laut. Lalu satu pergi."}' }] } }] });
+  };
+  const r = await transkripsiGemini({ audio: 'QUJD', mime: 'audio/wav', konteks: 'ikan: 2' }, { kunci: 'tes', fetchFn: fetchPalsu });
+  assert.deepEqual(r.kalimat, ['Ada tiga gurita di laut.', 'Lalu satu pergi.']);
+  const bagian = badan.contents[0].parts;
+  assert.equal(bagian[1].inlineData.mimeType, 'audio/wav');
+  assert.equal(bagian[1].inlineData.data, 'QUJD');
+  assert.match(bagian[0].text, /ikan: 2/);
+  assert.equal(badan.generationConfig.responseSchema.properties.transkrip.type, 'STRING');
+  _setelUlangUntukTes();
+});
+
+test('transkripsiGemini: rekaman kosong atau terlalu besar ditolak sebelum memanggil Gemini', async () => {
+  await assert.rejects(transkripsiGemini({ audio: '' }, { kunci: 'tes', fetchFn: () => { throw new Error('tidak boleh'); } }), /kosong/);
+  await assert.rejects(transkripsiGemini({ audio: 'A'.repeat(3_500_000) }, { kunci: 'tes', fetchFn: () => { throw new Error('tidak boleh'); } }), /terlalu panjang/);
+});
+
+test('transkripsiGemini urai=true: transkrip + adegan kalimat pertama dalam satu panggilan', async () => {
+  _setelUlangUntukTes();
+  let badan = null;
+  const fetchPalsu = async (url, opsi) => {
+    if (url.includes('/models?')) return Response.json({ models: [{ name: 'models/gemini-9-flash-lite' }] });
+    badan = JSON.parse(opsi.body);
+    const jawab = {
+      transkrip: 'Ada tiga ekor kelinci berlari di rumput.',
+      entitas: [{ jenis: 'ekor kelinci', jumlah: 3, aksi: 'lari', posisi: '', bagi: 0, emoji: '🐇', emoji_acuan: '' }],
+      latar: 'rumput', konsep: 'membilang', peristiwa: [], pertanyaan: '', tanya_benda: '',
+    };
+    return Response.json({ candidates: [{ content: { parts: [{ text: JSON.stringify(jawab) }] } }] });
+  };
+  const r = await transkripsiGemini({ audio: 'QUJD', konteks: 'kosong', urai: true }, { kunci: 'tes', fetchFn: fetchPalsu });
+  assert.equal(r.kalimat.length, 1);
+  assert.equal(r.hasil.entitas[0].jenis, 'kelinci', 'dirapikan seperti jalur teks');
+  assert.equal(r.hasil.entitas[0].aksi, 'lari', 'aksi benar karena "berlari" memang diucapkan');
+  assert.equal(r.hasil.latar, 'rumput');
+  assert.ok(badan.generationConfig.responseSchema.properties.entitas, 'skema gabungan');
+  assert.ok(badan.generationConfig.responseSchema.properties.transkrip);
+  assert.match(badan.systemInstruction.parts[0].text, /KALIMAT PERTAMA/);
+  assert.match(badan.systemInstruction.parts[0].text, /Contoh urai/);
+  _setelUlangUntukTes();
+});
+
+test('transkripsiGemini urai=true: tanpa ucapan → tanpa hasil', async () => {
+  _setelUlangUntukTes();
+  const fetchPalsu = async (url) => {
+    if (url.includes('/models?')) return Response.json({ models: [{ name: 'models/gemini-9-flash-lite' }] });
+    return Response.json({ candidates: [{ content: { parts: [{ text: '{"transkrip":"","entitas":[],"latar":"","konsep":"tidak_ada","peristiwa":[],"pertanyaan":"","tanya_benda":""}' }] } }] });
+  };
+  const r = await transkripsiGemini({ audio: 'QUJD', urai: true }, { kunci: 'tes', fetchFn: fetchPalsu });
+  assert.deepEqual(r.kalimat, []);
+  assert.equal(r.hasil, undefined);
+  _setelUlangUntukTes();
+});
+
+test('transkripsiGemini urai=true: beberapa kalimat → hasil gabungan dibuang, klien urai satu per satu', async () => {
+  _setelUlangUntukTes();
+  const fetchPalsu = async (url) => {
+    if (url.includes('/models?')) return Response.json({ models: [{ name: 'models/gemini-9-flash-lite' }] });
+    const jawab = { transkrip: 'Anak-anak, perhatikan papan. Ada dua belas bebek.', entitas: [{ jenis: 'bebek', jumlah: 12, aksi: 'diam', posisi: '', bagi: 0, emoji: '', emoji_acuan: '' }], latar: '', konsep: 'membilang', peristiwa: [], pertanyaan: '', tanya_benda: '' };
+    return Response.json({ candidates: [{ content: { parts: [{ text: JSON.stringify(jawab) }] } }] });
+  };
+  const r = await transkripsiGemini({ audio: 'QUJD', urai: true }, { kunci: 'tes', fetchFn: fetchPalsu });
+  assert.equal(r.kalimat.length, 2);
+  assert.equal(r.hasil, undefined, 'tidak boleh memakai urai yang mungkin salah kalimat');
+  _setelUlangUntukTes();
+});
+
+test('rapikan: entitas dipertahankan jika benda belum ada di papan, dibuang jika sudah ada', () => {
+  const h = () => ({
+    entitas: [{ jenis: 'apel', jumlah: 5, aksi: 'diam', posisi: '', bagi: 0, emoji: '', emoji_acuan: '' }],
+    latar: '', konsep: 'penjumlahan', pertanyaan: '', tanya_benda: '',
+    peristiwa: [{ tipe: 'tambah', target: 'apel', jumlah: 2, posisi: '' }],
+  });
+  assert.equal(rapikan(h(), 'beli lima apel lalu dua lagi', 'kosong').entitas.length, 1, 'papan kosong → entitas tetap');
+  assert.equal(rapikan(h(), 'satu apel lagi datang', 'apel: 5').entitas.length, 0, 'apel sudah ada → bukan benda baru');
+});
+
+test('engine: satu kalimat dengan entitas dan peristiwa → lima apel, lalu tambah dua = tujuh', () => {
+  const r = terapkan(ADEGAN_KOSONG, {
+    entitas: [{ jenis: 'apel', jumlah: 5, aksi: 'diam', posisi: '' }],
+    peristiwa: [{ tipe: 'tambah', target: 'apel', jumlah: 2 }], konsep: 'penjumlahan',
+  });
+  assert.equal(yangAda(r.adegan, 'apel').length, 7);
+  assert.equal(r.adegan.soal.teks, '5 + 2 = ?');
+  assert.equal(r.adegan.soal.jawaban, 7);
+});
+
+test('engine: benda lama yang diubah tetap ada saat benda baru diperkenalkan', () => {
+  const a = terapkan(ADEGAN_KOSONG, { entitas: [{ jenis: 'kelinci', jumlah: 3, aksi: 'diam', posisi: '' }], peristiwa: [] }).adegan;
+  const r = terapkan(a, {
+    entitas: [{ jenis: 'apel', jumlah: 2, aksi: 'diam', posisi: '' }],
+    peristiwa: [{ tipe: 'hapus', target: 'kelinci', jumlah: 1 }],
+  });
+  assert.equal(yangAda(r.adegan, 'kelinci').length, 2);
+  assert.equal(yangAda(r.adegan, 'apel').length, 2);
+});
+
+test('suara: ada_ucapan=false → transkrip kosong walau model menulis sesuatu', async () => {
+  _setelUlangUntukTes();
+  const fetchPalsu = async (url) => {
+    if (url.includes('/models?')) return Response.json({ models: [{ name: 'models/gemini-9-flash-lite' }] });
+    return Response.json({ candidates: [{ content: { parts: [{ text: '{"ada_ucapan":false,"transkrip":"Ada lima balon di kelas."}' }] } }] });
+  };
+  const r = await transkripsiGemini({ audio: 'QUJD' }, { kunci: 'tes', fetchFn: fetchPalsu });
+  assert.equal(r.transkrip, '');
+  assert.deepEqual(r.kalimat, []);
+  _setelUlangUntukTes();
+});
+
+// ---------- deteksi ucapan (VAD) ----------
+
+import { readFileSync, readdirSync } from 'node:fs';
+import { adaUcapan, wavKePcm } from '../lib/wav.js';
+
+const acak = (seed) => { let s = seed; return () => { s = (s * 1664525 + 1013904223) % 4294967296; return s / 4294967296 - 0.5; }; };
+
+test('vad: hening dan derau stabil bukan ucapan', () => {
+  assert.equal(adaUcapan(new Float32Array(48000)).ada, false, 'hening digital');
+  const r = acak(1);
+  const putih = Float32Array.from({ length: 48000 }, () => r() * 0.2);
+  assert.equal(adaUcapan(putih).ada, false, 'desis stabil');
+  const dengung = Float32Array.from({ length: 48000 }, (_, i) => 0.1 * Math.sin((2 * Math.PI * 120 * i) / 16000));
+  assert.equal(adaUcapan(dengung).ada, false, 'dengung kipas');
+});
+
+test('vad: ledakan energi seperti ucapan di atas derau terdeteksi', () => {
+  const r = acak(2);
+  const x = Float32Array.from({ length: 48000 }, () => r() * 0.01); // derau pelan
+  for (const [mulai, panjang] of [[6000, 5000], [20000, 7000]]) {
+    for (let i = 0; i < panjang; i++) x[mulai + i] += 0.3 * Math.sin((2 * Math.PI * 220 * i) / 16000) * Math.sin((Math.PI * i) / panjang);
+  }
+  const v = adaUcapan(x);
+  assert.equal(v.ada, true);
+  assert.ok(v.terpanjang >= 5);
+});
+
+test('vad: satu ketukan pendek bukan ucapan', () => {
+  const x = new Float32Array(48000);
+  for (let i = 0; i < 400; i++) x[10000 + i] = 0.5 * Math.exp(-i / 80);
+  assert.equal(adaUcapan(x).ada, false);
+});
+
+test('wav: kode → baca kembali, dan format yang tidak dikenal ditolak', () => {
+  const pcm = Float32Array.from({ length: 1600 }, (_, i) => 0.5 * Math.sin(i / 7));
+  const kembali = wavKePcm(new Uint8Array(pcmKeWav(pcm)));
+  assert.equal(kembali.laju, 16000);
+  assert.equal(kembali.pcm.length, 1600);
+  assert.ok(Math.abs(kembali.pcm[100] - pcm[100]) < 1e-3);
+  assert.equal(wavKePcm(new Uint8Array(10)), null);
+  assert.equal(wavKePcm(new Uint8Array(100)), null);
+});
+
+test('server: rekaman tanpa ucapan tidak dikirim ke Gemini', async () => {
+  _setelUlangUntukTes();
+  const hening = Buffer.from(pcmKeWav(new Float32Array(32000))).toString('base64');
+  let dipanggil = 0;
+  const fetchPalsu = async () => { dipanggil++; return Response.json({}); };
+  const r = await transkripsiGemini({ audio: hening, mime: 'audio/wav' }, { kunci: 'tes', fetchFn: fetchPalsu });
+  assert.equal(dipanggil, 0);
+  assert.equal(r.transkrip, '');
+  assert.equal(r.tanpaUcapan, true);
+  _setelUlangUntukTes();
+});
+
+test('vad: ucapan Indonesia asli (hasil TTS di folder uji, jika ada) terdeteksi', { skip: !process.env.WAV_UJI }, () => {
+  const dir = process.env.WAV_UJI;
+  for (const f of readdirSync(dir).filter((n) => n.endsWith('.wav'))) {
+    const w = wavKePcm(new Uint8Array(readFileSync(`${dir}/${f}`)));
+    assert.equal(adaUcapan(w.pcm, { laju: w.laju }).ada, true, f);
+  }
 });

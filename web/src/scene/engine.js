@@ -55,9 +55,12 @@ export function terapkan(adegan, hasil) {
   let konsep = hasil.konsep && hasil.konsep !== 'tidak_ada' ? hasil.konsep : adegan.konsep;
   let soal = null;
 
-  if (entitas.length && !peristiwa.length) {
-    // Kalimat yang memperkenalkan benda baru memulai adegan baru.
-    objek = [];
+  if (entitas.length) {
+    // Kalimat yang memperkenalkan benda baru memulai adegan baru. Jika kalimat yang
+    // sama juga mengubah benda lain yang sudah ada di papan, benda itu dipertahankan.
+    const baru = new Set(entitas.map((e) => e.jenis));
+    const dipakai = new Set(peristiwa.map((p) => p.target));
+    objek = objek.filter((o) => dipakai.has(o.jenis) && !baru.has(o.jenis));
     for (const e of entitas) {
       const n = batasi(e.jumlah);
       for (let i = 0; i < n && objek.length < BATAS_OBJEK; i++) {

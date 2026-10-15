@@ -22,3 +22,20 @@ export async function cekKesehatan() {
     return { server: false, ollama: false };
   }
 }
+
+/** Audio WAV (base64) → { transkrip, kalimat[], hasil?, sumber, ms } lewat Gemini. `urai` = sekalian urai kalimat pertama. */
+export async function transkripsi(audio, konteks, { urai = false, mime = 'audio/wav' } = {}) {
+  let r;
+  try {
+    r = await fetch('/api/transkripsi', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ audio, mime, konteks, urai }),
+    });
+  } catch {
+    throw new Error('Server tidak bisa dihubungi untuk memeriksa ucapan.');
+  }
+  const data = await r.json().catch(() => ({}));
+  if (!r.ok) throw new Error(data.detail || `Transkripsi gagal (galat ${r.status}).`);
+  return data;
+}

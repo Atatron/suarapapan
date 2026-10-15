@@ -74,6 +74,19 @@ export const cariGambar = (jenis) => cari(jenis, OBJ, ALIAS_OBJ);
 /** Nama file gambar tempat untuk latar ("di hutan" → "hutan"), atau null. */
 export const cariTempat = (latar) => cari(latar, TEMPAT, ALIAS_TEMPAT);
 
+const KATA_PENDUKUNG = ['satu', 'dua', 'tiga', 'empat', 'lima', 'enam', 'tujuh', 'delapan', 'sembilan', 'sepuluh', 'sebelas', 'belas', 'puluh',
+  'berlari', 'melompat', 'terbang', 'berenang', 'jatuh', 'pergi', 'datang', 'lagi', 'dibagi', 'potong', 'berapa', 'atas', 'bawah', 'samping'];
+
+/** Semua kata yang mungkin diucapkan guru (nama benda, tempat, bilangan, kata kerja). */
+export function kosakata() {
+  const kata = new Set(KATA_PENDUKUNG);
+  for (const n of [...Object.keys(OBJ), ...Object.keys(TEMPAT), ...Object.keys(ALIAS_OBJ), ...Object.keys(ALIAS_TEMPAT)]) {
+    kata.add(n);                       // "kuda-nil"
+    for (const w of n.split('-')) if (w.length > 3) kata.add(w);
+  }
+  return kata;
+}
+
 export const urlGambar = (nama) => `/aset/obj/${nama}.webp`;
 export const urlTempat = (nama) => `/aset/tempat/${nama}.webp`;
 export const _untukTes = { OBJ, TEMPAT, ALIAS_OBJ, ALIAS_TEMPAT };

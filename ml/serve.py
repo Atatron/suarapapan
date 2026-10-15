@@ -78,7 +78,7 @@ def normalkan_jenis(teks: str) -> str:
     return normalkan_benda(t)  # kelinci-kelinci → kelinci, tetapi kupu-kupu tetap kupu-kupu
 
 
-def rapikan(h: dict) -> dict:
+def rapikan(h: dict, konteks: str = "") -> dict:
     for e in h.get("entitas", []):
         e["jenis"] = normalkan_jenis(e["jenis"])
         # "di rumput" adalah latar, bukan posisi relatif seperti "di bawah meja"
@@ -90,8 +90,11 @@ def rapikan(h: dict) -> dict:
         p["jumlah"] = max(1, min(int(p.get("jumlah") or 1), 20))
     # Model kecil sering menulis benda yang berubah di "entitas" juga
     # ("satu kelinci lagi datang"). Benda itu bukan benda baru, jadi dibuang.
+    # Hanya jika benda itu memang sudah ada di papan; kalau belum ("beli lima apel,
+    # lalu beri dua lagi") entitas harus dipertahankan.
     target = {p["target"] for p in h.get("peristiwa", [])}
-    h["entitas"] = [e for e in h.get("entitas", []) if e["jenis"] not in target]
+    ada = {x.split(":")[0].strip() for x in konteks.split(",") if x.strip()}
+    h["entitas"] = [e for e in h.get("entitas", []) if not (e["jenis"] in target and e["jenis"] in ada)]
     # "kucing di bawah meja" adalah pelajaran posisi, bukan membilang
     if h.get("konsep") == "membilang" and any(e.get("posisi", "").startswith(("di ", "ke ")) and e["jumlah"] == 1 for e in h["entitas"]):
         h["konsep"] = "posisi"
@@ -182,7 +185,7 @@ async def tanya_llm(kalimat: str, konteks: str, model: str) -> dict:
     except httpx.HTTPError as e:
         raise HTTPException(503, f"Ollama tidak bisa dihubungi. Pastikan aplikasi Ollama berjalan. ({e!r})")
     try:
-        hasil = rapikan(json.loads(r.json()["message"]["content"]))
+        hasil = rapikan(json.loads(r.json()["message"]["content"]), konteks)
     except (KeyError, ValueError) as e:
         raise HTTPException(502, f"Jawaban model tidak bisa dibaca: {e}")
     # LLM kadang mengarang aksi ("kue berenang"). Aksi hanya dipakai jika kata

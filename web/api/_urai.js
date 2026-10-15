@@ -130,7 +130,7 @@ export function emojiSah(e) {
 const batasi = (n, min, max) => Math.max(min, Math.min(Math.round(Number(n) || 0), max));
 const tokenisasi = (teks) => teks.toLowerCase().match(/\w+(?:-\w+)*/g) || [];
 
-export function rapikan(h, kalimat) {
+export function rapikan(h, kalimat, konteks = '') {
   const hasil = { ...kosong, ...h };
   hasil.latar = String(hasil.latar || '').trim().toLowerCase();
   const kata = new Set(tokenisasi(kalimat));
@@ -160,8 +160,11 @@ export function rapikan(h, kalimat) {
     .filter((p) => p.target);
 
   // Benda yang berubah sering ikut ditulis di "entitas" ("satu kelinci lagi datang").
+  // Itu bukan benda baru jika benda itu memang sudah ada di papan. Jika belum ada
+  // ("Ibu membeli lima apel, lalu memberi dua apel lagi"), entitas harus dipertahankan.
+  const adaDiPapan = new Set(String(konteks).split(',').map((x) => x.split(':')[0].trim()).filter(Boolean));
   const target = new Set(hasil.peristiwa.map((p) => p.target));
-  hasil.entitas = hasil.entitas.filter((e) => !target.has(e.jenis));
+  hasil.entitas = hasil.entitas.filter((e) => !(target.has(e.jenis) && adaDiPapan.has(e.jenis)));
 
   if (hasil.entitas.some((e) => e.bagi)) hasil.konsep = 'pecahan';
   else if (hasil.entitas.some((e) => /^(di|ke) /.test(e.posisi) && e.jumlah === 1)) hasil.konsep = 'posisi';
@@ -234,50 +237,52 @@ function keJsonSchema(sk) {
 }
 
 const dasar = { temperature: 0, responseMimeType: 'application/json' };
-const VARIAN = [
-  { nama: 'responseSchema+tanpa-berpikir', config: () => ({ ...dasar, responseSchema: SKEMA, thinkingConfig: { thinkingBudget: 0 } }) },
-  // Model Gemini 3 terbaru menolak thinkingBudget 0 dan memakai thinkingLevel.
-  { nama: 'responseSchema+berpikir-minimal', config: () => ({ ...dasar, responseSchema: SKEMA, thinkingConfig: { thinkingLevel: 'minimal' } }) },
-  { nama: 'responseSchema+berpikir-rendah', config: () => ({ ...dasar, responseSchema: SKEMA, thinkingConfig: { thinkingLevel: 'low' } }) },
-  { nama: 'responseSchema', config: () => ({ ...dasar, responseSchema: SKEMA }) },
-  { nama: 'responseJsonSchema', config: () => ({ ...dasar, responseJsonSchema: keJsonSchema(SKEMA) }) },
+// Bentuk permintaan dari yang paling ketat ke yang paling longgar. Google hanya
+// menjawab "invalid argument" tanpa menyebut opsi mana yang ditolak, dan model
+// berbeda menerima opsi berbeda (mis. Gemini 3 memakai thinkingLevel).
+const varianUntuk = (skema) => [
+  { nama: 'responseSchema+tanpa-berpikir', config: () => ({ ...dasar, responseSchema: skema, thinkingConfig: { thinkingBudget: 0 } }) },
+  { nama: 'responseSchema+berpikir-minimal', config: () => ({ ...dasar, responseSchema: skema, thinkingConfig: { thinkingLevel: 'minimal' } }) },
+  { nama: 'responseSchema+berpikir-rendah', config: () => ({ ...dasar, responseSchema: skema, thinkingConfig: { thinkingLevel: 'low' } }) },
+  { nama: 'responseSchema', config: () => ({ ...dasar, responseSchema: skema }) },
+  { nama: 'responseJsonSchema', config: () => ({ ...dasar, responseJsonSchema: keJsonSchema(skema) }) },
   { nama: 'json-saja', config: () => ({ ...dasar }) },
 ];
-const varianBerhasil = new Map();
+const varianBerhasil = new Map(); // "model|skema" → indeks varian yang diterima
 
-// Satu model: bentuk permintaan dicoba dari yang paling ketat (skema + tanpa
-// berpikir) ke yang paling longgar, karena Google hanya menjawab "invalid
-// argument" tanpa menyebut opsi mana yang ditolak. Bentuk yang berhasil diingat.
-async function cobaModel(model, { kunci, fetchFn, contents, kalimat, signal, mulai }) {
-  let terakhir = { status: 0, pesan: '' };
-  for (let v = varianBerhasil.get(model) ?? 0; v < VARIAN.length; v++) {
+// Satu model, dengan varian bentuk permintaan di atas.
+async function cobaModel(model, { kunci, fetchFn, sistem, contents, skema, idSkema, olah, signal, mulai }) {
+  const varian = varianUntuk(skema);
+  const kunciVarian = `${model}|${idSkema}`;
+  let terakhir = { ok: false, status: 0, pesan: '' };
+  for (let v = varianBerhasil.get(kunciVarian) ?? 0; v < varian.length; v++) {
     const t0 = Date.now();
     let r;
     try {
       r = await fetchFn(`${API}/models/${model}:generateContent`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'x-goog-api-key': kunci },
-        body: JSON.stringify({ systemInstruction: { parts: [{ text: SISTEM }] }, contents, generationConfig: VARIAN[v].config() }),
+        body: JSON.stringify({ systemInstruction: { parts: [{ text: sistem }] }, contents, generationConfig: varian[v].config() }),
         signal,
       });
     } catch (e) {
       return { ok: false, status: 0, pesan: String(e?.message || e) };
     }
     if (r.ok) {
-      console.log('[gemini] waktu', JSON.stringify({ model, varian: VARIAN[v].nama, total: Date.now() - mulai, panggilan: Date.now() - t0 }));
-      varianBerhasil.set(model, v);
+      console.log('[gemini] waktu', JSON.stringify({ model, skema: idSkema, varian: varian[v].nama, total: Date.now() - mulai, panggilan: Date.now() - t0 }));
+      varianBerhasil.set(kunciVarian, v);
       const d = await r.json().catch(() => ({}));
       const teks = d.candidates?.[0]?.content?.parts?.filter((p) => !p.thought).map((p) => p.text || '').join('') || '';
       try {
         const mentah = JSON.parse(teks.replace(/^```(?:json)?\s*|\s*```$/g, ''));
-        return { ok: true, nilai: { hasil: rapikan(mentah, kalimat), sumber: model, ms: Date.now() - mulai } };
+        return { ok: true, nilai: { ...olah(mentah), sumber: model, ms: Date.now() - mulai } };
       } catch {
         return { ok: false, status: 502, pesan: 'jawaban bukan JSON' };
       }
     }
     terakhir = { ok: false, status: r.status, pesan: await r.text().catch(() => '') };
     if (r.status !== 400) break;
-    console.warn('[gemini]', model, VARIAN[v].nama, 'ditolak:', terakhir.pesan.slice(0, 200));
+    console.warn('[gemini]', model, varian[v].nama, 'ditolak:', terakhir.pesan.slice(0, 200));
   }
   return terakhir;
 }
@@ -291,24 +296,24 @@ function galatDari(h) {
 }
 
 // Layanan gratis Gemini kadang lambat (sampai 17 detik dalam uji) atau sibuk
-// (503). Jika model pertama belum menjawab setelah TUNDA_CADANGAN, kalimat yang
-// sama dikirim juga ke model berikutnya, dan jawaban tercepat yang dipakai.
+// (503). Jika model pertama belum menjawab setelah TUNDA_CADANGAN, permintaan
+// yang sama dikirim juga ke model berikutnya, dan jawaban tercepat yang dipakai.
 const TUNDA_CADANGAN = 2500;
 const BATAS_WAKTU = 15000;
 
-export async function uraiGemini(kalimat, konteks, { kunci = kunciGemini(), fetchFn = fetch, tundaCadangan = TUNDA_CADANGAN, batasWaktu = BATAS_WAKTU } = {}) {
+/**
+ * Memanggil Gemini dengan skema JSON, model cadangan, dan batas waktu.
+ * `olah(json)` mengubah JSON mentah menjadi nilai akhir (boleh melempar).
+ */
+export async function panggilGemini({
+  sistem, contents, skema, idSkema, olah,
+  kunci = kunciGemini(), fetchFn = fetch, tundaCadangan = TUNDA_CADANGAN, batasWaktu = BATAS_WAKTU,
+}) {
   if (!kunci) throw new GalatUrai('GEMINI_API_KEY belum diisi di pengaturan Vercel.', 503);
-  const contents = [];
-  for (const [k, kal, jawab] of CONTOH) {
-    contents.push({ role: 'user', parts: [{ text: `Adegan saat ini: ${k}\nKalimat: ${kal}` }] });
-    contents.push({ role: 'model', parts: [{ text: jawab }] });
-  }
-  contents.push({ role: 'user', parts: [{ text: `Adegan saat ini: ${konteks}\nKalimat: ${kalimat}` }] });
-
   const mulai = Date.now();
   const model = await ambilModel(kunci, fetchFn);
   const ac = new AbortController();
-  const ctx = { kunci, fetchFn, contents, kalimat, signal: ac.signal, mulai };
+  const ctx = { kunci, fetchFn, sistem, contents, skema, idSkema, olah, signal: ac.signal, mulai };
 
   return new Promise((resolve, reject) => {
     let berikut = 0;
@@ -342,6 +347,21 @@ export async function uraiGemini(kalimat, konteks, { kunci = kunciGemini(), fetc
       console.error('[gemini] terlalu lama:', Date.now() - mulai, 'ms');
       akhiri(() => reject(new GalatUrai('Gemini terlalu lama menjawab. Coba ucapkan lagi.', 504)));
     }, batasWaktu);
+  });
+}
+
+/** Kalimat guru (teks) → JSON adegan. */
+export async function uraiGemini(kalimat, konteks, opsi = {}) {
+  const contents = [];
+  for (const [k, kal, jawab] of CONTOH) {
+    contents.push({ role: 'user', parts: [{ text: `Adegan saat ini: ${k}\nKalimat: ${kal}` }] });
+    contents.push({ role: 'model', parts: [{ text: jawab }] });
+  }
+  contents.push({ role: 'user', parts: [{ text: `Adegan saat ini: ${konteks}\nKalimat: ${kalimat}` }] });
+  return panggilGemini({
+    sistem: SISTEM, contents, skema: SKEMA, idSkema: 'adegan',
+    olah: (mentah) => ({ hasil: rapikan(mentah, kalimat, konteks) }),
+    ...opsi,
   });
 }
 

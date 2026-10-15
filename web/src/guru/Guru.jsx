@@ -3,10 +3,21 @@ import Adegan from '../scene/Adegan.jsx';
 import { ADEGAN_KOSONG, terapkan, konteks, deskripsi } from '../scene/engine.js';
 import { kirim, dengar } from '../lib/saluran.js';
 import { suaraDidukung, buatPendengar } from '../lib/suara.js';
-import { uraikan, cekKesehatan } from '../lib/api.js';
+import { uraikan, cekKesehatan, transkripsi } from '../lib/api.js';
+import { rekamDidukung, mulaiRekam, siapkanMik, mikSudahDiizinkan, pesanMik } from '../lib/rekam.js';
+import { kosakata } from '../scene/pustaka.js';
 
 const KATA_ANGKA = 'satu dua tiga empat lima enam tujuh delapan sembilan sepuluh sebelas belas puluh seratus'.split(' ');
 const TOMBOL_CLICKER = new Set(['PageDown', 'PageUp']);
+const KOSAKATA = kosakata();
+const TUNGGU_HASIL_CHROME_MS = 500; // hasil akhir Web Speech tiba sedikit setelah tombol dilepas
+const JEDA_MIN_DETIK = 0.35;        // lebih pendek dari ini = tombol tersentuh, bukan ucapan
+const RMS_MIN = 0.004;              // lebih pelan dari ini = hening
+const tunggu = (ms) => new Promise((r) => setTimeout(r, ms));
+
+const bacaPilihan = () => {
+  try { return localStorage.getItem('suarapapan-akurat') !== '0'; } catch { return true; }
+};
 
 function kataSorot(hasil) {
   const s = new Set(KATA_ANGKA);
@@ -29,6 +40,8 @@ export default function Guru() {
   const [ketik, setKetik] = useState('');
   const [sematan, setSematan] = useState([]);
   const [kesehatan, setKesehatan] = useState(null);
+  const [akurat, setAkurat] = useState(bacaPilihan);
+  const [memeriksa, setMemeriksa] = useState(false);
 
   // Ref dipakai di dalam fungsi async supaya selalu membaca nilai terbaru.
   const papanRef = useRef(papan);
@@ -41,6 +54,17 @@ export default function Guru() {
   mendengarRef.current = mendengar;
   const antrean = useRef(Promise.resolve());
   const pendengar = useRef(null);
+  // Mode "akurat": suara direkam dan diperiksa Gemini; Web Speech Chrome hanya
+  // untuk caption langsung dan sebagai cadangan jika Gemini gagal.
+  const akuratRef = useRef(akurat);
+  const suaraSiapRef = useRef(false);
+  const tahanRef = useRef(false);
+  const rekamRef = useRef(null);
+  const cadanganRef = useRef([]);
+  const modeAkuratRef = useRef(false);
+  const sesiRef = useRef(0);
+  const masukkanRef = useRef(() => {});
+  akuratRef.current = akurat;
 
   const kirimCaption = (teks, sementaraFlag, sorot = []) => {
     if (!jedaRef.current) kirim({ type: 'caption', teks, sementara: sementaraFlag, sorot });
@@ -55,7 +79,9 @@ export default function Guru() {
     setPratinjau(null);
   }, []);
 
-  const proses = useCallback(async (kalimat) => {
+  // `awal` = { konteks, janji }: hasil urai yang sudah dimulai lebih dulu dari teks Chrome.
+  // Dipakai hanya jika konteks adegannya masih sama persis dengan sekarang.
+  const proses = useCallback(async (kalimat, awal = null) => {
     setSibuk((n) => n + 1);
     setGalat('');
     kirimCaption(kalimat, false);
@@ -63,7 +89,9 @@ export default function Guru() {
     // karena guru biasanya akan menyetujuinya.
     const dasar = pratinjauRef.current?.adegan ?? papanRef.current;
     try {
-      const { hasil, ms, sumber, yakin } = await uraikan(kalimat, konteks(dasar));
+      const konteksIni = konteks(dasar);
+      const dariAwal = awal && awal.konteks === konteksIni ? await awal.janji : null;
+      const { hasil, ms, sumber, yakin } = dariAwal ?? await uraikan(kalimat, konteksIni);
       const r = terapkan(dasar, hasil);
       kirimCaption(kalimat, false, kataSorot(hasil));
       setLog((l) => [{
@@ -87,9 +115,9 @@ export default function Guru() {
   }, [tampilkan]);
 
   // Kalimat diproses berurutan: kalimat kedua butuh hasil kalimat pertama.
-  const masukkan = useCallback((kalimat) => {
+  const masukkan = useCallback((kalimat, awal = null) => {
     if (!kalimat.trim()) return;
-    antrean.current = antrean.current.then(() => proses(kalimat.trim()));
+    antrean.current = antrean.current.then(() => proses(kalimat.trim(), awal));
   }, [proses]);
 
   // Mikrofon
@@ -97,15 +125,116 @@ export default function Guru() {
     if (!suaraDidukung()) return undefined;
     pendengar.current = buatPendengar({
       saatSementara: (t) => { setSementara(t); if (t) kirimCaption(t, true); },
-      saatFinal: (t) => { setSementara(''); masukkan(t); },
-      saatStatus: setMendengar,
-      saatGalat: (pesan) => { setGalat(pesan); setMendengar(false); },
+      saatFinal: (t) => {
+        setSementara('');
+        // Mode akurat: hasil Chrome hanya jadi caption dan cadangan.
+        if (modeAkuratRef.current) {
+          cadanganRef.current.push(t);
+          kirimCaption(t, true);
+        } else masukkan(t);
+      },
+      saatStatus: (aktif) => { if (!modeAkuratRef.current) setMendengar(aktif); },
+      saatGalat: (pesan) => {
+        // Galat Chrome tidak fatal selama rekaman jalan: Gemini tetap bisa memeriksa ucapannya.
+        if (!modeAkuratRef.current) { setGalat(pesan); setMendengar(false); }
+      },
+      kosakata: KOSAKATA,
     });
     return () => pendengar.current?.berhenti();
   }, [masukkan]);
+  masukkanRef.current = masukkan;
 
-  const mulai = () => { setGalat(''); pendengar.current?.mulai(); };
-  const berhenti = () => pendengar.current?.berhenti();
+  // Mikrofon dibuka lebih awal jika izinnya sudah ada, supaya kata pertama tidak terpotong.
+  useEffect(() => {
+    if (!rekamDidukung()) return;
+    mikSudahDiizinkan().then((ok) => { if (ok) siapkanMik().catch(() => {}); });
+  }, []);
+
+  const pilihAkurat = (nilai) => {
+    setAkurat(nilai);
+    try { localStorage.setItem('suarapapan-akurat', nilai ? '1' : '0'); } catch { /* tidak apa-apa */ }
+  };
+
+  // Rekaman selesai: transkripsi Gemini → kalimat; jika gagal pakai hasil Chrome.
+  const selesaikan = useCallback(async (kontrol, sesi) => {
+    setMemeriksa(true);
+    let kalimat = [];
+    let pesanGagal = '';
+    let abaikan = false;
+    let awalPertama = null;
+    try {
+      const rek = await kontrol.berhenti();
+      if (rek && (rek.durasi < JEDA_MIN_DETIK || rek.rms < RMS_MIN || !rek.ucapan)) {
+        abaikan = true; // tertekan tak sengaja, hening, atau hanya derau: jangan kirim apa pun
+      } else if (rek) {
+        try {
+          const dasar = pratinjauRef.current?.adegan ?? papanRef.current;
+          const konteksIni = konteks(dasar);
+          const r = await transkripsi(rek.audio, konteksIni, { urai: true });
+          kalimat = r.kalimat?.length ? r.kalimat : (r.transkrip ? [r.transkrip] : []);
+          // Kalimat pertama sudah diurai dalam panggilan yang sama.
+          if (r.hasil) awalPertama = { konteks: konteksIni, janji: Promise.resolve({ hasil: r.hasil, ms: r.ms, sumber: r.sumber }) };
+        } catch (e) {
+          pesanGagal = e.message;
+        }
+      }
+      if (!abaikan && !kalimat.length) {
+        // Gemini gagal atau kosong: pakai hasil Chrome (tunggu hasil akhirnya yang terlambat tiba).
+        await tunggu(TUNGGU_HASIL_CHROME_MS);
+        kalimat = cadanganRef.current.splice(0);
+        if (pesanGagal && kalimat.length) setGalat(`${pesanGagal} Memakai hasil pengenalan Chrome.`);
+        else if (pesanGagal) setGalat(pesanGagal);
+      }
+      cadanganRef.current = [];
+      kalimat.forEach((k, i) => masukkanRef.current(k, i === 0 ? awalPertama : null));
+    } finally {
+      setMemeriksa(false);
+      if (sesiRef.current === sesi) modeAkuratRef.current = false;
+    }
+  }, []);
+
+  const pakaiAkurat = () => akuratRef.current && suaraSiapRef.current && rekamDidukung();
+
+  const mulai = async () => {
+    if (tahanRef.current) return;
+    tahanRef.current = true;
+    setGalat('');
+    const sesi = ++sesiRef.current;
+    cadanganRef.current = [];
+    const akuratIni = pakaiAkurat();
+    if (!akuratIni && !pendengar.current) {
+      tahanRef.current = false;
+      setGalat('Pengenalan suara tidak tersedia di browser ini. Gunakan Google Chrome, atau ketik kalimat di bawah.');
+      return;
+    }
+    modeAkuratRef.current = akuratIni;
+    setMendengar(true);
+    pendengar.current?.mulai(); // caption langsung (jika browser mendukung)
+    if (!akuratIni) return;
+    try {
+      rekamRef.current = { kontrol: await mulaiRekam(), sesi };
+    } catch (e) {
+      modeAkuratRef.current = false;
+      rekamRef.current = null;
+      setGalat(pesanMik(e));
+      return;
+    }
+    if (!tahanRef.current) berhentiRekam(); // tombol sudah dilepas sambil menunggu izin mikrofon
+  };
+
+  const berhentiRekam = () => {
+    const r = rekamRef.current;
+    rekamRef.current = null;
+    if (r) selesaikan(r.kontrol, r.sesi);
+  };
+
+  const berhenti = () => {
+    if (!tahanRef.current) return;
+    tahanRef.current = false;
+    setMendengar(false);
+    pendengar.current?.berhenti();
+    berhentiRekam();
+  };
 
   // Spasi = tahan untuk bicara. Tombol clicker presentasi (PageDown/PageUp) = nyala/mati.
   useEffect(() => {
@@ -130,7 +259,7 @@ export default function Guru() {
   }), []);
 
   useEffect(() => {
-    const cek = () => cekKesehatan().then(setKesehatan);
+    const cek = () => cekKesehatan().then((k) => { suaraSiapRef.current = Boolean(k?.suara); setKesehatan(k); });
     cek();
     const t = setInterval(cek, 15000);
     return () => clearInterval(t);
@@ -174,7 +303,7 @@ export default function Guru() {
 
       <div className="guru-isi">
         <section className="kartu guru-bicara" aria-label="Bicara">
-          {suaraDidukung() ? (
+          {suaraDidukung() || rekamDidukung() ? (
             <button
               type="button"
               className={`tombol-mik${mendengar ? ' aktif' : ''}`}
@@ -183,13 +312,13 @@ export default function Guru() {
               onPointerLeave={() => mendengar && berhenti()}
             >
               <span className="tombol-mik-titik" aria-hidden="true" />
-              {mendengar ? 'Mendengarkan… lepas jika selesai' : 'Tahan untuk bicara'}
+              {mendengar ? 'Mendengarkan… lepas jika selesai' : memeriksa ? 'Memeriksa ucapan…' : 'Tahan untuk bicara'}
             </button>
           ) : (
             <p className="galat">Browser ini tidak mendukung pengenalan suara. Gunakan Google Chrome, atau ketik kalimat di bawah.</p>
           )}
           <p className="petunjuk">Tahan tombol Spasi atau tekan clicker presentasi untuk bicara.</p>
-          <p className="transkrip" aria-live="polite">{sementara || (sibuk ? 'Memahami kalimat…' : 'Transkrip muncul di sini.')}</p>
+          <p className="transkrip" aria-live="polite">{sementara || (memeriksa ? 'Memeriksa ucapan…' : sibuk ? 'Memahami kalimat…' : 'Transkrip muncul di sini.')}</p>
           <form className="form-ketik" onSubmit={kirimKetik}>
             <label htmlFor="ketik-kalimat">Atau ketik kalimat</label>
             <div className="form-ketik-baris">
@@ -200,6 +329,9 @@ export default function Guru() {
           {galat ? <p className="galat" role="alert">{galat}</p> : null}
           <div className="sakelar">
             <label><input id="opsi-otomatis" type="checkbox" checked={otomatis} onChange={(e) => setOtomatis(e.target.checked)} /> Tampilkan otomatis tanpa pratinjau</label>
+            <label title="Merekam suara dan memeriksanya dengan Gemini: lebih tepat untuk kata benda dan angka, tambah 1–3 detik.">
+              <input id="opsi-akurat" type="checkbox" checked={akurat && Boolean(kesehatan?.suara)} disabled={!kesehatan?.suara} onChange={(e) => pilihAkurat(e.target.checked)} /> Pengenalan suara akurat (Gemini){kesehatan && !kesehatan.suara ? ' — tidak tersedia' : ''}
+            </label>
             <label><input id="opsi-jeda" type="checkbox" checked={jeda} onChange={(e) => setJeda(e.target.checked)} /> Jeda caption di papan</label>
           </div>
         </section>

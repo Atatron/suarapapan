@@ -9,7 +9,7 @@ function apiGemini() {
     name: 'suarapapan-api-gemini',
     configureServer(server) {
       server.middlewares.use(async (req, res, next) => {
-        const nama = { '/api/parse': 'parse', '/api/kesehatan': 'kesehatan' }[req.url?.split('?')[0]];
+        const nama = { '/api/parse': 'parse', '/api/kesehatan': 'kesehatan', '/api/transkripsi': 'transkripsi' }[req.url?.split('?')[0]];
         if (!nama) return next();
         try {
           const modul = await server.ssrLoadModule(`/api/${nama}.js`);
@@ -41,7 +41,12 @@ export default defineConfig(({ mode }) => {
       port: 5173,
       strictPort: true,
       host: '127.0.0.1',
-      proxy: pakaiGemini ? undefined : { '/api': 'http://127.0.0.1:8000' },
+      // SUARAPAPAN_API=https://suarapapan.vercel.app → pakai server online (Gemini)
+      // dari tampilan lokal, tanpa kunci di laptop.
+      proxy: pakaiGemini ? undefined
+        : env.SUARAPAPAN_API
+          ? { '/api': { target: env.SUARAPAPAN_API, changeOrigin: true, secure: true } }
+          : { '/api': 'http://127.0.0.1:8000' },
     },
   };
 });
