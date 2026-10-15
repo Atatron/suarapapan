@@ -4,8 +4,8 @@
     "benar": 40,
     "total": 40,
     "akurasi": 1.0,
-    "latensi_median_ms": 9.1,
-    "latensi_p90_ms": 12.7,
+    "latensi_median_ms": 8.2,
+    "latensi_p90_ms": 14.4,
     "sumber": {
       "indobert": 40
     },
@@ -13,23 +13,54 @@
   },
   {
     "nama": "LLM qwen2.5:7b-instruct",
-    "benar": 40,
+    "benar": 39,
     "total": 40,
-    "akurasi": 1.0,
-    "latensi_median_ms": 749.0,
-    "latensi_p90_ms": 908,
+    "akurasi": 0.975,
+    "latensi_median_ms": 814.0,
+    "latensi_p90_ms": 952,
     "sumber": {
       "qwen2.5:7b-instruct": 40
     },
-    "salah": []
+    "salah": [
+      {
+        "kalimat": "datang lagi dua monyet",
+        "konteks": "monyet 1",
+        "dapat": [
+          [
+            [
+              "monyet",
+              2
+            ]
+          ],
+          [
+            [
+              "tambah",
+              "monyet",
+              2
+            ]
+          ]
+        ],
+        "harusnya": [
+          [],
+          [
+            [
+              "tambah",
+              "monyet",
+              2
+            ]
+          ]
+        ],
+        "sumber": "qwen2.5:7b-instruct"
+      }
+    ]
   },
   {
     "nama": "Gabungan (IndoBERT, cadangan qwen2.5:7b-instruct)",
     "benar": 40,
     "total": 40,
     "akurasi": 1.0,
-    "latensi_median_ms": 6.9,
-    "latensi_p90_ms": 9.9,
+    "latensi_median_ms": 5.7,
+    "latensi_p90_ms": 6.6,
     "sumber": {
       "indobert": 39,
       "qwen2.5:7b-instruct": 1

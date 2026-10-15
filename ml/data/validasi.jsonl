@@ -1,320 +1,320 @@
-{"konteks": "burung 8", "kata": ["dodi", "memiliki", "delapan", "belas", "semangka"], "label": ["O", "O", "B-JUMLAH", "I-JUMLAH", "B-BENDA"]}
-{"konteks": "anjing 9", "kata": ["ada", "1", "kucing", "bermain", "di", "bawah", "kotak"], "label": ["O", "B-JUMLAH", "B-BENDA", "B-AKSI", "B-POSISI", "I-POSISI", "I-POSISI"]}
-{"konteks": "apel 8", "kata": ["eh", "berapa", "apel", "yang", "tersisa", "?"], "label": ["O", "O", "O", "O", "O", "O"]}
-{"konteks": "anjing 12", "kata": ["nah", "anak-anak", ",", "lalu", "dua", "belas", "anjing", "lari", "pergi"], "label": ["O", "O", "O", "O", "B-JUMLAH", "I-JUMLAH", "B-BENDA", "B-PERISTIWA", "I-PERISTIWA"]}
-{"konteks": "ikan 1", "kata": ["ayo", "kita", "hitung", "bersama"], "label": ["O", "O", "O", "O"]}
-{"konteks": "kosong", "kata": ["di", "laut", "terdapat", "1", "buah", "perahu", "berenang"], "label": ["O", "B-TEMPAT", "O", "B-JUMLAH", "O", "B-BENDA", "B-AKSI"]}
-{"konteks": "jeruk 2", "kata": ["perhatikan", ",", "dayu", "memberi", "tiga", "jeruk", "tambahan"], "label": ["O", "O", "O", "B-PERISTIWA", "B-JUMLAH", "B-BENDA", "O"]}
-{"konteks": "buku 7", "kata": ["coba", "lihat", ",", "setelah", "itu", "pak", "guru", "menaruh", "enam", "buku"], "label": ["O", "O", "O", "O", "O", "O", "O", "B-PERISTIWA", "B-JUMLAH", "B-BENDA"]}
-{"konteks": "kosong", "kata": ["sebuah", "apel", "diletakkan", "di", "dalam", "lemari"], "label": ["B-JUMLAH", "B-BENDA", "O", "B-POSISI", "I-POSISI", "I-POSISI"]}
-{"konteks": "kosong", "kata": ["ayo", "lihat", ",", "ada", "2", "buku", "diletakkan", "di", "dekat", "pohon"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "O", "B-POSISI", "I-POSISI", "I-POSISI"]}
-{"konteks": "apel 11", "kata": ["coba", "perhatikan", ",", "terus", "ucok", "makan", "5", "apel-apel"], "label": ["O", "O", "O", "O", "O", "B-PERISTIWA", "B-JUMLAH", "B-BENDA"]}
-{"konteks": "kelinci 7", "kata": ["eh", "apel", "diletakkan", "di", "dalam", "meja"], "label": ["O", "B-BENDA", "O", "B-POSISI", "I-POSISI", "I-POSISI"]}
-{"konteks": "kosong", "kata": ["baik", ",", "ada", "seekor", "semut", "ada", "di", "dekat", "meja"], "label": ["O", "O", "O", "B-JUMLAH", "B-BENDA", "O", "B-POSISI", "I-POSISI", "I-POSISI"]}
-{"konteks": "kosong", "kata": ["ayo", "lihat", ",", "ayah", "mempunyai", "delapan", "belas", "kambing"], "label": ["O", "O", "O", "O", "O", "B-JUMLAH", "I-JUMLAH", "B-BENDA"]}
-{"konteks": "bintang 15", "kata": ["terus", "nenek", "menyembunyikan", "8", "buah", "bintang"], "label": ["O", "O", "B-PERISTIWA", "B-JUMLAH", "O", "B-BENDA"]}
-{"konteks": "kosong", "kata": ["ini", "ada", "dua", "puluh", "ekor", "kambing", "di", "halaman"], "label": ["O", "O", "B-JUMLAH", "I-JUMLAH", "O", "B-BENDA", "O", "B-TEMPAT"]}
-{"konteks": "kosong", "kata": ["nah", "anak-anak", ",", "apel", "di", "samping", "kotak"], "label": ["O", "O", "O", "B-BENDA", "B-POSISI", "I-POSISI", "I-POSISI"]}
-{"konteks": "burung 1", "kata": ["nah", "kemudian", "adik", "menaruh", "delapan", "burung", "lagi"], "label": ["O", "O", "O", "B-PERISTIWA", "B-JUMLAH", "B-BENDA", "O"]}
-{"konteks": "kosong", "kata": ["oke", ",", "semut", "terletak", "di", "depan", "tempat", "tidur"], "label": ["O", "O", "B-BENDA", "O", "B-POSISI", "I-POSISI", "I-POSISI", "I-POSISI"]}
-{"konteks": "kosong", "kata": ["jadi", "dodi", "memiliki", "empat", "belas", "mobil"], "label": ["O", "O", "O", "B-JUMLAH", "I-JUMLAH", "B-BENDA"]}
-{"konteks": "kosong", "kata": ["sekarang", "di", "taman", "terdapat", "dua", "puluh", "kupu-kupu", "terbang"], "label": ["O", "O", "B-TEMPAT", "O", "B-JUMLAH", "I-JUMLAH", "B-BENDA", "B-AKSI"]}
-{"konteks": "bunga 1", "kata": ["tiba-tiba", "setangkai", "bunga", "lagi", "muncul"], "label": ["O", "B-JUMLAH", "B-BENDA", "O", "B-PERISTIWA"]}
-{"konteks": "kosong", "kata": ["ani", "punya", "sebelas", "potong", "kue"], "label": ["O", "O", "B-JUMLAH", "O", "B-BENDA"]}
-{"konteks": "kupu-kupu 10", "kata": ["baik", ",", "satu", "ekor", "kupu-kupu", "terbang"], "label": ["O", "O", "B-JUMLAH", "O", "B-BENDA", "B-PERISTIWA"]}
-{"konteks": "katak 6", "kata": ["ada", "berapa", "katak", "sekarang", "?"], "label": ["O", "O", "O", "O", "O"]}
-{"konteks": "daun 9", "kata": ["ibu", "mempunyai", "5", "mobil"], "label": ["O", "O", "B-JUMLAH", "B-BENDA"]}
-{"konteks": "burung 10", "kata": ["nah", "anak-anak", ",", "tiba-tiba", "nenek", "memberi", "tujuh", "burung", "lagi"], "label": ["O", "O", "O", "O", "O", "B-PERISTIWA", "B-JUMLAH", "B-BENDA", "O"]}
-{"konteks": "kosong", "kata": ["di", "keranjang", "ada", "tiga", "belas", "tangkai", "bunga"], "label": ["O", "B-TEMPAT", "O", "B-JUMLAH", "I-JUMLAH", "O", "B-BENDA"]}
-{"konteks": "pesawat 2", "kata": ["jadi", "setelah", "itu", "muncul", "lagi", "tujuh", "pesawat"], "label": ["O", "O", "O", "B-PERISTIWA", "I-PERISTIWA", "B-JUMLAH", "B-BENDA"]}
-{"konteks": "bintang 5", "kata": ["oke", ",", "terus", "satu", "buah", "bintang", "hilang"], "label": ["O", "O", "O", "B-JUMLAH", "O", "B-BENDA", "B-PERISTIWA"]}
-{"konteks": "permen 8", "kata": ["nah", "kemudian", "7", "permen", "datang"], "label": ["O", "O", "B-JUMLAH", "B-BENDA", "B-PERISTIWA"]}
-{"konteks": "semut 15", "kata": ["anak-anak", ",", "lalu", "lima", "belas", "semut", "dibawa", "pergi", "monyet"], "label": ["O", "O", "O", "B-JUMLAH", "I-JUMLAH", "B-BENDA", "B-PERISTIWA", "I-PERISTIWA", "O"]}
-{"konteks": "semangka 6", "kata": ["di", "jalan", ",", "4", "daun"], "label": ["O", "B-TEMPAT", "O", "B-JUMLAH", "B-BENDA"]}
-{"konteks": "kosong", "kata": ["ayo", "lihat", ",", "ini", "ada", "sepuluh", "daun", "berjatuhan", "di", "dalam", "halaman"], "label": ["O", "O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "B-AKSI", "O", "O", "B-TEMPAT"]}
-{"konteks": "pisang 1", "kata": ["perhatikan", ",", "jadi", "berapa", "jumlah", "pisang", "semuanya", "?"], "label": ["O", "O", "O", "O", "O", "O", "O", "O"]}
-{"konteks": "buku 6", "kata": ["terus", "ani", "membawa", "delapan", "buah", "buku", "lagi"], "label": ["O", "O", "B-PERISTIWA", "B-JUMLAH", "O", "B-BENDA", "O"]}
-{"konteks": "balon 3", "kata": ["baik", ",", "terdapat", "sembilan", "belas", "ayam", "sedang", "bermain"], "label": ["O", "O", "O", "B-JUMLAH", "I-JUMLAH", "B-BENDA", "O", "B-AKSI"]}
-{"konteks": "kosong", "kata": ["perhatikan", ",", "ibu", "menggambar", "tujuh", "potong", "kue"], "label": ["O", "O", "O", "O", "B-JUMLAH", "O", "B-BENDA"]}
-{"konteks": "kelinci 9", "kata": ["nah", ",", "berapa", "kelinci", "yang", "tersisa", "?"], "label": ["O", "O", "O", "O", "O", "O", "O"]}
-{"konteks": "pensil 8", "kata": ["nah", "anak-anak", ",", "terus", "6", "pensil-pensil", "lagi", "muncul"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "O", "B-PERISTIWA"]}
-{"konteks": "jeruk 2", "kata": ["perhatikan", ",", "di", "langit", ",", "tujuh", "balon", "melayang"], "label": ["O", "O", "O", "B-TEMPAT", "O", "B-JUMLAH", "B-BENDA", "B-AKSI"]}
-{"konteks": "kosong", "kata": ["di", "kotak", ",", "dua", "puluh", "jeruk"], "label": ["O", "B-TEMPAT", "O", "B-JUMLAH", "I-JUMLAH", "B-BENDA"]}
-{"konteks": "kosong", "kata": ["eh", "perhatikan", "papan", "ya"], "label": ["O", "O", "O", "O"]}
-{"konteks": "kosong", "kata": ["lihat", "ya", ",", "berapa", "yang", "tersisa", "?"], "label": ["O", "O", "O", "O", "O", "O", "O"]}
-{"konteks": "semut 1", "kata": ["baik", ",", "tiba-tiba", "datang", "lagi", "sembilan", "semut"], "label": ["O", "O", "O", "B-PERISTIWA", "I-PERISTIWA", "B-JUMLAH", "B-BENDA"]}
-{"konteks": "apel 5", "kata": ["coba", "perhatikan", ",", "kemudian", "datang", "lagi", "delapan", "apel-apel"], "label": ["O", "O", "O", "O", "B-PERISTIWA", "I-PERISTIWA", "B-JUMLAH", "B-BENDA"]}
-{"konteks": "kosong", "kata": ["coba", "lihat", ",", "ada", "dua", "mangga", "terletak", "di", "belakang", "kotak"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "O", "B-POSISI", "I-POSISI", "I-POSISI"]}
-{"konteks": "kosong", "kata": ["made", "menggambar", "tiga", "puluh", "tiga", "mangga"], "label": ["O", "O", "B-JUMLAH", "I-JUMLAH", "I-JUMLAH", "B-BENDA"]}
-{"konteks": "kucing 3", "kata": ["oke", ",", "setelah", "itu", "siti", "membeli", "empat", "kucing", "lagi"], "label": ["O", "O", "O", "O", "O", "B-PERISTIWA", "B-JUMLAH", "B-BENDA", "O"]}
-{"konteks": "kupu-kupu 6", "kata": ["oke", ",", "tiba-tiba", "ani", "menyembunyikan", "lima", "kupu-kupu"], "label": ["O", "O", "O", "O", "B-PERISTIWA", "B-JUMLAH", "B-BENDA"]}
-{"konteks": "semangka 3", "kata": ["perhatikan", ",", "ada", "sebatang", "pensil", "di", "dalam", "meja"], "label": ["O", "O", "O", "B-JUMLAH", "B-BENDA", "O", "O", "B-TEMPAT"]}
-{"konteks": "kosong", "kata": ["di", "sini", "ada", "dua", "semangka", "di", "tas"], "label": ["O", "O", "O", "B-JUMLAH", "B-BENDA", "O", "B-TEMPAT"]}
-{"konteks": "perahu 5", "kata": ["setelah", "itu", "9", "perahu", "lagi", "muncul"], "label": ["O", "O", "B-JUMLAH", "B-BENDA", "O", "B-PERISTIWA"]}
-{"konteks": "mangga 6", "kata": ["oke", ",", "made", "membawa", "8", "mangga", "lagi"], "label": ["O", "O", "O", "B-PERISTIWA", "B-JUMLAH", "B-BENDA", "O"]}
-{"konteks": "bebek 2", "kata": ["nah", "anak-anak", ",", "di", "sini", "ada", "dua", "buku"], "label": ["O", "O", "O", "O", "O", "O", "B-JUMLAH", "B-BENDA"]}
-{"konteks": "buku 5", "kata": ["ayo", "lihat", ",", "nah", "siti", "membuang", "3", "buku"], "label": ["O", "O", "O", "O", "O", "B-PERISTIWA", "B-JUMLAH", "B-BENDA"]}
-{"konteks": "daun 1", "kata": ["dayu", "punya", "dua", "puluh", "buah", "balon"], "label": ["O", "O", "B-JUMLAH", "I-JUMLAH", "O", "B-BENDA"]}
-{"konteks": "semangka 3", "kata": ["nah", "anak-anak", ",", "nah", "tiga", "semangka", "habis"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "B-PERISTIWA"]}
-{"konteks": "bebek 6", "kata": ["sekarang", "tiba-tiba", "5", "bebek", "hilang"], "label": ["O", "O", "B-JUMLAH", "B-BENDA", "B-PERISTIWA"]}
-{"konteks": "semangka 4", "kata": ["ayo", "lihat", ",", "siapa", "yang", "bisa", "menjawab", "?"], "label": ["O", "O", "O", "O", "O", "O", "O", "O"]}
-{"konteks": "kosong", "kata": ["eh", "ada", "sembilan", "belas", "semangka", "di", "meja"], "label": ["O", "O", "B-JUMLAH", "I-JUMLAH", "B-BENDA", "O", "B-TEMPAT"]}
-{"konteks": "pesawat 14", "kata": ["sekarang", "tiba-tiba", "enam", "pesawat", "terbang", "pergi"], "label": ["O", "O", "B-JUMLAH", "B-BENDA", "B-PERISTIWA", "I-PERISTIWA"]}
-{"konteks": "kosong", "kata": ["eh", "terima", "kasih", "anak-anak"], "label": ["O", "O", "O", "O"]}
-{"konteks": "kura-kura 3", "kata": ["eh", "kita", "lanjut", "ke", "soal", "berikutnya"], "label": ["O", "O", "O", "O", "O", "O"]}
-{"konteks": "apel 4", "kata": ["coba", "lihat", ",", "setelah", "itu", "ani", "memakan", "sebuah", "apel"], "label": ["O", "O", "O", "O", "O", "O", "B-PERISTIWA", "B-JUMLAH", "B-BENDA"]}
-{"konteks": "semut 5", "kata": ["made", "menyembunyikan", "seekor", "semut"], "label": ["O", "B-PERISTIWA", "B-JUMLAH", "B-BENDA"]}
-{"konteks": "kupu-kupu 2", "kata": ["coba", "lihat", ",", "sekarang", "kupu-kupu", "nya", "tinggal", "berapa", "?"], "label": ["O", "O", "O", "O", "O", "O", "O", "O", "O"]}
-{"konteks": "bebek 4", "kata": ["anak-anak", ",", "kemudian", "ayah", "memberi", "enam", "bebek", "tambahan"], "label": ["O", "O", "O", "O", "B-PERISTIWA", "B-JUMLAH", "B-BENDA", "O"]}
-{"konteks": "semangka 1", "kata": ["nah", "nah", "9", "semangka", "lagi", "datang", "lagi"], "label": ["O", "O", "B-JUMLAH", "B-BENDA", "O", "B-PERISTIWA", "I-PERISTIWA"]}
-{"konteks": "kosong", "kata": ["ayo", "lihat", ",", "di", "piring", ",", "sembilan", "belas", "apel-apel"], "label": ["O", "O", "O", "O", "B-TEMPAT", "O", "B-JUMLAH", "I-JUMLAH", "B-BENDA"]}
-{"konteks": "buku 15", "kata": ["nah", "nah", "tiga", "buku", "pecah"], "label": ["O", "O", "B-JUMLAH", "B-BENDA", "B-PERISTIWA"]}
-{"konteks": "kosong", "kata": ["perhatikan", ",", "rina", "melihat", "17", "pensil"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"]}
-{"konteks": "mangga 13", "kata": ["eh", "lalu", "7", "mangga", "dimakan", "oleh", "adik"], "label": ["O", "O", "B-JUMLAH", "B-BENDA", "B-PERISTIWA", "I-PERISTIWA", "O"]}
-{"konteks": "jeruk 3", "kata": ["terus", "tiga", "jeruk", "habis"], "label": ["O", "B-JUMLAH", "B-BENDA", "B-PERISTIWA"]}
-{"konteks": "apel 13", "kata": ["lalu", "dayu", "memakan", "10", "apel"], "label": ["O", "O", "B-PERISTIWA", "B-JUMLAH", "B-BENDA"]}
-{"konteks": "kosong", "kata": ["eh", "made", "menggambar", "11", "buah", "mobil"], "label": ["O", "O", "O", "B-JUMLAH", "O", "B-BENDA"]}
-{"konteks": "kosong", "kata": ["coba", "perhatikan", ",", "coba", "hitung", "lagi", "ya"], "label": ["O", "O", "O", "O", "O", "O", "O"]}
-{"konteks": "apel 9", "kata": ["sekarang", "setelah", "itu", "9", "apel", "lagi", "menyusul"], "label": ["O", "O", "O", "B-JUMLAH", "B-BENDA", "O", "B-PERISTIWA"]}
-{"konteks": "anjing 7", "kata": ["jadi", "lalu", "lima", "anjing", "hilang"], "label": ["O", "O", "B-JUMLAH", "B-BENDA", "B-PERISTIWA"]}
-{"konteks": "kosong", "kata": ["adik", "melihat", "dua", "puluh", "ekor", "kambing"], "label": ["O", "O", "B-JUMLAH", "I-JUMLAH", "O", "B-BENDA"]}
-{"konteks": "ayam 3", "kata": ["ayo", "lihat", ",", "ibu", "melihat", "20", "ekor", "burung"], "label": ["O", "O", "O", "O", "O", "B-JUMLAH", "O", "B-BENDA"]}
-{"konteks": "pisang 8", "kata": ["lalu", "adik", "memberi", "tujuh", "pisang", "tambahan"], "label": ["O", "O", "B-PERISTIWA", "B-JUMLAH", "B-BENDA", "O"]}
-{"konteks": "bunga 9", "kata": ["nah", ",", "coba", "hitung", "bunga", "nya", "ada", "berapa", "?"], "label": ["O", "O", "O", "O", "O", "O", "O", "O", "O"]}
-{"konteks": "kosong", "kata": ["lihat", ",", "ada", "sebelas", "kelereng"], "label": ["O", "O", "O", "B-JUMLAH", "B-BENDA"]}
-{"konteks": "kosong", "kata": ["coba", "lihat", ",", "kakak", "memiliki", "31", "katak"], "label": ["O", "O", "O", "O", "O", "B-JUMLAH", "B-BENDA"]}
-{"konteks": "lebah 6", "kata": ["perhatikan", ",", "ada", "satu", "butir", "kelereng", "ada", "di", "dalam", "kursi"], "label": ["O", "O", "O", "B-JUMLAH", "O", "B-BENDA", "O", "B-POSISI", "I-POSISI", "I-POSISI"]}
-{"konteks": "perahu 11", "kata": ["ayo", "lihat", ",", "nah", "made", "mengambil", "enam", "buah", "perahu"], "label": ["O", "O", "O", "O", "O", "B-PERISTIWA", "B-JUMLAH", "O", "B-BENDA"]}
-{"konteks": "pisang 4", "kata": ["kemudian", "sembilan", "buah", "pisang", "datang", "lagi"], "label": ["O", "B-JUMLAH", "O", "B-BENDA", "B-PERISTIWA", "I-PERISTIWA"]}
-{"konteks": "kosong", "kata": ["rina", "melihat", "3", "telur"], "label": ["O", "O", "B-JUMLAH", "B-BENDA"]}
-{"konteks": "kelereng 5", "kata": ["eh", "lalu", "tiga", "kelereng", "datang", "lagi"], "label": ["O", "O", "B-JUMLAH", "B-BENDA", "B-PERISTIWA", "I-PERISTIWA"]}
-{"konteks": "burung 8", "kata": ["coba", "lihat", ",", "lalu", "empat", "burung-burung", "lagi", "muncul"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "O", "B-PERISTIWA"]}
-{"konteks": "pisang 9", "kata": ["terus", "bertambah", "7", "pisang"], "label": ["O", "B-PERISTIWA", "B-JUMLAH", "B-BENDA"]}
-{"konteks": "balon 4", "kata": ["lihat", "ya", ",", "kemudian", "satu", "buah", "balon", "terbang"], "label": ["O", "O", "O", "O", "B-JUMLAH", "O", "B-BENDA", "B-PERISTIWA"]}
-{"konteks": "buku 8", "kata": ["ayo", "lihat", ",", "berapa", "buku", "yang", "pergi", "?"], "label": ["O", "O", "O", "O", "O", "O", "O", "O"]}
-{"konteks": "kosong", "kata": ["lihat", "ya", ",", "sebuah", "mobil", "duduk", "di", "bawah", "pohon"], "label": ["O", "O", "O", "B-JUMLAH", "B-BENDA", "B-AKSI", "B-POSISI", "I-POSISI", "I-POSISI"]}
-{"konteks": "balon 3", "kata": ["perhatikan", ",", "tiba-tiba", "tujuh", "buah", "balon", "lagi", "datang"], "label": ["O", "O", "O", "B-JUMLAH", "O", "B-BENDA", "O", "B-PERISTIWA"]}
-{"konteks": "sapi 1", "kata": ["nah", ",", "di", "sini", "ada", "empat", "belas", "mangga", "di", "meja"], "label": ["O", "O", "O", "O", "O", "B-JUMLAH", "I-JUMLAH", "B-BENDA", "O", "B-TEMPAT"]}
-{"konteks": "kosong", "kata": ["coba", "lihat", ",", "nenek", "memiliki", "9", "ayam"], "label": ["O", "O", "O", "O", "O", "B-JUMLAH", "B-BENDA"]}
-{"konteks": "burung 5", "kata": ["terima", "kasih", "anak-anak"], "label": ["O", "O", "O"]}
-{"konteks": "bintang 13", "kata": ["lalu", "kakak", "mengambil", "8", "bintang"], "label": ["O", "O", "B-PERISTIWA", "B-JUMLAH", "B-BENDA"]}
-{"konteks": "semut 4", "kata": ["perhatikan", ",", "terdapat", "enam", "belas", "katak", "berenang", "di", "sungai"], "label": ["O", "O", "O", "B-JUMLAH", "I-JUMLAH", "B-BENDA", "B-AKSI", "O", "B-TEMPAT"]}
-{"konteks": "kosong", "kata": ["coba", "lihat", ",", "empat", "lebah", "terbang", "di", "langit"], "label": ["O", "O", "O", "B-JUMLAH", "B-BENDA", "B-AKSI", "O", "B-TEMPAT"]}
-{"konteks": "kura-kura 6", "kata": ["nah", "ini", "ada", "7", "bebek", "sedang", "berenang", "di", "kolam"], "label": ["O", "O", "O", "B-JUMLAH", "B-BENDA", "O", "B-AKSI", "O", "B-TEMPAT"]}
-{"konteks": "kosong", "kata": ["ucok", "mempunyai", "7", "lebah"], "label": ["O", "O", "B-JUMLAH", "B-BENDA"]}
-{"konteks": "telur 4", "kata": ["coba", "hitung", "telur", "nya", "ada", "berapa", "?"], "label": ["O", "O", "O", "O", "O", "O", "O"]}
-{"konteks": "bunga 1", "kata": ["nah", "anak-anak", ",", "ada", "enam", "katak", "berenang", "di", "sungai"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "B-AKSI", "O", "B-TEMPAT"]}
-{"konteks": "permen 3", "kata": ["baik", ",", "adik", "melihat", "sembilan", "buah", "jeruk", "di", "lemari"], "label": ["O", "O", "O", "O", "B-JUMLAH", "O", "B-BENDA", "O", "B-TEMPAT"]}
-{"konteks": "pesawat 9", "kata": ["anak-anak", ",", "kemudian", "pak", "guru", "memberikan", "2", "pesawat", "lagi"], "label": ["O", "O", "O", "O", "O", "B-PERISTIWA", "B-JUMLAH", "B-BENDA", "O"]}
-{"konteks": "apel 11", "kata": ["ayo", "lihat", ",", "setelah", "itu", "9", "apel", "habis", "dimakan", "adik"], "label": ["O", "O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "B-PERISTIWA", "I-PERISTIWA", "O"]}
-{"konteks": "ikan 7", "kata": ["tiba-tiba", "ibu", "memberi", "tiga", "ikan"], "label": ["O", "O", "B-PERISTIWA", "B-JUMLAH", "B-BENDA"]}
-{"konteks": "anjing 5", "kata": ["baik", ",", "tiba-tiba", "4", "anjing", "pulang"], "label": ["O", "O", "O", "B-JUMLAH", "B-BENDA", "B-PERISTIWA"]}
-{"konteks": "perahu 9", "kata": ["baik", ",", "kemudian", "5", "perahu", "lagi", "ikut", "bergabung"], "label": ["O", "O", "O", "B-JUMLAH", "B-BENDA", "O", "B-PERISTIWA", "I-PERISTIWA"]}
-{"konteks": "kosong", "kata": ["ayo", "lihat", ",", "ada", "dua", "belas", "kucing", "di", "hutan"], "label": ["O", "O", "O", "O", "B-JUMLAH", "I-JUMLAH", "B-BENDA", "O", "B-TEMPAT"]}
-{"konteks": "mangga 2", "kata": ["sekarang", "mangga", "nya", "tinggal", "berapa", "?"], "label": ["O", "O", "O", "O", "O", "O"]}
-{"konteks": "balon 5", "kata": ["sebuah", "bola", "di", "samping", "jendela"], "label": ["B-JUMLAH", "B-BENDA", "B-POSISI", "I-POSISI", "I-POSISI"]}
-{"konteks": "monyet 4", "kata": ["eh", "terus", "bertambah", "3", "ekor", "monyet"], "label": ["O", "O", "B-PERISTIWA", "B-JUMLAH", "O", "B-BENDA"]}
-{"konteks": "katak 5", "kata": ["sekarang", "nah", "adik", "membawa", "lima", "ekor", "katak", "tambahan"], "label": ["O", "O", "O", "B-PERISTIWA", "B-JUMLAH", "O", "B-BENDA", "O"]}
-{"konteks": "kelereng 8", "kata": ["ini", "ada", "delapan", "belas", "buah", "pesawat", "terbang", "di", "langit"], "label": ["O", "O", "B-JUMLAH", "I-JUMLAH", "O", "B-BENDA", "B-AKSI", "O", "B-TEMPAT"]}
-{"konteks": "katak 8", "kata": ["coba", "perhatikan", ",", "di", "danau", ",", "15", "kura-kura"], "label": ["O", "O", "O", "O", "B-TEMPAT", "O", "B-JUMLAH", "B-BENDA"]}
-{"konteks": "kosong", "kata": ["nah", ",", "terdapat", "tujuh", "puluh", "satu", "bebek", "sedang", "berenang", "di", "dalam", "laut"], "label": ["O", "O", "O", "B-JUMLAH", "I-JUMLAH", "I-JUMLAH", "B-BENDA", "O", "B-AKSI", "O", "O", "B-TEMPAT"]}
-{"konteks": "kupu-kupu 11", "kata": ["sekarang", "nah", "dodi", "mengambil", "lima", "kupu-kupu"], "label": ["O", "O", "O", "B-PERISTIWA", "B-JUMLAH", "B-BENDA"]}
-{"konteks": "pesawat 9", "kata": ["eh", "buku", "di", "dekat", "kursi"], "label": ["O", "B-BENDA", "B-POSISI", "I-POSISI", "I-POSISI"]}
-{"konteks": "kosong", "kata": ["empat", "ekor", "burung-burung", "terbang"], "label": ["B-JUMLAH", "O", "B-BENDA", "B-AKSI"]}
-{"konteks": "kosong", "kata": ["jadi", "20", "ekor", "kucing", "terletak", "di", "jalan"], "label": ["O", "B-JUMLAH", "O", "B-BENDA", "O", "O", "B-TEMPAT"]}
-{"konteks": "pisang 9", "kata": ["nah", "jadi", "berapa", "jumlah", "pisang", "semuanya", "?"], "label": ["O", "O", "O", "O", "O", "O", "O"]}
-{"konteks": "kosong", "kata": ["baik", ",", "14", "kelereng", "terletak", "di", "meja"], "label": ["O", "O", "B-JUMLAH", "B-BENDA", "O", "O", "B-TEMPAT"]}
-{"konteks": "pesawat 2", "kata": ["nah", "lalu", "dua", "pesawat", "hilang"], "label": ["O", "O", "B-JUMLAH", "B-BENDA", "B-PERISTIWA"]}
-{"konteks": "pisang 6", "kata": ["ayo", "lihat", ",", "lalu", "enam", "buah", "pisang", "lagi", "ikut", "bergabung"], "label": ["O", "O", "O", "O", "B-JUMLAH", "O", "B-BENDA", "O", "B-PERISTIWA", "I-PERISTIWA"]}
-{"konteks": "kupu-kupu 10", "kata": ["ayo", "lihat", ",", "kemudian", "9", "kupu-kupu", "terbang"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "B-PERISTIWA"]}
-{"konteks": "kosong", "kata": ["di", "sini", "ada", "seekor", "kelinci-kelinci"], "label": ["O", "O", "O", "B-JUMLAH", "B-BENDA"]}
-{"konteks": "semangka 13", "kata": ["nah", ",", "setelah", "itu", "tiga", "semangka", "hilang"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "B-PERISTIWA"]}
-{"konteks": "kosong", "kata": ["nah", "lihat", ",", "ada", "lima", "balon", "sedang", "beterbangan", "di", "taman"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "O", "B-AKSI", "O", "B-TEMPAT"]}
-{"konteks": "kelinci 2", "kata": ["ini", "ada", "empat", "belas", "lebah", "melayang"], "label": ["O", "O", "B-JUMLAH", "I-JUMLAH", "B-BENDA", "B-AKSI"]}
-{"konteks": "permen 1", "kata": ["anak-anak", ",", "lalu", "rina", "membeli", "enam", "permen", "tambahan"], "label": ["O", "O", "O", "O", "B-PERISTIWA", "B-JUMLAH", "B-BENDA", "O"]}
-{"konteks": "semangka 12", "kata": ["kemudian", "enam", "semangka", "pecah"], "label": ["O", "B-JUMLAH", "B-BENDA", "B-PERISTIWA"]}
-{"konteks": "kosong", "kata": ["budi", "membawa", "sembilan", "belas", "katak"], "label": ["O", "O", "B-JUMLAH", "I-JUMLAH", "B-BENDA"]}
-{"konteks": "mobil 8", "kata": ["nah", "tiba-tiba", "asep", "mengambil", "4", "mobil"], "label": ["O", "O", "O", "B-PERISTIWA", "B-JUMLAH", "B-BENDA"]}
-{"konteks": "telur 1", "kata": ["lihat", "ya", ",", "di", "kotak", "terdapat", "sembilan", "belas", "jeruk"], "label": ["O", "O", "O", "O", "B-TEMPAT", "O", "B-JUMLAH", "I-JUMLAH", "B-BENDA"]}
-{"konteks": "kosong", "kata": ["8", "semangka", "ada", "di", "kotak"], "label": ["B-JUMLAH", "B-BENDA", "O", "O", "B-TEMPAT"]}
-{"konteks": "kupu-kupu 1", "kata": ["coba", "perhatikan", ",", "adik", "memiliki", "dua", "puluh", "ekor", "kucing"], "label": ["O", "O", "O", "O", "O", "B-JUMLAH", "I-JUMLAH", "O", "B-BENDA"]}
-{"konteks": "pesawat 6", "kata": ["coba", "lihat", ",", "nah", "lima", "buah", "pesawat", "meletus"], "label": ["O", "O", "O", "O", "B-JUMLAH", "O", "B-BENDA", "B-PERISTIWA"]}
-{"konteks": "perahu 13", "kata": ["anak-anak", ",", "sebuah", "perahu-perahu", "berenang", "pergi"], "label": ["O", "O", "B-JUMLAH", "B-BENDA", "B-PERISTIWA", "I-PERISTIWA"]}
-{"konteks": "kosong", "kata": ["lihat", "ya", ",", "sembilan", "ekor", "burung", "terbang", "di", "langit"], "label": ["O", "O", "O", "B-JUMLAH", "O", "B-BENDA", "B-AKSI", "O", "B-TEMPAT"]}
-{"konteks": "mobil 3", "kata": ["baik", ",", "lalu", "2", "buah", "mobil", "pulang"], "label": ["O", "O", "O", "B-JUMLAH", "O", "B-BENDA", "B-PERISTIWA"]}
-{"konteks": "kosong", "kata": ["ada", "dua", "belas", "bintang", "di", "dalam", "langit"], "label": ["O", "B-JUMLAH", "I-JUMLAH", "B-BENDA", "O", "O", "B-TEMPAT"]}
-{"konteks": "pensil 4", "kata": ["eh", "sebuah", "pisang", "terletak", "di", "depan", "kotak"], "label": ["O", "B-JUMLAH", "B-BENDA", "O", "B-POSISI", "I-POSISI", "I-POSISI"]}
+{"konteks": "kosong", "kata": ["jadi", "gajah", "bersembunyi", "di", "depan", "kotak"], "label": ["O", "B-BENDA", "B-AKSI", "B-POSISI", "I-POSISI", "I-POSISI"]}
+{"konteks": "gajah 4", "kata": ["nah", "coba", "hitung", "gajah", "nya", "ada", "berapa", "?"], "label": ["O", "O", "O", "O", "O", "O", "O", "O"]}
+{"konteks": "kosong", "kata": ["coba", "lihat", ",", "dodi", "membawa", "sembilan", "sapi"], "label": ["O", "O", "O", "O", "O", "B-JUMLAH", "B-BENDA"]}
+{"konteks": "kosong", "kata": ["perhatikan", ",", "dayu", "memiliki", "tiga", "apel", "di", "piring"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "O", "B-TEMPAT"]}
+{"konteks": "burung 9", "kata": ["eh", "setelah", "itu", "lima", "burung", "terbang"], "label": ["O", "O", "O", "B-JUMLAH", "B-BENDA", "B-PERISTIWA"]}
+{"konteks": "buku 3", "kata": ["perhatikan", ",", "made", "mempunyai", "lima", "kelinci"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"]}
+{"konteks": "lebah 3", "kata": ["terus", "2", "lebah", "terbang"], "label": ["O", "B-JUMLAH", "B-BENDA", "B-PERISTIWA"]}
+{"konteks": "pesawat 8", "kata": ["coba", "lihat", ",", "tiba-tiba", "muncul", "lagi", "sebuah", "pesawat"], "label": ["O", "O", "O", "O", "B-PERISTIWA", "I-PERISTIWA", "B-JUMLAH", "B-BENDA"]}
+{"konteks": "kosong", "kata": ["bu", "guru", "membawa", "delapan", "belas", "semangka", "di", "keranjang"], "label": ["O", "O", "O", "B-JUMLAH", "I-JUMLAH", "B-BENDA", "O", "B-TEMPAT"]}
+{"konteks": "kosong", "kata": ["lihat", "ya", ",", "empat", "ekor", "lebah", "terbang"], "label": ["O", "O", "O", "B-JUMLAH", "O", "B-BENDA", "B-AKSI"]}
+{"konteks": "mobil 6", "kata": ["perhatikan", ",", "nah", "tujuh", "mobil", "datang", "bermain"], "label": ["O", "O", "O", "B-JUMLAH", "B-BENDA", "B-PERISTIWA", "I-PERISTIWA"]}
+{"konteks": "telur 7", "kata": ["coba", "lihat", ",", "tiba-tiba", "tiga", "telur", "lagi", "datang", "lagi"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "O", "B-PERISTIWA", "I-PERISTIWA"]}
+{"konteks": "kelereng 4", "kata": ["eh", "kemudian", "tiga", "kelereng", "diambil", "oleh", "kakak"], "label": ["O", "O", "B-JUMLAH", "B-BENDA", "B-PERISTIWA", "I-PERISTIWA", "O"]}
+{"konteks": "katak 12", "kata": ["baik", ",", "nah", "adik", "membuang", "9", "katak"], "label": ["O", "O", "O", "O", "B-PERISTIWA", "B-JUMLAH", "B-BENDA"]}
+{"konteks": "kambing 9", "kata": ["anak-anak", ",", "ada", "satu", "bunga", "diletakkan", "di", "dalam", "tempat", "tidur"], "label": ["O", "O", "O", "B-JUMLAH", "B-BENDA", "O", "B-POSISI", "I-POSISI", "I-POSISI", "I-POSISI"]}
+{"konteks": "kosong", "kata": ["perhatikan", ",", "tiga", "puluh", "empat", "perahu", "berenang", "di", "sungai"], "label": ["O", "O", "B-JUMLAH", "I-JUMLAH", "I-JUMLAH", "B-BENDA", "B-AKSI", "O", "B-TEMPAT"]}
+{"konteks": "semangka 13", "kata": ["perhatikan", ",", "nah", "delapan", "semangka", "habis"], "label": ["O", "O", "O", "B-JUMLAH", "B-BENDA", "B-PERISTIWA"]}
+{"konteks": "kosong", "kata": ["nah", "anak-anak", ",", "di", "sini", "ada", "lima", "puluh", "satu", "kelinci", "di", "rumput"], "label": ["O", "O", "O", "O", "O", "O", "B-JUMLAH", "I-JUMLAH", "I-JUMLAH", "B-BENDA", "O", "B-TEMPAT"]}
+{"konteks": "bola 4", "kata": ["kemudian", "6", "bola", "muncul"], "label": ["O", "B-JUMLAH", "B-BENDA", "B-PERISTIWA"]}
+{"konteks": "kosong", "kata": ["coba", "lihat", ",", "terdapat", "empat", "buah", "apel", "di", "tas"], "label": ["O", "O", "O", "O", "B-JUMLAH", "O", "B-BENDA", "O", "B-TEMPAT"]}
+{"konteks": "semangka 9", "kata": ["jadi", "ada", "tiga", "apel", "terletak", "di", "atas", "lemari"], "label": ["O", "O", "B-JUMLAH", "B-BENDA", "O", "B-POSISI", "I-POSISI", "I-POSISI"]}
+{"konteks": "kue 8", "kata": ["lihat", "ya", ",", "monyet", "ada", "di", "samping", "jendela"], "label": ["O", "O", "O", "B-BENDA", "O", "B-POSISI", "I-POSISI", "I-POSISI"]}
+{"konteks": "kura-kura 11", "kata": ["coba", "lihat", ",", "kemudian", "satu", "kura-kura", "hilang"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "B-PERISTIWA"]}
+{"konteks": "kosong", "kata": ["sekarang", "ada", "1", "mobil", "duduk", "di", "belakang", "jendela"], "label": ["O", "O", "B-JUMLAH", "B-BENDA", "B-AKSI", "B-POSISI", "I-POSISI", "I-POSISI"]}
+{"konteks": "kosong", "kata": ["coba", "hitung", "lagi", "ya"], "label": ["O", "O", "O", "O"]}
+{"konteks": "gajah 7", "kata": ["jadi", "ani", "menaruh", "satu", "gajah", "lagi"], "label": ["O", "O", "B-PERISTIWA", "B-JUMLAH", "B-BENDA", "O"]}
+{"konteks": "kosong", "kata": ["coba", "perhatikan", ",", "ini", "ada", "dua", "belas", "gajah", "di", "kebun"], "label": ["O", "O", "O", "O", "O", "B-JUMLAH", "I-JUMLAH", "B-BENDA", "O", "B-TEMPAT"]}
+{"konteks": "kosong", "kata": ["nah", "anak-anak", ",", "5", "buah", "pesawat", "sedang", "melayang", "di", "langit"], "label": ["O", "O", "O", "B-JUMLAH", "O", "B-BENDA", "O", "B-AKSI", "O", "B-TEMPAT"]}
+{"konteks": "daun 1", "kata": ["nah", "terdapat", "tujuh", "belas", "sapi", "di", "dalam", "taman"], "label": ["O", "O", "B-JUMLAH", "I-JUMLAH", "B-BENDA", "O", "O", "B-TEMPAT"]}
+{"konteks": "sapi 6", "kata": ["coba", "lihat", ",", "di", "keranjang", "terdapat", "delapan", "buku"], "label": ["O", "O", "O", "O", "B-TEMPAT", "O", "B-JUMLAH", "B-BENDA"]}
+{"konteks": "kosong", "kata": ["coba", "lihat", ",", "asep", "melihat", "17", "kambing"], "label": ["O", "O", "O", "O", "O", "B-JUMLAH", "B-BENDA"]}
+{"konteks": "balon 11", "kata": ["jadi", "kemudian", "sepuluh", "balon", "terbang"], "label": ["O", "O", "B-JUMLAH", "B-BENDA", "B-PERISTIWA"]}
+{"konteks": "permen 8", "kata": ["coba", "perhatikan", ",", "lalu", "9", "permen", "lagi", "datang"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "O", "B-PERISTIWA"]}
+{"konteks": "bebek 9", "kata": ["kemudian", "sembilan", "bebek", "datang"], "label": ["O", "B-JUMLAH", "B-BENDA", "B-PERISTIWA"]}
+{"konteks": "mobil 1", "kata": ["coba", "lihat", ",", "kemudian", "datang", "lagi", "empat", "mobil"], "label": ["O", "O", "O", "O", "B-PERISTIWA", "I-PERISTIWA", "B-JUMLAH", "B-BENDA"]}
+{"konteks": "bola 1", "kata": ["kemudian", "7", "buah", "bola", "ikut", "bergabung"], "label": ["O", "B-JUMLAH", "O", "B-BENDA", "B-PERISTIWA", "I-PERISTIWA"]}
+{"konteks": "kosong", "kata": ["nah", "di", "sini", "ada", "empat", "belas", "ekor", "lebah", "terbang", "di", "taman"], "label": ["O", "O", "O", "O", "B-JUMLAH", "I-JUMLAH", "O", "B-BENDA", "B-AKSI", "O", "B-TEMPAT"]}
+{"konteks": "kosong", "kata": ["lihat", ",", "ada", "empat", "belas", "mobil", "di", "hutan"], "label": ["O", "O", "O", "B-JUMLAH", "I-JUMLAH", "B-BENDA", "O", "B-TEMPAT"]}
+{"konteks": "kambing 8", "kata": ["eh", "kemudian", "lima", "ekor", "kambing", "lari", "pergi"], "label": ["O", "O", "B-JUMLAH", "O", "B-BENDA", "B-PERISTIWA", "I-PERISTIWA"]}
+{"konteks": "sapi 1", "kata": ["nah", "enam", "sapi", "lagi", "datang", "bermain"], "label": ["O", "B-JUMLAH", "B-BENDA", "O", "B-PERISTIWA", "I-PERISTIWA"]}
+{"konteks": "daun 8", "kata": ["nah", "anak-anak", ",", "1", "burung", "sedang", "melayang", "di", "langit"], "label": ["O", "O", "O", "B-JUMLAH", "B-BENDA", "O", "B-AKSI", "O", "B-TEMPAT"]}
+{"konteks": "burung 8", "kata": ["nah", ",", "di", "danau", "terdapat", "sembilan", "belas", "kura-kura", "berenang"], "label": ["O", "O", "O", "B-TEMPAT", "O", "B-JUMLAH", "I-JUMLAH", "B-BENDA", "B-AKSI"]}
+{"konteks": "anjing 6", "kata": ["tiga", "ekor", "anjing", "pulang"], "label": ["B-JUMLAH", "O", "B-BENDA", "B-PERISTIWA"]}
 {"konteks": "kosong", "kata": ["ayo", "lihat", ",", "kue", "diletakkan", "di", "belakang", "meja"], "label": ["O", "O", "O", "B-BENDA", "O", "B-POSISI", "I-POSISI", "I-POSISI"]}
-{"konteks": "kosong", "kata": ["sekarang", "kelereng", "di", "samping", "kursi"], "label": ["O", "B-BENDA", "B-POSISI", "I-POSISI", "I-POSISI"]}
-{"konteks": "bunga 4", "kata": ["lihat", "ya", ",", "terus", "ucok", "menyembunyikan", "3", "tangkai", "bunga"], "label": ["O", "O", "O", "O", "O", "B-PERISTIWA", "B-JUMLAH", "O", "B-BENDA"]}
-{"konteks": "kosong", "kata": ["nah", "anak-anak", ",", "berapa", "jumlahnya", "?"], "label": ["O", "O", "O", "O", "O", "O"]}
-{"konteks": "kosong", "kata": ["dayu", "mempunyai", "enam", "buah", "pisang"], "label": ["O", "O", "B-JUMLAH", "O", "B-BENDA"]}
-{"konteks": "ikan 6", "kata": ["oke", ",", "di", "sini", "ada", "dua", "puluh", "apel", "di", "dalam", "piring"], "label": ["O", "O", "O", "O", "O", "B-JUMLAH", "I-JUMLAH", "B-BENDA", "O", "O", "B-TEMPAT"]}
-{"konteks": "kosong", "kata": ["ada", "1", "buku", "diletakkan", "di", "bawah", "lemari"], "label": ["O", "B-JUMLAH", "B-BENDA", "O", "B-POSISI", "I-POSISI", "I-POSISI"]}
-{"konteks": "kosong", "kata": ["jadi", "ini", "ada", "dua", "puluh", "kucing-kucing", "sedang", "berjalan", "di", "rumput"], "label": ["O", "O", "O", "B-JUMLAH", "I-JUMLAH", "B-BENDA", "O", "B-AKSI", "O", "B-TEMPAT"]}
-{"konteks": "semut 15", "kata": ["terus", "asep", "mengambil", "lima", "belas", "semut"], "label": ["O", "O", "B-PERISTIWA", "B-JUMLAH", "I-JUMLAH", "B-BENDA"]}
-{"konteks": "kupu-kupu 12", "kata": ["oke", ",", "lalu", "enam", "kupu-kupu", "terbang"], "label": ["O", "O", "O", "B-JUMLAH", "B-BENDA", "B-PERISTIWA"]}
-{"konteks": "kosong", "kata": ["nah", "di", "sini", "ada", "delapan", "belas", "bola", "di", "dalam", "keranjang"], "label": ["O", "O", "O", "O", "B-JUMLAH", "I-JUMLAH", "B-BENDA", "O", "O", "B-TEMPAT"]}
-{"konteks": "mangga 11", "kata": ["11", "mangga", "disembunyikan", "monyet"], "label": ["B-JUMLAH", "B-BENDA", "B-PERISTIWA", "O"]}
-{"konteks": "bunga 6", "kata": ["lalu", "3", "bunga", "lagi", "ikut", "bergabung"], "label": ["O", "B-JUMLAH", "B-BENDA", "O", "B-PERISTIWA", "I-PERISTIWA"]}
-{"konteks": "kupu-kupu 12", "kata": ["perhatikan", ",", "nah", "11", "ekor", "kupu-kupu", "meletus"], "label": ["O", "O", "O", "B-JUMLAH", "O", "B-BENDA", "B-PERISTIWA"]}
-{"konteks": "ayam 2", "kata": ["eh", "dua", "belas", "mangga", "terletak", "di", "kotak"], "label": ["O", "B-JUMLAH", "I-JUMLAH", "B-BENDA", "O", "O", "B-TEMPAT"]}
-{"konteks": "anjing 12", "kata": ["oke", ",", "tiba-tiba", "sembilan", "anjing", "dibawa", "pergi", "adik"], "label": ["O", "O", "O", "B-JUMLAH", "B-BENDA", "B-PERISTIWA", "I-PERISTIWA", "O"]}
-{"konteks": "kura-kura 10", "kata": ["coba", "lihat", ",", "9", "kura-kura", "pergi"], "label": ["O", "O", "O", "B-JUMLAH", "B-BENDA", "B-PERISTIWA"]}
-{"konteks": "kelereng 5", "kata": ["lihat", ",", "ada", "delapan", "semangka", "di", "piring"], "label": ["O", "O", "O", "B-JUMLAH", "B-BENDA", "O", "B-TEMPAT"]}
-{"konteks": "anjing 5", "kata": ["lalu", "adik", "membeli", "sembilan", "ekor", "anjing", "lagi"], "label": ["O", "O", "B-PERISTIWA", "B-JUMLAH", "O", "B-BENDA", "O"]}
-{"konteks": "semangka 6", "kata": ["ayo", "lihat", ",", "made", "memberi", "7", "semangka", "lagi"], "label": ["O", "O", "O", "O", "B-PERISTIWA", "B-JUMLAH", "B-BENDA", "O"]}
-{"konteks": "kosong", "kata": ["ayo", "lihat", ",", "di", "taman", "terdapat", "sembilan", "buah", "pesawat", "beterbangan"], "label": ["O", "O", "O", "O", "B-TEMPAT", "O", "B-JUMLAH", "O", "B-BENDA", "B-AKSI"]}
-{"konteks": "bunga 13", "kata": ["nah", "anak-anak", ",", "kemudian", "tiga", "bunga", "jatuh"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "B-PERISTIWA"]}
-{"konteks": "kosong", "kata": ["perhatikan", ",", "di", "sini", "ada", "11", "biji", "permen"], "label": ["O", "O", "O", "O", "O", "B-JUMLAH", "O", "B-BENDA"]}
-{"konteks": "kosong", "kata": ["lihat", "ya", ",", "kita", "lanjut", "ke", "soal", "berikutnya"], "label": ["O", "O", "O", "O", "O", "O", "O", "O"]}
-{"konteks": "kosong", "kata": ["coba", "perhatikan", ",", "ucok", "mempunyai", "dua", "puluh", "lebah"], "label": ["O", "O", "O", "O", "O", "B-JUMLAH", "I-JUMLAH", "B-BENDA"]}
-{"konteks": "pisang 9", "kata": ["eh", "tiba-tiba", "6", "pisang", "datang", "bermain"], "label": ["O", "O", "B-JUMLAH", "B-BENDA", "B-PERISTIWA", "I-PERISTIWA"]}
-{"konteks": "kosong", "kata": ["ini", "ada", "13", "kucing", "berlari", "di", "sawah"], "label": ["O", "O", "B-JUMLAH", "B-BENDA", "B-AKSI", "O", "B-TEMPAT"]}
-{"konteks": "kura-kura 1", "kata": ["oke", ",", "ini", "ada", "empat", "buah", "mangga"], "label": ["O", "O", "O", "O", "B-JUMLAH", "O", "B-BENDA"]}
-{"konteks": "bola 8", "kata": ["sekarang", "lalu", "pak", "tani", "menaruh", "lima", "buah", "bola", "lagi"], "label": ["O", "O", "O", "O", "B-PERISTIWA", "B-JUMLAH", "O", "B-BENDA", "O"]}
-{"konteks": "kosong", "kata": ["jadi", "ada", "3", "semut", "berdiri", "di", "atas", "jendela"], "label": ["O", "O", "B-JUMLAH", "B-BENDA", "B-AKSI", "B-POSISI", "I-POSISI", "I-POSISI"]}
-{"konteks": "sapi 5", "kata": ["eh", "empat", "sapi", "masuk", "ke", "kandang"], "label": ["O", "B-JUMLAH", "B-BENDA", "B-PERISTIWA", "I-PERISTIWA", "I-PERISTIWA"]}
-{"konteks": "mobil 2", "kata": ["ini", "ada", "tiga", "puluh", "tujuh", "kambing"], "label": ["O", "O", "B-JUMLAH", "I-JUMLAH", "I-JUMLAH", "B-BENDA"]}
-{"konteks": "kosong", "kata": ["perhatikan", ",", "seekor", "kambing", "ada", "di", "depan", "lemari"], "label": ["O", "O", "B-JUMLAH", "B-BENDA", "O", "B-POSISI", "I-POSISI", "I-POSISI"]}
-{"konteks": "kosong", "kata": ["nah", "ini", "ada", "5", "lebah", "melayang", "di", "udara"], "label": ["O", "O", "O", "B-JUMLAH", "B-BENDA", "B-AKSI", "O", "B-TEMPAT"]}
-{"konteks": "kambing 7", "kata": ["lalu", "tujuh", "kambing", "lagi", "datang"], "label": ["O", "B-JUMLAH", "B-BENDA", "O", "B-PERISTIWA"]}
-{"konteks": "kosong", "kata": ["sebuah", "jeruk", "diletakkan", "di", "dalam", "kursi"], "label": ["B-JUMLAH", "B-BENDA", "O", "B-POSISI", "I-POSISI", "I-POSISI"]}
-{"konteks": "kosong", "kata": ["coba", "perhatikan", ",", "4", "lebah", "terbang", "di", "langit"], "label": ["O", "O", "O", "B-JUMLAH", "B-BENDA", "B-AKSI", "O", "B-TEMPAT"]}
-{"konteks": "kosong", "kata": ["perhatikan", ",", "ada", "20", "gajah", "sedang", "tidur", "di", "jalan"], "label": ["O", "O", "O", "B-JUMLAH", "B-BENDA", "O", "B-AKSI", "O", "B-TEMPAT"]}
-{"konteks": "kosong", "kata": ["nah", "anak-anak", ",", "asep", "punya", "1", "semangka"], "label": ["O", "O", "O", "O", "O", "B-JUMLAH", "B-BENDA"]}
-{"konteks": "kosong", "kata": ["eh", "delapan", "belas", "kupu-kupu", "terbang", "di", "taman"], "label": ["O", "B-JUMLAH", "I-JUMLAH", "B-BENDA", "B-AKSI", "O", "B-TEMPAT"]}
-{"konteks": "kosong", "kata": ["nah", "anak-anak", ",", "di", "sini", "ada", "lima", "puluh", "delapan", "anjing", "sedang", "melompat"], "label": ["O", "O", "O", "O", "O", "O", "B-JUMLAH", "I-JUMLAH", "I-JUMLAH", "B-BENDA", "O", "B-AKSI"]}
-{"konteks": "kelereng 9", "kata": ["nah", "anak-anak", ",", "selamat", "pagi", "anak-anak"], "label": ["O", "O", "O", "O", "O", "O"]}
-{"konteks": "burung 7", "kata": ["ada", "berapa", "burung", "sekarang", "?"], "label": ["O", "O", "O", "O", "O"]}
-{"konteks": "kupu-kupu 2", "kata": ["sekarang", "asep", "punya", "8", "kura-kura"], "label": ["O", "O", "O", "B-JUMLAH", "B-BENDA"]}
+{"konteks": "pesawat 6", "kata": ["oke", ",", "ada", "tiga", "ekor", "sapi", "di", "halaman"], "label": ["O", "O", "O", "B-JUMLAH", "O", "B-BENDA", "O", "B-TEMPAT"]}
 {"konteks": "daun 8", "kata": ["lihat", "ya", ",", "terus", "dua", "lembar", "daun", "hilang"], "label": ["O", "O", "O", "O", "B-JUMLAH", "O", "B-BENDA", "B-PERISTIWA"]}
-{"konteks": "kosong", "kata": ["baik", ",", "empat", "ekor", "lebah-lebah", "terbang", "di", "langit"], "label": ["O", "O", "B-JUMLAH", "O", "B-BENDA", "B-AKSI", "O", "B-TEMPAT"]}
-{"konteks": "kosong", "kata": ["nah", "anak-anak", ",", "sebelas", "kupu-kupu", "terbang"], "label": ["O", "O", "O", "B-JUMLAH", "B-BENDA", "B-AKSI"]}
-{"konteks": "kosong", "kata": ["anak-anak", ",", "7", "butir", "telur", "terletak", "di", "meja"], "label": ["O", "O", "B-JUMLAH", "O", "B-BENDA", "O", "O", "B-TEMPAT"]}
-{"konteks": "kelereng 6", "kata": ["sekarang", "tiba-tiba", "made", "memberikan", "enam", "kelereng", "tambahan"], "label": ["O", "O", "O", "B-PERISTIWA", "B-JUMLAH", "B-BENDA", "O"]}
-{"konteks": "kosong", "kata": ["terdapat", "14", "kupu-kupu", "di", "taman"], "label": ["O", "B-JUMLAH", "B-BENDA", "O", "B-TEMPAT"]}
-{"konteks": "semut 2", "kata": ["anak-anak", ",", "ada", "satu", "anjing", "ada", "di", "belakang", "jendela"], "label": ["O", "O", "O", "B-JUMLAH", "B-BENDA", "O", "B-POSISI", "I-POSISI", "I-POSISI"]}
-{"konteks": "anjing 7", "kata": ["perhatikan", ",", "terdapat", "delapan", "lebah", "sedang", "beterbangan", "di", "langit"], "label": ["O", "O", "O", "B-JUMLAH", "B-BENDA", "O", "B-AKSI", "O", "B-TEMPAT"]}
-{"konteks": "kosong", "kata": ["oke", ",", "dua", "ekor", "burung", "terbang"], "label": ["O", "O", "B-JUMLAH", "O", "B-BENDA", "B-AKSI"]}
-{"konteks": "gajah 5", "kata": ["nah", ",", "terus", "4", "gajah", "pergi"], "label": ["O", "O", "O", "B-JUMLAH", "B-BENDA", "B-PERISTIWA"]}
-{"konteks": "bebek 1", "kata": ["anak-anak", ",", "seekor", "ayam", "bersembunyi", "di", "dalam", "tempat", "tidur"], "label": ["O", "O", "B-JUMLAH", "B-BENDA", "B-AKSI", "B-POSISI", "I-POSISI", "I-POSISI", "I-POSISI"]}
-{"konteks": "telur 14", "kata": ["nah", "terus", "kakak", "mengambil", "tiga", "telur"], "label": ["O", "O", "O", "B-PERISTIWA", "B-JUMLAH", "B-BENDA"]}
-{"konteks": "bebek 8", "kata": ["terus", "delapan", "bebek", "hilang"], "label": ["O", "B-JUMLAH", "B-BENDA", "B-PERISTIWA"]}
-{"konteks": "kosong", "kata": ["coba", "lihat", ",", "asep", "menggambar", "sembilan", "puluh", "lima", "pisang", "di", "lemari"], "label": ["O", "O", "O", "O", "O", "B-JUMLAH", "I-JUMLAH", "I-JUMLAH", "B-BENDA", "O", "B-TEMPAT"]}
-{"konteks": "kosong", "kata": ["baik", ",", "ada", "tiga", "ekor", "semut", "sedang", "tidur", "di", "dalam", "sawah"], "label": ["O", "O", "O", "B-JUMLAH", "O", "B-BENDA", "O", "B-AKSI", "O", "O", "B-TEMPAT"]}
-{"konteks": "kosong", "kata": ["anak-anak", ",", "di", "halaman", ",", "11", "monyet", "tidur"], "label": ["O", "O", "O", "B-TEMPAT", "O", "B-JUMLAH", "B-BENDA", "B-AKSI"]}
-{"konteks": "semangka 8", "kata": ["sekarang", "nah", "satu", "semangka", "hilang"], "label": ["O", "O", "B-JUMLAH", "B-BENDA", "B-PERISTIWA"]}
-{"konteks": "ayam 7", "kata": ["coba", "lihat", ",", "dua", "kambing", "ada", "di", "sawah"], "label": ["O", "O", "O", "B-JUMLAH", "B-BENDA", "O", "O", "B-TEMPAT"]}
-{"konteks": "kosong", "kata": ["jadi", "delapan", "balon", "terbang", "di", "langit"], "label": ["O", "B-JUMLAH", "B-BENDA", "B-AKSI", "O", "B-TEMPAT"]}
-{"konteks": "kosong", "kata": ["di", "meja", ",", "dua", "puluh", "enam", "potong", "kue"], "label": ["O", "B-TEMPAT", "O", "B-JUMLAH", "I-JUMLAH", "I-JUMLAH", "O", "B-BENDA"]}
-{"konteks": "kelereng 10", "kata": ["jadi", "lalu", "6", "kelereng", "datang"], "label": ["O", "O", "B-JUMLAH", "B-BENDA", "B-PERISTIWA"]}
-{"konteks": "pesawat 5", "kata": ["anak-anak", ",", "sebuah", "pisang", "terletak", "di", "dekat", "kursi"], "label": ["O", "O", "B-JUMLAH", "B-BENDA", "O", "B-POSISI", "I-POSISI", "I-POSISI"]}
-{"konteks": "daun 5", "kata": ["dodi", "membawa", "3", "bebek"], "label": ["O", "O", "B-JUMLAH", "B-BENDA"]}
-{"konteks": "mangga 13", "kata": ["lalu", "sepuluh", "mangga", "hilang"], "label": ["O", "B-JUMLAH", "B-BENDA", "B-PERISTIWA"]}
-{"konteks": "jeruk 4", "kata": ["eh", "ada", "berapa", "jeruk", "sekarang", "?"], "label": ["O", "O", "O", "O", "O", "O"]}
-{"konteks": "gajah 7", "kata": ["oke", ",", "lalu", "rina", "menaruh", "lima", "gajah", "lagi"], "label": ["O", "O", "O", "O", "B-PERISTIWA", "B-JUMLAH", "B-BENDA", "O"]}
-{"konteks": "mobil 6", "kata": ["ayo", "lihat", ",", "sebelas", "pensil", "terletak", "di", "piring"], "label": ["O", "O", "O", "B-JUMLAH", "B-BENDA", "O", "O", "B-TEMPAT"]}
-{"konteks": "kosong", "kata": ["coba", "lihat", ",", "16", "mobil", "sedang", "berjalan", "di", "halaman"], "label": ["O", "O", "O", "B-JUMLAH", "B-BENDA", "O", "B-AKSI", "O", "B-TEMPAT"]}
-{"konteks": "kosong", "kata": ["baik", ",", "di", "halaman", "terdapat", "empat", "semut", "berlari"], "label": ["O", "O", "O", "B-TEMPAT", "O", "B-JUMLAH", "B-BENDA", "B-AKSI"]}
-{"konteks": "ayam 6", "kata": ["sekarang", "setelah", "itu", "bu", "guru", "memberi", "enam", "ayam"], "label": ["O", "O", "O", "O", "O", "B-PERISTIWA", "B-JUMLAH", "B-BENDA"]}
-{"konteks": "bunga 7", "kata": ["di", "sini", "ada", "sembilan", "belas", "perahu", "berenang", "di", "kolam"], "label": ["O", "O", "O", "B-JUMLAH", "I-JUMLAH", "B-BENDA", "B-AKSI", "O", "B-TEMPAT"]}
-{"konteks": "ayam 4", "kata": ["anak-anak", ",", "nah", "tiga", "ayam", "dibawa", "pergi", "budi"], "label": ["O", "O", "O", "B-JUMLAH", "B-BENDA", "B-PERISTIWA", "I-PERISTIWA", "O"]}
-{"konteks": "kosong", "kata": ["nah", "anak-anak", ",", "pak", "guru", "membawa", "14", "semut"], "label": ["O", "O", "O", "O", "O", "O", "B-JUMLAH", "B-BENDA"]}
-{"konteks": "semut 12", "kata": ["eh", "setelah", "itu", "6", "semut", "pergi", "ke", "hutan"], "label": ["O", "O", "O", "B-JUMLAH", "B-BENDA", "B-PERISTIWA", "I-PERISTIWA", "I-PERISTIWA"]}
-{"konteks": "perahu 7", "kata": ["coba", "lihat", ",", "ada", "satu", "ekor", "ayam", "tidur", "di", "atas", "meja"], "label": ["O", "O", "O", "O", "B-JUMLAH", "O", "B-BENDA", "B-AKSI", "B-POSISI", "I-POSISI", "I-POSISI"]}
-{"konteks": "kue 9", "kata": ["perhatikan", ",", "di", "jalan", "ada", "lima", "anjing", "duduk"], "label": ["O", "O", "O", "B-TEMPAT", "O", "B-JUMLAH", "B-BENDA", "B-AKSI"]}
-{"konteks": "bunga 7", "kata": ["coba", "lihat", ",", "tujuh", "bunga", "lagi", "menyusul"], "label": ["O", "O", "O", "B-JUMLAH", "B-BENDA", "O", "B-PERISTIWA"]}
-{"konteks": "burung 3", "kata": ["nah", "anak-anak", ",", "setelah", "itu", "satu", "burung", "terbang"], "label": ["O", "O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "B-PERISTIWA"]}
-{"konteks": "sapi 6", "kata": ["nah", "anak-anak", ",", "jadi", "berapa", "jumlah", "sapi", "semuanya", "?"], "label": ["O", "O", "O", "O", "O", "O", "O", "O", "O"]}
-{"konteks": "apel 1", "kata": ["ayo", "lihat", ",", "setelah", "itu", "datang", "lagi", "tujuh", "buah", "apel"], "label": ["O", "O", "O", "O", "O", "B-PERISTIWA", "I-PERISTIWA", "B-JUMLAH", "O", "B-BENDA"]}
-{"konteks": "kosong", "kata": ["nah", ",", "4", "balon", "terbang", "di", "langit"], "label": ["O", "O", "B-JUMLAH", "B-BENDA", "B-AKSI", "O", "B-TEMPAT"]}
-{"konteks": "jeruk 8", "kata": ["anak-anak", ",", "ada", "dua", "buah", "apel", "di", "samping", "kotak"], "label": ["O", "O", "O", "B-JUMLAH", "O", "B-BENDA", "B-POSISI", "I-POSISI", "I-POSISI"]}
-{"konteks": "kosong", "kata": ["baik", ",", "pak", "guru", "membawa", "70", "butir", "kelereng"], "label": ["O", "O", "O", "O", "O", "B-JUMLAH", "O", "B-BENDA"]}
-{"konteks": "katak 5", "kata": ["anak-anak", ",", "ada", "berapa", "katak", "sekarang", "?"], "label": ["O", "O", "O", "O", "O", "O", "O"]}
-{"konteks": "kosong", "kata": ["ibu", "melihat", "10", "apel"], "label": ["O", "O", "B-JUMLAH", "B-BENDA"]}
-{"konteks": "bunga 6", "kata": ["nah", "enam", "pensil", "terletak", "di", "tas"], "label": ["O", "B-JUMLAH", "B-BENDA", "O", "O", "B-TEMPAT"]}
-{"konteks": "kupu-kupu 7", "kata": ["lalu", "lima", "kupu-kupu", "terbang"], "label": ["O", "B-JUMLAH", "B-BENDA", "B-PERISTIWA"]}
-{"konteks": "kosong", "kata": ["coba", "perhatikan", ",", "di", "jalan", "ada", "tujuh", "daun"], "label": ["O", "O", "O", "O", "B-TEMPAT", "O", "B-JUMLAH", "B-BENDA"]}
-{"konteks": "mangga 9", "kata": ["eh", "nah", "tiga", "mangga", "lagi", "datang", "lagi"], "label": ["O", "O", "B-JUMLAH", "B-BENDA", "O", "B-PERISTIWA", "I-PERISTIWA"]}
-{"konteks": "lebah 1", "kata": ["perhatikan", ",", "sekarang", "kita", "belajar", "pengurangan"], "label": ["O", "O", "O", "O", "O", "O"]}
-{"konteks": "semut 4", "kata": ["nah", ",", "lihat", ",", "ada", "tiga", "puluh", "delapan", "apel", "di", "dalam", "piring"], "label": ["O", "O", "O", "O", "O", "B-JUMLAH", "I-JUMLAH", "I-JUMLAH", "B-BENDA", "O", "O", "B-TEMPAT"]}
-{"konteks": "kosong", "kata": ["nah", ",", "tujuh", "lebah", "terbang", "di", "langit"], "label": ["O", "O", "B-JUMLAH", "B-BENDA", "B-AKSI", "O", "B-TEMPAT"]}
-{"konteks": "burung 2", "kata": ["lihat", "ya", ",", "dengarkan", "baik-baik", "ya"], "label": ["O", "O", "O", "O", "O", "O"]}
-{"konteks": "permen 9", "kata": ["nah", "anak-anak", ",", "terus", "dua", "biji", "permen", "pecah"], "label": ["O", "O", "O", "O", "B-JUMLAH", "O", "B-BENDA", "B-PERISTIWA"]}
-{"konteks": "anjing 2", "kata": ["oke", ",", "5", "ekor", "anjing", "muncul"], "label": ["O", "O", "B-JUMLAH", "O", "B-BENDA", "B-PERISTIWA"]}
-{"konteks": "telur 3", "kata": ["ada", "berapa", "telur", "sekarang", "?"], "label": ["O", "O", "O", "O", "O"]}
-{"konteks": "kosong", "kata": ["baik", ",", "coba", "hitung", "lagi", "ya"], "label": ["O", "O", "O", "O", "O", "O"]}
-{"konteks": "kosong", "kata": ["eh", "ucok", "mempunyai", "tiga", "belas", "pensil", "di", "lemari"], "label": ["O", "O", "O", "B-JUMLAH", "I-JUMLAH", "B-BENDA", "O", "B-TEMPAT"]}
-{"konteks": "kosong", "kata": ["ini", "ada", "dua", "puluh", "gajah", "berlari"], "label": ["O", "O", "B-JUMLAH", "I-JUMLAH", "B-BENDA", "B-AKSI"]}
-{"konteks": "mangga 6", "kata": ["perhatikan", ",", "berapa", "mangga", "yang", "pergi", "?"], "label": ["O", "O", "O", "O", "O", "O", "O"]}
-{"konteks": "bebek 2", "kata": ["berapa", "bebek", "yang", "pergi", "?"], "label": ["O", "O", "O", "O", "O"]}
-{"konteks": "semangka 15", "kata": ["baik", ",", "kemudian", "nenek", "mengambil", "12", "semangka"], "label": ["O", "O", "O", "O", "B-PERISTIWA", "B-JUMLAH", "B-BENDA"]}
-{"konteks": "kucing 8", "kata": ["nah", ",", "made", "membawa", "2", "potong", "kue"], "label": ["O", "O", "O", "O", "B-JUMLAH", "O", "B-BENDA"]}
-{"konteks": "monyet 5", "kata": ["coba", "perhatikan", ",", "nah", "bertambah", "2", "monyet"], "label": ["O", "O", "O", "O", "B-PERISTIWA", "B-JUMLAH", "B-BENDA"]}
-{"konteks": "kosong", "kata": ["nah", "anak-anak", ",", "lihat", ",", "ada", "enam", "belas", "butir", "kelereng", "di", "tas"], "label": ["O", "O", "O", "O", "O", "O", "B-JUMLAH", "I-JUMLAH", "O", "B-BENDA", "O", "B-TEMPAT"]}
-{"konteks": "jeruk 10", "kata": ["lihat", "ya", ",", "nah", "datang", "lagi", "sembilan", "buah", "jeruk"], "label": ["O", "O", "O", "O", "B-PERISTIWA", "I-PERISTIWA", "B-JUMLAH", "O", "B-BENDA"]}
-{"konteks": "buku 5", "kata": ["ayo", "lihat", ",", "terus", "siti", "menyembunyikan", "5", "buah", "buku"], "label": ["O", "O", "O", "O", "O", "B-PERISTIWA", "B-JUMLAH", "O", "B-BENDA"]}
-{"konteks": "ikan 10", "kata": ["jadi", "kemudian", "enam", "ikan", "datang", "lagi"], "label": ["O", "O", "B-JUMLAH", "B-BENDA", "B-PERISTIWA", "I-PERISTIWA"]}
-{"konteks": "apel 5", "kata": ["sekarang", "tiba-tiba", "nenek", "menaruh", "enam", "apel", "lagi"], "label": ["O", "O", "O", "B-PERISTIWA", "B-JUMLAH", "B-BENDA", "O"]}
-{"konteks": "monyet 2", "kata": ["nah", "dua", "ekor", "monyet", "diambil", "oleh", "monyet"], "label": ["O", "B-JUMLAH", "O", "B-BENDA", "B-PERISTIWA", "I-PERISTIWA", "O"]}
-{"konteks": "kupu-kupu 2", "kata": ["coba", "hitung", "kupu-kupu", "nya", "ada", "berapa", "?"], "label": ["O", "O", "O", "O", "O", "O", "O"]}
-{"konteks": "kosong", "kata": ["dua", "belas", "kura-kura", "berenang", "di", "kolam"], "label": ["B-JUMLAH", "I-JUMLAH", "B-BENDA", "B-AKSI", "O", "B-TEMPAT"]}
-{"konteks": "kosong", "kata": ["anak-anak", ",", "budi", "melihat", "dua", "ekor", "semut"], "label": ["O", "O", "O", "O", "B-JUMLAH", "O", "B-BENDA"]}
-{"konteks": "kelinci 13", "kata": ["sekarang", "terus", "made", "membuang", "delapan", "kelinci"], "label": ["O", "O", "O", "B-PERISTIWA", "B-JUMLAH", "B-BENDA"]}
-{"konteks": "perahu 6", "kata": ["coba", "lihat", ",", "terdapat", "sembilan", "pisang", "di", "piring"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "O", "B-TEMPAT"]}
-{"konteks": "bola 4", "kata": ["oke", ",", "di", "sini", "ada", "20", "buku", "di", "dalam", "keranjang"], "label": ["O", "O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "O", "O", "B-TEMPAT"]}
-{"konteks": "ayam 6", "kata": ["anak-anak", ",", "tiba-tiba", "ucok", "membawa", "2", "ayam", "lagi"], "label": ["O", "O", "O", "O", "B-PERISTIWA", "B-JUMLAH", "B-BENDA", "O"]}
+{"konteks": "kosong", "kata": ["di", "kotak", ",", "enam", "puluh", "delapan", "jeruk"], "label": ["O", "B-TEMPAT", "O", "B-JUMLAH", "I-JUMLAH", "I-JUMLAH", "B-BENDA"]}
+{"konteks": "lebah 10", "kata": ["ayah", "mengambil", "empat", "lebah"], "label": ["O", "B-PERISTIWA", "B-JUMLAH", "B-BENDA"]}
+{"konteks": "kosong", "kata": ["oke", ",", "di", "taman", ",", "tiga", "buah", "pesawat", "terbang"], "label": ["O", "O", "O", "B-TEMPAT", "O", "B-JUMLAH", "O", "B-BENDA", "B-AKSI"]}
+{"konteks": "apel 3", "kata": ["di", "tas", ",", "8", "kue"], "label": ["O", "B-TEMPAT", "O", "B-JUMLAH", "B-BENDA"]}
+{"konteks": "kambing 7", "kata": ["perhatikan", ",", "dayu", "memiliki", "3", "anjing"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"]}
+{"konteks": "kelereng 9", "kata": ["di", "taman", "ada", "8", "lebah", "beterbangan"], "label": ["O", "B-TEMPAT", "O", "B-JUMLAH", "B-BENDA", "B-AKSI"]}
+{"konteks": "kura-kura 7", "kata": ["nah", "anak-anak", ",", "siti", "membeli", "4", "ekor", "kura-kura"], "label": ["O", "O", "O", "O", "B-PERISTIWA", "B-JUMLAH", "O", "B-BENDA"]}
+{"konteks": "katak 8", "kata": ["nah", "anak-anak", ",", "lalu", "lima", "katak", "disembunyikan", "burung"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "B-PERISTIWA", "O"]}
+{"konteks": "kosong", "kata": ["coba", "perhatikan", ",", "di", "piring", ",", "sebuah", "jeruk"], "label": ["O", "O", "O", "O", "B-TEMPAT", "O", "B-JUMLAH", "B-BENDA"]}
+{"konteks": "kosong", "kata": ["oke", ",", "di", "sini", "ada", "dua", "pesawat", "melayang", "di", "taman"], "label": ["O", "O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "B-AKSI", "O", "B-TEMPAT"]}
+{"konteks": "sapi 6", "kata": ["anak-anak", ",", "di", "langit", "terdapat", "dua", "puluh", "lebah", "terbang"], "label": ["O", "O", "O", "B-TEMPAT", "O", "B-JUMLAH", "I-JUMLAH", "B-BENDA", "B-AKSI"]}
+{"konteks": "kura-kura 2", "kata": ["sekarang", "kemudian", "bertambah", "sembilan", "ekor", "kura-kura"], "label": ["O", "O", "B-PERISTIWA", "B-JUMLAH", "O", "B-BENDA"]}
+{"konteks": "ikan 1", "kata": ["sekarang", "sembilan", "belas", "potong", "kue", "ada", "di", "lemari"], "label": ["O", "B-JUMLAH", "I-JUMLAH", "O", "B-BENDA", "O", "O", "B-TEMPAT"]}
+{"konteks": "telur 7", "kata": ["nah", ",", "terus", "ucok", "memakan", "tujuh", "telur"], "label": ["O", "O", "O", "O", "B-PERISTIWA", "B-JUMLAH", "B-BENDA"]}
+{"konteks": "jeruk 7", "kata": ["nah", "di", "sawah", "ada", "6", "ekor", "ayam", "berlarian"], "label": ["O", "O", "B-TEMPAT", "O", "B-JUMLAH", "O", "B-BENDA", "B-AKSI"]}
+{"konteks": "kosong", "kata": ["ayo", "lihat", ",", "adik", "punya", "3", "bunga", "di", "piring"], "label": ["O", "O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "O", "B-TEMPAT"]}
+{"konteks": "bebek 4", "kata": ["perhatikan", ",", "lalu", "dayu", "menyembunyikan", "2", "bebek"], "label": ["O", "O", "O", "O", "B-PERISTIWA", "B-JUMLAH", "B-BENDA"]}
+{"konteks": "perahu 5", "kata": ["setelah", "itu", "9", "perahu", "lagi", "muncul"], "label": ["O", "O", "B-JUMLAH", "B-BENDA", "O", "B-PERISTIWA"]}
+{"konteks": "kosong", "kata": ["di", "langit", "terdapat", "seekor", "burung"], "label": ["O", "B-TEMPAT", "O", "B-JUMLAH", "B-BENDA"]}
+{"konteks": "apel 14", "kata": ["perhatikan", ",", "lalu", "tujuh", "apel", "habis"], "label": ["O", "O", "O", "B-JUMLAH", "B-BENDA", "B-PERISTIWA"]}
+{"konteks": "kosong", "kata": ["nah", "12", "kupu-kupu", "terbang"], "label": ["O", "B-JUMLAH", "B-BENDA", "B-AKSI"]}
+{"konteks": "lebah 2", "kata": ["coba", "lihat", ",", "lalu", "8", "lebah", "lagi", "ikut", "bergabung"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "O", "B-PERISTIWA", "I-PERISTIWA"]}
+{"konteks": "kosong", "kata": ["ada", "dua", "ayam", "berdiri", "di", "atas", "pohon"], "label": ["O", "B-JUMLAH", "B-BENDA", "B-AKSI", "B-POSISI", "I-POSISI", "I-POSISI"]}
+{"konteks": "kosong", "kata": ["sekarang", "siti", "mempunyai", "dua", "puluh", "dua", "kelinci"], "label": ["O", "O", "O", "B-JUMLAH", "I-JUMLAH", "I-JUMLAH", "B-BENDA"]}
+{"konteks": "balon 3", "kata": ["nah", "anak-anak", ",", "muncul", "lagi", "satu", "balon"], "label": ["O", "O", "O", "B-PERISTIWA", "I-PERISTIWA", "B-JUMLAH", "B-BENDA"]}
+{"konteks": "kosong", "kata": ["nah", ",", "pak", "tani", "mempunyai", "sepuluh", "permen", "di", "piring"], "label": ["O", "O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "O", "B-TEMPAT"]}
+{"konteks": "kura-kura 7", "kata": ["baik", ",", "kemudian", "muncul", "lagi", "lima", "kura-kura"], "label": ["O", "O", "O", "B-PERISTIWA", "I-PERISTIWA", "B-JUMLAH", "B-BENDA"]}
+{"konteks": "katak 8", "kata": ["lihat", "ya", ",", "satu", "ekor", "katak", "pergi"], "label": ["O", "O", "O", "B-JUMLAH", "O", "B-BENDA", "B-PERISTIWA"]}
+{"konteks": "burung 6", "kata": ["jadi", "tiga", "belas", "perahu", "berenang", "di", "kolam"], "label": ["O", "B-JUMLAH", "I-JUMLAH", "B-BENDA", "B-AKSI", "O", "B-TEMPAT"]}
+{"konteks": "kosong", "kata": ["baik", ",", "ada", "dua", "ekor", "sapi", "bermain", "di", "dekat", "rumah"], "label": ["O", "O", "O", "B-JUMLAH", "O", "B-BENDA", "B-AKSI", "B-POSISI", "I-POSISI", "I-POSISI"]}
+{"konteks": "kosong", "kata": ["lihat", ",", "ada", "13", "telur"], "label": ["O", "O", "O", "B-JUMLAH", "B-BENDA"]}
+{"konteks": "ayam 7", "kata": ["nah", "bunga", "terletak", "di", "atas", "pohon"], "label": ["O", "B-BENDA", "O", "B-POSISI", "I-POSISI", "I-POSISI"]}
+{"konteks": "sapi 2", "kata": ["perhatikan", ",", "asep", "memberikan", "tujuh", "ekor", "sapi"], "label": ["O", "O", "O", "B-PERISTIWA", "B-JUMLAH", "O", "B-BENDA"]}
+{"konteks": "permen 9", "kata": ["lihat", "ya", ",", "nah", "asep", "makan", "sembilan", "biji", "permen"], "label": ["O", "O", "O", "O", "O", "B-PERISTIWA", "B-JUMLAH", "O", "B-BENDA"]}
+{"konteks": "ikan 6", "kata": ["lihat", "ya", ",", "di", "sungai", ",", "89", "perahu", "berenang"], "label": ["O", "O", "O", "O", "B-TEMPAT", "O", "B-JUMLAH", "B-BENDA", "B-AKSI"]}
+{"konteks": "kosong", "kata": ["oke", ",", "sekarang", "giliran", "siti"], "label": ["O", "O", "O", "O", "O"]}
+{"konteks": "kosong", "kata": ["perhatikan", ",", "dua", "burung", "terbang"], "label": ["O", "O", "B-JUMLAH", "B-BENDA", "B-AKSI"]}
+{"konteks": "gajah 9", "kata": ["baik", ",", "ayo", "duduk", "yang", "rapi"], "label": ["O", "O", "O", "O", "O", "O"]}
+{"konteks": "sapi 13", "kata": ["nah", ",", "terus", "empat", "ekor", "sapi", "lari", "pergi"], "label": ["O", "O", "O", "B-JUMLAH", "O", "B-BENDA", "B-PERISTIWA", "I-PERISTIWA"]}
 {"konteks": "kosong", "kata": ["baik", ",", "terdapat", "15", "ekor", "kura-kura", "berenang"], "label": ["O", "O", "O", "B-JUMLAH", "O", "B-BENDA", "B-AKSI"]}
-{"konteks": "monyet 1", "kata": ["sekarang", "sembilan", "kucing", "ada", "di", "sawah"], "label": ["O", "B-JUMLAH", "B-BENDA", "O", "O", "B-TEMPAT"]}
-{"konteks": "kura-kura 5", "kata": ["sekarang", "kemudian", "adik", "menaruh", "lima", "kura-kura", "tambahan"], "label": ["O", "O", "O", "B-PERISTIWA", "B-JUMLAH", "B-BENDA", "O"]}
-{"konteks": "kosong", "kata": ["ayo", "lihat", ",", "di", "rumput", "terdapat", "tiga", "kambing", "melompat"], "label": ["O", "O", "O", "O", "B-TEMPAT", "O", "B-JUMLAH", "B-BENDA", "B-AKSI"]}
-{"konteks": "semut 4", "kata": ["coba", "lihat", ",", "lalu", "nenek", "mengambil", "tiga", "ekor", "semut"], "label": ["O", "O", "O", "O", "O", "B-PERISTIWA", "B-JUMLAH", "O", "B-BENDA"]}
-{"konteks": "kue 7", "kata": ["oke", ",", "terus", "tujuh", "kue", "diambil", "monyet"], "label": ["O", "O", "O", "B-JUMLAH", "B-BENDA", "B-PERISTIWA", "O"]}
-{"konteks": "apel 5", "kata": ["di", "kolam", ",", "12", "katak"], "label": ["O", "B-TEMPAT", "O", "B-JUMLAH", "B-BENDA"]}
-{"konteks": "kosong", "kata": ["coba", "lihat", ",", "lima", "kupu-kupu", "terbang", "di", "langit"], "label": ["O", "O", "O", "B-JUMLAH", "B-BENDA", "B-AKSI", "O", "B-TEMPAT"]}
-{"konteks": "telur 12", "kata": ["nah", "anak-anak", ",", "lalu", "asep", "menghabiskan", "tiga", "telur"], "label": ["O", "O", "O", "O", "O", "B-PERISTIWA", "B-JUMLAH", "B-BENDA"]}
-{"konteks": "mangga 2", "kata": ["oke", ",", "siti", "menggambar", "lima", "daun"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"]}
-{"konteks": "kosong", "kata": ["perhatikan", ",", "ada", "sebuah", "semangka", "diletakkan", "di", "depan", "tempat", "tidur"], "label": ["O", "O", "O", "B-JUMLAH", "B-BENDA", "O", "B-POSISI", "I-POSISI", "I-POSISI", "I-POSISI"]}
-{"konteks": "kambing 7", "kata": ["anak-anak", ",", "di", "sini", "ada", "50", "kelereng"], "label": ["O", "O", "O", "O", "O", "B-JUMLAH", "B-BENDA"]}
-{"konteks": "pisang 1", "kata": ["baik", ",", "ada", "tiga", "kucing", "terletak", "di", "samping", "jendela"], "label": ["O", "O", "O", "B-JUMLAH", "B-BENDA", "O", "B-POSISI", "I-POSISI", "I-POSISI"]}
-{"konteks": "daun 14", "kata": ["coba", "perhatikan", ",", "nah", "adik", "menyembunyikan", "sebelas", "daun"], "label": ["O", "O", "O", "O", "O", "B-PERISTIWA", "B-JUMLAH", "B-BENDA"]}
-{"konteks": "mobil 5", "kata": ["sekarang", "sekarang", "mobil", "nya", "tinggal", "berapa", "?"], "label": ["O", "O", "O", "O", "O", "O", "O"]}
-{"konteks": "kupu-kupu 9", "kata": ["di", "sini", "ada", "9", "ikan", "sedang", "berenang", "di", "dalam", "sungai"], "label": ["O", "O", "O", "B-JUMLAH", "B-BENDA", "O", "B-AKSI", "O", "O", "B-TEMPAT"]}
-{"konteks": "kosong", "kata": ["lihat", "ya", ",", "di", "langit", ",", "18", "bintang"], "label": ["O", "O", "O", "O", "B-TEMPAT", "O", "B-JUMLAH", "B-BENDA"]}
-{"konteks": "lebah 6", "kata": ["nah", "anak-anak", ",", "2", "kupu-kupu", "melayang", "di", "taman"], "label": ["O", "O", "O", "B-JUMLAH", "B-BENDA", "B-AKSI", "O", "B-TEMPAT"]}
-{"konteks": "kosong", "kata": ["coba", "perhatikan", ",", "11", "balon", "terbang", "di", "langit"], "label": ["O", "O", "O", "B-JUMLAH", "B-BENDA", "B-AKSI", "O", "B-TEMPAT"]}
-{"konteks": "balon 10", "kata": ["8", "balon", "lagi", "menyusul"], "label": ["B-JUMLAH", "B-BENDA", "O", "B-PERISTIWA"]}
-{"konteks": "kosong", "kata": ["eh", "kita", "lanjut", "ke", "soal", "berikutnya"], "label": ["O", "O", "O", "O", "O", "O"]}
-{"konteks": "perahu 8", "kata": ["sebuah", "pisang", "diletakkan", "di", "depan", "lemari"], "label": ["B-JUMLAH", "B-BENDA", "O", "B-POSISI", "I-POSISI", "I-POSISI"]}
-{"konteks": "monyet 8", "kata": ["sekarang", "tiba-tiba", "dua", "monyet", "menyusul"], "label": ["O", "O", "B-JUMLAH", "B-BENDA", "B-PERISTIWA"]}
-{"konteks": "perahu 2", "kata": ["oke", ",", "selamat", "pagi", "anak-anak"], "label": ["O", "O", "O", "O", "O"]}
-{"konteks": "pisang 7", "kata": ["oke", ",", "setelah", "itu", "siti", "mengambil", "5", "pisang"], "label": ["O", "O", "O", "O", "O", "B-PERISTIWA", "B-JUMLAH", "B-BENDA"]}
-{"konteks": "kupu-kupu 9", "kata": ["eh", "tiba-tiba", "3", "kupu-kupu", "terbang"], "label": ["O", "O", "B-JUMLAH", "B-BENDA", "B-PERISTIWA"]}
-{"konteks": "kosong", "kata": ["lihat", "ya", ",", "apel", "di", "dekat", "jendela"], "label": ["O", "O", "O", "B-BENDA", "B-POSISI", "I-POSISI", "I-POSISI"]}
-{"konteks": "kosong", "kata": ["16", "balon", "terletak", "di", "udara"], "label": ["B-JUMLAH", "B-BENDA", "O", "O", "B-TEMPAT"]}
-{"konteks": "bunga 9", "kata": ["nah", "anak-anak", ",", "kakak", "menggambar", "15", "buku", "di", "tas"], "label": ["O", "O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "O", "B-TEMPAT"]}
-{"konteks": "bunga 8", "kata": ["lihat", "ya", ",", "coba", "hitung", "bunga", "nya", "ada", "berapa", "?"], "label": ["O", "O", "O", "O", "O", "O", "O", "O", "O", "O"]}
-{"konteks": "kupu-kupu 6", "kata": ["jadi", "tiba-tiba", "5", "kupu-kupu", "terbang"], "label": ["O", "O", "B-JUMLAH", "B-BENDA", "B-PERISTIWA"]}
-{"konteks": "mobil 2", "kata": ["eh", "nah", "2", "mobil", "berlari", "pergi"], "label": ["O", "O", "B-JUMLAH", "B-BENDA", "B-PERISTIWA", "I-PERISTIWA"]}
-{"konteks": "kosong", "kata": ["eh", "sekarang", "giliran", "siti"], "label": ["O", "O", "O", "O"]}
-{"konteks": "balon 4", "kata": ["perhatikan", ",", "jadi", "berapa", "jumlah", "balon", "semuanya", "?"], "label": ["O", "O", "O", "O", "O", "O", "O", "O"]}
-{"konteks": "semut 1", "kata": ["jadi", "di", "langit", "ada", "69", "kupu-kupu"], "label": ["O", "O", "B-TEMPAT", "O", "B-JUMLAH", "B-BENDA"]}
-{"konteks": "telur 8", "kata": ["coba", "perhatikan", ",", "terdapat", "19", "kelereng", "di", "keranjang"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "O", "B-TEMPAT"]}
-{"konteks": "kosong", "kata": ["baik", ",", "di", "keranjang", "ada", "tiga", "belas", "permen"], "label": ["O", "O", "O", "B-TEMPAT", "O", "B-JUMLAH", "I-JUMLAH", "B-BENDA"]}
-{"konteks": "kupu-kupu 4", "kata": ["nah", "anak-anak", ",", "lalu", "empat", "kupu-kupu", "terbang"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "B-PERISTIWA"]}
-{"konteks": "bola 8", "kata": ["jadi", "coba", "hitung", "lagi", "ya"], "label": ["O", "O", "O", "O", "O"]}
-{"konteks": "kosong", "kata": ["anak-anak", ",", "terdapat", "tujuh", "semut", "sedang", "berlarian", "di", "sawah"], "label": ["O", "O", "O", "B-JUMLAH", "B-BENDA", "O", "B-AKSI", "O", "B-TEMPAT"]}
+{"konteks": "kosong", "kata": ["baik", ",", "enam", "potong", "kue", "terletak", "di", "tas"], "label": ["O", "O", "B-JUMLAH", "O", "B-BENDA", "O", "O", "B-TEMPAT"]}
+{"konteks": "kosong", "kata": ["sekarang", "ada", "sepuluh", "kelinci", "sedang", "berlarian", "di", "lapangan"], "label": ["O", "O", "B-JUMLAH", "B-BENDA", "O", "B-AKSI", "O", "B-TEMPAT"]}
+{"konteks": "semangka 6", "kata": ["baik", ",", "dua", "belas", "buah", "pesawat-pesawat", "terletak", "di", "taman"], "label": ["O", "O", "B-JUMLAH", "I-JUMLAH", "O", "B-BENDA", "O", "O", "B-TEMPAT"]}
+{"konteks": "burung 1", "kata": ["nah", "kemudian", "adik", "menaruh", "delapan", "burung", "lagi"], "label": ["O", "O", "O", "B-PERISTIWA", "B-JUMLAH", "B-BENDA", "O"]}
+{"konteks": "semangka 6", "kata": ["ayo", "lihat", ",", "bertambah", "tujuh", "buah", "semangka"], "label": ["O", "O", "O", "B-PERISTIWA", "B-JUMLAH", "O", "B-BENDA"]}
+{"konteks": "kelinci 3", "kata": ["coba", "perhatikan", ",", "nah", "budi", "membuang", "satu", "ekor", "kelinci"], "label": ["O", "O", "O", "O", "O", "B-PERISTIWA", "B-JUMLAH", "O", "B-BENDA"]}
+{"konteks": "permen 2", "kata": ["nah", ",", "di", "sini", "ada", "23", "ekor", "kambing", "sedang", "berlarian", "di", "dalam", "halaman"], "label": ["O", "O", "O", "O", "O", "B-JUMLAH", "O", "B-BENDA", "O", "B-AKSI", "O", "O", "B-TEMPAT"]}
+{"konteks": "kosong", "kata": ["sekarang", "ada", "dua", "semut", "di", "samping", "jendela"], "label": ["O", "O", "B-JUMLAH", "B-BENDA", "B-POSISI", "I-POSISI", "I-POSISI"]}
+{"konteks": "daun 3", "kata": ["jadi", "ada", "seekor", "gajah", "berdiri", "di", "depan", "meja"], "label": ["O", "O", "B-JUMLAH", "B-BENDA", "B-AKSI", "B-POSISI", "I-POSISI", "I-POSISI"]}
+{"konteks": "kosong", "kata": ["coba", "perhatikan", ",", "ani", "membawa", "empat", "belas", "ekor", "kura-kura"], "label": ["O", "O", "O", "O", "O", "B-JUMLAH", "I-JUMLAH", "O", "B-BENDA"]}
+{"konteks": "lebah 5", "kata": ["coba", "lihat", ",", "tiba-tiba", "rina", "membuang", "2", "lebah"], "label": ["O", "O", "O", "O", "O", "B-PERISTIWA", "B-JUMLAH", "B-BENDA"]}
+{"konteks": "bunga 6", "kata": ["coba", "lihat", ",", "ada", "dua", "lebah", "di", "langit"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "O", "B-TEMPAT"]}
+{"konteks": "pensil 1", "kata": ["ayo", "lihat", ",", "setelah", "itu", "datang", "lagi", "1", "pensil"], "label": ["O", "O", "O", "O", "O", "B-PERISTIWA", "I-PERISTIWA", "B-JUMLAH", "B-BENDA"]}
+{"konteks": "daun 5", "kata": ["coba", "lihat", ",", "nah", "satu", "daun", "hilang"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "B-PERISTIWA"]}
+{"konteks": "kambing 3", "kata": ["eh", "lalu", "seekor", "kambing", "diambil", "ibu"], "label": ["O", "O", "B-JUMLAH", "B-BENDA", "B-PERISTIWA", "O"]}
+{"konteks": "monyet 6", "kata": ["sekarang", "ada", "berapa", "monyet", "sekarang", "?"], "label": ["O", "O", "O", "O", "O", "O"]}
+{"konteks": "kupu-kupu 12", "kata": ["perhatikan", ",", "nah", "11", "ekor", "kupu-kupu", "meletus"], "label": ["O", "O", "O", "B-JUMLAH", "O", "B-BENDA", "B-PERISTIWA"]}
+{"konteks": "kosong", "kata": ["coba", "lihat", ",", "lihat", ",", "ada", "sembilan", "belas", "bunga", "di", "kotak"], "label": ["O", "O", "O", "O", "O", "O", "B-JUMLAH", "I-JUMLAH", "B-BENDA", "O", "B-TEMPAT"]}
+{"konteks": "lebah 7", "kata": ["anak-anak", ",", "lalu", "bertambah", "empat", "ekor", "lebah"], "label": ["O", "O", "O", "B-PERISTIWA", "B-JUMLAH", "O", "B-BENDA"]}
+{"konteks": "bunga 10", "kata": ["made", "mengambil", "sepuluh", "bunga"], "label": ["O", "B-PERISTIWA", "B-JUMLAH", "B-BENDA"]}
+{"konteks": "anjing 2", "kata": ["nah", "ada", "satu", "ekor", "ayam", "bersembunyi", "di", "bawah", "kursi"], "label": ["O", "O", "B-JUMLAH", "O", "B-BENDA", "B-AKSI", "B-POSISI", "I-POSISI", "I-POSISI"]}
+{"konteks": "kosong", "kata": ["sekarang", "sekarang", "kita", "belajar", "pengurangan"], "label": ["O", "O", "O", "O", "O"]}
+{"konteks": "telur 1", "kata": ["kue", "di", "dekat", "lemari"], "label": ["B-BENDA", "B-POSISI", "I-POSISI", "I-POSISI"]}
+{"konteks": "anjing 6", "kata": ["anak-anak", ",", "kemudian", "bu", "guru", "mengambil", "satu", "anjing-anjing"], "label": ["O", "O", "O", "O", "O", "B-PERISTIWA", "B-JUMLAH", "B-BENDA"]}
+{"konteks": "kosong", "kata": ["perhatikan", ",", "tiga", "buah", "balon", "terbang"], "label": ["O", "O", "B-JUMLAH", "O", "B-BENDA", "B-AKSI"]}
+{"konteks": "perahu 8", "kata": ["anak-anak", ",", "asep", "mempunyai", "11", "semangka"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"]}
+{"konteks": "perahu 7", "kata": ["coba", "lihat", ",", "ucok", "mengambil", "enam", "perahu"], "label": ["O", "O", "O", "O", "B-PERISTIWA", "B-JUMLAH", "B-BENDA"]}
+{"konteks": "ikan 5", "kata": ["coba", "lihat", ",", "selamat", "pagi", "anak-anak"], "label": ["O", "O", "O", "O", "O", "O"]}
+{"konteks": "permen 10", "kata": ["anak-anak", ",", "kemudian", "sembilan", "permen", "ikut", "bergabung"], "label": ["O", "O", "O", "B-JUMLAH", "B-BENDA", "B-PERISTIWA", "I-PERISTIWA"]}
+{"konteks": "kosong", "kata": ["anak-anak", ",", "hari", "ini", "kita", "belajar", "membilang"], "label": ["O", "O", "O", "O", "O", "O", "O"]}
+{"konteks": "lebah 1", "kata": ["coba", "perhatikan", ",", "ada", "11", "butir", "telur", "di", "dalam", "meja"], "label": ["O", "O", "O", "O", "B-JUMLAH", "O", "B-BENDA", "O", "O", "B-TEMPAT"]}
+{"konteks": "kosong", "kata": ["lihat", "ya", ",", "di", "jalan", ",", "lima", "belas", "kucing", "berlari"], "label": ["O", "O", "O", "O", "B-TEMPAT", "O", "B-JUMLAH", "I-JUMLAH", "B-BENDA", "B-AKSI"]}
+{"konteks": "daun 4", "kata": ["lalu", "empat", "daun", "diambil", "angin"], "label": ["O", "B-JUMLAH", "B-BENDA", "B-PERISTIWA", "O"]}
+{"konteks": "sapi 4", "kata": ["ada", "seekor", "semut", "diletakkan", "di", "belakang", "kursi"], "label": ["O", "B-JUMLAH", "B-BENDA", "O", "B-POSISI", "I-POSISI", "I-POSISI"]}
+{"konteks": "mobil 12", "kata": ["nah", "setelah", "itu", "6", "mobil-mobil", "disembunyikan", "kakak"], "label": ["O", "O", "O", "B-JUMLAH", "B-BENDA", "B-PERISTIWA", "O"]}
+{"konteks": "kosong", "kata": ["oke", ",", "ada", "satu", "permen", "terletak", "di", "atas", "kotak"], "label": ["O", "O", "O", "B-JUMLAH", "B-BENDA", "O", "B-POSISI", "I-POSISI", "I-POSISI"]}
+{"konteks": "kosong", "kata": ["nah", "anak-anak", ",", "89", "pesawat", "melayang", "di", "udara"], "label": ["O", "O", "O", "B-JUMLAH", "B-BENDA", "B-AKSI", "O", "B-TEMPAT"]}
+{"konteks": "pensil 3", "kata": ["nah", "ditambah", "dua", "batang", "pensil"], "label": ["O", "B-PERISTIWA", "B-JUMLAH", "O", "B-BENDA"]}
+{"konteks": "kucing 4", "kata": ["nah", "anak-anak", ",", "kita", "lanjut", "ke", "soal", "berikutnya"], "label": ["O", "O", "O", "O", "O", "O", "O", "O"]}
+{"konteks": "apel 9", "kata": ["nah", "anak-anak", ",", "ada", "berapa", "apel", "sekarang", "?"], "label": ["O", "O", "O", "O", "O", "O", "O", "O"]}
+{"konteks": "daun 5", "kata": ["eh", "sekarang", "giliran", "siti"], "label": ["O", "O", "O", "O"]}
+{"konteks": "kosong", "kata": ["jadi", "gajah", "duduk", "di", "atas", "meja"], "label": ["O", "B-BENDA", "B-AKSI", "B-POSISI", "I-POSISI", "I-POSISI"]}
+{"konteks": "bintang 5", "kata": ["baik", ",", "dayu", "memberikan", "delapan", "bintang", "lagi"], "label": ["O", "O", "O", "B-PERISTIWA", "B-JUMLAH", "B-BENDA", "O"]}
+{"konteks": "burung 11", "kata": ["lihat", "ya", ",", "enam", "ekor", "burung", "diambil", "kucing"], "label": ["O", "O", "O", "B-JUMLAH", "O", "B-BENDA", "B-PERISTIWA", "O"]}
+{"konteks": "kosong", "kata": ["baik", ",", "di", "sini", "ada", "20", "jeruk"], "label": ["O", "O", "O", "O", "O", "B-JUMLAH", "B-BENDA"]}
+{"konteks": "permen 2", "kata": ["nah", "anak-anak", ",", "terus", "dua", "permen", "habis", "dimakan", "kakak"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "B-PERISTIWA", "I-PERISTIWA", "O"]}
+{"konteks": "bola 9", "kata": ["eh", "berapa", "bola", "yang", "tersisa", "?"], "label": ["O", "O", "O", "O", "O", "O"]}
+{"konteks": "kosong", "kata": ["ayo", "lihat", ",", "ini", "ada", "8", "pesawat", "sedang", "beterbangan"], "label": ["O", "O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "O", "B-AKSI"]}
+{"konteks": "kupu-kupu 11", "kata": ["anak-anak", ",", "nah", "satu", "kupu-kupu", "disembunyikan", "adik"], "label": ["O", "O", "O", "B-JUMLAH", "B-BENDA", "B-PERISTIWA", "O"]}
+{"konteks": "kura-kura 2", "kata": ["nah", "ditambah", "lagi", "dengan", "dua", "kura-kura"], "label": ["O", "B-PERISTIWA", "I-PERISTIWA", "I-PERISTIWA", "B-JUMLAH", "B-BENDA"]}
+{"konteks": "kosong", "kata": ["jadi", "sembilan", "ekor", "kupu-kupu", "terbang", "di", "udara"], "label": ["O", "B-JUMLAH", "O", "B-BENDA", "B-AKSI", "O", "B-TEMPAT"]}
+{"konteks": "kosong", "kata": ["jadi", "tiga", "belas", "jeruk", "terletak", "di", "tas"], "label": ["O", "B-JUMLAH", "I-JUMLAH", "B-BENDA", "O", "O", "B-TEMPAT"]}
+{"konteks": "buku 9", "kata": ["tiba-tiba", "7", "buku", "hilang"], "label": ["O", "B-JUMLAH", "B-BENDA", "B-PERISTIWA"]}
+{"konteks": "pesawat 1", "kata": ["nah", "lalu", "bertambah", "4", "pesawat"], "label": ["O", "O", "B-PERISTIWA", "B-JUMLAH", "B-BENDA"]}
+{"konteks": "kosong", "kata": ["baik", ",", "seekor", "kucing", "diletakkan", "di", "dekat", "meja"], "label": ["O", "O", "B-JUMLAH", "B-BENDA", "O", "B-POSISI", "I-POSISI", "I-POSISI"]}
+{"konteks": "burung 5", "kata": ["jadi", "setelah", "itu", "pak", "guru", "mengambil", "4", "burung"], "label": ["O", "O", "O", "O", "O", "B-PERISTIWA", "B-JUMLAH", "B-BENDA"]}
+{"konteks": "semut 9", "kata": ["perhatikan", ",", "lima", "semut", "hilang"], "label": ["O", "O", "B-JUMLAH", "B-BENDA", "B-PERISTIWA"]}
+{"konteks": "buku 6", "kata": ["di", "taman", ",", "15", "balon", "terbang"], "label": ["O", "B-TEMPAT", "O", "B-JUMLAH", "B-BENDA", "B-AKSI"]}
+{"konteks": "kosong", "kata": ["anak-anak", ",", "ini", "ada", "18", "permen"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"]}
+{"konteks": "kucing 11", "kata": ["jadi", "kemudian", "sebelas", "kucing", "hilang"], "label": ["O", "O", "B-JUMLAH", "B-BENDA", "B-PERISTIWA"]}
+{"konteks": "bintang 10", "kata": ["kemudian", "datang", "lagi", "8", "bintang"], "label": ["O", "B-PERISTIWA", "I-PERISTIWA", "B-JUMLAH", "B-BENDA"]}
+{"konteks": "perahu 2", "kata": ["oke", ",", "tiba-tiba", "dua", "perahu-perahu", "pergi"], "label": ["O", "O", "O", "B-JUMLAH", "B-BENDA", "B-PERISTIWA"]}
+{"konteks": "telur 7", "kata": ["perhatikan", ",", "ada", "berapa", "telur", "sekarang", "?"], "label": ["O", "O", "O", "O", "O", "O", "O"]}
+{"konteks": "daun 9", "kata": ["lihat", "ya", ",", "nah", "ani", "memberi", "lima", "lembar", "daun", "lagi"], "label": ["O", "O", "O", "O", "O", "B-PERISTIWA", "B-JUMLAH", "O", "B-BENDA", "O"]}
+{"konteks": "kosong", "kata": ["coba", "perhatikan", ",", "seekor", "kelinci", "terletak", "di", "dekat", "pohon"], "label": ["O", "O", "O", "B-JUMLAH", "B-BENDA", "O", "B-POSISI", "I-POSISI", "I-POSISI"]}
+{"konteks": "kosong", "kata": ["siapa", "yang", "bisa", "menjawab", "?"], "label": ["O", "O", "O", "O", "O"]}
+{"konteks": "bunga 5", "kata": ["perhatikan", ",", "lihat", ",", "ada", "sepuluh", "ekor", "ikan", "berenang", "di", "dalam", "danau"], "label": ["O", "O", "O", "O", "O", "B-JUMLAH", "O", "B-BENDA", "B-AKSI", "O", "O", "B-TEMPAT"]}
+{"konteks": "kambing 9", "kata": ["lihat", "ya", ",", "di", "sini", "ada", "77", "kelinci", "sedang", "berlarian", "di", "dalam", "sawah"], "label": ["O", "O", "O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "O", "B-AKSI", "O", "O", "B-TEMPAT"]}
+{"konteks": "buku 13", "kata": ["nah", "budi", "membuang", "delapan", "buah", "buku"], "label": ["O", "O", "B-PERISTIWA", "B-JUMLAH", "O", "B-BENDA"]}
+{"konteks": "kupu-kupu 2", "kata": ["sekarang", "asep", "punya", "8", "kura-kura"], "label": ["O", "O", "O", "B-JUMLAH", "B-BENDA"]}
+{"konteks": "telur 14", "kata": ["ayo", "lihat", ",", "tiba-tiba", "tiga", "telur", "disembunyikan", "ibu"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "B-PERISTIWA", "O"]}
+{"konteks": "ikan 6", "kata": ["tiba-tiba", "9", "ekor", "ikan", "lagi", "ikut", "bergabung"], "label": ["O", "B-JUMLAH", "O", "B-BENDA", "O", "B-PERISTIWA", "I-PERISTIWA"]}
+{"konteks": "balon 6", "kata": ["anak-anak", ",", "tiba-tiba", "dua", "balon", "terbang"], "label": ["O", "O", "O", "B-JUMLAH", "B-BENDA", "B-PERISTIWA"]}
+{"konteks": "perahu 11", "kata": ["baik", ",", "lalu", "7", "perahu-perahu", "berenang", "pergi"], "label": ["O", "O", "O", "B-JUMLAH", "B-BENDA", "B-PERISTIWA", "I-PERISTIWA"]}
+{"konteks": "sapi 4", "kata": ["jadi", "terus", "muncul", "lagi", "lima", "sapi"], "label": ["O", "O", "B-PERISTIWA", "I-PERISTIWA", "B-JUMLAH", "B-BENDA"]}
+{"konteks": "kosong", "kata": ["coba", "perhatikan", ",", "ayo", "semua", "lihat", "ke", "depan"], "label": ["O", "O", "O", "O", "O", "O", "O", "O"]}
 {"konteks": "kosong", "kata": ["perhatikan", ",", "ada", "6", "katak", "berenang"], "label": ["O", "O", "O", "B-JUMLAH", "B-BENDA", "B-AKSI"]}
-{"konteks": "kupu-kupu 9", "kata": ["perhatikan", ",", "ini", "ada", "18", "monyet", "tidur"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "B-AKSI"]}
-{"konteks": "kosong", "kata": ["oke", ",", "ini", "ada", "lima", "belas", "jeruk", "di", "piring"], "label": ["O", "O", "O", "O", "B-JUMLAH", "I-JUMLAH", "B-BENDA", "O", "B-TEMPAT"]}
-{"konteks": "kosong", "kata": ["perhatikan", ",", "siapa", "yang", "bisa", "menjawab", "?"], "label": ["O", "O", "O", "O", "O", "O", "O"]}
-{"konteks": "burung 3", "kata": ["nah", "anak-anak", ",", "tiba-tiba", "satu", "burung", "terbang"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "B-PERISTIWA"]}
-{"konteks": "jeruk 10", "kata": ["lihat", "ya", ",", "nah", "9", "jeruk-jeruk", "habis"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "B-PERISTIWA"]}
-{"konteks": "kosong", "kata": ["oke", ",", "di", "tas", ",", "5", "pensil"], "label": ["O", "O", "O", "B-TEMPAT", "O", "B-JUMLAH", "B-BENDA"]}
-{"konteks": "kosong", "kata": ["eh", "ada", "delapan", "buah", "mangga", "di", "piring"], "label": ["O", "O", "B-JUMLAH", "O", "B-BENDA", "O", "B-TEMPAT"]}
-{"konteks": "kelereng 7", "kata": ["sekarang", "lalu", "enam", "kelereng", "diambil", "kakak"], "label": ["O", "O", "B-JUMLAH", "B-BENDA", "B-PERISTIWA", "O"]}
-{"konteks": "kambing 7", "kata": ["jadi", "terus", "ucok", "mengambil", "7", "kambing"], "label": ["O", "O", "O", "B-PERISTIWA", "B-JUMLAH", "B-BENDA"]}
-{"konteks": "kosong", "kata": ["coba", "perhatikan", ",", "di", "keranjang", ",", "empat", "belas", "pisang"], "label": ["O", "O", "O", "O", "B-TEMPAT", "O", "B-JUMLAH", "I-JUMLAH", "B-BENDA"]}
-{"konteks": "kosong", "kata": ["eh", "2", "ekor", "burung", "terbang", "di", "langit"], "label": ["O", "B-JUMLAH", "O", "B-BENDA", "B-AKSI", "O", "B-TEMPAT"]}
-{"konteks": "kosong", "kata": ["lihat", "ya", ",", "3", "burung", "terbang", "di", "langit"], "label": ["O", "O", "O", "B-JUMLAH", "B-BENDA", "B-AKSI", "O", "B-TEMPAT"]}
+{"konteks": "kue 14", "kata": ["eh", "lalu", "siti", "makan", "sepotong", "kue"], "label": ["O", "O", "O", "B-PERISTIWA", "B-JUMLAH", "B-BENDA"]}
+{"konteks": "kosong", "kata": ["coba", "perhatikan", ",", "sebuah", "mobil", "berdiri", "di", "dekat", "rumah"], "label": ["O", "O", "O", "B-JUMLAH", "B-BENDA", "B-AKSI", "B-POSISI", "I-POSISI", "I-POSISI"]}
+{"konteks": "kelinci 5", "kata": ["coba", "perhatikan", ",", "masih", "salah", ",", "coba", "lagi"], "label": ["O", "O", "O", "O", "O", "O", "O", "O"]}
+{"konteks": "kambing 15", "kata": ["coba", "lihat", ",", "nah", "tiga", "ekor", "kambing", "lari", "pergi"], "label": ["O", "O", "O", "O", "B-JUMLAH", "O", "B-BENDA", "B-PERISTIWA", "I-PERISTIWA"]}
+{"konteks": "bebek 15", "kata": ["coba", "lihat", ",", "tiba-tiba", "adik", "mengambil", "tiga", "belas", "ekor", "bebek"], "label": ["O", "O", "O", "O", "O", "B-PERISTIWA", "B-JUMLAH", "I-JUMLAH", "O", "B-BENDA"]}
+{"konteks": "kue 7", "kata": ["nah", "anak-anak", ",", "nah", "sepotong", "kue", "jatuh"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "B-PERISTIWA"]}
+{"konteks": "kosong", "kata": ["coba", "lihat", ",", "ada", "dua", "kue", "diletakkan", "di", "samping", "lemari"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "O", "B-POSISI", "I-POSISI", "I-POSISI"]}
+{"konteks": "kosong", "kata": ["eh", "ada", "dua", "ayam", "ada", "di", "bawah", "pohon"], "label": ["O", "O", "B-JUMLAH", "B-BENDA", "O", "B-POSISI", "I-POSISI", "I-POSISI"]}
+{"konteks": "kupu-kupu 8", "kata": ["coba", "lihat", ",", "nah", "tiga", "kupu-kupu", "terbang"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "B-PERISTIWA"]}
+{"konteks": "kosong", "kata": ["di", "sini", "ada", "16", "ekor", "kura-kura", "berenang", "di", "kolam"], "label": ["O", "O", "O", "B-JUMLAH", "O", "B-BENDA", "B-AKSI", "O", "B-TEMPAT"]}
+{"konteks": "burung 7", "kata": ["oke", ",", "ada", "berapa", "burung", "sekarang", "?"], "label": ["O", "O", "O", "O", "O", "O", "O"]}
+{"konteks": "kosong", "kata": ["jadi", "sebuah", "jeruk", "ada", "di", "atas", "kotak"], "label": ["O", "B-JUMLAH", "B-BENDA", "O", "B-POSISI", "I-POSISI", "I-POSISI"]}
+{"konteks": "pisang 4", "kata": ["nah", ",", "tiba-tiba", "satu", "buah", "pisang", "lagi", "menyusul"], "label": ["O", "O", "O", "B-JUMLAH", "O", "B-BENDA", "O", "B-PERISTIWA"]}
+{"konteks": "bunga 9", "kata": ["baik", ",", "tiba-tiba", "bu", "guru", "membeli", "delapan", "bunga", "tambahan"], "label": ["O", "O", "O", "O", "O", "B-PERISTIWA", "B-JUMLAH", "B-BENDA", "O"]}
+{"konteks": "jeruk 7", "kata": ["lihat", "ya", ",", "lihat", ",", "ada", "1", "apel", "di", "dalam", "kotak"], "label": ["O", "O", "O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "O", "O", "B-TEMPAT"]}
+{"konteks": "kosong", "kata": ["sekarang", "lihat", ",", "ada", "4", "kelinci", "sedang", "berlarian", "di", "kebun"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "O", "B-AKSI", "O", "B-TEMPAT"]}
+{"konteks": "kosong", "kata": ["eh", "dua", "belas", "katak-katak", "sedang", "berenang", "di", "danau"], "label": ["O", "B-JUMLAH", "I-JUMLAH", "B-BENDA", "O", "B-AKSI", "O", "B-TEMPAT"]}
+{"konteks": "apel 5", "kata": ["coba", "perhatikan", ",", "kemudian", "datang", "lagi", "delapan", "apel-apel"], "label": ["O", "O", "O", "O", "B-PERISTIWA", "I-PERISTIWA", "B-JUMLAH", "B-BENDA"]}
+{"konteks": "monyet 9", "kata": ["anak-anak", ",", "lalu", "dua", "monyet-monyet", "lagi", "datang"], "label": ["O", "O", "O", "B-JUMLAH", "B-BENDA", "O", "B-PERISTIWA"]}
+{"konteks": "ayam 7", "kata": ["coba", "lihat", ",", "terus", "dodi", "membeli", "dua", "ayam", "lagi"], "label": ["O", "O", "O", "O", "O", "B-PERISTIWA", "B-JUMLAH", "B-BENDA", "O"]}
+{"konteks": "kambing 1", "kata": ["anak-anak", ",", "sekarang", "kambing", "nya", "tinggal", "berapa", "?"], "label": ["O", "O", "O", "O", "O", "O", "O", "O"]}
+{"konteks": "perahu 8", "kata": ["sebuah", "pisang", "diletakkan", "di", "depan", "lemari"], "label": ["B-JUMLAH", "B-BENDA", "O", "B-POSISI", "I-POSISI", "I-POSISI"]}
+{"konteks": "kupu-kupu 9", "kata": ["nah", "kemudian", "dua", "kupu-kupu", "terbang"], "label": ["O", "O", "B-JUMLAH", "B-BENDA", "B-PERISTIWA"]}
+{"konteks": "lebah 3", "kata": ["nah", "lalu", "satu", "lebah", "terbang"], "label": ["O", "O", "B-JUMLAH", "B-BENDA", "B-PERISTIWA"]}
+{"konteks": "perahu 6", "kata": ["ayo", "lihat", ",", "kemudian", "ucok", "menaruh", "enam", "buah", "perahu", "lagi"], "label": ["O", "O", "O", "O", "O", "B-PERISTIWA", "B-JUMLAH", "O", "B-BENDA", "O"]}
+{"konteks": "ayam 6", "kata": ["jadi", "terus", "2", "ayam", "pergi"], "label": ["O", "O", "B-JUMLAH", "B-BENDA", "B-PERISTIWA"]}
+{"konteks": "pesawat 11", "kata": ["sekarang", "terus", "sebuah", "pesawat", "pergi"], "label": ["O", "O", "B-JUMLAH", "B-BENDA", "B-PERISTIWA"]}
+{"konteks": "kosong", "kata": ["sekarang", "kita", "belajar", "pengurangan"], "label": ["O", "O", "O", "O"]}
+{"konteks": "balon 10", "kata": ["nah", "kemudian", "sebuah", "balon", "terbang"], "label": ["O", "O", "B-JUMLAH", "B-BENDA", "B-PERISTIWA"]}
+{"konteks": "daun 9", "kata": ["anak-anak", ",", "coba", "hitung", "daun", "nya", "ada", "berapa", "?"], "label": ["O", "O", "O", "O", "O", "O", "O", "O", "O"]}
+{"konteks": "monyet 13", "kata": ["oke", ",", "setelah", "itu", "6", "monyet", "pergi"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "B-PERISTIWA"]}
+{"konteks": "kosong", "kata": ["sekarang", "ini", "ada", "lima", "mangga", "di", "dalam", "keranjang"], "label": ["O", "O", "O", "B-JUMLAH", "B-BENDA", "O", "O", "B-TEMPAT"]}
+{"konteks": "jeruk 4", "kata": ["berapa", "jeruk", "yang", "tersisa", "?"], "label": ["O", "O", "O", "O", "O"]}
+{"konteks": "lebah 2", "kata": ["anak-anak", ",", "nah", "nenek", "memberi", "6", "lebah", "tambahan"], "label": ["O", "O", "O", "O", "B-PERISTIWA", "B-JUMLAH", "B-BENDA", "O"]}
+{"konteks": "apel 10", "kata": ["anak-anak", ",", "kemudian", "dua", "buah", "apel", "habis"], "label": ["O", "O", "O", "B-JUMLAH", "O", "B-BENDA", "B-PERISTIWA"]}
+{"konteks": "semut 3", "kata": ["tiba-tiba", "1", "semut", "datang"], "label": ["O", "B-JUMLAH", "B-BENDA", "B-PERISTIWA"]}
+{"konteks": "kue 7", "kata": ["oke", ",", "terus", "tujuh", "kue", "diambil", "monyet"], "label": ["O", "O", "O", "B-JUMLAH", "B-BENDA", "B-PERISTIWA", "O"]}
+{"konteks": "kosong", "kata": ["ayo", "lihat", ",", "ini", "ada", "tujuh", "belas", "kelinci", "sedang", "berjalan"], "label": ["O", "O", "O", "O", "O", "B-JUMLAH", "I-JUMLAH", "B-BENDA", "O", "B-AKSI"]}
+{"konteks": "kosong", "kata": ["di", "taman", "terdapat", "satu", "burung", "melayang"], "label": ["O", "B-TEMPAT", "O", "B-JUMLAH", "B-BENDA", "B-AKSI"]}
+{"konteks": "bintang 6", "kata": ["lihat", "ya", ",", "berapa", "bintang", "yang", "tersisa", "?"], "label": ["O", "O", "O", "O", "O", "O", "O", "O"]}
+{"konteks": "ayam 2", "kata": ["ayo", "lihat", ",", "ada", "3", "pensil", "terletak", "di", "dalam", "tempat", "tidur"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "O", "B-POSISI", "I-POSISI", "I-POSISI", "I-POSISI"]}
+{"konteks": "burung 8", "kata": ["kemudian", "empat", "burung", "terbang"], "label": ["O", "B-JUMLAH", "B-BENDA", "B-PERISTIWA"]}
+{"konteks": "kosong", "kata": ["ayo", "lihat", ",", "sebatang", "pensil", "terletak", "di", "bawah", "kotak"], "label": ["O", "O", "O", "B-JUMLAH", "B-BENDA", "O", "B-POSISI", "I-POSISI", "I-POSISI"]}
+{"konteks": "kosong", "kata": ["eh", "siti", "membawa", "lima", "belas", "permen"], "label": ["O", "O", "O", "B-JUMLAH", "I-JUMLAH", "B-BENDA"]}
+{"konteks": "mobil 2", "kata": ["eh", "sekarang", "mobil", "nya", "tinggal", "berapa", "?"], "label": ["O", "O", "O", "O", "O", "O", "O"]}
+{"konteks": "telur 3", "kata": ["setelah", "itu", "bu", "guru", "memberi", "enam", "telur", "lagi"], "label": ["O", "O", "O", "O", "B-PERISTIWA", "B-JUMLAH", "B-BENDA", "O"]}
+{"konteks": "kue 7", "kata": ["coba", "perhatikan", ",", "ditambah", "dengan", "6", "kue"], "label": ["O", "O", "O", "B-PERISTIWA", "I-PERISTIWA", "B-JUMLAH", "B-BENDA"]}
+{"konteks": "anjing 5", "kata": ["baik", ",", "ada", "satu", "kucing", "tidur", "di", "samping", "kotak"], "label": ["O", "O", "O", "B-JUMLAH", "B-BENDA", "B-AKSI", "B-POSISI", "I-POSISI", "I-POSISI"]}
+{"konteks": "bola 4", "kata": ["ayo", "lihat", ",", "kemudian", "kakak", "mengambil", "satu", "bola"], "label": ["O", "O", "O", "O", "O", "B-PERISTIWA", "B-JUMLAH", "B-BENDA"]}
+{"konteks": "pesawat 2", "kata": ["jadi", "setelah", "itu", "muncul", "lagi", "tujuh", "pesawat"], "label": ["O", "O", "O", "B-PERISTIWA", "I-PERISTIWA", "B-JUMLAH", "B-BENDA"]}
+{"konteks": "kosong", "kata": ["coba", "lihat", ",", "ada", "12", "ikan", "sedang", "berenang"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "O", "B-AKSI"]}
+{"konteks": "kosong", "kata": ["seekor", "kucing", "diletakkan", "di", "samping", "kotak"], "label": ["B-JUMLAH", "B-BENDA", "O", "B-POSISI", "I-POSISI", "I-POSISI"]}
+{"konteks": "kosong", "kata": ["lihat", "ya", ",", "delapan", "balon", "ada", "di", "udara"], "label": ["O", "O", "O", "B-JUMLAH", "B-BENDA", "O", "O", "B-TEMPAT"]}
+{"konteks": "bola 2", "kata": ["kemudian", "rina", "mengambil", "dua", "bola"], "label": ["O", "O", "B-PERISTIWA", "B-JUMLAH", "B-BENDA"]}
+{"konteks": "kosong", "kata": ["oke", ",", "di", "tas", ",", "sembilan", "pisang"], "label": ["O", "O", "O", "B-TEMPAT", "O", "B-JUMLAH", "B-BENDA"]}
+{"konteks": "semangka 4", "kata": ["eh", "tiga", "semangka", "pecah"], "label": ["O", "B-JUMLAH", "B-BENDA", "B-PERISTIWA"]}
+{"konteks": "kosong", "kata": ["perhatikan", ",", "ini", "ada", "12", "kue", "di", "dalam", "tas"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "O", "O", "B-TEMPAT"]}
+{"konteks": "kosong", "kata": ["nah", "di", "piring", ",", "lima", "tangkai", "bunga"], "label": ["O", "O", "B-TEMPAT", "O", "B-JUMLAH", "O", "B-BENDA"]}
+{"konteks": "burung 4", "kata": ["pensil", "di", "samping", "kursi"], "label": ["B-BENDA", "B-POSISI", "I-POSISI", "I-POSISI"]}
+{"konteks": "kura-kura 3", "kata": ["ayo", "lihat", ",", "terus", "ditambah", "tujuh", "ekor", "kura-kura"], "label": ["O", "O", "O", "O", "B-PERISTIWA", "B-JUMLAH", "O", "B-BENDA"]}
+{"konteks": "pensil 3", "kata": ["lihat", "ya", ",", "ada", "satu", "semangka", "diletakkan", "di", "depan", "jendela"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "O", "B-POSISI", "I-POSISI", "I-POSISI"]}
+{"konteks": "monyet 2", "kata": ["nah", "kemudian", "tujuh", "monyet", "lagi", "datang"], "label": ["O", "O", "B-JUMLAH", "B-BENDA", "O", "B-PERISTIWA"]}
+{"konteks": "kelereng 2", "kata": ["coba", "lihat", ",", "ada", "tujuh", "belas", "mobil", "sedang", "duduk", "di", "kebun"], "label": ["O", "O", "O", "O", "B-JUMLAH", "I-JUMLAH", "B-BENDA", "O", "B-AKSI", "O", "B-TEMPAT"]}
+{"konteks": "apel 7", "kata": ["baik", ",", "sekarang", "apel", "nya", "tinggal", "berapa", "?"], "label": ["O", "O", "O", "O", "O", "O", "O", "O"]}
+{"konteks": "daun 4", "kata": ["jadi", "setelah", "itu", "siti", "membuang", "satu", "daun"], "label": ["O", "O", "O", "O", "B-PERISTIWA", "B-JUMLAH", "B-BENDA"]}
+{"konteks": "sapi 8", "kata": ["perhatikan", ",", "setelah", "itu", "seekor", "sapi", "lagi", "muncul"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "O", "B-PERISTIWA"]}
+{"konteks": "kupu-kupu 6", "kata": ["ayo", "lihat", ",", "nah", "dua", "kupu-kupu", "terbang"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "B-PERISTIWA"]}
+{"konteks": "mobil 3", "kata": ["nah", "3", "mobil", "berlari", "pergi"], "label": ["O", "B-JUMLAH", "B-BENDA", "B-PERISTIWA", "I-PERISTIWA"]}
+{"konteks": "kosong", "kata": ["sekarang", "lihat", ",", "ada", "11", "apel", "di", "meja"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "O", "B-TEMPAT"]}
+{"konteks": "sapi 3", "kata": ["coba", "lihat", ",", "lihat", ",", "ada", "3", "kura-kura"], "label": ["O", "O", "O", "O", "O", "O", "B-JUMLAH", "B-BENDA"]}
+{"konteks": "kosong", "kata": ["oke", ",", "rina", "membawa", "sebelas", "ekor", "bebek"], "label": ["O", "O", "O", "O", "B-JUMLAH", "O", "B-BENDA"]}
+{"konteks": "mangga 1", "kata": ["baik", ",", "terdapat", "empat", "kambing", "bermain", "di", "lapangan"], "label": ["O", "O", "O", "B-JUMLAH", "B-BENDA", "B-AKSI", "O", "B-TEMPAT"]}
+{"konteks": "kosong", "kata": ["oke", ",", "sebelas", "monyet", "berjalan", "di", "hutan"], "label": ["O", "O", "B-JUMLAH", "B-BENDA", "B-AKSI", "O", "B-TEMPAT"]}
+{"konteks": "kosong", "kata": ["terdapat", "14", "kupu-kupu", "di", "taman"], "label": ["O", "B-JUMLAH", "B-BENDA", "O", "B-TEMPAT"]}
+{"konteks": "kosong", "kata": ["oke", ",", "di", "sini", "ada", "11", "sapi", "sedang", "duduk", "di", "jalan"], "label": ["O", "O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "O", "B-AKSI", "O", "B-TEMPAT"]}
+{"konteks": "ikan 2", "kata": ["baik", ",", "ada", "berapa", "ikan", "sekarang", "?"], "label": ["O", "O", "O", "O", "O", "O", "O"]}
+{"konteks": "pesawat 4", "kata": ["tiba-tiba", "ibu", "membuang", "tiga", "pesawat"], "label": ["O", "O", "B-PERISTIWA", "B-JUMLAH", "B-BENDA"]}
+{"konteks": "kosong", "kata": ["oke", ",", "di", "kolam", "ada", "dua", "puluh", "kura-kura"], "label": ["O", "O", "O", "B-TEMPAT", "O", "B-JUMLAH", "I-JUMLAH", "B-BENDA"]}
+{"konteks": "kelinci 5", "kata": ["perhatikan", ",", "made", "melihat", "sembilan", "bunga"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"]}
+{"konteks": "kelereng 6", "kata": ["sekarang", "tiba-tiba", "made", "memberikan", "enam", "kelereng", "tambahan"], "label": ["O", "O", "O", "B-PERISTIWA", "B-JUMLAH", "B-BENDA", "O"]}
+{"konteks": "bebek 5", "kata": ["coba", "perhatikan", ",", "di", "sini", "ada", "tujuh", "puluh", "delapan", "kucing", "sedang", "melompat", "di", "jalan"], "label": ["O", "O", "O", "O", "O", "O", "B-JUMLAH", "I-JUMLAH", "I-JUMLAH", "B-BENDA", "O", "B-AKSI", "O", "B-TEMPAT"]}
+{"konteks": "kosong", "kata": ["baik", ",", "9", "ikan", "berenang", "di", "kolam"], "label": ["O", "O", "B-JUMLAH", "B-BENDA", "B-AKSI", "O", "B-TEMPAT"]}
+{"konteks": "burung 8", "kata": ["oke", ",", "kemudian", "4", "burung", "terbang"], "label": ["O", "O", "O", "B-JUMLAH", "B-BENDA", "B-PERISTIWA"]}
+{"konteks": "kosong", "kata": ["ada", "satu", "bola", "diletakkan", "di", "dekat", "meja"], "label": ["O", "B-JUMLAH", "B-BENDA", "O", "B-POSISI", "I-POSISI", "I-POSISI"]}
+{"konteks": "anjing 2", "kata": ["lihat", "ya", ",", "lalu", "dua", "anjing", "dibawa", "pergi", "budi"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "B-PERISTIWA", "I-PERISTIWA", "O"]}
+{"konteks": "burung 4", "kata": ["eh", "setelah", "itu", "tiga", "ekor", "burung-burung", "terbang"], "label": ["O", "O", "O", "B-JUMLAH", "O", "B-BENDA", "B-PERISTIWA"]}
+{"konteks": "kelinci 6", "kata": ["baik", ",", "benar", "sekali"], "label": ["O", "O", "O", "O"]}
+{"konteks": "sapi 2", "kata": ["lihat", "ya", ",", "di", "lapangan", "ada", "14", "buah", "mobil", "duduk"], "label": ["O", "O", "O", "O", "B-TEMPAT", "O", "B-JUMLAH", "O", "B-BENDA", "B-AKSI"]}
+{"konteks": "kelereng 9", "kata": ["baik", ",", "ada", "tiga", "mangga", "di", "depan", "kotak"], "label": ["O", "O", "O", "B-JUMLAH", "B-BENDA", "B-POSISI", "I-POSISI", "I-POSISI"]}
+{"konteks": "kelereng 10", "kata": ["anak-anak", ",", "lalu", "6", "kelereng", "habis"], "label": ["O", "O", "O", "B-JUMLAH", "B-BENDA", "B-PERISTIWA"]}
+{"konteks": "kosong", "kata": ["lihat", "ya", ",", "lihat", ",", "ada", "9", "mangga"], "label": ["O", "O", "O", "O", "O", "O", "B-JUMLAH", "B-BENDA"]}
+{"konteks": "kura-kura 8", "kata": ["perhatikan", ",", "tiba-tiba", "dayu", "membuang", "lima", "kura-kura"], "label": ["O", "O", "O", "O", "B-PERISTIWA", "B-JUMLAH", "B-BENDA"]}
+{"konteks": "anjing 5", "kata": ["eh", "di", "kolam", "ada", "dua", "perahu", "berenang"], "label": ["O", "O", "B-TEMPAT", "O", "B-JUMLAH", "B-BENDA", "B-AKSI"]}
+{"konteks": "semangka 8", "kata": ["baik", ",", "tiba-tiba", "5", "semangka", "jatuh"], "label": ["O", "O", "O", "B-JUMLAH", "B-BENDA", "B-PERISTIWA"]}
+{"konteks": "gajah 9", "kata": ["lihat", "ya", ",", "kambing", "duduk", "di", "atas", "meja"], "label": ["O", "O", "O", "B-BENDA", "B-AKSI", "B-POSISI", "I-POSISI", "I-POSISI"]}
+{"konteks": "kelereng 14", "kata": ["nah", "terus", "13", "kelereng-kelereng", "habis"], "label": ["O", "O", "B-JUMLAH", "B-BENDA", "B-PERISTIWA"]}
+{"konteks": "katak 14", "kata": ["jadi", "nah", "tiga", "belas", "katak", "pergi"], "label": ["O", "O", "B-JUMLAH", "I-JUMLAH", "B-BENDA", "B-PERISTIWA"]}
+{"konteks": "semangka 3", "kata": ["nah", "anak-anak", ",", "nah", "tiga", "semangka", "habis"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "B-PERISTIWA"]}
+{"konteks": "kosong", "kata": ["perhatikan", ",", "ada", "dua", "puluh", "daun", "di", "jalan"], "label": ["O", "O", "O", "B-JUMLAH", "I-JUMLAH", "B-BENDA", "O", "B-TEMPAT"]}
+{"konteks": "buku 8", "kata": ["terus", "enam", "buku", "dibawa", "pergi", "kakak"], "label": ["O", "B-JUMLAH", "B-BENDA", "B-PERISTIWA", "I-PERISTIWA", "O"]}
+{"konteks": "katak 10", "kata": ["coba", "lihat", ",", "setelah", "itu", "sembilan", "katak-katak", "berenang", "pergi"], "label": ["O", "O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "B-PERISTIWA", "I-PERISTIWA"]}
+{"konteks": "bola 6", "kata": ["nah", "anak-anak", ",", "ayo", "kita", "hitung", "bersama"], "label": ["O", "O", "O", "O", "O", "O", "O"]}
+{"konteks": "kosong", "kata": ["ada", "15", "bintang"], "label": ["O", "B-JUMLAH", "B-BENDA"]}
+{"konteks": "permen 7", "kata": ["nah", "tiba-tiba", "sebiji", "permen", "datang"], "label": ["O", "O", "B-JUMLAH", "B-BENDA", "B-PERISTIWA"]}
+{"konteks": "kosong", "kata": ["jadi", "ada", "12", "ekor", "semut", "sedang", "bermain", "di", "kebun"], "label": ["O", "O", "B-JUMLAH", "O", "B-BENDA", "O", "B-AKSI", "O", "B-TEMPAT"]}
+{"konteks": "katak 8", "kata": ["ayo", "lihat", ",", "berapa", "katak", "yang", "pergi", "?"], "label": ["O", "O", "O", "O", "O", "O", "O", "O"]}
+{"konteks": "kosong", "kata": ["baik", ",", "di", "halaman", "ada", "dua", "puluh", "enam", "sapi", "berlari"], "label": ["O", "O", "O", "B-TEMPAT", "O", "B-JUMLAH", "I-JUMLAH", "I-JUMLAH", "B-BENDA", "B-AKSI"]}
+{"konteks": "kupu-kupu 7", "kata": ["lalu", "lima", "kupu-kupu", "terbang"], "label": ["O", "B-JUMLAH", "B-BENDA", "B-PERISTIWA"]}
+{"konteks": "bola 8", "kata": ["oke", ",", "nah", "bu", "guru", "mengambil", "tujuh", "buah", "bola-bola"], "label": ["O", "O", "O", "O", "O", "B-PERISTIWA", "B-JUMLAH", "O", "B-BENDA"]}
+{"konteks": "ikan 8", "kata": ["coba", "lihat", ",", "kemudian", "nenek", "mengambil", "dua", "ikan"], "label": ["O", "O", "O", "O", "O", "B-PERISTIWA", "B-JUMLAH", "B-BENDA"]}
+{"konteks": "anjing 13", "kata": ["jadi", "terus", "tujuh", "anjing", "pulang"], "label": ["O", "O", "B-JUMLAH", "B-BENDA", "B-PERISTIWA"]}
+{"konteks": "kosong", "kata": ["nah", ",", "ada", "1", "biji", "permen", "ada", "di", "bawah", "kotak"], "label": ["O", "O", "O", "B-JUMLAH", "O", "B-BENDA", "O", "B-POSISI", "I-POSISI", "I-POSISI"]}
+{"konteks": "lebah 4", "kata": ["oke", ",", "terus", "budi", "membuang", "4", "ekor", "lebah"], "label": ["O", "O", "O", "O", "B-PERISTIWA", "B-JUMLAH", "O", "B-BENDA"]}
+{"konteks": "lebah 5", "kata": ["nah", "berapa", "lebah", "yang", "tersisa", "?"], "label": ["O", "O", "O", "O", "O", "O"]}
+{"konteks": "kosong", "kata": ["nenek", "punya", "18", "permen"], "label": ["O", "O", "B-JUMLAH", "B-BENDA"]}
+{"konteks": "kosong", "kata": ["nah", "ini", "ada", "5", "lebah", "melayang", "di", "udara"], "label": ["O", "O", "O", "B-JUMLAH", "B-BENDA", "B-AKSI", "O", "B-TEMPAT"]}
+{"konteks": "kupu-kupu 11", "kata": ["pak", "guru", "membuang", "tiga", "kupu-kupu"], "label": ["O", "O", "B-PERISTIWA", "B-JUMLAH", "B-BENDA"]}
+{"konteks": "lebah 3", "kata": ["di", "sungai", ",", "4", "perahu"], "label": ["O", "B-TEMPAT", "O", "B-JUMLAH", "B-BENDA"]}
+{"konteks": "pesawat 5", "kata": ["anak-anak", ",", "bertambah", "dua", "buah", "pesawat"], "label": ["O", "O", "B-PERISTIWA", "B-JUMLAH", "O", "B-BENDA"]}
+{"konteks": "kupu-kupu 5", "kata": ["lihat", "ya", ",", "4", "kupu-kupu", "terbang"], "label": ["O", "O", "O", "B-JUMLAH", "B-BENDA", "B-PERISTIWA"]}
+{"konteks": "kosong", "kata": ["oke", ",", "pintar", "sekali"], "label": ["O", "O", "O", "O"]}
+{"konteks": "kosong", "kata": ["eh", "ucok", "membawa", "delapan", "bintang"], "label": ["O", "O", "O", "B-JUMLAH", "B-BENDA"]}
+{"konteks": "sapi 7", "kata": ["nah", "ada", "berapa", "sapi", "sekarang", "?"], "label": ["O", "O", "O", "O", "O", "O"]}
+{"konteks": "burung 3", "kata": ["sebutir", "telur", "terletak", "di", "atas", "pohon"], "label": ["B-JUMLAH", "B-BENDA", "O", "B-POSISI", "I-POSISI", "I-POSISI"]}
+{"konteks": "apel 8", "kata": ["eh", "kemudian", "tiga", "buah", "apel-apel", "diambil", "ibu"], "label": ["O", "O", "B-JUMLAH", "O", "B-BENDA", "B-PERISTIWA", "O"]}
+{"konteks": "kosong", "kata": ["ayo", "lihat", ",", "di", "kolam", ",", "empat", "belas", "ekor", "katak", "berenang"], "label": ["O", "O", "O", "O", "B-TEMPAT", "O", "B-JUMLAH", "I-JUMLAH", "O", "B-BENDA", "B-AKSI"]}
+{"konteks": "pesawat 12", "kata": ["ayo", "lihat", ",", "12", "buah", "pesawat", "diambil", "oleh", "kakak"], "label": ["O", "O", "O", "B-JUMLAH", "O", "B-BENDA", "B-PERISTIWA", "I-PERISTIWA", "O"]}
+{"konteks": "pesawat 15", "kata": ["nah", "tiba-tiba", "9", "pesawat", "diambil", "ibu"], "label": ["O", "O", "B-JUMLAH", "B-BENDA", "B-PERISTIWA", "O"]}
+{"konteks": "kambing 2", "kata": ["sekarang", "tiba-tiba", "4", "kambing", "datang", "bermain"], "label": ["O", "O", "B-JUMLAH", "B-BENDA", "B-PERISTIWA", "I-PERISTIWA"]}
+{"konteks": "burung 3", "kata": ["ayo", "lihat", ",", "terus", "2", "burung", "terbang"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "B-PERISTIWA"]}
+{"konteks": "semut 12", "kata": ["eh", "setelah", "itu", "6", "semut", "pergi", "ke", "hutan"], "label": ["O", "O", "O", "B-JUMLAH", "B-BENDA", "B-PERISTIWA", "I-PERISTIWA", "I-PERISTIWA"]}
+{"konteks": "semut 1", "kata": ["coba", "lihat", ",", "pisang", "ada", "di", "atas", "rumah"], "label": ["O", "O", "O", "B-BENDA", "O", "B-POSISI", "I-POSISI", "I-POSISI"]}
+{"konteks": "kosong", "kata": ["coba", "lihat", ",", "empat", "puluh", "bola", "terletak", "di", "keranjang"], "label": ["O", "O", "O", "B-JUMLAH", "I-JUMLAH", "B-BENDA", "O", "O", "B-TEMPAT"]}
+{"konteks": "monyet 8", "kata": ["coba", "lihat", ",", "nah", "delapan", "ekor", "monyet", "diambil", "kakak"], "label": ["O", "O", "O", "O", "B-JUMLAH", "O", "B-BENDA", "B-PERISTIWA", "O"]}
+{"konteks": "kosong", "kata": ["oke", ",", "ada", "dua", "ekor", "kelinci", "diletakkan", "di", "bawah", "rumah"], "label": ["O", "O", "O", "B-JUMLAH", "O", "B-BENDA", "O", "B-POSISI", "I-POSISI", "I-POSISI"]}
+{"konteks": "kosong", "kata": ["eh", "ada", "2", "batang", "pensil", "ada", "di", "atas", "tempat", "tidur"], "label": ["O", "O", "B-JUMLAH", "O", "B-BENDA", "O", "B-POSISI", "I-POSISI", "I-POSISI", "I-POSISI"]}
+{"konteks": "bintang 5", "kata": ["oke", ",", "terus", "satu", "buah", "bintang", "hilang"], "label": ["O", "O", "O", "B-JUMLAH", "O", "B-BENDA", "B-PERISTIWA"]}
+{"konteks": "kosong", "kata": ["jadi", "ada", "1", "mangga", "diletakkan", "di", "belakang", "lemari"], "label": ["O", "O", "B-JUMLAH", "B-BENDA", "O", "B-POSISI", "I-POSISI", "I-POSISI"]}
+{"konteks": "apel 5", "kata": ["sekarang", "tiba-tiba", "nenek", "menaruh", "enam", "apel", "lagi"], "label": ["O", "O", "O", "B-PERISTIWA", "B-JUMLAH", "B-BENDA", "O"]}
+{"konteks": "daun 4", "kata": ["eh", "hari", "ini", "kita", "belajar", "membilang"], "label": ["O", "O", "O", "O", "O", "O"]}
+{"konteks": "ikan 6", "kata": ["jadi", "ini", "ada", "18", "pensil", "di", "tas"], "label": ["O", "O", "O", "B-JUMLAH", "B-BENDA", "O", "B-TEMPAT"]}
+{"konteks": "balon 12", "kata": ["anak-anak", ",", "terus", "enam", "balon", "terbang"], "label": ["O", "O", "O", "B-JUMLAH", "B-BENDA", "B-PERISTIWA"]}
+{"konteks": "daun 6", "kata": ["nah", "anak-anak", ",", "3", "daun", "diambil", "burung"], "label": ["O", "O", "O", "B-JUMLAH", "B-BENDA", "B-PERISTIWA", "O"]}
+{"konteks": "balon 12", "kata": ["setelah", "itu", "satu", "balon", "diambil", "kucing"], "label": ["O", "O", "B-JUMLAH", "B-BENDA", "B-PERISTIWA", "O"]}
+{"konteks": "kosong", "kata": ["nah", "anak-anak", ",", "ada", "tiga", "mobil", "duduk", "di", "samping", "kotak"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "B-AKSI", "B-POSISI", "I-POSISI", "I-POSISI"]}
+{"konteks": "kupu-kupu 15", "kata": ["nah", "setelah", "itu", "15", "kupu-kupu", "terbang"], "label": ["O", "O", "O", "B-JUMLAH", "B-BENDA", "B-PERISTIWA"]}
+{"konteks": "kucing 11", "kata": ["baik", ",", "nah", "tujuh", "kucing-kucing", "dibawa", "pergi", "kucing"], "label": ["O", "O", "O", "B-JUMLAH", "B-BENDA", "B-PERISTIWA", "I-PERISTIWA", "O"]}
+{"konteks": "telur 4", "kata": ["tiba-tiba", "muncul", "lagi", "satu", "telur"], "label": ["O", "B-PERISTIWA", "I-PERISTIWA", "B-JUMLAH", "B-BENDA"]}
+{"konteks": "kosong", "kata": ["nah", "anak-anak", ",", "benar", "sekali"], "label": ["O", "O", "O", "O", "O"]}
+{"konteks": "jeruk 6", "kata": ["coba", "lihat", ",", "sembilan", "belas", "potong", "kue", "terletak", "di", "tas"], "label": ["O", "O", "O", "B-JUMLAH", "I-JUMLAH", "O", "B-BENDA", "O", "O", "B-TEMPAT"]}
+{"konteks": "kupu-kupu 4", "kata": ["coba", "lihat", ",", "lihat", ",", "ada", "tiga", "belas", "ekor", "kambing", "sedang", "berjalan"], "label": ["O", "O", "O", "O", "O", "O", "B-JUMLAH", "I-JUMLAH", "O", "B-BENDA", "O", "B-AKSI"]}
+{"konteks": "pensil 6", "kata": ["nah", ",", "lalu", "ucok", "membuang", "dua", "batang", "pensil"], "label": ["O", "O", "O", "O", "B-PERISTIWA", "B-JUMLAH", "O", "B-BENDA"]}
+{"konteks": "burung 2", "kata": ["perhatikan", ",", "lihat", ",", "ada", "tujuh", "ekor", "ikan", "di", "sungai"], "label": ["O", "O", "O", "O", "O", "B-JUMLAH", "O", "B-BENDA", "O", "B-TEMPAT"]}
+{"konteks": "kosong", "kata": ["ini", "ada", "13", "kucing", "berlari", "di", "sawah"], "label": ["O", "O", "B-JUMLAH", "B-BENDA", "B-AKSI", "O", "B-TEMPAT"]}
+{"konteks": "kambing 4", "kata": ["coba", "lihat", ",", "terdapat", "13", "buah", "apel"], "label": ["O", "O", "O", "O", "B-JUMLAH", "O", "B-BENDA"]}
+{"konteks": "mobil 2", "kata": ["nah", "anak-anak", ",", "terdapat", "sembilan", "buah", "perahu", "berenang"], "label": ["O", "O", "O", "O", "B-JUMLAH", "O", "B-BENDA", "B-AKSI"]}
+{"konteks": "kosong", "kata": ["di", "lemari", "ada", "tiga", "puluh", "tujuh", "telur"], "label": ["O", "B-TEMPAT", "O", "B-JUMLAH", "I-JUMLAH", "I-JUMLAH", "B-BENDA"]}

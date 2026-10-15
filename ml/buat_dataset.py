@@ -196,6 +196,10 @@ def t_tambah():
     if pola < 0.45:
         jumlah_benda(k, n, b, gol)
         k.tambah(ACAK.choice(["lagi", ""])).tambah(ACAK.choice(DATANG), "PERISTIWA")
+    elif pola < 0.60:
+        # "sekarang ditambah dengan 3 kucing": benda yang ditambahkan (sering jenis baru di papan)
+        k.tambah(ACAK.choice(["ditambah", "ditambah dengan", "ditambah lagi dengan", "bertambah"]), "PERISTIWA")
+        jumlah_benda(k, n, b, gol)
     elif pola < 0.85:
         k.tambah(ACAK.choice(SUBJEK)).tambah(ACAK.choice(BERI), "PERISTIWA")
         jumlah_benda(k, n, b, gol)

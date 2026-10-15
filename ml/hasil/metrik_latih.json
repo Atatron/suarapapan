@@ -17,85 +17,85 @@
   "riwayat": [
     {
       "epoch": 1,
-      "loss": 0.3796,
-      "f1_validasi": 0.9952
+      "loss": 0.3843,
+      "f1_validasi": 0.9977
     },
     {
       "epoch": 2,
-      "loss": 0.0037,
-      "f1_validasi": 0.9976
+      "loss": 0.002,
+      "f1_validasi": 0.9989
     },
     {
       "epoch": 3,
-      "loss": 0.0003,
-      "f1_validasi": 0.9976
+      "loss": 0.0005,
+      "f1_validasi": 1.0
     },
     {
       "epoch": 4,
-      "loss": 0.0003,
-      "f1_validasi": 0.9988
+      "loss": 0.0002,
+      "f1_validasi": 0.9989
     },
     {
       "epoch": 5,
-      "loss": 0.0004,
-      "f1_validasi": 0.9988
+      "loss": 0.0001,
+      "f1_validasi": 0.9989
     }
   ],
-  "f1_validasi_terbaik": 0.9988,
+  "f1_validasi_terbaik": 1.0,
   "uji_templat": {
     "AKSI": {
       "precision": 1.0,
       "recall": 1.0,
       "f1-score": 1.0,
-      "support": 58.0
+      "support": 51.0
     },
     "BENDA": {
       "precision": 1.0,
       "recall": 1.0,
       "f1-score": 1.0,
-      "support": 281.0
+      "support": 285.0
     },
     "JUMLAH": {
       "precision": 1.0,
       "recall": 1.0,
       "f1-score": 1.0,
-      "support": 270.0
+      "support": 277.0
     },
     "PERISTIWA": {
-      "precision": 0.9925,
+      "precision": 1.0,
       "recall": 1.0,
-      "f1-score": 0.9962,
+      "f1-score": 1.0,
       "support": 132.0
     },
     "POSISI": {
       "precision": 1.0,
-      "recall": 0.9667,
-      "f1-score": 0.9831,
-      "support": 30.0
+      "recall": 0.9355,
+      "f1-score": 0.9667,
+      "support": 31.0
     },
     "TEMPAT": {
-      "precision": 0.988,
+      "precision": 0.9737,
       "recall": 1.0,
-      "f1-score": 0.9939,
-      "support": 82.0
+      "f1-score": 0.9867,
+      "support": 74.0
     },
     "micro avg": {
-      "precision": 0.9977,
-      "recall": 0.9988,
-      "f1-score": 0.9982,
-      "support": 853.0
+      "precision": 0.9976,
+      "recall": 0.9976,
+      "f1-score": 0.9976,
+      "support": 850.0
     },
     "macro avg": {
-      "precision": 0.9967,
-      "recall": 0.9944,
-      "f1-score": 0.9955,
-      "support": 853.0
+      "precision": 0.9956,
+      "recall": 0.9892,
+      "f1-score": 0.9922,
+      "support": 850.0
     },
     "weighted avg": {
       "precision": 0.9977,
-      "recall": 0.9988,
-      "f1-score": 0.9982,
-      "support": 853.0
+      "recall": 0.9976,
+      "f1-score": 0.9976,
+      "support": 850.0
     }
   },
   "confusion_matrix": {
@@ -110,17 +110,17 @@
     ],
     "nilai": [
       [
-        1289,
+        1263,
         0,
         0,
         0,
         0,
         0,
-        1
+        0
       ],
       [
         0,
-        315,
+        331,
         0,
         0,
         0,
@@ -130,7 +130,7 @@
       [
         0,
         0,
-        281,
+        285,
         0,
         0,
         0,
@@ -140,7 +140,7 @@
         0,
         0,
         0,
-        58,
+        51,
         0,
         0,
         0
@@ -150,16 +150,16 @@
         0,
         0,
         0,
-        82,
+        74,
         0,
         0
       ],
       [
+        4,
+        0,
+        0,
+        0,
         2,
-        0,
-        0,
-        0,
-        1,
         91,
         0
       ],
@@ -170,9 +170,9 @@
         0,
         0,
         0,
-        175
+        176
       ]
     ]
   },
-  "durasi_detik": 70
+  "durasi_detik": 77
 }
