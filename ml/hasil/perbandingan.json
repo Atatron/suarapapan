@@ -4,8 +4,8 @@
     "benar": 40,
     "total": 40,
     "akurasi": 1.0,
-    "latensi_median_ms": 8.2,
-    "latensi_p90_ms": 14.4,
+    "latensi_median_ms": 8.6,
+    "latensi_p90_ms": 12.9,
     "sumber": {
       "indobert": 40
     },
@@ -16,8 +16,8 @@
     "benar": 39,
     "total": 40,
     "akurasi": 0.975,
-    "latensi_median_ms": 814.0,
-    "latensi_p90_ms": 952,
+    "latensi_median_ms": 877.0,
+    "latensi_p90_ms": 1056,
     "sumber": {
       "qwen2.5:7b-instruct": 40
     },
@@ -59,11 +59,11 @@
     "benar": 40,
     "total": 40,
     "akurasi": 1.0,
-    "latensi_median_ms": 5.7,
-    "latensi_p90_ms": 6.6,
+    "latensi_median_ms": 6.8,
+    "latensi_p90_ms": 13.6,
     "sumber": {
-      "indobert": 39,
-      "qwen2.5:7b-instruct": 1
+      "indobert": 38,
+      "qwen2.5:7b-instruct": 2
     },
     "salah": []
   }

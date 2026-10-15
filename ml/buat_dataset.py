@@ -59,7 +59,7 @@ HAPUS_PASIF = ["diambil", "dibawa pergi", "diambil oleh", "disembunyikan"]
 HAPUS_PASIF_MAKANAN = ["dimakan", "dimakan oleh", "habis dimakan"]
 PELAKU = ["kucing", "adik", "budi", "kakak", "angin", "monyet", "ibu", "burung"]
 DATANG = ["datang", "datang lagi", "ikut bergabung", "menyusul", "muncul", "datang bermain"]
-BERI = ["memberi", "memberikan", "membeli", "membawa", "menaruh"]
+BERI = ["memberi", "memberikan", "membeli", "membawa", "menaruh", "menambahkan", "menambah"]
 TANPA_ADEGAN = [
     "selamat pagi anak-anak", "ayo kita hitung bersama", "bagus sekali", "siapa yang bisa menjawab ?", "coba hitung lagi ya",
     "sekarang kita belajar pengurangan", "hari ini kita belajar membilang", "tepuk tangan untuk budi", "perhatikan papan ya",
@@ -196,7 +196,20 @@ def t_tambah():
     if pola < 0.45:
         jumlah_benda(k, n, b, gol)
         k.tambah(ACAK.choice(["lagi", ""])).tambah(ACAK.choice(DATANG), "PERISTIWA")
+    elif pola < 0.50:
+        # "kemudian 2 burung lagi terbang kemari": gerak mendekat = datang
+        jumlah_benda(k, n, b, gol)
+        k.tambah(ACAK.choice(["lagi", ""])).tambah(ACAK.choice(["terbang kemari", "berlari kemari", "datang kemari", "mendekat", "tiba", "berjalan kemari"]), "PERISTIWA")
+    elif pola < 0.55:
+        # "ada tambahan satu jeruk"
+        k.tambah("ada").tambah("tambahan", "PERISTIWA")
+        jumlah_benda(k, n, b, gol)
     elif pola < 0.60:
+        # "sekarang ada dua anjing lagi": benda sudah ada di papan, "lagi" menandai tambahan
+        k.tambah("ada")
+        jumlah_benda(k, n, b, gol)
+        k.tambah("lagi", "PERISTIWA")
+    elif pola < 0.68:
         # "sekarang ditambah dengan 3 kucing": benda yang ditambahkan (sering jenis baru di papan)
         k.tambah(ACAK.choice(["ditambah", "ditambah dengan", "ditambah lagi dengan", "bertambah"]), "PERISTIWA")
         jumlah_benda(k, n, b, gol)

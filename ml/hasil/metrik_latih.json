@@ -17,28 +17,28 @@
   "riwayat": [
     {
       "epoch": 1,
-      "loss": 0.3843,
-      "f1_validasi": 0.9977
+      "loss": 0.3834,
+      "f1_validasi": 0.9948
     },
     {
       "epoch": 2,
-      "loss": 0.002,
-      "f1_validasi": 0.9989
+      "loss": 0.0015,
+      "f1_validasi": 1.0
     },
     {
       "epoch": 3,
       "loss": 0.0005,
-      "f1_validasi": 1.0
+      "f1_validasi": 0.9983
     },
     {
       "epoch": 4,
       "loss": 0.0002,
-      "f1_validasi": 0.9989
+      "f1_validasi": 0.9983
     },
     {
       "epoch": 5,
       "loss": 0.0001,
-      "f1_validasi": 0.9989
+      "f1_validasi": 0.9983
     }
   ],
   "f1_validasi_terbaik": 1.0,
@@ -53,7 +53,7 @@
       "precision": 1.0,
       "recall": 1.0,
       "f1-score": 1.0,
-      "support": 285.0
+      "support": 286.0
     },
     "JUMLAH": {
       "precision": 1.0,
@@ -65,37 +65,37 @@
       "precision": 1.0,
       "recall": 1.0,
       "f1-score": 1.0,
-      "support": 132.0
+      "support": 125.0
     },
     "POSISI": {
       "precision": 1.0,
-      "recall": 0.9355,
-      "f1-score": 0.9667,
-      "support": 31.0
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 41.0
     },
     "TEMPAT": {
-      "precision": 0.9737,
+      "precision": 1.0,
       "recall": 1.0,
-      "f1-score": 0.9867,
-      "support": 74.0
+      "f1-score": 1.0,
+      "support": 77.0
     },
     "micro avg": {
-      "precision": 0.9976,
-      "recall": 0.9976,
-      "f1-score": 0.9976,
-      "support": 850.0
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 857.0
     },
     "macro avg": {
-      "precision": 0.9956,
-      "recall": 0.9892,
-      "f1-score": 0.9922,
-      "support": 850.0
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 857.0
     },
     "weighted avg": {
-      "precision": 0.9977,
-      "recall": 0.9976,
-      "f1-score": 0.9976,
-      "support": 850.0
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 857.0
     }
   },
   "confusion_matrix": {
@@ -110,7 +110,7 @@
     ],
     "nilai": [
       [
-        1263,
+        1274,
         0,
         0,
         0,
@@ -120,7 +120,7 @@
       ],
       [
         0,
-        331,
+        339,
         0,
         0,
         0,
@@ -130,7 +130,7 @@
       [
         0,
         0,
-        285,
+        286,
         0,
         0,
         0,
@@ -150,17 +150,17 @@
         0,
         0,
         0,
-        74,
+        77,
         0,
         0
       ],
       [
-        4,
         0,
         0,
         0,
-        2,
-        91,
+        0,
+        0,
+        126,
         0
       ],
       [
@@ -170,9 +170,9 @@
         0,
         0,
         0,
-        176
+        159
       ]
     ]
   },
-  "durasi_detik": 77
+  "durasi_detik": 72
 }

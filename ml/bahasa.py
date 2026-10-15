@@ -78,7 +78,8 @@ AKSI_KE_ENUM = {
 
 # ---------- peristiwa ----------
 KATA_TAMBAH = {"datang", "memberi", "diberi", "memberikan", "membeli", "dibeli", "bertambah", "menyusul",
-               "bergabung", "muncul", "tambah", "ditambah", "menambah", "dikasih", "kasih", "membawa", "dibawa", "menaruh", "lahir"}
+               "bergabung", "muncul", "tambah", "ditambah", "menambah", "menambahkan", "ditambahkan", "tambahan", "kemari",
+               "tiba", "lagi", "dikasih", "kasih", "membawa", "dibawa", "menaruh", "lahir"}
 
 
 KATA_PASTI_HAPUS = {"pergi", "hilang", "habis", "pulang", "meletus", "pecah"}

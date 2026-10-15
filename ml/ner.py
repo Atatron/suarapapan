@@ -10,6 +10,8 @@ from pathlib import Path
 import torch
 from transformers import AutoModelForTokenClassification, AutoTokenizer
 
+KATA_BAGI = {"dibagi", "membagi", "dibelah", "membelah", "dipotong", "memotong", "bagi"}
+
 from bahasa import AKSI_KE_ENUM, kata_ke_angka, normalkan_benda, tipe_peristiwa, tokenisasi
 
 MODEL_DEFAULT = Path(__file__).parent / "model" / "indobert-suarapapan"
@@ -65,6 +67,20 @@ def susun_json(kata, label, prob, konteks: str) -> dict:
     # seperti "Siti membawa 8 kue" ke papan kosong adalah adegan baru.
     if peristiwa and papan_kosong and pasangan:
         peristiwa = []
+
+    # Pecahan ("kue itu dibagi menjadi empat", "dibelah"): bukan tambah/hapus. Banyak potongan = bilangan
+    # terakhir di kalimat (dua jika tidak disebut). Model tidak dilatih untuk ini, jadi memakai kata kunci.
+    if any(k in KATA_BAGI for k in kata):
+        potongan = 2
+        for i, k in enumerate(kata):
+            if k in KATA_BAGI:
+                n = next((kata_ke_angka([x]) for x in kata[i + 1:] if kata_ke_angka([x])), None)
+                potongan = n if n and n >= 2 else 2
+        sasaran = [j for j, _ in pasangan] or [b.strip().rsplit(" ", 1)[0].replace(":", "").strip()
+                                               for b in konteks.split(",") if b.strip() and b.strip() != "kosong"][:1]
+        if sasaran and not papan_kosong:
+            return {"entitas": [], "latar": "", "posisi": "", "konsep": "pecahan",
+                    "peristiwa": [{"tipe": "bagi", "target": sasaran[0], "jumlah": min(potongan, 12)}], "pertanyaan": ""}
 
     if peristiwa:
         tipe = tipe_peristiwa([k for p in peristiwa for k in p[1]])
