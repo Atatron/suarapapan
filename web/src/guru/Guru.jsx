@@ -48,6 +48,7 @@ export default function Guru() {
   const [akurat, setAkurat] = useState(bacaPilihan);
   const [memeriksa, setMemeriksa] = useState(false);
   const [gabung, setGabung] = useState(false);
+  const [hitungSemua, setHitungSemua] = useState(true);
   const [tafsir, setTafsir] = useState(null); // tafsir lain untuk kalimat terakhir yang sudah tampil di papan
 
   // Ref dipakai di dalam fungsi async supaya selalu membaca nilai terbaru.
@@ -74,6 +75,8 @@ export default function Guru() {
   akuratRef.current = akurat;
   const gabungRef = useRef(false);
   gabungRef.current = gabung;
+  const hitungSemuaRef = useRef(true);
+  hitungSemuaRef.current = hitungSemua;
 
   const kirimCaption = (teks, sementaraFlag, sorot = []) => {
     if (!jedaRef.current) kirim({ type: 'caption', teks, sementara: sementaraFlag, sorot });
@@ -107,7 +110,7 @@ export default function Guru() {
       const konteksIni = konteks(dasar);
       const dariAwal = awal && awal.konteks === konteksIni ? await awal.janji : null;
       const { hasil, ms, sumber, yakin } = dariAwal ?? await uraikan(kalimat, konteksIni);
-      const r = terapkan(dasar, hasil, { gabung: gabungRef.current });
+      const r = terapkan(dasar, hasil, { gabung: gabungRef.current, hitungSemua: hitungSemuaRef.current });
       kirimCaption(kalimat, false, kataSorot(hasil));
       setLog((l) => [{
         id: `${Date.now()}-${Math.random()}`, kalimat, ms, sumber, yakin,
@@ -388,6 +391,9 @@ export default function Guru() {
             </label>
             <label title="Benda yang disebut ditambahkan ke papan; benda yang sudah ada tidak dihapus. Kalimat seperti “ada juga …” atau “… datang” melakukannya otomatis.">
               <input id="opsi-gabung" type="checkbox" checked={gabung} onChange={(e) => setGabung(e.target.checked)} /> Masukkan ke papan tanpa mengganti yang sudah ada
+            </label>
+            <label title="Jika papan berisi beberapa jenis karakter, soal penjumlahan dan pengurangan memakai jumlah semua karakter (3 kelinci + 2 harimau = 5). Matikan jika karakter lain hanya hiasan.">
+              <input id="opsi-hitung-semua" type="checkbox" checked={hitungSemua} onChange={(e) => setHitungSemua(e.target.checked)} /> Hitung semua karakter di papan
             </label>
             <label><input id="opsi-jeda" type="checkbox" checked={jeda} onChange={(e) => setJeda(e.target.checked)} /> Jeda caption di papan</label>
           </div>

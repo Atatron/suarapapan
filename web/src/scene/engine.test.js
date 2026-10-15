@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import { ADEGAN_KOSONG, terapkan, yangAda, konteks, deskripsi, uraiPosisi } from './engine.js';
 import { hitungWer, normalisasi } from '../lib/wer.js';
 import * as Sej from './sejarah.js';
+import { kelompokJenis } from './engine.js';
 import { pcmKeWav, hitungRms, normalkan, keBase64 } from '../lib/wav.js';
 import { pilihAlternatif } from '../lib/suara.js';
 import { bersihkanTranskrip, pecahKalimat, transkripsiGemini, sistemSuara, kosakata as kosakataServer } from '../../api/_suara.js';
@@ -605,7 +606,13 @@ test('gabung: kelinci dimasukkan ke gambar berisi harimau, harimau tidak hilang'
   assert.equal(yangAda(r.adegan, 'harimau').length, 1);
   assert.equal(yangAda(r.adegan, 'kelinci').length, 3);
   assert.equal(r.adegan.latar, 'hutan', 'latar lama dipertahankan');
-  assert.match(r.penjelasan.join(' '), /3 kelinci dimasukkan ke papan/);
+  // karakter berjenis lain masuk → penjumlahan semua karakter (1 + 3), bukan hanya kelinci
+  assert.equal(r.adegan.soal.teks, '1 + 3 = ?');
+  assert.match(r.penjelasan.join(' '), /1 karakter di papan \+ 3 yang masuk = 4/);
+  // dimatikan guru: hanya jenis yang disebut, tanpa soal "0 + n"
+  const hanyaDisebut = terapkan(a, { ...tigaKelinciBaru, gabung: true }, { hitungSemua: false });
+  assert.equal(hanyaDisebut.adegan.soal, null);
+  assert.match(hanyaDisebut.penjelasan.join(' '), /3 kelinci dimasukkan ke papan/);
 });
 
 test('gabung: pilihan guru di panel (opsi) sama dengan gabung dari kalimat; tanpa itu adegan diganti', () => {
@@ -622,8 +629,13 @@ test('tambah: benda yang belum ada masuk tanpa soal "0 + n"', () => {
   const r = terapkan(a, { entitas: [], peristiwa: [{ tipe: 'tambah', target: 'kelinci', jumlah: 3 }] });
   assert.equal(yangAda(r.adegan, 'kelinci').length, 3);
   assert.equal(yangAda(r.adegan, 'harimau').length, 1);
-  assert.equal(r.adegan.soal, null);
+  assert.equal(r.adegan.soal.teks, '1 + 3 = ?', 'jenis baru masuk ke papan berisi → penjumlahan semua karakter');
   assert.equal(r.alternatif, null);
+  // papan kosong: benda baru masuk tanpa soal "0 + n"
+  const kosong = terapkan(ADEGAN_KOSONG, { entitas: [], peristiwa: [{ tipe: 'tambah', target: 'kelinci', jumlah: 3 }] });
+  assert.equal(kosong.adegan.soal, null);
+  // guru mematikan hitung semua: tidak ada soal
+  assert.equal(terapkan(a, { entitas: [], peristiwa: [{ tipe: 'tambah', target: 'kelinci', jumlah: 3 }] }, { hitungSemua: false }).adegan.soal, null);
 });
 
 test('tambah: kelinci sudah 3, "datang 3" → 6 dengan penjelasan dan tafsir alternatif "hanya 3"', () => {
@@ -631,8 +643,13 @@ test('tambah: kelinci sudah 3, "datang 3" → 6 dengan penjelasan dan tafsir alt
   a = terapkan(a, { ...tigaKelinciBaru, gabung: true }).adegan;
   const r = terapkan(a, { entitas: [], peristiwa: [{ tipe: 'tambah', target: 'kelinci', jumlah: 3 }] });
   assert.equal(yangAda(r.adegan, 'kelinci').length, 6);
-  assert.equal(r.penjelasan[0], '3 kelinci + 3 kelinci yang datang = 6.');
-  assert.deepEqual(r.adegan.soal.teks, '3 + 3 = ?');
+  // papan: 1 harimau + 3 kelinci; 3 kelinci datang → semua karakter: 4 + 3 = 7
+  assert.equal(r.penjelasan[0], '4 karakter di papan + 3 yang masuk = 7.');
+  assert.equal(r.adegan.soal.teks, '4 + 3 = ?');
+  // hanya yang disebut (kelinci): 3 + 3 = 6
+  const hanyaKelinci = terapkan(a, { entitas: [], peristiwa: [{ tipe: 'tambah', target: 'kelinci', jumlah: 3 }] }, { hitungSemua: false });
+  assert.equal(hanyaKelinci.penjelasan[0], '3 kelinci + 3 kelinci yang datang = 6.');
+  assert.equal(hanyaKelinci.adegan.soal.teks, '3 + 3 = ?');
   assert.equal(r.alternatif.label, 'Maksudnya hanya 3 kelinci');
   assert.equal(yangAda(r.alternatif.adegan, 'kelinci').length, 3);
   assert.equal(yangAda(r.alternatif.adegan, 'harimau').length, 1, 'benda lain tetap');
@@ -746,4 +763,83 @@ test('beda: jumlah per jenis, benda yang pergi tidak dihitung, plus potongan dan
   const pizza2 = { ...ADEGAN_KOSONG, objek: [{ id: 'p', jenis: 'pizza', status: 'ada', bagi: 4, diambil: 1 }], latar: 'dapur' };
   assert.deepEqual(Sej.ringkasBeda(pizza1, pizza2), ['potongan diambil: 0 → 1', 'tempat: — → dapur']);
   assert.deepEqual(Sej.ringkasBeda(a, a), []);
+});
+
+// ---------- aritmetika dengan beberapa jenis karakter ----------
+
+const ban = (...pasang) => ({
+  ...ADEGAN_KOSONG,
+  latar: 'hutan',
+  objek: pasang.flatMap(([j, n]) => Array.from({ length: n }, (_, i) => ({ id: `${j}${i}`, jenis: j, aksi: 'diam', posisi: '', status: 'ada' }))),
+});
+const KT_HR = ban(['kelinci', 3], ['harimau', 2]);
+
+test('campur: kelompokJenis menghitung per jenis, urut kemunculan, tanpa yang pergi', () => {
+  const a = { ...KT_HR, objek: KT_HR.objek.map((o, i) => (i === 4 ? { ...o, status: 'pergi' } : o)) };
+  assert.deepEqual(kelompokJenis(KT_HR), [{ jenis: 'kelinci', n: 3 }, { jenis: 'harimau', n: 2 }]);
+  assert.deepEqual(kelompokJenis(a), [{ jenis: 'kelinci', n: 3 }, { jenis: 'harimau', n: 1 }]);
+});
+
+test('campur: karakter berjenis lain masuk → penjumlahan total (3 + 2 = 5)', () => {
+  const a = ban(['kelinci', 3]);
+  const r = terapkan(a, { entitas: [{ jenis: 'harimau', jumlah: 2, aksi: 'diam', posisi: '' }], peristiwa: [], gabung: true });
+  assert.equal(r.adegan.soal.teks, '3 + 2 = ?');
+  assert.equal(r.adegan.soal.jawaban, 5);
+  assert.deepEqual(r.adegan.soal.rincian, [{ jenis: 'kelinci', n: 3 }, { jenis: 'harimau', n: 2 }]);
+  assert.equal(r.adegan.konsep, 'penjumlahan');
+  assert.match(r.penjelasan[0], /3 karakter di papan \+ 2 yang masuk = 5/);
+});
+
+test('campur: salah satu jenis pergi → pengurangan dari total (5 − 2 = 3)', () => {
+  const r = terapkan(KT_HR, { entitas: [], peristiwa: [{ tipe: 'hapus', target: 'harimau', jumlah: 2 }] });
+  assert.equal(r.adegan.soal.teks, '5 − 2 = ?');
+  assert.equal(r.adegan.soal.jawaban, 3);
+  assert.equal(yangAda(r.adegan).length, 3);
+  assert.deepEqual(r.adegan.soal.rincian.map((k) => k.n), [3, 2], 'rincian = keadaan sebelum');
+});
+
+test('campur: menambah jenis yang sudah ada di papan campuran memakai total (5 + 2 = 7)', () => {
+  const r = terapkan(KT_HR, { entitas: [], peristiwa: [{ tipe: 'tambah', target: 'kelinci', jumlah: 2 }], tambahEksplisit: true });
+  assert.equal(r.adegan.soal.teks, '5 + 2 = ?');
+  assert.equal(r.adegan.soal.jawaban, 7);
+});
+
+test('campur: "datang" dengan jenis baru lewat peristiwa tambah juga penjumlahan total', () => {
+  const r = terapkan(ban(['kelinci', 3]), { entitas: [], peristiwa: [{ tipe: 'tambah', target: 'harimau', jumlah: 2 }] });
+  assert.equal(r.adegan.soal.teks, '3 + 2 = ?');
+  assert.equal(yangAda(r.adegan, 'harimau').length, 2);
+});
+
+test('campur: jenis tunggal tidak berubah (3 kelinci + 2 kelinci, 3 − 2)', () => {
+  const a = ban(['kelinci', 3]);
+  assert.equal(terapkan(a, { entitas: [], peristiwa: [{ tipe: 'tambah', target: 'kelinci', jumlah: 2 }] }).adegan.soal.teks, '3 + 2 = ?');
+  assert.equal(terapkan(a, { entitas: [], peristiwa: [{ tipe: 'hapus', target: 'kelinci', jumlah: 2 }] }).adegan.soal.teks, '3 − 2 = ?');
+});
+
+test('pertanyaan: total, selisih, terbanyak, tersedikit, dan satu jenis', () => {
+  const tanya = (tj, extra = {}) => terapkan(KT_HR, { entitas: [], peristiwa: [], pertanyaan: 'x?', tanya_jenis: tj, ...extra }).adegan.soal;
+  assert.deepEqual([tanya('total').teks, tanya('total').jawaban], ['3 + 2 = ?', 5]);
+  assert.deepEqual([tanya('selisih').teks, tanya('selisih').jawaban], ['3 − 2 = ?', 1]);
+  const t = tanya('terbanyak');
+  assert.equal(t.jawaban, 'kelinci');
+  assert.deepEqual(t.opsi, ['kelinci', 'harimau', 'sama banyak']);
+  assert.equal(tanya('tersedikit').jawaban, 'harimau');
+  assert.deepEqual([tanya('benda', { tanya_benda: 'harimau' }).teks, tanya('benda', { tanya_benda: 'harimau' }).jawaban], ['Ada berapa harimau?', 2]);
+  // tanpa tanya_jenis tetapi beberapa jenis dan tidak menyebut benda → total
+  assert.equal(tanya('tidak_ada').jawaban, 5);
+});
+
+test('pertanyaan: jumlah sama → "sama banyak"; satu jenis tidak punya selisih', () => {
+  const seri = ban(['ikan', 2], ['kucing', 2]);
+  const s = terapkan(seri, { entitas: [], peristiwa: [], pertanyaan: 'x?', tanya_jenis: 'terbanyak' }).adegan.soal;
+  assert.equal(s.jawaban, 'sama banyak');
+  const satu = terapkan(ban(['ikan', 4]), { entitas: [], peristiwa: [], pertanyaan: 'x?', tanya_jenis: 'selisih' }).adegan.soal;
+  assert.equal(satu.teks, 'Ada berapa ikan?', 'tidak ada pembanding → menghitung satu jenis');
+});
+
+test('rapikan: tanya_jenis divalidasi dan dikosongkan bila tidak bertanya', () => {
+  const h = (extra) => ({ entitas: [], peristiwa: [], latar: '', konsep: 'membilang', pertanyaan: 'Berapa semuanya?', tanya_benda: '', ...extra });
+  assert.equal(rapikan(h({ tanya_jenis: 'total' }), 'berapa semuanya', 'kelinci: 3').tanya_jenis, 'total');
+  assert.equal(rapikan(h({ tanya_jenis: 'ngawur' }), 'x', 'kosong').tanya_jenis, 'tidak_ada');
+  assert.equal(rapikan(h({ pertanyaan: '', tanya_jenis: 'total' }), 'x', 'kosong').tanya_jenis, 'tidak_ada');
 });

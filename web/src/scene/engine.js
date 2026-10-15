@@ -35,6 +35,14 @@ function opsiAngka(jawaban) {
   return [...new Set([jawaban - 1, jawaban, jawaban + 1].filter((x) => x >= 0))];
 }
 
+/** Jumlah per jenis karakter di papan, urut kemunculan: [{ jenis, n }]. */
+export function kelompokJenis(adegan) {
+  const m = new Map();
+  for (const o of yangAda(adegan)) m.set(o.jenis, (m.get(o.jenis) || 0) + 1);
+  return [...m].map(([jenis, n]) => ({ jenis, n }));
+}
+const jumlahSemua = (kel) => kel.reduce((a, k) => a + k.n, 0);
+
 /**
  * Menerapkan hasil parser ke adegan.
  * Mengembalikan { adegan, berubah, catatan }. berubah=false berarti kalimat
@@ -45,6 +53,9 @@ export function terapkan(adegan, hasil, opsi = {}) {
   // gabung: benda baru dimasukkan ke papan tanpa menghapus yang sudah ada (dari kalimat
   // "ada juga ...", "... datang", atau pilihan guru di panel).
   const gabung = opsi.gabung === true || hasil?.gabung === true;
+  // hitungSemua (bawaan): aritmetika memakai jumlah SEMUA karakter di papan. Dimatikan guru jika
+  // karakter lain hanya hiasan dan yang dihitung hanya jenis yang disebut.
+  const hitungSemua = opsi.hitungSemua !== false;
   const penjelasan = [];
   const peristiwa = [...(hasil?.peristiwa ?? [])]; // salinan: "ambil" tanpa potongan ditambahkan sebagai "hapus"
   const catatan = [];
@@ -58,6 +69,12 @@ export function terapkan(adegan, hasil, opsi = {}) {
   let objek = yangAda(adegan).map((o) => ({ ...o, status: 'ada' }));
   let konsep = hasil.konsep && hasil.konsep !== 'tidak_ada' ? hasil.konsep : adegan.konsep;
   let soal = null;
+  // Untuk aritmetika papan campuran: jumlah semua karakter sebelum kalimat ini, dan perubahannya.
+  const kelSebelum = kelompokJenis(adegan);
+  const totalSebelum = jumlahSemua(kelSebelum);
+  let dihapusTotal = 0;
+  let ditambahTotal = 0;
+  const jenisBaru = new Set(); // jenis yang baru masuk ke papan yang sudah berisi karakter lain
 
   if (entitas.length) {
     // Kalimat yang memperkenalkan benda baru memulai adegan baru. Jika kalimat yang
@@ -67,12 +84,17 @@ export function terapkan(adegan, hasil, opsi = {}) {
     if (!gabung) objek = objek.filter((o) => dipakai.has(o.jenis) && !baru.has(o.jenis));
     for (const e of entitas) {
       const n = batasi(e.jumlah);
-      for (let i = 0; i < n && objek.length < BATAS_OBJEK; i++) {
+      let masuk = 0;
+      for (let i = 0; i < n && objek.length < BATAS_OBJEK; i++, masuk++) {
         const o = { id: idBaru(), jenis: e.jenis, aksi: e.aksi || 'diam', posisi: e.posisi || '', status: 'datang' };
         if (e.emoji) o.emoji = e.emoji;
         if (e.emoji_acuan) o.emojiAcuan = e.emoji_acuan;
         if (e.bagi >= 2) Object.assign(o, { bagi: Math.min(e.bagi, 12), diambil: 0 });
         objek.push(o);
+      }
+      if (gabung && totalSebelum > 0) {
+        ditambahTotal += masuk;
+        if (!kelSebelum.some((k) => k.jenis === e.jenis)) jenisBaru.add(e.jenis);
       }
     }
     if (objek.some((o) => o.bagi)) konsep = 'pecahan';
@@ -104,6 +126,7 @@ export function terapkan(adegan, hasil, opsi = {}) {
         }
       }
       if (dihapus < n) catatan.push(`Hanya ada ${sebelum} ${p.target}, jadi hanya ${dihapus} yang dihapus.`);
+      dihapusTotal += dihapus;
       konsep = 'pengurangan';
       soal = { teks: `${sebelum} − ${dihapus} = ?`, jawaban: sebelum - dihapus };
     }
@@ -151,6 +174,8 @@ export function terapkan(adegan, hasil, opsi = {}) {
         objek.push(o);
       }
       if (ditambah < n) catatan.push(`Papan dibatasi ${BATAS_OBJEK} benda.`);
+      ditambahTotal += ditambah;
+      if (sebelum === 0 && totalSebelum > 0) jenisBaru.add(p.target);
       if (sebelum > 0) {
         konsep = 'penjumlahan';
         soal = { teks: `${sebelum} + ${ditambah} = ?`, jawaban: sebelum + ditambah };
@@ -162,15 +187,56 @@ export function terapkan(adegan, hasil, opsi = {}) {
     }
   }
 
-  // "Ada berapa ikan?" → soal menghitung, kecuali kalimat itu sudah membuat soal sendiri.
+  // Papan berisi beberapa jenis karakter (atau jenis baru masuk): hitungan memakai jumlah SEMUA
+  // karakter, bukan hanya jenis yang disebut. "3 kelinci + 2 harimau" menjadi 3 + 2 = 5.
+  // Kalimat yang memulai adegan baru (entitas tanpa gabung) tidak memakai isi papan yang lama.
+  const gantiAdegan = entitas.length > 0 && !gabung;
+  const campur = kelSebelum.length >= 2 || jenisBaru.size > 0;
+  if (hitungSemua && !gantiAdegan && totalSebelum > 0 && (campur || (tambahan && entitas.length))) {
+    if (dihapusTotal > 0) {
+      konsep = 'pengurangan';
+      const sisa = totalSebelum - dihapusTotal;
+      soal = { teks: `${totalSebelum} − ${dihapusTotal} = ?`, jawaban: sisa, rincian: kelSebelum };
+      penjelasan.length = 0;
+      penjelasan.push(`${totalSebelum} karakter di papan − ${dihapusTotal} yang pergi = ${sisa}.`);
+    } else if (ditambahTotal > 0) {
+      konsep = 'penjumlahan';
+      const kelSesudah = kelompokJenis({ objek });
+      soal = { teks: `${totalSebelum} + ${ditambahTotal} = ?`, jawaban: totalSebelum + ditambahTotal, rincian: kelSesudah };
+      penjelasan.length = 0;
+      penjelasan.push(`${totalSebelum} karakter di papan + ${ditambahTotal} yang masuk = ${totalSebelum + ditambahTotal}.`);
+    }
+  }
+
+  // Pertanyaan guru. tanya_jenis: benda (satu jenis), total, selisih, terbanyak, tersedikit.
   if (hasil?.pertanyaan && !soal) {
-    const benda = hasil.tanya_benda && yangAda({ objek }, hasil.tanya_benda).length ? hasil.tanya_benda : '';
-    const n = yangAda({ objek }, benda || undefined).length;
-    if (n) {
-      const jenisAda = new Set(yangAda({ objek }).map((o) => o.jenis));
-      const nama = benda || (jenisAda.size === 1 ? [...jenisAda][0] : 'benda');
-      soal = { teks: `Ada berapa ${nama}?`, jawaban: n };
+    const kel = kelompokJenis({ objek });
+    const total = jumlahSemua(kel);
+    const sebut = hasil.tanya_benda && kel.some((k) => k.jenis === hasil.tanya_benda) ? hasil.tanya_benda : '';
+    const dariParser = hasil.tanya_jenis && hasil.tanya_jenis !== 'tidak_ada' ? hasil.tanya_jenis : '';
+    const jenisTanya = dariParser || (sebut ? 'benda' : kel.length > 1 ? 'total' : 'benda');
+    const daftar = (k) => k.map((x) => x.n).join(' + ');
+    if (kel.length) {
       if (konsep === 'tidak_ada') konsep = 'membilang';
+      if (jenisTanya === 'selisih' && kel.length >= 2) {
+        const [besar, kecil] = [...kel].sort((x, y) => y.n - x.n);
+        soal = { teks: `${besar.n} − ${kecil.n} = ?`, jawaban: besar.n - kecil.n, rincian: [besar, kecil] };
+      } else if ((jenisTanya === 'terbanyak' || jenisTanya === 'tersedikit') && kel.length >= 2) {
+        const urut = [...kel].sort((x, y) => (jenisTanya === 'terbanyak' ? y.n - x.n : x.n - y.n));
+        const seri = urut.filter((k) => k.n === urut[0].n);
+        soal = {
+          teks: jenisTanya === 'terbanyak' ? 'Mana yang paling banyak?' : 'Mana yang paling sedikit?',
+          jawaban: seri.length > 1 ? 'sama banyak' : urut[0].jenis,
+          opsi: [...kel.map((k) => k.jenis), 'sama banyak'],
+          rincian: kel,
+        };
+      } else if (jenisTanya === 'total' && kel.length >= 2) {
+        soal = { teks: `${daftar(kel)} = ?`, jawaban: total, rincian: kel };
+      } else {
+        const nama = sebut || (kel.length === 1 ? kel[0].jenis : '');
+        if (nama) soal = { teks: `Ada berapa ${nama}?`, jawaban: kel.find((k) => k.jenis === nama).n };
+        else soal = { teks: `${daftar(kel)} = ?`, jawaban: total, rincian: kel }; // beberapa jenis, tidak jelas → total
+      }
     }
   }
   if (soal && !soal.opsi) soal.opsi = opsiAngka(soal.jawaban);

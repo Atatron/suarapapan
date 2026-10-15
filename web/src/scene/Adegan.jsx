@@ -7,6 +7,8 @@ import { pilihLatar } from './latar.js';
 
 const ukuranUntuk = (n) => (n <= 3 ? 'besar' : n <= 6 ? 'sedang' : n <= 12 ? 'kecil' : 'mini');
 const slug = (s) => (s || 'kosong').toLowerCase().replace(/[^a-z]+/g, '-');
+// Karakter sejenis dikelompokkan; beri jarak di awal tiap kelompok supaya "3 kelinci" dan "2 harimau" terlihat terpisah.
+const awalKelompok = (adegan, i) => (i > 0 && adegan.objek[i - 1].jenis !== adegan.objek[i].jenis ? ' awal-kelompok' : '');
 const persen = (v) => `${(v * 100).toFixed(2)}%`;
 
 /**
@@ -59,14 +61,14 @@ export default function Adegan({ adegan, interaktif = false, kecil = false }) {
       {ikon ? <img className="adegan-pemandangan" src={urlTempat(ikon)} alt="" aria-hidden="true" draggable={false} /> : null}
       <div className={`adegan-panggung${latar ? ' panggung-latar' : ''}`} style={wilayah}>
         {adegan.objek.map((o, i) => (o.bagi ? (
-          <div key={o.id} className={`obj obj-pecahan status-${o.status}`}>
+          <div key={o.id} className={`obj obj-pecahan status-${o.status}${awalKelompok(adegan, i)}`}>
             <Pecahan o={o} interaktif={interaktif} versi={adegan.versi} />
           </div>
         ) : (
           <button
             key={o.id}
             type="button"
-            className={`obj ukuran-${ukuran} status-${o.status}`}
+            className={`obj ukuran-${ukuran} status-${o.status}${awalKelompok(adegan, i)}`}
             style={{ '--tunda': `${(i % 10) * 0.1}s` }}
             onClick={() => ketuk(o)}
             disabled={!interaktif || o.status === 'pergi'}

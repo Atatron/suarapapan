@@ -6,6 +6,7 @@
 export const AKSI = ['diam', 'lari', 'lompat', 'terbang', 'berenang', 'jatuh'];
 export const KONSEP = ['membilang', 'penjumlahan', 'pengurangan', 'pecahan', 'posisi', 'tidak_ada'];
 export const TIPE_PERISTIWA = ['hapus', 'tambah', 'bagi', 'ambil', 'pindah'];
+export const TANYA_JENIS = ['tidak_ada', 'benda', 'total', 'selisih', 'terbanyak', 'tersedikit'];
 
 // Format skema Gemini (subset OpenAPI). propertyOrdering membuat model menulis
 // field dengan urutan tetap, yang membuat jawabannya lebih stabil.
@@ -47,10 +48,11 @@ export const SKEMA = {
     },
     pertanyaan: { type: 'STRING' },
     tanya_benda: { type: 'STRING' },
+    tanya_jenis: { type: 'STRING', enum: TANYA_JENIS },
     gabung: { type: 'BOOLEAN' },
   },
-  required: ['entitas', 'latar', 'konsep', 'peristiwa', 'pertanyaan', 'tanya_benda', 'gabung'],
-  propertyOrdering: ['entitas', 'latar', 'konsep', 'peristiwa', 'pertanyaan', 'tanya_benda', 'gabung'],
+  required: ['entitas', 'latar', 'konsep', 'peristiwa', 'pertanyaan', 'tanya_benda', 'tanya_jenis', 'gabung'],
+  propertyOrdering: ['entitas', 'latar', 'konsep', 'peristiwa', 'pertanyaan', 'tanya_benda', 'tanya_jenis', 'gabung'],
 };
 
 export const SISTEM = `Kamu adalah pengurai kalimat guru SD (kelas 1–3, matematika) untuk aplikasi SuaraPapan.
@@ -83,10 +85,18 @@ Ubah SATU kalimat guru menjadi JSON adegan. Aturan:
 - "konsep" = membilang (menghitung benda), penjumlahan, pengurangan, pecahan, posisi, atau tidak_ada.
 - "pertanyaan" = kalimat soal jika guru bertanya ("ada berapa kelinci sekarang?"), selain itu "".
   "tanya_benda" = benda yang ditanyakan jumlahnya, atau "" jika tidak ada.
+  "tanya_jenis" = macam pertanyaan, jika guru bertanya:
+    "benda"      jumlah SATU jenis ("ada berapa kelinci sekarang?"), isi juga tanya_benda;
+    "total"      jumlah semua karakter ("berapa semuanya / jumlahnya / seluruhnya?");
+    "selisih"    perbedaan jumlah dua jenis ("berapa selisihnya?", "berapa lebihnya?");
+    "terbanyak"  "mana yang lebih banyak / paling banyak?";
+    "tersedikit" "mana yang lebih sedikit / paling sedikit?";
+    "tidak_ada"  jika guru tidak bertanya.
+  Papan boleh berisi beberapa jenis karakter sekaligus; hitungan "semuanya" mencakup semua jenis.
 - Jika kalimat tidak menggambarkan benda (salam, instruksi, pujian), kembalikan entitas dan peristiwa kosong dan konsep "tidak_ada".
 - Jangan mengarang benda yang tidak disebut guru.`;
 
-const kosong = { entitas: [], latar: '', konsep: 'tidak_ada', peristiwa: [], pertanyaan: '', tanya_benda: '', gabung: false };
+const kosong = { entitas: [], latar: '', konsep: 'tidak_ada', peristiwa: [], pertanyaan: '', tanya_benda: '', tanya_jenis: 'tidak_ada', gabung: false };
 const j = (o) => JSON.stringify({ ...kosong, ...o });
 
 export const CONTOH = [
@@ -105,7 +115,17 @@ export const CONTOH = [
   ['kucing: 1 (di bawah meja)', 'Sekarang kucingnya naik ke atas meja.',
     j({ konsep: 'posisi', peristiwa: [{ tipe: 'pindah', target: 'kucing', jumlah: 1, posisi: 'di atas meja' }] })],
   ['ikan: 7', 'Coba hitung, ada berapa ikan di kolam?',
-    j({ konsep: 'membilang', pertanyaan: 'Ada berapa ikan di kolam?', tanya_benda: 'ikan' })],
+    j({ konsep: 'membilang', pertanyaan: 'Ada berapa ikan di kolam?', tanya_benda: 'ikan', tanya_jenis: 'benda' })],
+  ['kosong', 'Di hutan ada tiga kelinci dan dua harimau.',
+    j({ entitas: [
+      { jenis: 'kelinci', jumlah: 3, aksi: 'diam', posisi: '', bagi: 0, emoji: '🐇', emoji_acuan: '' },
+      { jenis: 'harimau', jumlah: 2, aksi: 'diam', posisi: '', bagi: 0, emoji: '🐅', emoji_acuan: '' }], latar: 'hutan', konsep: 'membilang' })],
+  ['kelinci: 3, harimau: 2', 'Berapa jumlah hewan semuanya?',
+    j({ konsep: 'penjumlahan', pertanyaan: 'Berapa jumlah hewan semuanya?', tanya_jenis: 'total' })],
+  ['kelinci: 3, harimau: 2', 'Mana yang lebih banyak, kelinci atau harimau?',
+    j({ konsep: 'membilang', pertanyaan: 'Mana yang lebih banyak?', tanya_jenis: 'terbanyak' })],
+  ['kelinci: 3, harimau: 2', 'Berapa selisih kelinci dan harimau?',
+    j({ konsep: 'pengurangan', pertanyaan: 'Berapa selisih kelinci dan harimau?', tanya_jenis: 'selisih' })],
   ['harimau: 1', 'Ada juga tiga kelinci di sana.',
     j({ entitas: [{ jenis: 'kelinci', jumlah: 3, aksi: 'diam', posisi: '', bagi: 0, emoji: '🐇', emoji_acuan: '' }], konsep: 'membilang', gabung: true })],
   ['harimau: 1', 'Adapun kelinci yang datang sebanyak tiga.',
@@ -207,6 +227,7 @@ export function rapikan(h, kalimat, konteks = '') {
   if (!KONSEP.includes(hasil.konsep)) hasil.konsep = 'tidak_ada';
 
   hasil.pertanyaan = String(hasil.pertanyaan || '').trim();
+  hasil.tanya_jenis = hasil.pertanyaan && TANYA_JENIS.includes(h.tanya_jenis) ? h.tanya_jenis : 'tidak_ada';
   hasil.tanya_benda = normalkanJenis(hasil.tanya_benda);
   return hasil;
 }

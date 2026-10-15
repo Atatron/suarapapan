@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import Adegan from '../scene/Adegan.jsx';
+import { Benda } from '../scene/aset.jsx';
 import { ADEGAN_KOSONG } from '../scene/engine.js';
 import { kirim, dengar } from '../lib/saluran.js';
 
@@ -14,6 +15,17 @@ function Soal({ soal, versi }) {
   const benar = pilihan !== null && String(pilihan) === String(soal.jawaban);
   return (
     <div className="soal">
+      {soal.rincian?.length ? (
+        <ul className="soal-rincian" aria-label="Rincian karakter">
+          {soal.rincian.map((r) => (
+            <li key={r.jenis} className="rincian-item">
+              <span className="rincian-gambar"><Benda jenis={r.jenis} /></span>
+              <b>{r.n}</b>
+              <span>{r.jenis}</span>
+            </li>
+          ))}
+        </ul>
+      ) : null}
       <p className="soal-teks">{!benar ? soal.teks : soal.teks.includes('= ?') ? soal.teks.replace('= ?', `= ${soal.jawaban}`) : `${soal.teks} ${soal.jawaban}`}</p>
       <div className="soal-opsi">
         {opsi.map((n) => (

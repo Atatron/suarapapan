@@ -80,7 +80,7 @@ export function calonLatar(latar) {
 
 const WILAYAH_LEBAR = [0.04, 0.96];
 const WILAYAH_PECAHAN = { x: [0.1, 0.9], y: [0.12, 0.94] };
-const BANYAK = 7; // lebih dari ini: pakai area lebih lebar supaya benda tidak mengecil
+const BANYAK = 4; // lebih dari ini: pakai area lebih lebar supaya benda (dan kelompoknya) muat satu baris
 const MELEBAR = 0.07; // area yang disarankan adalah titik awal; sedikit dilebarkan agar tiga benda muat satu baris
 
 const lebarkan = ([a, b]) => [Math.max(0.03, a - MELEBAR), Math.min(0.97, b + MELEBAR)];
