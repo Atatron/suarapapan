@@ -72,7 +72,8 @@ Ubah SATU kalimat guru menjadi JSON adegan. Aturan:
   Jika kalimat mengubah benda yang sudah ada, isi "peristiwa" dan biarkan "entitas" kosong.
 - "latar" = tempat adegan, pilih SATU yang paling cocok dari: rumput, hutan, kebun, sawah, peternakan, gunung,
   sungai, danau, kolam, laut, bawah-laut, pantai, dapur, kamar, kelas, sekolah, pasar, kota, jalan-desa, gurun,
-  salju, kebun-binatang, langit, taman. Jika tidak ada yang cocok atau tempat tidak disebut, isi "".
+  salju, kebun-binatang, langit, taman, taman-bermain, malam, rumah, dalam-rumah, bandara, pelabuhan, stasiun,
+  angkasa, klinik. Jika tidak ada yang cocok atau tempat tidak disebut, isi "".
 - "konsep" = membilang (menghitung benda), penjumlahan, pengurangan, pecahan, posisi, atau tidak_ada.
 - "pertanyaan" = kalimat soal jika guru bertanya ("ada berapa kelinci sekarang?"), selain itu "".
   "tanya_benda" = benda yang ditanyakan jumlahnya, atau "" jika tidak ada.
@@ -104,6 +105,9 @@ export const CONTOH = [
 
 // ---------- perapian (salinan ml/serve.py + ml/bahasa.py) ----------
 
+// Kata tempat: "di dalam laut" menyebut tempat, bukan letak relatif terhadap sebuah benda.
+const TEMPAT_BUKAN_ACUAN = new Set(['laut', 'sungai', 'kolam', 'danau', 'hutan', 'kelas', 'rumput', 'kebun', 'sawah', 'pantai',
+  'gunung', 'langit', 'taman', 'kota', 'pasar', 'dapur', 'kamar', 'sekolah', 'peternakan', 'desa', 'gurun', 'salju', 'udara', 'air']);
 const KATA_ULANG_TETAP = new Set(['kupu-kupu', 'kura-kura', 'laba-laba', 'biri-biri', 'undur-undur', 'ubur-ubur', 'lumba-lumba']);
 const AKSI_KE_ENUM = {
   berlari: 'lari', lari: 'lari', berjalan: 'lari', berlarian: 'lari', berkejaran: 'lari',
@@ -138,8 +142,11 @@ export function rapikan(h, kalimat, konteks = '') {
   hasil.entitas = (hasil.entitas || []).map((e) => {
     const jenis = normalkanJenis(e.jenis);
     let posisi = String(e.posisi || '').trim().toLowerCase();
-    // "di rumput" adalah latar, bukan posisi relatif seperti "di bawah meja"
-    if (hasil.latar && (posisi === hasil.latar || posisi === `di ${hasil.latar}`)) posisi = '';
+    // "di rumput" adalah latar, bukan posisi relatif seperti "di bawah meja". Begitu juga
+    // "di dalam laut" atau "di atas rumput": acuannya sebuah tempat, bukan benda pelajaran posisi.
+    const acuan = posisi.split(/\s+/).pop();
+    if (hasil.latar && (posisi === hasil.latar || posisi === `di ${hasil.latar}` || acuan === hasil.latar)) posisi = '';
+    else if (TEMPAT_BUKAN_ACUAN.has(acuan)) posisi = '';
     // LLM kadang mengarang aksi ("kue berenang"); aksi dipakai hanya jika kata kerjanya diucapkan.
     const aksi = [...kata].some((k) => AKSI_KE_ENUM[k] === e.aksi) ? e.aksi : 'diam';
     const bagi = batasi(e.bagi, 0, 12);

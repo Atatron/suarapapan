@@ -518,3 +518,77 @@ test('wer: tepat, ganti, sisip, hapus', () => {
   assert.deepEqual(hitungWer('ada tiga gurita', 'ada tiga guru ita'), { salah: 2, total: 3, ganti: 1, sisip: 1, hapus: 0 });
   assert.equal(hitungWer('ada tiga kelinci', '').salah, 3);
 });
+
+// ---------- latar cerdas ----------
+
+import { pilihLatar, calonLatar, LATAR, _untukTes as _latar } from './latar.js';
+
+const ob = (...jenis) => ({ objek: jenis.map((j, i) => ({ id: `t${i}`, jenis: j, status: 'ada' })), latar: '' });
+
+test('latar: data lengkap — setiap benda ada di pustaka, setiap file latar ada', () => {
+  const { OBJ } = _untukTes;
+  assert.equal(Object.keys(LATAR).length, 32);
+  for (const [nama, b] of Object.entries(_latar.BENDA)) {
+    assert.ok(OBJ[nama], `benda ${nama} tidak ada di pustaka gambar`);
+    assert.ok(LATAR[b.latar], `latar ${b.latar} untuk ${nama} tidak ada`);
+  }
+  assert.equal(Object.keys(_latar.BENDA).length, 192);
+  for (const id of Object.keys(LATAR)) assert.ok(existsSync(new URL(`../../public/aset/latar/${id}.webp`, import.meta.url)), id);
+  for (const [k, daftar] of Object.entries(_latar.KANDIDAT)) for (const id of daftar) assert.ok(LATAR[id], `kandidat ${k} → ${id}`);
+});
+
+test('latar: dipilih dari benda saat guru tidak menyebut tempat', () => {
+  assert.equal(pilihLatar(ob('kelinci', 'kelinci')).id, 'farm');
+  assert.equal(pilihLatar(ob('harimau')).id, 'jungle');
+  assert.equal(pilihLatar(ob('singa', 'zebra')).id, 'savanna');
+  assert.equal(pilihLatar(ob('gurita')).id, 'underwater');
+  assert.equal(pilihLatar(ob('paus')).id, 'deep-ocean');
+  assert.equal(pilihLatar(ob('dokter')).id, 'clinic');
+  assert.equal(pilihLatar(ob('roket')).id, 'space');
+});
+
+test('latar: yang paling banyak cocok menang; benda tak dikenal diabaikan', () => {
+  assert.equal(pilihLatar(ob('singa', 'gajah', 'harimau')).id, 'savanna', 'dua dari tiga cocok untuk sabana');
+  assert.equal(pilihLatar(ob('bajaj', 'bajaj', 'ikan')).id, 'underwater');
+  assert.equal(pilihLatar(ob('bajaj')).id, 'classroom', 'tak ada yang dikenal dan tak ada tempat → ruang kelas');
+});
+
+test('latar: tempat yang disebut guru didahulukan, tetapi calon yang cocok dengan benda dipilih', () => {
+  assert.equal(pilihLatar({ ...ob('ayam'), latar: 'sawah' }).id, 'rice-fields');
+  assert.equal(pilihLatar({ ...ob('kelinci', 'kelinci', 'kelinci'), latar: 'rumput' }).id, 'farm', 'rumput → peternakan karena kelinci cocok');
+  assert.equal(pilihLatar({ ...ob('bajaj'), latar: 'rumput' }).id, 'nature', 'tanpa benda yang cocok → calon pertama');
+  assert.equal(pilihLatar({ ...ob('ikan'), latar: 'laut' }).id, 'underwater');
+  assert.equal(pilihLatar({ ...ob('kucing'), latar: 'dapur' }).id, 'kitchen');
+});
+
+test('latar: kosong → ruang kelas, area mengikuti benda dan melebar untuk banyak benda', () => {
+  assert.equal(pilihLatar({ objek: [], latar: '' }).id, 'classroom');
+  const sedikit = pilihLatar(ob('sapi', 'sapi'));
+  assert.ok(sedikit.x[0] <= _latar.BENDA.sapi.x[0] && sedikit.x[1] >= _latar.BENDA.sapi.x[1], 'area dilebarkan, tidak dipersempit');
+  assert.deepEqual(sedikit.y, _latar.BENDA.sapi.y);
+  const banyak = pilihLatar(ob(...Array(9).fill('sapi')));
+  assert.deepEqual(banyak.x, [0.04, 0.96]);
+  const pecahan = pilihLatar({ objek: [{ id: 'p', jenis: 'pizza', status: 'ada', bagi: 4 }], latar: '' });
+  assert.deepEqual(pecahan.x, [0.1, 0.9]);
+});
+
+test('latar: calonLatar membaca kata tempat dengan imbuhan dan sinonim', () => {
+  assert.deepEqual(calonLatar('di hutan lebat'), _latar.KANDIDAT.hutan);
+  assert.deepEqual(calonLatar('taman bermain'), ['playground']);
+  assert.deepEqual(calonLatar('bandara'), ['airport']);
+  assert.deepEqual(calonLatar('padang rumput'), _latar.KANDIDAT.rumput);
+  assert.deepEqual(calonLatar(''), []);
+  assert.deepEqual(calonLatar('xyz'), []);
+});
+
+test('rapikan: "di dalam laut" adalah tempat, bukan pelajaran posisi; "di bawah meja" tetap posisi', () => {
+  const dasar = (posisi, latar) => ({
+    entitas: [{ jenis: 'ikan', jumlah: 3, aksi: 'diam', posisi, bagi: 0, emoji: '', emoji_acuan: '' }],
+    latar, konsep: 'membilang', peristiwa: [], pertanyaan: '', tanya_benda: '',
+  });
+  assert.equal(rapikan(dasar('di dalam laut', 'laut'), 'tiga ikan di laut').entitas[0].posisi, '');
+  assert.equal(rapikan(dasar('di dalam laut', ''), 'tiga ikan di laut').entitas[0].posisi, '', 'meski latar kosong');
+  assert.equal(rapikan(dasar('di atas rumput', 'rumput'), 'x').entitas[0].posisi, '');
+  assert.equal(rapikan(dasar('di bawah meja', ''), 'kucing di bawah meja').entitas[0].posisi, 'di bawah meja');
+  assert.equal(rapikan(dasar('di atas kursi', 'kelas'), 'x').entitas[0].posisi, 'di atas kursi');
+});

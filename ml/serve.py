@@ -72,6 +72,12 @@ CONTOH = [
 ]
 
 
+# "di dalam laut" menyebut tempat, bukan letak relatif terhadap sebuah benda.
+TEMPAT_BUKAN_ACUAN = {"laut", "sungai", "kolam", "danau", "hutan", "kelas", "rumput", "kebun", "sawah", "pantai",
+                      "gunung", "langit", "taman", "kota", "pasar", "dapur", "kamar", "sekolah", "peternakan", "desa",
+                      "gurun", "salju", "udara", "air"}
+
+
 def normalkan_jenis(teks: str) -> str:
     t = teks.strip().lower()
     t = re.sub(r"^(ekor|buah|biji|batang|lembar|orang)\s+", "", t)
@@ -82,7 +88,11 @@ def rapikan(h: dict, konteks: str = "") -> dict:
     for e in h.get("entitas", []):
         e["jenis"] = normalkan_jenis(e["jenis"])
         # "di rumput" adalah latar, bukan posisi relatif seperti "di bawah meja"
-        if h.get("latar") and e.get("posisi", "").strip() in (h["latar"], f"di {h['latar']}"):
+        posisi = e.get("posisi", "").strip()
+        acuan = posisi.split()[-1] if posisi else ""
+        if h.get("latar") and (posisi in (h["latar"], f"di {h['latar']}") or acuan == h["latar"]):
+            e["posisi"] = ""
+        elif acuan in TEMPAT_BUKAN_ACUAN:
             e["posisi"] = ""
         e["jumlah"] = max(1, min(int(e.get("jumlah") or 1), 20))
     for p in h.get("peristiwa", []):

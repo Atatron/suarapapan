@@ -49,9 +49,23 @@ function Caption({ teks, sementara, sorot }) {
   );
 }
 
+// Hanya saat pengembangan: /papan?demo=<json adegan>&teks=... memuat adegan langsung,
+// untuk tangkapan layar dan pemeriksaan tampilan tanpa panel guru.
+function demoDariUrl() {
+  if (!import.meta.env.DEV) return null;
+  try {
+    const q = new URLSearchParams(window.location.search);
+    const d = q.get('demo');
+    return d ? { adegan: JSON.parse(d), teks: q.get('teks') || '' } : null;
+  } catch {
+    return null;
+  }
+}
+
 export default function Papan() {
-  const [adegan, setAdegan] = useState(ADEGAN_KOSONG);
-  const [caption, setCaption] = useState({ teks: '', sementara: false, sorot: [] });
+  const demo = useMemo(demoDariUrl, []);
+  const [adegan, setAdegan] = useState(() => demo?.adegan ?? ADEGAN_KOSONG);
+  const [caption, setCaption] = useState({ teks: demo?.teks ?? '', sementara: false, sorot: [] });
 
   useEffect(() => {
     const lepas = dengar((m) => {
@@ -70,14 +84,17 @@ export default function Papan() {
     <main className="papan">
       <button type="button" className="papan-layar-penuh" onClick={layarPenuh}>Layar penuh</button>
       <div className="papan-atas">{adegan.soal ? <Soal soal={adegan.soal} versi={adegan.versi} /> : null}</div>
-      {adegan.objek.length ? (
+      <div className="papan-panggung">
         <Adegan adegan={adegan} interaktif />
-      ) : (
-        <div className="papan-kosong">
-          <p className="papan-logo">SuaraPapan</p>
-          <p>Menunggu guru berbicara…</p>
-        </div>
-      )}
+        {adegan.objek.length ? null : (
+          <div className="papan-lapis-kosong">
+            <div>
+              <p className="papan-logo">SuaraPapan</p>
+              <p>Menunggu guru berbicara…</p>
+            </div>
+          </div>
+        )}
+      </div>
       <div className="papan-bawah">
         <Caption {...caption} />
       </div>

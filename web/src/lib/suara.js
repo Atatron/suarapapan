@@ -37,12 +37,9 @@ export function buatPendengar({ saatSementara, saatFinal, saatStatus, saatGalat,
   r.interimResults = true;
   r.continuous = true;
   r.maxAlternatives = 5;
-  // Chrome terbaru bisa diberi petunjuk kata (contextual biasing); browser lain mengabaikannya.
-  if (kosakata && 'phrases' in r && typeof window.SpeechRecognitionPhrase === 'function') {
-    try {
-      r.phrases = [...kosakata].slice(0, 400).map((k) => new window.SpeechRecognitionPhrase(k.replace(/-/g, ' '), 3.0));
-    } catch { /* tidak didukung */ }
-  }
+  // Catatan: properti `phrases` (petunjuk kata) sengaja tidak dipakai. Ia hanya jalan
+  // pada pengenalan di perangkat; selain itu Chrome mengirim galat "phrases-not-supported"
+  // dan pengenalan berhenti. Petunjuk kosakata ada di jalur Gemini (api/_suara.js).
   let aktif = false;
 
   r.onresult = (e) => {
