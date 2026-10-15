@@ -157,6 +157,7 @@ export default function Guru() {
 
   const status = kesehatan === null ? 'memeriksa…'
     : !kesehatan.server ? 'server ML mati'
+      : kesehatan.gemini !== undefined ? (kesehatan.gemini ? 'siap' : 'GEMINI_API_KEY belum diisi')
       : kesehatan.indobert && kesehatan.ollama ? 'siap'
         : kesehatan.indobert ? 'IndoBERT siap, LLM cadangan mati'
           : kesehatan.ollama ? 'hanya LLM (IndoBERT belum dilatih)' : 'model belum siap';
@@ -166,7 +167,7 @@ export default function Guru() {
       <header className="guru-kepala">
         <h1>SuaraPapan <span>panel guru</span></h1>
         <div className="guru-kepala-kanan">
-          <span className={`chip chip-${status === 'siap' ? 'ok' : 'peringatan'}`}>Model: {status}</span>
+          <span className={`chip chip-${status === 'siap' ? 'ok' : 'peringatan'}`}>{kesehatan?.gemini !== undefined ? 'Online (Gemini)' : 'Model'}: {status}</span>
           <button type="button" className="tombol" onClick={() => window.open('/papan', 'suarapapan-papan')}>Buka papan</button>
         </div>
       </header>

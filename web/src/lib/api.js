@@ -7,7 +7,7 @@ export async function uraikan(kalimat, konteks) {
       body: JSON.stringify({ kalimat, konteks }),
     });
   } catch {
-    throw new Error('Server ML tidak bisa dihubungi. Pastikan server Python sudah berjalan.');
+    throw new Error('Server tidak bisa dihubungi. Periksa koneksi internet, atau jalankan server Python jika memakai mode offline.');
   }
   const data = await r.json().catch(() => ({}));
   if (!r.ok) throw new Error(data.detail || `Server ML mengembalikan galat ${r.status}.`);

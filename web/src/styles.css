@@ -179,3 +179,49 @@ button { font: inherit; }
 .soal-tombol.benar { background: var(--kuning); border-color: var(--kuning); color: var(--tinta); }
 .soal-tombol.salah { border-color: #E07A5F; }
 .soal-umpan { margin: 0; min-height: 1.4em; font-size: clamp(20px, 2.2vw, 40px); color: var(--kuning); }
+
+/* ---------- pecahan ---------- */
+/* Ukuran mengikuti tinggi papan yang tersisa (container query), supaya
+   pizza tidak terpotong saat soal di atasnya memanjang. */
+.adegan { container-type: size; }
+.obj-pecahan { width: min(50cqw, 64cqh); }
+.pecahan { display: grid; justify-items: center; gap: 1vh; }
+.pecahan-svg { width: 100%; height: auto; overflow: visible; }
+.potong { transition: transform 0.35s ease-out, opacity 0.35s; }
+.potong[role='button'] { cursor: pointer; }
+.potong.diambil { opacity: 0.55; }
+.potong:focus-visible { outline: none; }
+.potong:focus-visible path, .potong:focus-visible rect { stroke: var(--kuning); stroke-width: 6; }
+.pecahan-label { display: flex; align-items: center; gap: 1.2vw; min-height: 2.6em; font-family: var(--font-judul); }
+.pecahan-angka { display: inline-grid; justify-items: center; font-weight: 700; font-size: clamp(22px, 4.2vw, 80px); line-height: 1; color: var(--kuning); }
+.pecahan-angka span:first-child { border-bottom: 0.08em solid currentColor; padding: 0 0.15em; }
+.pecahan-kata { font-size: clamp(12px, 1.8vw, 34px); color: var(--kapur-redup); }
+.adegan-kecil .pecahan-angka { font-size: clamp(16px, 2vw, 30px); }
+.adegan-kecil .pecahan-kata { font-size: 12px; }
+
+/* ---------- posisi ---------- */
+.adegan-posisi { justify-content: flex-end; }
+.posisi { position: relative; z-index: 1; flex: 1; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; padding-top: 6%; touch-action: none; }
+/* Kotak acuan berukuran sama dengan gambar acuan (200×160), jadi zona bisa diatur dalam persen. */
+.posisi-acuan { position: relative; width: min(36cqw, 52cqh); aspect-ratio: 200 / 160; }
+.posisi-acuan-gambar { position: absolute; inset: 0; }
+.posisi-acuan-gambar .benda-cadangan { height: 100%; align-content: end; }
+.posisi-zona { position: absolute; display: flex; align-items: flex-end; justify-content: center; gap: 4%; }
+.posisi-benda { width: 42%; flex: none; }
+.zona-atas { left: 0; right: 0; bottom: calc(100% - 30 / 160 * 100%); }
+.zona-bawah { left: 0; right: 0; bottom: 0; }
+.zona-bawah .posisi-benda { width: 38%; }
+.zona-samping { left: 104%; width: 90%; bottom: 0; justify-content: flex-start; }
+.zona-depan { left: 0; right: 0; bottom: -6%; z-index: 2; }
+.zona-belakang { left: 0; right: 0; bottom: 55%; z-index: -1; }
+.zona-dalam { left: 10%; right: 10%; bottom: 10%; }
+.zona-dalam .posisi-benda { width: 34%; }
+.posisi-benda.bisa-seret { cursor: grab; }
+.posisi-benda.diseret { cursor: grabbing; z-index: 5; position: relative; filter: drop-shadow(0 8px 10px rgba(0, 0, 0, 0.4)); }
+.posisi-label, .posisi-petunjuk { order: -1; }
+.posisi-label { margin: 0; font-family: var(--font-tangan); font-size: clamp(16px, 3.4vw, 60px); color: var(--kuning); text-align: center; }
+.adegan-kecil .posisi-label { font-size: 18px; margin: 4px 0 0; }
+.posisi-petunjuk { margin: 0 0 2vh; font-size: clamp(12px, 1.4vw, 24px); color: var(--kapur-redup); }
+@media (prefers-reduced-motion: no-preference) {
+  .posisi-benda.status-datang { animation: masuk 0.6s ease-out both; animation-delay: var(--tunda); }
+}

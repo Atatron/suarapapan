@@ -3,6 +3,17 @@
 Guru bicara, papan bercerita. Ucapan guru diubah menjadi caption dan adegan
 interaktif di proyektor, untuk siswa penyandang disabilitas di kelas inklusi.
 
+## Versi online (tanpa instalasi)
+
+Buka **https://suarapapan.vercel.app/guru** di Google Chrome. Versi online memakai
+Gemini (`web/api/parse.js`) untuk memahami kalimat, dengan skema JSON yang sama
+dengan IndoBERT. Kunci disimpan di Vercel sebagai `GEMINI_API_KEY`
+(Settings → Environment Variables), tidak pernah di kode.
+
+Untuk mencoba versi online di laptop: buat `web/.env.local` berisi
+`GEMINI_API_KEY=...`, lalu `npm run dev`. Tanpa kunci itu, `/api` diteruskan ke
+server Python seperti di bawah.
+
 ## Menjalankan di laptop (Windows)
 
 Butuh: Python 3.12, Node.js, [Ollama](https://ollama.com) dengan model `qwen2.5:7b-instruct`, dan Google Chrome.

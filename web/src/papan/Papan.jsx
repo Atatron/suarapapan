@@ -6,19 +6,21 @@ import { kirim, dengar } from '../lib/saluran.js';
 function Soal({ soal, versi }) {
   const [pilihan, setPilihan] = useState(null);
   useEffect(() => setPilihan(null), [versi]);
+  // Adegan lama (tanpa opsi) tetap didukung: opsi dibuat di sekitar jawaban.
   const opsi = useMemo(
-    () => [...new Set([soal.jawaban - 1, soal.jawaban, soal.jawaban + 1].filter((x) => x >= 0))],
-    [soal.jawaban],
+    () => soal.opsi || [...new Set([soal.jawaban - 1, soal.jawaban, soal.jawaban + 1].filter((x) => x >= 0))],
+    [soal.opsi, soal.jawaban],
   );
-  const benar = pilihan === soal.jawaban;
+  const benar = pilihan !== null && String(pilihan) === String(soal.jawaban);
   return (
     <div className="soal">
-      <p className="soal-teks">{pilihan !== null && benar ? soal.teks.replace('?', String(soal.jawaban)) : soal.teks}</p>
+      <p className="soal-teks">{!benar ? soal.teks : soal.teks.includes('= ?') ? soal.teks.replace('= ?', `= ${soal.jawaban}`) : `${soal.teks} ${soal.jawaban}`}</p>
       <div className="soal-opsi">
         {opsi.map((n) => (
           <button
             key={n}
             type="button"
+            aria-label={String(n).includes('/') ? String(n).replace('/', ' per ') : undefined}
             className={`soal-tombol${pilihan === n ? (benar ? ' benar' : ' salah') : ''}`}
             onClick={() => setPilihan(n)}
           >

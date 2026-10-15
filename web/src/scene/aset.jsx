@@ -103,10 +103,26 @@ const GAMBAR = {
       <circle cx="148" cy="124" r="20" fill="#2B2B2B" /><circle cx="148" cy="124" r="8" fill={KAPUR} />
     </>
   ),
+  // Permukaan meja di y=30..44; ruang di bawahnya cukup untuk benda lain (topik posisi).
+  meja: () => (
+    <>
+      <rect x="6" y="30" width="188" height="14" rx="4" fill="#C98B5A" />
+      <rect x="6" y="40" width="188" height="6" fill="#8A5F3C" />
+      <rect x="16" y="44" width="12" height="114" fill="#8A5F3C" />
+      <rect x="172" y="44" width="12" height="114" fill="#8A5F3C" />
+    </>
+  ),
+  kotak: () => (
+    <>
+      <path d="M20 30 L180 30 L170 158 L30 158Z" fill="#C98B5A" />
+      <rect x="12" y="22" width="176" height="16" rx="3" fill="#E3B577" />
+      <path d="M100 38 L100 158" stroke="#8A5F3C" strokeWidth="4" />
+    </>
+  ),
 };
 
 // Sinonim sederhana supaya kata yang mirip tetap mendapat gambar yang sama.
-const SINONIM = { kelinci: ['kelinci', 'arnab'], kucing: ['kucing', 'meong'], burung: ['burung', 'burung-burung'], balon: ['balon'], mobil: ['mobil', 'mobil-mobilan'] };
+const SINONIM = { kelinci: ['kelinci', 'arnab'], kucing: ['kucing', 'meong'], burung: ['burung', 'burung-burung'], balon: ['balon'], mobil: ['mobil', 'mobil-mobilan'], meja: ['meja', 'meja-meja'], kotak: ['kotak', 'kardus', 'peti'] };
 const PETA_SINONIM = Object.fromEntries(Object.entries(SINONIM).flatMap(([k, v]) => v.map((s) => [s, k])));
 
 const EMOJI = {
