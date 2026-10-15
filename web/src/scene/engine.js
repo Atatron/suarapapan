@@ -52,7 +52,14 @@ export function terapkan(adegan, hasil, opsi = {}) {
   const entitas = hasil?.entitas ?? [];
   // gabung: benda baru dimasukkan ke papan tanpa menghapus yang sudah ada (dari kalimat
   // "ada juga ...", "... datang", atau pilihan guru di panel).
-  const gabung = opsi.gabung === true || hasil?.gabung === true;
+  // Jenis yang sama sekali baru di papan yang sudah berisi ("ada 2 gajah", lalu "ada 2 kupu-kupu")
+  // otomatis bergabung: guru jarang bermaksud menghapus yang sudah ada. Menyebut jenis yang sudah ada
+  // (mis. "ada 3 kelinci" lagi) tetap memulai adegan baru. Guru bisa menolaknya dengan opsi.gabung=false.
+  const jenisAda = new Set(yangAda(adegan).map((o) => o.jenis));
+  const semuaJenisBaru = (hasil?.entitas ?? []).length > 0 && jenisAda.size > 0
+    && hasil.entitas.every((e) => !jenisAda.has(e.jenis));
+  const gabung = opsi.gabung === true || hasil?.gabung === true
+    || (semuaJenisBaru && opsi.gabung !== false);
   // hitungSemua (bawaan): aritmetika memakai jumlah SEMUA karakter di papan. Dimatikan guru jika
   // karakter lain hanya hiasan dan yang dihitung hanya jenis yang disebut.
   const hitungSemua = opsi.hitungSemua !== false;
@@ -82,8 +89,18 @@ export function terapkan(adegan, hasil, opsi = {}) {
     const baru = new Set(entitas.map((e) => e.jenis));
     const dipakai = new Set(peristiwa.map((p) => p.target));
     if (!gabung) objek = objek.filter((o) => dipakai.has(o.jenis) && !baru.has(o.jenis));
+    // "ada 3 anak dan 3 kelinci" saat 3 kelinci sudah di papan: kalimat yang menyebut beberapa jenis
+    // sekaligus, dengan sedikitnya satu jenis baru, menyatakan keadaan (bukan menambah lagi).
+    // Jenis yang sudah ada hanya dilengkapi sampai sebanyak yang disebut. Kata "lagi/tambahan"
+    // atau kata gabung dari kalimat (datang, juga, ...) tetap berarti penjumlahan.
+    const pernyataanKeadaan = gabung && !hasil?.tambahEksplisit && !hasil?.gabung && entitas.length >= 2
+      && entitas.some((e) => !kelSebelum.some((k) => k.jenis === e.jenis));
     for (const e of entitas) {
-      const n = batasi(e.jumlah);
+      let n = batasi(e.jumlah);
+      if (pernyataanKeadaan) {
+        const sudah = kelSebelum.find((k) => k.jenis === e.jenis)?.n ?? 0;
+        n = Math.max(0, n - sudah);
+      }
       let masuk = 0;
       for (let i = 0; i < n && objek.length < BATAS_OBJEK; i++, masuk++) {
         const o = { id: idBaru(), jenis: e.jenis, aksi: e.aksi || 'diam', posisi: e.posisi || '', status: 'datang' };

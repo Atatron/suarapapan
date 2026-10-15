@@ -110,7 +110,7 @@ export default function Guru() {
       const konteksIni = konteks(dasar);
       const dariAwal = awal && awal.konteks === konteksIni ? await awal.janji : null;
       const { hasil, ms, sumber, yakin } = dariAwal ?? await uraikan(kalimat, konteksIni);
-      const r = terapkan(dasar, hasil, { gabung: gabungRef.current, hitungSemua: hitungSemuaRef.current });
+      const r = terapkan(dasar, hasil, { gabung: gabungRef.current || undefined, hitungSemua: hitungSemuaRef.current });
       kirimCaption(kalimat, false, kataSorot(hasil));
       setLog((l) => [{
         id: `${Date.now()}-${Math.random()}`, kalimat, ms, sumber, yakin,

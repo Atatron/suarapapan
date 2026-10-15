@@ -83,7 +83,7 @@ export default function Adegan({ adegan, interaktif = false, kecil = false }) {
         )))}
       </div>
       {latar ? null : <div className="adegan-tanah" aria-hidden="true" />}
-      {adegan.latar ? <div className="adegan-latar">di {adegan.latar}</div> : null}
+      {adegan.latar && !latar ? <div className="adegan-latar">di {adegan.latar}</div> : null}
     </div>
   );
 }

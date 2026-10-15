@@ -616,13 +616,16 @@ test('gabung: kelinci dimasukkan ke gambar berisi harimau, harimau tidak hilang'
   assert.match(hanyaDisebut.penjelasan.join(' '), /3 kelinci dimasukkan ke papan/);
 });
 
-test('gabung: pilihan guru di panel (opsi) sama dengan gabung dari kalimat; tanpa itu adegan diganti', () => {
+test('gabung: jenis baru otomatis bergabung ke papan berisi; opsi.gabung=false menggantinya', () => {
   const a = terapkan(ADEGAN_KOSONG, harimau).adegan;
   const lewatOpsi = terapkan(a, tigaKelinciBaru, { gabung: true }).adegan;
   assert.equal(yangAda(lewatOpsi, 'harimau').length, 1);
-  const tanpa = terapkan(a, tigaKelinciBaru).adegan;
-  assert.equal(yangAda(tanpa, 'harimau').length, 0, 'perilaku lama: benda baru memulai adegan baru');
-  assert.equal(yangAda(tanpa, 'kelinci').length, 3);
+  const otomatis = terapkan(a, tigaKelinciBaru).adegan;
+  assert.equal(yangAda(otomatis, 'harimau').length, 1, '"ada 2 gajah" lalu "ada 2 kupu-kupu": gajah tetap');
+  assert.equal(yangAda(otomatis, 'kelinci').length, 3);
+  const ganti = terapkan(a, tigaKelinciBaru, { gabung: false }).adegan;
+  assert.equal(yangAda(ganti, 'harimau').length, 0);
+  assert.equal(yangAda(ganti, 'kelinci').length, 3);
 });
 
 test('tambah: benda yang belum ada masuk tanpa soal "0 + n"', () => {
@@ -869,4 +872,29 @@ test('latar: aksi memindahkan tempat jika permukaannya tidak cocok', () => {
   assert.equal(pilihLatar(beraksi('harimau', 'lari')).id, 'jungle', 'lari tetap di darat');
   assert.equal(pilihLatar(beraksi('harimau', 'berenang', 'hutan')).id, 'jungle', 'tempat dari guru menang');
   assert.equal(pilihLatar(beraksi('burung', 'terbang')).permukaan, 'air');
+});
+
+test('"ada 3 anak dan 3 kelinci" saat 3 kelinci sudah ada: kelinci tidak digandakan', () => {
+  const a = terapkan(ADEGAN_KOSONG, { entitas: [{ jenis: 'kelinci', jumlah: 3 }], peristiwa: [] }).adegan;
+  const r = terapkan(a, {
+    entitas: [{ jenis: 'anak', jumlah: 3 }, { jenis: 'kelinci', jumlah: 3 }], peristiwa: [],
+  }, { gabung: true });
+  assert.equal(yangAda(r.adegan, 'kelinci').length, 3);
+  assert.equal(yangAda(r.adegan, 'anak').length, 3);
+});
+
+test('"ada juga dua kelinci" tetap menjumlahkan', () => {
+  const a = terapkan(ADEGAN_KOSONG, { entitas: [{ jenis: 'kelinci', jumlah: 3 }], peristiwa: [] }).adegan;
+  const r = terapkan(a, { entitas: [{ jenis: 'kelinci', jumlah: 2 }], peristiwa: [], gabung: true });
+  assert.equal(yangAda(r.adegan, 'kelinci').length, 5);
+});
+
+test('"sekarang ditambah dengan 3 kucing": kelinci tetap ada, kucing bergabung', () => {
+  const a = terapkan(ADEGAN_KOSONG, { entitas: [{ jenis: 'kelinci', jumlah: 2, posisi: 'di taman' }], peristiwa: [] }).adegan;
+  const h = rapikan({ entitas: [{ jenis: 'kucing', jumlah: 3 }], peristiwa: [], konsep: 'penjumlahan' },
+    'sekarang ditambah dengan 3 kucing', 'kelinci: 2');
+  assert.equal(h.gabung, true);
+  const r = terapkan(a, h);
+  assert.equal(yangAda(r.adegan, 'kelinci').length, 2);
+  assert.equal(yangAda(r.adegan, 'kucing').length, 3);
 });

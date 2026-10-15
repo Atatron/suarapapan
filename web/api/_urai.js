@@ -141,7 +141,7 @@ export const CONTOH = [
 const TEMPAT_BUKAN_ACUAN = new Set(['laut', 'sungai', 'kolam', 'danau', 'hutan', 'kelas', 'rumput', 'kebun', 'sawah', 'pantai',
   'gunung', 'langit', 'taman', 'kota', 'pasar', 'dapur', 'kamar', 'sekolah', 'peternakan', 'desa', 'gurun', 'salju', 'udara', 'air']);
 // Kata yang berarti "masukkan ke adegan yang ada", bukan "mulai adegan baru".
-const KATA_GABUNG = /\b(datang|muncul|juga|bersama|ikut|menyusul|bergabung|masuk|tambahkan|menambahkan|masukkan|memasukkan|ditambahkan)\b/i;
+const KATA_GABUNG = /\b(datang|muncul|juga|bersama|ikut|menyusul|bergabung|masuk|tambahkan|menambahkan|masukkan|memasukkan|ditambahkan|ditambah|menambah|bertambah|tambah|plus)\b/i;
 const KATA_TAMBAH_EKSPLISIT = /\b(lagi|tambahan|lainnya|lain)\b/i;
 const KATA_DUA_PERISTIWA = /\b(lagi|lalu|kemudian|setelah itu|serta)\b/i;
 const KATA_ULANG_TETAP = new Set(['kupu-kupu', 'kura-kura', 'laba-laba', 'biri-biri', 'undur-undur', 'ubur-ubur', 'lumba-lumba']);
