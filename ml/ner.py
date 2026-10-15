@@ -64,7 +64,8 @@ def susun_json(kata, label, prob, konteks: str) -> dict:
         return kosong()
 
     # "Ayo hitung semua apel yang ada di layar": meminta menghitung, bukan menambah benda.
-    if any(k in KATA_HITUNG for k in kata) and not peristiwa:
+    # Kalimat yang menyebut jumlah ("coba hitung, ada 27 semut") tetap adegan baru.
+    if any(k in KATA_HITUNG for k in kata) and not peristiwa and not any(x[0] == "JUMLAH" for x in r):
         return kosong()
 
     papan_kosong = konteks.strip() in ("", "kosong")
