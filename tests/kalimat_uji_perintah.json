@@ -1,0 +1,473 @@
+[
+ {
+  "konteks": "kosong",
+  "kalimat": "Tampilkan tiga apel di papan.",
+  "entitas": [
+   [
+    "apel",
+    3
+   ]
+  ],
+  "peristiwa": []
+ },
+ {
+  "konteks": "kosong",
+  "kalimat": "Coba perlihatkan lima bola berwarna merah.",
+  "entitas": [
+   [
+    "bola",
+    5
+   ]
+  ],
+  "peristiwa": []
+ },
+ {
+  "konteks": "kosong",
+  "kalimat": "Ibu mau kalian melihat dua buah jeruk.",
+  "entitas": [
+   [
+    "jeruk",
+    2
+   ]
+  ],
+  "peristiwa": []
+ },
+ {
+  "konteks": "kosong",
+  "kalimat": "Sekarang munculkan empat buku di layar.",
+  "entitas": [
+   [
+    "buku",
+    4
+   ]
+  ],
+  "peristiwa": []
+ },
+ {
+  "konteks": "kosong",
+  "kalimat": "Tolong tampilkan satu pensil.",
+  "entitas": [
+   [
+    "pensil",
+    1
+   ]
+  ],
+  "peristiwa": []
+ },
+ {
+  "konteks": "kosong",
+  "kalimat": "Ayo kita lihat enam apel yang tersusun rapi.",
+  "entitas": [
+   [
+    "apel",
+    6
+   ]
+  ],
+  "peristiwa": []
+ },
+ {
+  "konteks": "kosong",
+  "kalimat": "Buatkan gambar delapan bola.",
+  "entitas": [
+   [
+    "bola",
+    8
+   ]
+  ],
+  "peristiwa": []
+ },
+ {
+  "konteks": "kosong",
+  "kalimat": "Tunjukkan tujuh jeruk kepada anak-anak.",
+  "entitas": [
+   [
+    "jeruk",
+    7
+   ]
+  ],
+  "peristiwa": []
+ },
+ {
+  "konteks": "kosong",
+  "kalimat": "Coba munculkan sembilan pensil pada papan belajar.",
+  "entitas": [
+   [
+    "pensil",
+    9
+   ]
+  ],
+  "peristiwa": []
+ },
+ {
+  "konteks": "kosong",
+  "kalimat": "Sekarang tampilkan sepuluh buku dalam satu kelompok.",
+  "entitas": [
+   [
+    "buku",
+    10
+   ]
+  ],
+  "peristiwa": []
+ },
+ {
+  "konteks": "kosong",
+  "kalimat": "Tampilkan tiga apel dan dua jeruk.",
+  "entitas": [
+   [
+    "apel",
+    3
+   ],
+   [
+    "jeruk",
+    2
+   ]
+  ],
+  "peristiwa": []
+ },
+ {
+  "konteks": "kosong",
+  "kalimat": "Perlihatkan empat bola dan satu buku.",
+  "entitas": [
+   [
+    "bola",
+    4
+   ],
+   [
+    "buku",
+    1
+   ]
+  ],
+  "peristiwa": []
+ },
+ {
+  "konteks": "kosong",
+  "kalimat": "Coba munculkan dua pensil dan lima buku.",
+  "entitas": [
+   [
+    "pensil",
+    2
+   ],
+   [
+    "buku",
+    5
+   ]
+  ],
+  "peristiwa": []
+ },
+ {
+  "konteks": "kosong",
+  "kalimat": "Tolong gambarkan dua apel serta dua bola.",
+  "entitas": [
+   [
+    "apel",
+    2
+   ],
+   [
+    "bola",
+    2
+   ]
+  ],
+  "peristiwa": []
+ },
+ {
+  "konteks": "kosong",
+  "kalimat": "Sekarang letakkan lima pensil dan tiga buku di papan.",
+  "entitas": [
+   [
+    "pensil",
+    5
+   ],
+   [
+    "buku",
+    3
+   ]
+  ],
+  "peristiwa": []
+ },
+ {
+  "konteks": "apel 3",
+  "kalimat": "Tambahkan dua apel lagi ke papan.",
+  "entitas": [],
+  "peristiwa": [
+   [
+    "tambah",
+    "apel",
+    2
+   ]
+  ]
+ },
+ {
+  "konteks": "apel 2",
+  "kalimat": "Sekarang kita masukkan satu jeruk.",
+  "entitas": [],
+  "peristiwa": [
+   [
+    "tambah",
+    "jeruk",
+    1
+   ]
+  ]
+ },
+ {
+  "konteks": "bola 2",
+  "kalimat": "Tolong tambahkan tiga bola ke kelompok tadi.",
+  "entitas": [],
+  "peristiwa": [
+   [
+    "tambah",
+    "bola",
+    3
+   ]
+  ]
+ },
+ {
+  "konteks": "pensil 3",
+  "kalimat": "Masukkan empat pensil lagi.",
+  "entitas": [],
+  "peristiwa": [
+   [
+    "tambah",
+    "pensil",
+    4
+   ]
+  ]
+ },
+ {
+  "konteks": "buku 2",
+  "kalimat": "Ayo kita tambah dua buku.",
+  "entitas": [],
+  "peristiwa": [
+   [
+    "tambah",
+    "buku",
+    2
+   ]
+  ]
+ },
+ {
+  "konteks": "bola 1",
+  "kalimat": "Tambahkan lima bola supaya jumlahnya bertambah.",
+  "entitas": [],
+  "peristiwa": [
+   [
+    "tambah",
+    "bola",
+    5
+   ]
+  ]
+ },
+ {
+  "konteks": "jeruk 2",
+  "kalimat": "Ibu mau menambahkan dua jeruk ke kelompok yang sudah ada.",
+  "entitas": [],
+  "peristiwa": [
+   [
+    "tambah",
+    "jeruk",
+    2
+   ]
+  ]
+ },
+ {
+  "konteks": "buku 4",
+  "kalimat": "Tambah satu buku lagi, ya.",
+  "entitas": [],
+  "peristiwa": [
+   [
+    "tambah",
+    "buku",
+    1
+   ]
+  ]
+ },
+ {
+  "konteks": "apel 3",
+  "kalimat": "Hapus satu apel dari papan.",
+  "entitas": [],
+  "peristiwa": [
+   [
+    "hapus",
+    "apel",
+    1
+   ]
+  ]
+ },
+ {
+  "konteks": "bola 5",
+  "kalimat": "Sekarang ambil dua bola dari kelompok tadi.",
+  "entitas": [],
+  "peristiwa": [
+   [
+    "hapus",
+    "bola",
+    2
+   ]
+  ]
+ },
+ {
+  "konteks": "jeruk 6",
+  "kalimat": "Tolong kurangi tiga jeruk.",
+  "entitas": [],
+  "peristiwa": [
+   [
+    "hapus",
+    "jeruk",
+    3
+   ]
+  ]
+ },
+ {
+  "konteks": "pensil 2",
+  "kalimat": "Hilangkan satu pensil dari layar.",
+  "entitas": [],
+  "peristiwa": [
+   [
+    "hapus",
+    "pensil",
+    1
+   ]
+  ]
+ },
+ {
+  "konteks": "buku 4",
+  "kalimat": "Coba hapus dua buku yang sudah ditampilkan.",
+  "entitas": [],
+  "peristiwa": [
+   [
+    "hapus",
+    "buku",
+    2
+   ]
+  ]
+ },
+ {
+  "konteks": "apel 7",
+  "kalimat": "Kita kurangi empat apel dari kelompok ini.",
+  "entitas": [],
+  "peristiwa": [
+   [
+    "hapus",
+    "apel",
+    4
+   ]
+  ]
+ },
+ {
+  "konteks": "jeruk 5",
+  "kalimat": "Sekarang buang dua jeruk dari gambar.",
+  "entitas": [],
+  "peristiwa": [
+   [
+    "hapus",
+    "jeruk",
+    2
+   ]
+  ]
+ },
+ {
+  "konteks": "apel 3",
+  "kalimat": "Kosongkan papan sekarang.",
+  "entitas": [],
+  "peristiwa": []
+ },
+ {
+  "konteks": "apel 3",
+  "kalimat": "Tolong kembalikan tampilan sebelumnya.",
+  "entitas": [],
+  "peristiwa": []
+ },
+ {
+  "konteks": "bola 2",
+  "kalimat": "Batalkan perubahan yang baru saja dibuat.",
+  "entitas": [],
+  "peristiwa": []
+ },
+ {
+  "konteks": "apel 3",
+  "kalimat": "Perbesar ukuran objek supaya terlihat jelas.",
+  "entitas": [],
+  "peristiwa": []
+ },
+ {
+  "konteks": "apel 3",
+  "kalimat": "Sembunyikan tulisan jumlahnya dulu.",
+  "entitas": [],
+  "peristiwa": []
+ },
+ {
+  "konteks": "apel 3",
+  "kalimat": "Tampilkan angka jumlah di bawah setiap kelompok.",
+  "entitas": [],
+  "peristiwa": []
+ },
+ {
+  "konteks": "apel 4",
+  "kalimat": "Ayo hitung semua apel yang ada di layar.",
+  "entitas": [],
+  "peristiwa": []
+ },
+ {
+  "konteks": "bola 3",
+  "kalimat": "Coba hitung jumlah bola satu per satu.",
+  "entitas": [],
+  "peristiwa": []
+ },
+ {
+  "konteks": "buku 5",
+  "kalimat": "Tunjukkan berapa banyak buku yang ada pada gambar.",
+  "entitas": [],
+  "peristiwa": []
+ },
+ {
+  "konteks": "apel 3, jeruk 5",
+  "kalimat": "Bagus, sekarang coba tunjukkan kelompok yang lebih sedikit.",
+  "entitas": [],
+  "peristiwa": []
+ },
+ {
+  "konteks": "buku 3",
+  "kalimat": "Sekarang buka buku matematika kalian halaman dua belas.",
+  "entitas": [],
+  "peristiwa": []
+ },
+ {
+  "konteks": "apel 3",
+  "kalimat": "Bisa tampilkan gambar yang sama seperti pelajaran kemarin?",
+  "entitas": [],
+  "peristiwa": []
+ },
+ {
+  "konteks": "kosong",
+  "kalimat": "Nah, anak-anak, sekarang Ibu mau lihat tiga buah apel muncul di papan, ya.",
+  "entitas": [
+   [
+    "apel",
+    3
+   ]
+  ],
+  "peristiwa": []
+ },
+ {
+  "konteks": "bola 2",
+  "kalimat": "Oke, tadi kita sudah punya dua bola, sekarang coba tambah satu lagi.",
+  "entitas": [],
+  "peristiwa": [
+   [
+    "tambah",
+    "bola",
+    1
+   ]
+  ]
+ },
+ {
+  "konteks": "kosong",
+  "kalimat": "Coba, coba, bukan empat, Ibu maksudnya lima jeruk.",
+  "entitas": [
+   [
+    "jeruk",
+    5
+   ]
+  ],
+  "peristiwa": []
+ }
+]

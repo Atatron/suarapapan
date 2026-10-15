@@ -10,6 +10,7 @@ from pathlib import Path
 import torch
 from transformers import AutoModelForTokenClassification, AutoTokenizer
 
+KATA_HITUNG = {"hitung", "hitunglah", "menghitung", "dihitung", "cacah"}
 KATA_BAGI = {"dibagi", "membagi", "dibelah", "membelah", "dipotong", "memotong", "bagi"}
 
 from bahasa import AKSI_KE_ENUM, kata_ke_angka, normalkan_benda, tipe_peristiwa, tokenisasi
@@ -62,6 +63,10 @@ def susun_json(kata, label, prob, konteks: str) -> dict:
     if awal in PERTANYAAN_AWAL or (kata and kata[-1] == "?" and not peristiwa):
         return kosong()
 
+    # "Ayo hitung semua apel yang ada di layar": meminta menghitung, bukan menambah benda.
+    if any(k in KATA_HITUNG for k in kata) and not peristiwa:
+        return kosong()
+
     papan_kosong = konteks.strip() in ("", "kosong")
     # Benda yang belum ada di papan tidak bisa pergi atau ditambah, jadi kalimat
     # seperti "Siti membawa 8 kue" ke papan kosong adalah adegan baru.
@@ -92,6 +97,12 @@ def susun_json(kata, label, prob, konteks: str) -> dict:
             jml = next((kata_ke_angka(x[1]) for x in r if x[0] == "JUMLAH"), None)
             if len(jenis_konteks) == 1:
                 pasangan = [(jenis_konteks[0], jml)]
+        # "tadi sudah punya dua bola, sekarang coba tambah satu lagi": bilangan setelah kata kerja dan
+        # setelah benda terakhir (tanpa benda sesudahnya) adalah jumlah yang berubah, bukan "dua".
+        if pasangan and peristiwa and jumlah_tunggu is not None and r:
+            posisi_kerja = peristiwa[0][2]
+            if all(x[2] < posisi_kerja for x in r if x[0] == "BENDA"):
+                pasangan = [(pasangan[-1][0], jumlah_tunggu)]
         return {
             "entitas": [], "latar": "", "posisi": "",
             "konsep": "penjumlahan" if tipe == "tambah" else "pengurangan",

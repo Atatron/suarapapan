@@ -10,9 +10,10 @@ from pathlib import Path
 from ner import PengenalNER
 
 AKAR = Path(__file__).parent
-UJI = json.loads((AKAR.parent / "tests" / "kalimat_uji_sulit.json").read_text(encoding="utf-8"))
+BERKAS = sys.argv[2] if len(sys.argv) > 2 else "kalimat_uji_sulit.json"
+UJI = json.loads((AKAR.parent / "tests" / BERKAS).read_text(encoding="utf-8"))
 
-ner = PengenalNER(Path(sys.argv[1])) if len(sys.argv) > 1 else PengenalNER()
+ner = PengenalNER(Path(sys.argv[1])) if len(sys.argv) > 1 and sys.argv[1] != "-" else PengenalNER()
 salah = 0
 for u in UJI:
     h = ner.urai(u["kalimat"], u["konteks"])["hasil"]
