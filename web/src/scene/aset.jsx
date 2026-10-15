@@ -126,20 +126,62 @@ const SINONIM = { kelinci: ['kelinci', 'arnab'], kucing: ['kucing', 'meong'], bu
 const PETA_SINONIM = Object.fromEntries(Object.entries(SINONIM).flatMap(([k, v]) => v.map((s) => [s, k])));
 
 const EMOJI = {
-  anjing: '🐕', ayam: '🐔', bebek: '🦆', sapi: '🐄', kambing: '🐐', gajah: '🐘', monyet: '🐒', katak: '🐸',
-  'kura-kura': '🐢', kupu: '🦋', 'kupu-kupu': '🦋', semut: '🐜', lebah: '🐝', siput: '🐌', ular: '🐍', kuda: '🐎',
-  pisang: '🍌', jeruk: '🍊', mangga: '🥭', anggur: '🍇', semangka: '🍉', stroberi: '🍓', wortel: '🥕', jagung: '🌽',
-  kue: '🍰', roti: '🍞', permen: '🍬', telur: '🥚', pizza: '🍕', es: '🍦', donat: '🍩',
-  pensil: '✏️', buku: '📖', tas: '🎒', kursi: '🪑', jam: '⏰', gunting: '✂️', penggaris: '📏',
-  rumah: '🏠', sepeda: '🚲', perahu: '⛵', kapal: '🚢', pesawat: '✈️', bus: '🚌', kereta: '🚆',
-  matahari: '☀️', bulan: '🌙', awan: '☁️', pohon: '🌳', daun: '🍃', batu: '🪨', payung: '☂️', topi: '🧢', sepatu: '👟',
+  // hewan
+  anjing: '🐕', ayam: '🐔', anak_ayam: '🐤', bebek: '🦆', angsa: '🦢', sapi: '🐄', kerbau: '🐃', kambing: '🐐', domba: '🐑',
+  gajah: '🐘', monyet: '🐒', kera: '🐒', gorila: '🦍', katak: '🐸', kodok: '🐸', 'kura-kura': '🐢', penyu: '🐢',
+  kupu: '🦋', 'kupu-kupu': '🦋', semut: '🐜', lebah: '🐝', siput: '🐌', ular: '🐍', kuda: '🐎', zebra: '🦓', jerapah: '🦒',
+  harimau: '🐅', macan: '🐅', singa: '🦁', beruang: '🐻', panda: '🐼', koala: '🐨', serigala: '🐺', rubah: '🦊',
+  tikus: '🐁', hamster: '🐹', babi: '🐖', unta: '🐫', badak: '🦏', kuda_nil: '🦛', buaya: '🦎', kadal: '🦎', cicak: '🦎',
+  bebek_kecil: '🐥', burung_hantu: '🦉', elang: '🦅', merpati: '🕊️', merak: '🦚', kakaktua: '🦜', beo: '🦜', penguin: '🐧',
+  'lumba-lumba': '🐬', paus: '🐋', hiu: '🦈', gurita: '🐙', kepiting: '🦀', udang: '🦐', 'ubur-ubur': '🪼', kerang: '🐚',
+  nyamuk: '🦟', lalat: '🪰', kecoa: '🪳', 'laba-laba': '🕷️', kumbang: '🪲', kepik: '🐞', ulat: '🐛', cacing: '🪱',
+  dinosaurus: '🦕', naga: '🐉', kelelawar: '🦇', landak: '🦔', tupai: '🐿️', berang: '🦦', rusa: '🦌', kanguru: '🦘',
+  // buah dan sayur
+  pisang: '🍌', jeruk: '🍊', mangga: '🥭', anggur: '🍇', semangka: '🍉', melon: '🍈', stroberi: '🍓', ceri: '🍒',
+  nanas: '🍍', kelapa: '🥥', pir: '🍐', persik: '🍑', lemon: '🍋', alpukat: '🥑', tomat: '🍅', terong: '🍆',
+  wortel: '🥕', jagung: '🌽', cabai: '🌶️', cabe: '🌶️', timun: '🥒', mentimun: '🥒', brokoli: '🥦', kentang: '🥔',
+  bawang: '🧅', jamur: '🍄', kacang: '🥜', sayur: '🥬', selada: '🥬', paprika: '🫑', ubi: '🍠',
+  // makanan dan minuman
+  kue: '🍰', roti: '🍞', permen: '🍬', cokelat: '🍫', coklat: '🍫', telur: '🥚', pizza: '🍕', es: '🍦', donat: '🍩',
+  nasi: '🍚', mi: '🍜', mie: '🍜', bakso: '🍲', sate: '🍢', sup: '🍲', soto: '🍲', burger: '🍔', kentang_goreng: '🍟',
+  sosis: '🌭', keju: '🧀', susu: '🥛', air: '💧', teh: '🍵', kopi: '☕', jus: '🧃', madu: '🍯', biskuit: '🍪',
+  kue_kering: '🍪', lolipop: '🍭', martabak: '🥞', panekuk: '🥞', sandwich: '🥪', nasi_goreng: '🍛', ketupat: '🍙', onigiri: '🍙',
+  // benda sekolah dan rumah
+  pensil: '✏️', pulpen: '🖊️', bolpoin: '🖊️', krayon: '🖍️', buku: '📖', tas: '🎒', kursi: '🪑', jam: '⏰', gunting: '✂️',
+  penggaris: '📏', penghapus: '🧽', kertas: '📄', amplop: '✉️', surat: '✉️', komputer: '💻', laptop: '💻', telepon: '📱',
+  hp: '📱', televisi: '📺', tv: '📺', lampu: '💡', kunci: '🔑', pintu: '🚪', jendela: '🪟', kasur: '🛏️', tempat_tidur: '🛏️',
+  sofa: '🛋️', cermin: '🪞', sikat_gigi: '🪥', sabun: '🧼', ember: '🪣', sapu: '🧹', keranjang: '🧺', piring: '🍽️',
+  sendok: '🥄', garpu: '🍴', gelas: '🥛', cangkir: '☕', botol: '🍼', panci: '🍲', kado: '🎁', hadiah: '🎁',
+  // mainan dan olahraga
+  boneka: '🧸', layang: '🪁', 'layang-layang': '🪁', kelereng: '🔮', yoyo: '🪀', robot: '🤖', gitar: '🎸', drum: '🥁',
+  terompet: '🎺', piano: '🎹', bola_basket: '🏀', bola_voli: '🏐', raket: '🏸', medali: '🏅', piala: '🏆', bendera: '🚩',
+  // kendaraan
+  rumah: '🏠', sekolah: '🏫', masjid: '🕌', gereja: '⛪', toko: '🏪', rumah_sakit: '🏥', jembatan: '🌉',
+  sepeda: '🚲', motor: '🏍️', perahu: '⛵', kapal: '🚢', pesawat: '✈️', helikopter: '🚁', roket: '🚀', bus: '🚌',
+  kereta: '🚆', truk: '🚚', ambulans: '🚑', taksi: '🚕', becak: '🛺', delman: '🐎', traktor: '🚜', 'mobil-mobilan': '🚗',
+  // alam dan cuaca
+  matahari: '☀️', bulan: '🌙', awan: '☁️', hujan: '🌧️', pelangi: '🌈', petir: '⚡', salju: '❄️', angin: '🌬️', api: '🔥',
+  pohon: '🌳', daun: '🍃', batu: '🪨', gunung: '⛰️', bukit: '⛰️', pantai: '🏖️', pulau: '🏝️', kaktus: '🌵', rumput: '🌱',
+  mawar: '🌹', melati: '🌼', 'bunga-bunga': '🌸', bibit: '🌱', kayu: '🪵', planet: '🪐', bumi: '🌍', komet: '☄️',
+  // pakaian
+  payung: '☂️', topi: '🧢', sepatu: '👟', sandal: '🩴', baju: '👕', kaos: '👕', celana: '👖', rok: '👗', gaun: '👗',
+  kaus_kaki: '🧦', kacamata: '👓', sarung_tangan: '🧤', syal: '🧣', mahkota: '👑', cincin: '💍', dasi: '👔',
+  // orang
+  anak: '🧒', adik: '🧒', kakak: '🧑', ibu: '👩', ayah: '👨', bapak: '👨', nenek: '👵', kakek: '👴', bayi: '👶',
+  guru: '🧑‍🏫', dokter: '🧑‍⚕️', polisi: '👮', petani: '🧑‍🌾', koki: '🧑‍🍳', murid: '🧑‍🎓', siswa: '🧑‍🎓', teman: '🧒',
+  // bentuk dan uang
+  segitiga: '🔺', persegi: '🟥', kotak_kecil: '🟦', lingkaran: '🔵', hati: '❤️', koin: '🪙', uang: '💵', dompet: '👛',
 };
+
 
 export function adaGambar(jenis) {
   return Boolean(GAMBAR[PETA_SINONIM[jenis] || jenis]);
 }
 
-export function Benda({ jenis, indeks = 0 }) {
+const cariEmoji = (jenis) => EMOJI[jenis] || EMOJI[jenis.replace(/[\s-]+/g, '_')] || EMOJI[jenis.split(/\s+/)[0]];
+
+/** Gambar buatan sendiri dulu, lalu kamus emoji, lalu emoji pilihan Gemini. */
+export function Benda({ jenis, indeks = 0, emoji }) {
   const kunci = PETA_SINONIM[jenis] || jenis;
   const gambar = GAMBAR[kunci];
   if (gambar) {
@@ -151,7 +193,7 @@ export function Benda({ jenis, indeks = 0 }) {
   }
   return (
     <div className="benda-cadangan" role="img" aria-label={jenis}>
-      <span className="benda-emoji" aria-hidden="true">{EMOJI[kunci] || '●'}</span>
+      <span className="benda-emoji" aria-hidden="true">{cariEmoji(kunci || '') || emoji || '●'}</span>
       <span className="benda-label">{jenis}</span>
     </div>
   );

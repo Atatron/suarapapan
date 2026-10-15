@@ -121,7 +121,7 @@ export function PanggungPosisi({ adegan, interaktif = false }) {
   return (
     <div className="posisi" onPointerMove={gerak} onPointerUp={lepas} onPointerCancel={() => setSeret(null)}>
       <div className="posisi-acuan" ref={kotak}>
-        <div className="posisi-acuan-gambar"><Benda jenis={acuan} /></div>
+        <div className="posisi-acuan-gambar"><Benda jenis={acuan} emoji={adegan.objek.find((o) => o.emojiAcuan)?.emojiAcuan} /></div>
         {Object.entries(zona).map(([relasi, isi]) => (
           <div key={relasi} className={`posisi-zona zona-${relasi}`}>
             {isi.map((o, i) => {
@@ -135,7 +135,7 @@ export function PanggungPosisi({ adegan, interaktif = false }) {
                   role={interaktif ? 'img' : undefined}
                   aria-label={`${o.jenis} ${tulisPosisi(relasi, acuan)}`}
                 >
-                  <span className={`obj-gerak aksi-${o.aksi}`}><Benda jenis={o.jenis} indeks={i} /></span>
+                  <span className={`obj-gerak aksi-${o.aksi}`}><Benda jenis={o.jenis} indeks={i} emoji={o.emoji} /></span>
                 </div>
               );
             })}

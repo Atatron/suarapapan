@@ -62,6 +62,8 @@ export function terapkan(adegan, hasil) {
       const n = batasi(e.jumlah);
       for (let i = 0; i < n && objek.length < BATAS_OBJEK; i++) {
         const o = { id: idBaru(), jenis: e.jenis, aksi: e.aksi || 'diam', posisi: e.posisi || '', status: 'datang' };
+        if (e.emoji) o.emoji = e.emoji;
+        if (e.emoji_acuan) o.emojiAcuan = e.emoji_acuan;
         if (e.bagi >= 2) Object.assign(o, { bagi: Math.min(e.bagi, 12), diambil: 0 });
         objek.push(o);
       }
@@ -127,7 +129,10 @@ export function terapkan(adegan, hasil) {
       const contoh = objek.find((o) => o.jenis === p.target);
       let ditambah = 0;
       for (let i = 0; i < n && objek.length < BATAS_OBJEK; i++, ditambah++) {
-        objek.push({ id: idBaru(), jenis: p.target, aksi: contoh?.aksi || 'diam', posisi: contoh?.posisi || '', status: 'datang' });
+        const o = { id: idBaru(), jenis: p.target, aksi: contoh?.aksi || 'diam', posisi: contoh?.posisi || '', status: 'datang' };
+        if (contoh?.emoji) o.emoji = contoh.emoji;
+        if (contoh?.emojiAcuan) o.emojiAcuan = contoh.emojiAcuan;
+        objek.push(o);
       }
       if (ditambah < n) catatan.push(`Papan dibatasi ${BATAS_OBJEK} benda.`);
       konsep = 'penjumlahan';

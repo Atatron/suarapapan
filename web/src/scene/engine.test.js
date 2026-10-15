@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { ADEGAN_KOSONG, terapkan, yangAda, konteks, deskripsi, uraiPosisi } from './engine.js';
-import { rapikan, urutkanModel, uraiGemini, _setelUlangUntukTes } from '../../api/_urai.js';
+import { rapikan, urutkanModel, uraiGemini, _setelUlangUntukTes, emojiSah } from '../../api/_urai.js';
 
 const tigaKelinci = {
   entitas: [{ jenis: 'kelinci', jumlah: 3, aksi: 'lari', posisi: '' }],
@@ -134,7 +134,7 @@ test('rapikan: penggolong, kata ulang, aksi karangan, latar', () => {
       { jenis: 'kue', jumlah: 1, aksi: 'berenang', posisi: '', bagi: 0 }],
     latar: 'rumput', konsep: 'membilang', peristiwa: [], pertanyaan: '', tanya_benda: '',
   }, 'ada tiga kelinci berlari di rumput dan satu kue');
-  assert.deepEqual(h.entitas[0], { jenis: 'kelinci', jumlah: 3, aksi: 'lari', posisi: '', bagi: 0 });
+  assert.deepEqual(h.entitas[0], { jenis: 'kelinci', jumlah: 3, aksi: 'lari', posisi: '', bagi: 0, emoji: '', emoji_acuan: '' });
   assert.equal(h.entitas[1].aksi, 'diam', 'kue tidak berenang karena kata itu tidak diucapkan');
   assert.equal(rapikan({ entitas: [{ jenis: 'kupu-kupu', jumlah: 2, aksi: 'terbang', posisi: '', bagi: 0 }] }, 'dua kupu-kupu terbang').entitas[0].jenis, 'kupu-kupu');
   assert.equal(rapikan({ entitas: [{ jenis: 'pizza', jumlah: 1, aksi: 'diam', posisi: '', bagi: 4 }], konsep: 'membilang' }, 'pizza dibagi empat').konsep, 'pecahan');
@@ -213,4 +213,15 @@ test('uraiGemini: semua model lambat → galat batas waktu, bukan menggantung', 
   };
   await assert.rejects(uraiGemini('halo', 'kosong', { kunci: 'tes', fetchFn: fetchPalsu, tundaCadangan: 10, batasWaktu: 60 }), /terlalu lama/);
   _setelUlangUntukTes();
+});
+
+test('emoji: hanya emoji asli yang diterima, dan ikut ke benda yang ditambahkan', () => {
+  assert.equal(emojiSah('🐅'), '🐅');
+  assert.equal(emojiSah('🧑‍🏫'), '🧑‍🏫');
+  assert.equal(emojiSah('harimau'), '');
+  assert.equal(emojiSah('🐅 harimau'), '');
+  let a = terapkan(ADEGAN_KOSONG, { entitas: [{ jenis: 'harimau', jumlah: 2, aksi: 'diam', emoji: '🐅' }], peristiwa: [] }).adegan;
+  assert.equal(a.objek[0].emoji, '🐅');
+  a = terapkan(a, { entitas: [], peristiwa: [{ tipe: 'tambah', target: 'harimau', jumlah: 1 }] }).adegan;
+  assert.equal(a.objek[2].emoji, '🐅');
 });

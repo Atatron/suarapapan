@@ -22,9 +22,11 @@ export const SKEMA = {
           aksi: { type: 'STRING', enum: AKSI },
           posisi: { type: 'STRING' },
           bagi: { type: 'INTEGER' },
+          emoji: { type: 'STRING' },
+          emoji_acuan: { type: 'STRING' },
         },
-        required: ['jenis', 'jumlah', 'aksi', 'posisi', 'bagi'],
-        propertyOrdering: ['jenis', 'jumlah', 'aksi', 'posisi', 'bagi'],
+        required: ['jenis', 'jumlah', 'aksi', 'posisi', 'bagi', 'emoji', 'emoji_acuan'],
+        propertyOrdering: ['jenis', 'jumlah', 'aksi', 'posisi', 'bagi', 'emoji', 'emoji_acuan'],
       },
     },
     latar: { type: 'STRING' },
@@ -58,6 +60,8 @@ Ubah SATU kalimat guru menjadi JSON adegan. Aturan:
   "aksi" = diam, lari, lompat, terbang, berenang, atau jatuh. Pakai "diam" jika kata kerjanya tidak disebut.
   "posisi" = letak relatif terhadap benda lain, selalu berbentuk "di <atas|bawah|samping|depan|belakang|dalam> <benda>", misalnya "di bawah meja". Selain itu "".
   "bagi" = jumlah potongan sama besar jika benda dibagi ("pizza dibagi empat" → 4), selain itu 0.
+  "emoji" = SATU emoji yang paling mirip dengan benda itu (harimau → 🐅, nasi → 🍚, guru → 🧑‍🏫). Wajib diisi untuk benda apa pun.
+  "emoji_acuan" = satu emoji untuk benda acuan di "posisi" ("di bawah pohon" → 🌳), atau "" jika posisi kosong.
 - "peristiwa": perubahan pada benda yang SUDAH ADA di adegan saat ini.
   "hapus" untuk pergi, terbang pergi, dimakan, hilang, diambil, pecah, meletus.
   "tambah" untuk datang, diberi lagi, dibeli lagi, bertambah.
@@ -78,17 +82,17 @@ const j = (o) => JSON.stringify({ ...kosong, ...o });
 
 export const CONTOH = [
   ['kosong', 'Nah anak-anak, ada tiga kelinci berlari di rumput.',
-    j({ entitas: [{ jenis: 'kelinci', jumlah: 3, aksi: 'lari', posisi: '', bagi: 0 }], latar: 'rumput', konsep: 'membilang' })],
+    j({ entitas: [{ jenis: 'kelinci', jumlah: 3, aksi: 'lari', posisi: '', bagi: 0, emoji: '🐇', emoji_acuan: '' }], latar: 'rumput', konsep: 'membilang' })],
   ['kelinci: 3', 'Lalu dua kelinci pergi.',
     j({ konsep: 'pengurangan', peristiwa: [{ tipe: 'hapus', target: 'kelinci', jumlah: 2, posisi: '' }] })],
   ['apel: 3', 'Ibu memberi dua buah apel lagi.',
     j({ konsep: 'penjumlahan', peristiwa: [{ tipe: 'tambah', target: 'apel', jumlah: 2, posisi: '' }] })],
   ['kosong', 'Ibu punya satu pizza, kita bagi empat sama besar.',
-    j({ entitas: [{ jenis: 'pizza', jumlah: 1, aksi: 'diam', posisi: '', bagi: 4 }], konsep: 'pecahan' })],
+    j({ entitas: [{ jenis: 'pizza', jumlah: 1, aksi: 'diam', posisi: '', bagi: 4, emoji: '🍕', emoji_acuan: '' }], konsep: 'pecahan' })],
   ['pizza: 1 (dibagi 4)', 'Adik makan satu potong.',
     j({ konsep: 'pecahan', peristiwa: [{ tipe: 'ambil', target: 'pizza', jumlah: 1, posisi: '' }] })],
   ['kosong', 'Ada seekor kucing tidur di bawah meja.',
-    j({ entitas: [{ jenis: 'kucing', jumlah: 1, aksi: 'diam', posisi: 'di bawah meja', bagi: 0 }], konsep: 'posisi' })],
+    j({ entitas: [{ jenis: 'kucing', jumlah: 1, aksi: 'diam', posisi: 'di bawah meja', bagi: 0, emoji: '🐈', emoji_acuan: '' }], konsep: 'posisi' })],
   ['kucing: 1 (di bawah meja)', 'Sekarang kucingnya naik ke atas meja.',
     j({ konsep: 'posisi', peristiwa: [{ tipe: 'pindah', target: 'kucing', jumlah: 1, posisi: 'di atas meja' }] })],
   ['ikan: 7', 'Coba hitung, ada berapa ikan di kolam?',
@@ -114,6 +118,13 @@ export function normalkanJenis(teks) {
   return m && !KATA_ULANG_TETAP.has(t) ? m[1] : t;
 }
 
+// Hanya terima satu emoji pendek, bukan teks bebas dari model.
+export function emojiSah(e) {
+  const t = String(e || '').trim();
+  // \p{N} juga cocok dengan keycap (1️⃣), jadi hanya huruf yang ditolak.
+  return t && t.length <= 16 && /\p{Extended_Pictographic}/u.test(t) && !/\p{L}/u.test(t) ? t : '';
+}
+
 const batasi = (n, min, max) => Math.max(min, Math.min(Math.round(Number(n) || 0), max));
 const tokenisasi = (teks) => teks.toLowerCase().match(/\w+(?:-\w+)*/g) || [];
 
@@ -130,7 +141,10 @@ export function rapikan(h, kalimat) {
     // LLM kadang mengarang aksi ("kue berenang"); aksi dipakai hanya jika kata kerjanya diucapkan.
     const aksi = [...kata].some((k) => AKSI_KE_ENUM[k] === e.aksi) ? e.aksi : 'diam';
     const bagi = batasi(e.bagi, 0, 12);
-    return { jenis, jumlah: batasi(e.jumlah, 1, 20), aksi, posisi, bagi: bagi >= 2 ? bagi : 0 };
+    return {
+      jenis, jumlah: batasi(e.jumlah, 1, 20), aksi, posisi, bagi: bagi >= 2 ? bagi : 0,
+      emoji: emojiSah(e.emoji), emoji_acuan: posisi ? emojiSah(e.emoji_acuan) : '',
+    };
   }).filter((e) => e.jenis);
 
   hasil.peristiwa = (hasil.peristiwa || [])
