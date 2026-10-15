@@ -234,3 +234,17 @@ button { font: inherit; }
   object-fit: contain; object-position: center bottom; opacity: 0.5; z-index: 0; pointer-events: none; user-select: none;
 }
 .beranda-gambar { width: 100%; height: auto; border-radius: 14px; border: 1px solid var(--garis); }
+
+/* ---------- uji suara ---------- */
+.uji-langkah { margin: 0; padding-left: 1.3em; display: grid; gap: 4px; }
+.uji-kondisi select { padding: 8px 10px; border-radius: 8px; border: 2px solid var(--garis); font: inherit; background: #fff; }
+.uji-daftar { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+.uji-daftar li { padding: 12px 14px; border: 1px solid var(--garis); border-radius: 10px; display: grid; gap: 8px; }
+.uji-daftar li.uji-aktif { border-color: var(--bahaya); background: #FFF3EF; }
+.uji-acuan { margin: 0; font-size: 19px; font-family: var(--font-judul); font-weight: 600; }
+.uji-hasil { margin: 0; display: grid; grid-template-columns: max-content 1fr; gap: 2px 12px; font-size: 15px; }
+.uji-hasil dt { color: var(--redup); }
+.uji-hasil dd { margin: 0; }
+.uji-benar { color: var(--hijau); font-weight: 600; margin-left: 6px; }
+.uji-salah { color: var(--bahaya); font-weight: 600; margin-left: 6px; }
+.uji-catatan { grid-column: 1 / -1; color: #7A4A00; }

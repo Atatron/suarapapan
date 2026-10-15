@@ -1,6 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { ADEGAN_KOSONG, terapkan, yangAda, konteks, deskripsi, uraiPosisi } from './engine.js';
+import { hitungWer, normalisasi } from '../lib/wer.js';
 import { pcmKeWav, hitungRms, normalkan, keBase64 } from '../lib/wav.js';
 import { pilihAlternatif } from '../lib/suara.js';
 import { bersihkanTranskrip, pecahKalimat, transkripsiGemini, sistemSuara, kosakata as kosakataServer } from '../../api/_suara.js';
@@ -501,4 +502,19 @@ test('vad: ucapan Indonesia asli (hasil TTS di folder uji, jika ada) terdeteksi'
     const w = wavKePcm(new Uint8Array(readFileSync(`${dir}/${f}`)));
     assert.equal(adaUcapan(w.pcm, { laju: w.laju }).ada, true, f);
   }
+});
+
+// ---------- WER (halaman uji suara) ----------
+
+test('wer: normalisasi angka dan tanda baca', () => {
+  assert.deepEqual(normalisasi('Ada 3 kelinci, berlari!'), ['ada', 'tiga', 'kelinci', 'berlari']);
+  assert.deepEqual(normalisasi('Anak-anak, perhatikan.'), ['anak-anak', 'perhatikan']);
+});
+
+test('wer: tepat, ganti, sisip, hapus', () => {
+  assert.deepEqual(hitungWer('Ada tiga kelinci.', 'ada 3 kelinci'), { salah: 0, total: 3, ganti: 0, sisip: 0, hapus: 0 });
+  assert.deepEqual(hitungWer('ada tiga kelinci', 'ada tiga kelinci kecil'), { salah: 1, total: 3, ganti: 0, sisip: 1, hapus: 0 });
+  assert.deepEqual(hitungWer('ada tiga kelinci', 'ada kelinci'), { salah: 1, total: 3, ganti: 0, sisip: 0, hapus: 1 });
+  assert.deepEqual(hitungWer('ada tiga gurita', 'ada tiga guru ita'), { salah: 2, total: 3, ganti: 1, sisip: 1, hapus: 0 });
+  assert.equal(hitungWer('ada tiga kelinci', '').salah, 3);
 });

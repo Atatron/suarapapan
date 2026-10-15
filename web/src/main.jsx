@@ -2,6 +2,7 @@ import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import Guru from './guru/Guru.jsx';
 import Papan from './papan/Papan.jsx';
+import Uji from './uji/Uji.jsx';
 import './styles.css';
 
 function Beranda() {
@@ -19,7 +20,7 @@ function Beranda() {
 }
 
 const jalur = window.location.pathname.replace(/\/+$/, '');
-const Halaman = jalur === '/guru' ? Guru : jalur === '/papan' ? Papan : Beranda;
+const Halaman = jalur === '/guru' ? Guru : jalur === '/papan' ? Papan : jalur === '/uji' ? Uji : Beranda;
 document.body.dataset.halaman = Halaman === Papan ? 'papan' : 'guru';
 
 createRoot(document.getElementById('root')).render(
