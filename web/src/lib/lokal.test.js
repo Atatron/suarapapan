@@ -149,7 +149,8 @@ test('"laki-laki" bukan kata ulang: tetap menjadi gambar anak laki-laki, bukan e
 test('jumlah di atas batas papan: guru diberi tahu, bukan dipotong diam-diam', () => {
   const r = ucap(ADEGAN_KOSONG, 'Ada 50 kelinci.');
   assert.equal(hitung(r.adegan, 'kelinci'), 20);
-  assert.ok(r.catatan.some((c) => /20 gambar/.test(c)), r.catatan.join('|'));
+  assert.equal(r.hasil.needsConfirmation, true);
+  assert.equal(r.hasil.notice.code, 'LIMITED_QUANTITY');
 });
 
 test('menghapus benda yang tidak ada di papan tidak menciptakan benda; "semua X pergi" menghapus semuanya', () => {
