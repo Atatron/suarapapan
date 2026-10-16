@@ -46,7 +46,8 @@ pilihan jawaban. Siswa maju dan mengetuk setiap kelinci: angka 1, 2, 3 muncul.*
 3. **Tahan tombol Spasi** (atau tombol besar "Tahan untuk bicara") dan ucapkan kalimat, lalu lepaskan.
    Izinkan mikrofon saat Chrome bertanya. *Tanpa mikrofon:* ketik kalimat di kolom "Atau ketik kalimat".
 4. Periksa **Pratinjau**, lalu klik **Tampilkan di papan** (atau centang "Tampilkan otomatis").
-   Tunggu ±3–7 detik setelah menekan Kirim atau melepas tombol; layanan gratis kadang lebih lambat.
+   Kalimat sederhana langsung tampil; kalimat rumit menunggu ±3–7 detik (Gemini, layanan gratis kadang lebih lambat).
+   Bingung harus mengucapkan apa? Klik salah satu **Coba contoh** di bawah kolom ketik.
 
 Contoh yang bisa dicoba **berurutan** (tekan **Bersihkan** di tempat bertanda ▸):
 
@@ -155,6 +156,10 @@ flowchart LR
 - **Suara.** Selama tombol ditahan, Chrome menampilkan caption langsung dan aplikasi merekam. Saat dilepas,
   rekaman dikirim ke server kami, yang meminta Gemini menuliskan ucapan **dengan daftar kosakata papan**
   (nama benda, tempat, bilangan) dan sekalian menguraikannya. Jika Gemini gagal, hasil Chrome dipakai.
+- **Urutan pemahaman kalimat.** (1) Pola sederhana ("ada tiga kelinci", "dua kelinci pergi", "berapa semuanya?")
+  dipahami langsung di browser oleh aturan bahasa (`web/src/lib/lokal.js`), dalam milidetik dan tanpa kuota.
+  (2) Kalimat lain dikirim ke Gemini. (3) Jika Gemini tidak tersedia (kuota habis, sibuk, tanpa internet), tebakan
+  terbaik aturan lokal dipakai, supaya pelajaran tidak berhenti. Ketiganya menghasilkan JSON yang sama.
 - **Pemahaman kalimat.** Kalimat menjadi JSON: *entitas* (jumlah, benda, aksi, posisi), *peristiwa*
   (tambah/hapus/bagi/ambil/pindah), tempat, dan jenis pertanyaan.
 - **Mesin adegan** (`web/src/scene/engine.js`) fungsi murni: adegan lama + JSON → adegan baru + soal.
@@ -171,11 +176,12 @@ perbaiki) ada di [`docs/PROSES_PENGEMBANGAN.md`](docs/PROSES_PENGEMBANGAN.md).
 
 | Pengukuran | Hasil | Catatan jujur |
 |---|---|---|
-| Uji otomatis | **81 uji** (80 lulus, 1 dilewati) | `cd web && npm test` |
+| Uji otomatis | **113 uji** (112 lulus, 1 dilewati) | `cd web && npm test` |
 | IndoBERT vs LLM, 40 kalimat tulisan tim (**sebelum** perbaikan, 13 Okt) | IndoBERT **38/40**, 7,9 ms · LLM Qwen2.5-7B 38/40, 760 ms · gabungan 39/40 | Angka paling jujur; [berkasnya](ml/hasil/perbandingan_sebelum_perbaikan.md) disimpan sebelum perbaikan |
 | Set yang sama **sesudah** perbaikan | 40/40 | **Bukan bukti independen**: set itu dipakai untuk memperbaiki |
 | 51 kalimat bebas + 45 kalimat perintah | 51/51 · 45/45 | Disusun saat memperkuat model; berfungsi sebagai uji regresi |
 | F1 validasi | 1,0 | Dari data buatan templat; tidak mewakili kalimat guru nyata |
+| Penguraian kalimat **tanpa Gemini** (aturan lokal di browser) | 41 kalimat baru, dijalankan **sekali sebelum aturan disetel**: 39 benar, 1 ternyata salah label kami (jadi 40), 1 ditandai ragu dan diserahkan ke Gemini | Ditulis oleh tim pengembang, bukan guru, dan benda hanya yang ada di pustaka. 136 kalimat lama dipakai **menyetel** aturan (100%, tidak independen) |
 | Pengenalan suara (Gemini) | **0 salah dari 124 kata**, 2 putaran, separuh dengan derau kelas | Suara **sintetis**; suara anak, aksen daerah, dan gema belum diuji |
 | Rekaman hening atau derau | 0 dari 12 klip derau (desis, gumam, dengung) menghasilkan kalimat; hening digital juga ditolak | Satu klip kena batas waktu layanan; derau buatan, bukan kelas sungguhan |
 | Kecepatan versi online | ±3–7 detik setelah tombol dilepas | Gemini tingkat gratis; kadang lebih lambat |
@@ -217,7 +223,10 @@ Kami lebih suka juri mendengarnya dari kami:
 3. **Belum ada uji coba dengan guru dan siswa nyata.** Pilot di SLB B dan SD inklusi ada di rencana.
 4. **Pengenalan suara belum bisa offline.** Pemahaman kalimat (IndoBERT) bisa lokal, tetapi suara ke teks
    masih butuh internet. Mode offline dengan `faster-whisper` baru rencana.
-5. **Versi online bergantung pada Gemini tingkat gratis**: kadang lambat (sampai belasan detik) atau kena batas kuota.
+5. **Versi online memakai Gemini tingkat gratis**, yang hanya mengizinkan sekitar **20 permintaan per hari per model**
+   dan kadang lambat (sampai belasan detik). Kami menutupnya dengan aturan lokal di browser (pola sederhana tidak
+   memakai kuota sama sekali) dan cache jawaban yang sama; kalimat yang rumit tetap butuh Gemini. Sekolah sungguhan
+   sebaiknya memakai tingkat berbayar.
 6. **Cakupan:** matematika kelas 1–3. Kata di luar pustaka tampil sebagai emoji.
 7. **Gambar pose gerak** (berlari, terbang) belum dibuat; alat pemotongnya sudah (`tools/bangun_aksi.py`).
    Saat ini gerakan memakai animasi sederhana.
@@ -232,7 +241,7 @@ Kami lebih suka juri mendengarnya dari kami:
 | `web/` | Aplikasi: React + Vite. `src/guru`, `src/papan`, `src/scene` (mesin adegan, latar, pustaka), `src/lib` (suara); `api/` fungsi serverless Vercel (`parse`, `transkripsi`, `kesehatan`); `public/aset` (gambar) |
 | `ml/` | IndoBERT: `buat_dataset.py`, `latih_ner.py`, `ner.py`, `evaluasi.py`; server lokal `serve.py`; `hasil/` |
 | `tools/` | Pembuat aset: `bangun_aset.py` (sprite sheet → 192 karakter), `bangun_latar.py` (32 latar + pasangan karakter), `bangun_aksi.py` |
-| `tests/` | Kalimat uji (40 + 51 + 45) dan kalimat guru asli |
+| `tests/` | Kalimat uji (40 + 51 + 45 + 41 untuk aturan lokal) dan kalimat guru asli |
 | `docs/` | Proses, tangkapan layar, materi pengajuan |
 | `video/` | Sumber video demo (dibuat dengan kode) |
 
@@ -245,7 +254,7 @@ npm install
 SUARAPAPAN_API=https://suarapapan.vercel.app npm run dev     # PowerShell: $env:SUARAPAPAN_API="https://suarapapan.vercel.app"; npm run dev
 # atau pakai kunci Gemini sendiri:
 echo GEMINI_API_KEY=isi_kunci_anda > .env.local && npm run dev
-npm test                                                     # 81 uji otomatis
+npm test                                                     # 113 uji otomatis
 ```
 
 Buka `http://127.0.0.1:5173/guru`. Deploy: `cd web && vercel deploy --prod` dengan variabel `GEMINI_API_KEY`

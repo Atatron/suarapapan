@@ -70,10 +70,10 @@ Latensi diukur pada laptop dengan GPU RTX 5060.
 
 ### Pengujian otomatis
 
-`cd web && npm test` menjalankan **81 uji** (80 lulus, 1 dilewati karena butuh berkas audio).
+`cd web && npm test` menjalankan **113 uji** (112 lulus, 1 dilewati karena butuh berkas audio).
 Yang diuji: mesin adegan, aritmetika beberapa jenis karakter, riwayat Batalkan/Ulangi,
 pembersih hasil parser, pencarian gambar dan latar, pengkodean audio, pendeteksi ucapan,
-dan penghitung kesalahan kata.
+penghitung kesalahan kata, penguraian aturan lokal, dan batas laju API.
 
 ## 4. Kesalahan yang kami temukan dan perbaiki
 
@@ -90,6 +90,8 @@ Dikumpulkan di sini karena **cara menemukannya** sama pentingnya dengan hasil ak
 | Bercak putih di sela kaki ayam, bebek, angsa | Latar putih yang terkurung tidak terjangkau penghapus latar | Daftar 22 benda yang diperiksa satu per satu; benda yang memang berisi warna putih (nasi, susu, awan) tidak disentuh |
 | Galat merah `phrases-not-supported` di Chrome | Fitur petunjuk kata Chrome hanya jalan di perangkat | Fitur itu dihapus; kosakata diberikan lewat jalur Gemini |
 | Model terbaru menolak parameter berpikir (`invalid argument`) | Nama model dan opsi berubah-ubah | Mencoba bentuk permintaan dari yang ketat ke yang longgar, lalu mengingat yang berhasil |
+| Situs publik berhenti memahami kalimat setelah beberapa percobaan (503/429) | Log produksi menunjukkan kuota gratis Gemini hanya **20 permintaan per hari per model**; pemakaian juri akan menghabiskannya | Aturan bahasa di browser (`web/src/lib/lokal.js`) memahami pola sederhana tanpa server, dan menjadi cadangan jika Gemini gagal. Pengukuran: 41 kalimat baru dijalankan **sekali sebelum disetel** (39 benar, 1 salah label kami, 1 ragu); 136 kalimat lama dipakai menyetel sehingga 100% di sana tidak independen. Ditambah batas laju per IP dan cache jawaban yang sama di server |
+| Halaman panel guru kosong saat dikembangkan setelah klien mengimpor `api/_urai.js` | Proxy dev mengarahkan semua `/api/*` ke server, termasuk berkas JavaScript | `rapikan` dipindah ke `src/lib/rapikan.js` yang dipakai bersama klien dan server |
 | Aset baru dikembalikan sebagai halaman HTML sesaat setelah rilis | Cache tepi belum beralih | Dicatat sebagai perilaku operasional; cek ulang beberapa detik kemudian |
 
 ## 5. Hal yang belum selesai

@@ -77,6 +77,10 @@ button { font: inherit; }
 .form-ketik input:focus { border-color: var(--hijau); outline: none; }
 .galat { margin: 0; padding: 10px 12px; border-radius: 8px; background: #F8E3DE; color: #7A2A1C; font-size: 15px; }
 .catatan { margin: 0; font-size: 14px; color: #7A4A00; }
+.contoh { display: grid; gap: 6px; }
+.contoh-judul { font-size: 13px; color: var(--redup); }
+.contoh-daftar { display: flex; flex-wrap: wrap; gap: 6px; }
+.tombol-contoh { white-space: normal; text-align: left; line-height: 1.3; }
 .sakelar { display: grid; gap: 6px; font-size: 15px; }
 .ringkas { margin: 0; font-size: 15px; }
 .sematan { display: grid; gap: 6px; }

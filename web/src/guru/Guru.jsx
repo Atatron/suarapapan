@@ -18,6 +18,17 @@ const TUNGGU_HASIL_CHROME_MS = 500; // hasil akhir Web Speech tiba sedikit setel
 const JEDA_MIN_DETIK = 0.35;        // lebih pendek dari ini = tombol tersentuh, bukan ucapan
 const RMS_MIN = 0.0008;             // lebih pelan dari ini = hening (mikrofon laptop bisa sangat pelan; ucapan dinilai setelah diperkuat)
 const tunggu = (ms) => new Promise((r) => setTimeout(r, ms));
+// Contoh yang bisa diklik: membantu siapa pun yang belum tahu harus mengucapkan apa, dan jalan tanpa mikrofon.
+const CONTOH = [
+  'Ada tiga kelinci berlari di rumput.',
+  'Lalu dua kelinci pergi.',
+  'Di hutan ada tiga kelinci dan dua harimau.',
+  'Berapa jumlah hewan semuanya?',
+  'Ibu punya satu pizza, kita bagi empat sama besar.',
+  'Adik makan satu potong.',
+  'Kucing tidur di bawah meja.',
+  'Ada tujuh ikan berenang di kolam.',
+];
 
 const bacaPilihan = () => {
   try { return localStorage.getItem('suarapapan-akurat') !== '0'; } catch { return true; }
@@ -447,6 +458,14 @@ export default function Guru() {
               <button type="submit" className="tombol tombol-utama">Kirim</button>
             </div>
           </form>
+          <div className="contoh" role="group" aria-label="Contoh kalimat">
+            <span className="contoh-judul">Coba contoh (berurutan dari atas; Bersihkan di antara pelajaran):</span>
+            <div className="contoh-daftar">
+              {CONTOH.map((k) => (
+                <button key={k} type="button" className="tombol tombol-kecil tombol-contoh" onClick={() => masukkan(k)}>{k}</button>
+              ))}
+            </div>
+          </div>
           {galat ? <p className="galat" role="alert">{galat}</p> : null}
           <div className="sakelar">
             <label><input id="opsi-otomatis" type="checkbox" checked={otomatis} onChange={(e) => setOtomatis(e.target.checked)} /> Tampilkan otomatis tanpa pratinjau</label>
