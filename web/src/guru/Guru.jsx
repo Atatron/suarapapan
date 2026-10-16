@@ -1,7 +1,8 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import Adegan from '../scene/Adegan.jsx';
 import { ADEGAN_KOSONG, terapkan, konteks, deskripsi, pindahkan } from '../scene/engine.js';
-import { kirim, dengar } from '../lib/saluran.js';
+import { buatSesiGuru, sesiDariUrl } from '../lib/saluran.js';
+import { buatAntrean } from '../lib/pekerjaan.js';
 import { suaraDidukung, buatPendengar } from '../lib/suara.js';
 import { uraikan, cekKesehatan, transkripsi } from '../lib/api.js';
 import { rekamDidukung, mulaiRekam, siapkanMik, mikSudahDiizinkan, pesanMik, mulaiUkurLevel } from '../lib/rekam.js';
@@ -14,300 +15,322 @@ import { buangHurufLepas } from '../lib/teks.js';
 const KATA_ANGKA = 'satu dua tiga empat lima enam tujuh delapan sembilan sepuluh sebelas belas puluh seratus'.split(' ');
 const TOMBOL_CLICKER = new Set(['PageDown', 'PageUp']);
 const KOSAKATA = kosakata();
-const TUNGGU_HASIL_CHROME_MS = 500; // hasil akhir Web Speech tiba sedikit setelah tombol dilepas
-const JEDA_MIN_DETIK = 0.35;        // lebih pendek dari ini = tombol tersentuh, bukan ucapan
-const RMS_MIN = 0.0008;             // lebih pelan dari ini = hening (mikrofon laptop bisa sangat pelan; ucapan dinilai setelah diperkuat)
 const tunggu = (ms) => new Promise((r) => setTimeout(r, ms));
-// Contoh yang bisa diklik: membantu siapa pun yang belum tahu harus mengucapkan apa, dan jalan tanpa mikrofon.
 const CONTOH = [
-  'Ada tiga kelinci berlari di rumput.',
-  'Lalu dua kelinci pergi.',
-  'Di hutan ada tiga kelinci dan dua harimau.',
-  'Berapa jumlah hewan semuanya?',
-  'Ibu punya satu pizza, kita bagi empat sama besar.',
-  'Adik makan satu potong.',
-  'Kucing tidur di bawah meja.',
-  'Ada tujuh ikan berenang di kolam.',
+  'Ada tiga kelinci berlari di rumput.', 'Lalu dua kelinci pergi.',
+  'Di hutan ada tiga kelinci dan dua harimau.', 'Berapa jumlah hewan semuanya?',
+  'Ibu punya satu pizza, kita bagi empat sama besar.', 'Adik makan satu potong.',
+  'Kucing tidur di bawah meja.', 'Ada tujuh ikan berenang di kolam.',
 ];
-
-const bacaPilihan = () => {
-  try { return localStorage.getItem('suarapapan-akurat') !== '0'; } catch { return true; }
-};
-
+const bacaPilihan = () => { try { return localStorage.getItem('suarapapan-akurat') !== '0'; } catch { return true; } };
+// StrictMode boleh merender dua kali; hanya satu pengendali dibuat per tab guru.
+let sesiAktif;
+const ambilSesi = () => sesiAktif ||= buatSesiGuru(sesiDariUrl({ buat: true }), {
+  adegan: ADEGAN_KOSONG, sejarah: Sej.awalSejarah(ADEGAN_KOSONG),
+});
 function kataSorot(hasil) {
-  const s = new Set(KATA_ANGKA);
-  for (const e of hasil.entitas || []) s.add(e.jenis);
-  for (const p of hasil.peristiwa || []) s.add(p.target);
-  return [...s];
+  return [...new Set([...KATA_ANGKA, ...(hasil.entitas || []).map((e) => e.jenis), ...(hasil.peristiwa || []).map((e) => e.target)])];
 }
 
 export default function Guru() {
-  // Riwayat papan (Batalkan/Ulangi): ref = sumber kebenaran (dibaca di fungsi async), state = untuk tampilan.
-  const [sejarah, setSejarahState] = useState(() => Sej.awalSejarah(ADEGAN_KOSONG));
+  const [sesi] = useState(ambilSesi);
+  const [sejarah, setSejarahState] = useState(() => sesi.baca().sejarah || Sej.awalSejarah(sesi.baca().adegan));
   const sejarahRef = useRef(sejarah);
   const papan = sejarah.sekarang.adegan;
+  const papanRef = useRef(papan);
+  const captionRef = useRef(sesi.baca().caption);
   const [pratinjau, setPratinjau] = useState(null);
+  const pratinjauRef = useRef(null);
   const [otomatis, setOtomatis] = useState(false);
   const [jeda, setJeda] = useState(false);
   const [mendengar, setMendengar] = useState(false);
   const [sementara, setSementara] = useState('');
   const [log, setLog] = useState([]);
   const [galat, setGalat] = useState('');
+  const [info, setInfo] = useState('');
   const [sibuk, setSibuk] = useState(0);
   const [ketik, setKetik] = useState('');
   const [sematan, setSematan] = useState([]);
   const [kesehatan, setKesehatan] = useState(null);
+  const [availability, setAvailability] = useState(null);
   const [akurat, setAkurat] = useState(bacaPilihan);
   const [memeriksa, setMemeriksa] = useState(false);
   const [gabung, setGabung] = useState(false);
   const [hitungSemua, setHitungSemua] = useState(true);
-  const [tafsir, setTafsir] = useState(null); // tafsir lain untuk kalimat terakhir yang sudah tampil di papan
-
-  // Ref dipakai di dalam fungsi async supaya selalu membaca nilai terbaru.
-  const papanRef = useRef(papan);
-  const pratinjauRef = useRef(pratinjau);
-  const otomatisRef = useRef(otomatis);
-  const jedaRef = useRef(jeda);
-  const mendengarRef = useRef(false);
-  otomatisRef.current = otomatis;
-  jedaRef.current = jeda;
-  mendengarRef.current = mendengar;
-  const antrean = useRef(Promise.resolve());
-  const pendengar = useRef(null);
-  // Mode "akurat": suara direkam dan diperiksa Gemini; Web Speech Chrome hanya
-  // untuk caption langsung dan sebagai cadangan jika Gemini gagal.
-  const akuratRef = useRef(akurat);
-  const suaraSiapRef = useRef(false);
+  const [tafsir, setTafsir] = useState(null);
+  const [berwenang, setBerwenang] = useState(() => sesi.aktif());
+  const [antrean] = useState(() => buatAntrean());
+  const pilihanRef = useRef({});
+  pilihanRef.current = { otomatis, jeda, akurat, gabung, hitungSemua, kesehatan };
+  const captureRef = useRef(null);
   const tahanRef = useRef(false);
-  const rekamRef = useRef(null);
-  const cadanganRef = useRef([]);
-  const modeAkuratRef = useRef(false);
-  const sesiRef = useRef(0);
-  const masukkanRef = useRef(() => {});
-  akuratRef.current = akurat;
-  const gabungRef = useRef(false);
-  gabungRef.current = gabung;
-  const hitungSemuaRef = useRef(true);
-  hitungSemuaRef.current = hitungSemua;
+  const mendengarRef = useRef(false);
+  const prosesRef = useRef(() => {});
+  const mulaiRef = useRef(() => {});
+  const berhentiRef = useRef(() => {});
 
-  const kirimCaption = (teks, sementaraFlag, sorot = []) => {
-    if (!jedaRef.current) kirim({ type: 'caption', teks, sementara: sementaraFlag, sorot });
-  };
+  const kirimCaption = useCallback((teks, sementaraFlag = false, sorot = []) => {
+    if (pilihanRef.current.jeda || !sesi.aktif()) return;
+    captionRef.current = { teks, sementara: sementaraFlag, sorot };
+    sesi.perbarui({ caption: captionRef.current });
+  }, [sesi]);
 
-  const setSejarah = useCallback((baru) => {
+  const setSejarah = useCallback((baru, label = null) => {
+    if (!sesi.aktif()) return false;
+    const caption = label !== null && !pilihanRef.current.jeda
+      ? { teks: label, sementara: false, sorot: [] } : captionRef.current;
+    if (!sesi.perbarui({ sejarah: baru, adegan: baru.sekarang.adegan, caption })) return false;
+    captionRef.current = caption;
     sejarahRef.current = baru;
     papanRef.current = baru.sekarang.adegan;
     setSejarahState(baru);
-  }, []);
+    return true;
+  }, [sesi]);
 
-  // `label` = kalimat (atau tindakan) yang menghasilkan papan ini; tampil di "Sebelum dan sesudah".
+  const hapusPratinjau = () => { pratinjauRef.current = null; setPratinjau(null); setTafsir(null); };
   const tampilkan = useCallback((adegan, label = '') => {
-    setSejarah(Sej.catat(sejarahRef.current, adegan, label));
-    kirim({ type: 'adegan', adegan });
+    if (!setSejarah(Sej.catat(sejarahRef.current, adegan, label), label)) return;
     pratinjauRef.current = null;
     setPratinjau(null);
     setTafsir(null);
   }, [setSejarah]);
 
-  // `awal` = { konteks, janji }: hasil urai yang sudah dimulai lebih dulu dari teks Chrome.
-  // Dipakai hanya jika konteks adegannya masih sama persis dengan sekarang.
-  const proses = useCallback(async (kalimatMentah, awal = null) => {
-    const kalimat = buangHurufLepas(kalimatMentah);
-    if (!kalimat) return;
-    setSibuk((n) => n + 1);
-    setGalat('');
-    kirimCaption(kalimat, false);
-    // Kalimat berikutnya dibangun di atas pratinjau yang belum disetujui,
-    // karena guru biasanya akan menyetujuinya.
-    const dasar = pratinjauRef.current?.adegan ?? papanRef.current;
-    try {
-      const konteksIni = konteks(dasar);
-      const dariAwal = awal && awal.konteks === konteksIni ? await awal.janji : null;
-      const { hasil, ms, sumber, yakin } = dariAwal ?? await uraikan(kalimat, konteksIni);
-      const r = terapkan(dasar, hasil, { gabung: gabungRef.current || undefined, hitungSemua: hitungSemuaRef.current });
-      kirimCaption(kalimat, false, kataSorot(hasil));
-      setLog((l) => [{
-        id: `${Date.now()}-${Math.random()}`, kalimat, ms, sumber, yakin,
-        ringkas: r.berubah
-          ? `${deskripsi(r.adegan)}${r.penjelasan.length ? ` (${r.penjelasan.join(' ')})` : ''}`
-          : 'Hanya caption (tidak ada benda).',
-        catatan: r.catatan,
-      }, ...l].slice(0, 30));
-      if (!r.berubah) return;
-      if (otomatisRef.current) {
-        tampilkan(r.adegan, kalimat);
-        if (r.alternatif) setTafsir({ ...r.alternatif, penjelasan: r.penjelasan });
-      } else {
-        const p = { adegan: r.adegan, kalimat, ms, catatan: r.catatan, penjelasan: r.penjelasan, alternatif: r.alternatif };
-        pratinjauRef.current = p;
-        setPratinjau(p);
-      }
-    } catch (e) {
-      setGalat(e.message);
-    } finally {
-      setSibuk((n) => n - 1);
+  const batalkanProses = useCallback(() => {
+    antrean.batalkan();
+    const c = captureRef.current;
+    captureRef.current = null;
+    if (c) {
+      c.batal = true;
+      c.pendengar?.buang();
+      c.kontrol?.berhenti().catch(() => {});
     }
-  }, [tampilkan]);
+    tahanRef.current = false;
+    mendengarRef.current = false;
+    setMendengar(false);
+    setMemeriksa(false);
+    setSementara('');
+    setSibuk(0);
+  }, [antrean]);
 
-  // Kalimat diproses berurutan: kalimat kedua butuh hasil kalimat pertama.
-  const masukkan = useCallback((kalimat, awal = null) => {
-    if (!kalimat.trim()) return;
-    antrean.current = antrean.current.then(() => proses(kalimat.trim(), awal));
-  }, [proses]);
+  // Setiap perubahan manual membatalkan jawaban lama, termasuk hasil transkripsi.
+  const ubahManual = (fn) => { batalkanProses(); hapusPratinjau(); fn(); };
 
-  // Mikrofon
-  useEffect(() => {
-    if (!suaraDidukung()) return undefined;
-    pendengar.current = buatPendengar({
-      saatSementara: (t) => { setSementara(t); if (t) kirimCaption(t, true); },
-      saatFinal: (t) => {
-        setSementara('');
-        // Mode akurat: hasil Chrome hanya jadi caption dan cadangan.
-        if (modeAkuratRef.current) {
-          cadanganRef.current.push(t);
-          kirimCaption(t, true);
-        } else masukkan(t);
-      },
-      saatStatus: (aktif) => { if (!modeAkuratRef.current) setMendengar(aktif); },
-      saatGalat: (pesan) => {
-        // Galat Chrome tidak fatal selama rekaman jalan: Gemini tetap bisa memeriksa ucapannya.
-        if (!modeAkuratRef.current) { setGalat(pesan); setMendengar(false); }
-      },
-      kosakata: KOSAKATA,
-    });
-    return () => pendengar.current?.berhenti();
-  }, [masukkan]);
-  masukkanRef.current = masukkan;
+  const proses = useCallback(async (kalimatMentah, tiket, hasilAwal = null, wajibPeriksa = false) => {
+    const kalimat = buangHurufLepas(kalimatMentah);
+    if (!kalimat || !tiket.berlaku() || !sesi.aktif()) return;
+    setKetik((lama) => lama || kalimat);
+    setGalat('');
+    setInfo('');
+    const dasar = pratinjauRef.current?.adegan ?? papanRef.current;
+    const pratinjauMeragukan = Boolean(pratinjauRef.current?.needsConfirmation);
+    const k = konteks(dasar);
+    const jawaban = hasilAwal?.konteks === k ? hasilAwal.jawaban : await uraikan(kalimat, k, { signal: tiket.signal });
+    if (!tiket.berlaku() || !sesi.aktif()) return;
+    const { hasil, ms, sumber, yakin, needsConfirmation, notice, availability: tersedia } = jawaban;
+    const perluPeriksa = Boolean(needsConfirmation || hasil.needsConfirmation || yakin === 'rendah'
+      || (typeof yakin === 'number' && yakin < 0.85) || pratinjauMeragukan || wajibPeriksa);
+    if (tersedia) setAvailability(tersedia);
+    const r = terapkan(dasar, hasil, { gabung: pilihanRef.current.gabung || undefined, hitungSemua: pilihanRef.current.hitungSemua });
+    const catatan = [...(notice?.message ? [notice.message] : []), ...r.catatan];
+    setLog((l) => [{ id: `${Date.now()}-${Math.random()}`, kalimat, ms, sumber, yakin,
+      ringkas: r.berubah ? deskripsi(r.adegan) : 'Papan tidak berubah.', catatan }, ...l].slice(0, 30));
+    if (perluPeriksa || notice) setInfo(notice?.message || 'Tafsiran ini perlu diperiksa. Pastikan jenis, jumlah, dan tindakan sudah benar.');
+    if (!perluPeriksa) setKetik((lama) => lama === kalimatMentah ? '' : lama);
+    if (!r.berubah) {
+      if (!perluPeriksa) kirimCaption(kalimat, false, kataSorot(hasil));
+      else kirimCaption(sejarahRef.current.sekarang.label || '', false);
+      if (pratinjauRef.current) setInfo((pesan) => `${pesan || 'Kalimat ini tidak mengubah papan.'} Pratinjau sebelumnya tetap menunggu persetujuan.`);
+      return;
+    }
+    // Tafsiran meragukan selalu diperiksa, meskipun mode otomatis dinyalakan.
+    if (pilihanRef.current.otomatis && !perluPeriksa) {
+      tampilkan(r.adegan, kalimat);
+      if (r.alternatif) setTafsir({ ...r.alternatif, penjelasan: r.penjelasan });
+    } else {
+      kirimCaption(sejarahRef.current.sekarang.label || '', false);
+      const p = { adegan: r.adegan, kalimat, ms, catatan, penjelasan: r.penjelasan,
+        alternatif: r.alternatif, needsConfirmation: perluPeriksa, sumber };
+      pratinjauRef.current = p;
+      setPratinjau(p);
+    }
+  }, [sesi, tampilkan, kirimCaption]);
+  prosesRef.current = proses;
 
-  // Mikrofon dibuka lebih awal jika izinnya sudah ada, supaya kata pertama tidak terpotong.
-  useEffect(() => {
-    if (!rekamDidukung()) return;
-    mikSudahDiizinkan().then((ok) => { if (ok) siapkanMik().catch(() => {}); });
-  }, []);
-
-  const pilihAkurat = (nilai) => {
-    setAkurat(nilai);
-    try { localStorage.setItem('suarapapan-akurat', nilai ? '1' : '0'); } catch { /* tidak apa-apa */ }
-  };
-
-  // Rekaman selesai: transkripsi Gemini → kalimat; jika gagal pakai hasil Chrome.
-  const selesaikan = useCallback(async (kontrol, sesi) => {
-    setMemeriksa(true);
-    let kalimat = [];
-    let pesanGagal = '';
-    let abaikan = false;
-    let awalPertama = null;
-    let alasanHening = '';
-    try {
-      const rek = await kontrol.berhenti();
-      if (rek && (rek.durasi < JEDA_MIN_DETIK || rek.rms < RMS_MIN || !rek.ucapan)) {
-        // Tertekan tak sengaja, hening, atau hanya derau: audio tidak dikirim ke Gemini (ia bisa mengarang kalimat).
-        // Tetapi jika Chrome sendiri mendengar ucapan, hasil Chrome dipakai; dan guru diberi tahu apa yang terukur.
-        abaikan = true;
-        alasanHening = rek.durasi < JEDA_MIN_DETIK
-          ? 'Tombol dilepas terlalu cepat. Tahan sampai selesai bicara.'
-          : `Suara tidak terdeteksi (level ${rek.rms.toFixed(4)}, puncak ${(rek.puncak ?? 0).toFixed(3)}). Dekatkan mikrofon, naikkan volume input di Windows, atau pakai tombol Tes mikrofon.`;
-      } else if (!rek) {
-        alasanHening = 'Rekaman kosong: mikrofon tidak menghasilkan data. Periksa mikrofon yang dipilih (ikon gembok di address bar, lalu Mikrofon).';
-      } else if (rek) {
-        try {
-          const dasar = pratinjauRef.current?.adegan ?? papanRef.current;
-          const konteksIni = konteks(dasar);
-          const r = await transkripsi(rek.audio, konteksIni, { urai: true });
-          kalimat = r.kalimat?.length ? r.kalimat : (r.transkrip ? [r.transkrip] : []);
-          // Kalimat pertama sudah diurai dalam panggilan yang sama.
-          if (r.hasil) awalPertama = { konteks: konteksIni, janji: Promise.resolve({ hasil: r.hasil, ms: r.ms, sumber: r.sumber }) };
-        } catch (e) {
-          pesanGagal = e.message;
+  const jalankan = useCallback((tugas) => {
+    if (!sesi.aktif()) { setGalat('Sesi ini dikendalikan tab guru lain. Muat ulang untuk mengambil alih.'); return; }
+    setSibuk((n) => n + 1);
+    antrean.tambahkan(async (tiket) => {
+      try { await tugas(tiket); }
+      catch (e) {
+        if (tiket.berlaku() && e.name !== 'AbortError') {
+          if (e.code) setAvailability({ status: 'unavailable', reason: e.code });
+          setGalat(`${e.message} Kalimat tetap tersedia untuk diperbaiki atau dicoba lagi.`);
         }
       }
-      if (!kalimat.length) {
-        // Gemini gagal/kosong, atau filter kami menyangka hening: pakai hasil Chrome (tunggu hasil akhirnya yang terlambat tiba).
-        await tunggu(TUNGGU_HASIL_CHROME_MS);
-        kalimat = cadanganRef.current.splice(0);
-        if (pesanGagal && kalimat.length) setGalat(`${pesanGagal} Memakai hasil pengenalan Chrome.`);
-        else if (pesanGagal) setGalat(pesanGagal);
-        else if (!kalimat.length && alasanHening) setGalat(alasanHening);
-      }
-      cadanganRef.current = [];
-      kalimat.forEach((k, i) => masukkanRef.current(k, i === 0 ? awalPertama : null));
-    } finally {
-      setMemeriksa(false);
-      if (sesiRef.current === sesi) modeAkuratRef.current = false;
-    }
+      finally { if (tiket.berlaku()) setSibuk((n) => Math.max(0, n - 1)); }
+    }).catch((e) => { setGalat(e.message); setSibuk((n) => Math.max(0, n - 1)); });
+  }, [antrean, sesi]);
+  const masukkan = useCallback((kalimat) => {
+    if (!kalimat.trim()) return;
+    if (captureRef.current) { setGalat('Selesaikan rekaman sebelum mengirim kalimat berikutnya.'); return; }
+    setKetik(kalimat.trim());
+    jalankan((tiket) => prosesRef.current(kalimat.trim(), tiket));
+  }, [jalankan]);
+
+  useEffect(() => {
+    if (rekamDidukung()) mikSudahDiizinkan().then((ok) => { if (ok) siapkanMik().catch(() => {}); });
+    const unsubscribe = sesi.dengar((m) => {
+      if (m.type === 'geser') ubahManual(() => setSejarah(Sej.perbarui(sejarahRef.current, pindahkan(papanRef.current, m.id, m.px, m.py, m.beku))));
+    });
+    const cekOtoritas = () => {
+      const aktif = sesi.aktif();
+      setBerwenang(aktif);
+      if (!aktif) batalkanProses();
+    };
+    window.addEventListener('storage', cekOtoritas);
+    return () => { unsubscribe(); window.removeEventListener('storage', cekOtoritas); batalkanProses(); };
+  }, [sesi, setSejarah, batalkanProses]);
+
+  useEffect(() => {
+    let aktif = true;
+    const cek = () => cekKesehatan().then((k) => { if (aktif) setKesehatan(k); });
+    cek();
+    const timer = setInterval(cek, 15000);
+    return () => { aktif = false; clearInterval(timer); };
   }, []);
+  const pilihAkurat = (nilai) => { setAkurat(nilai); try { localStorage.setItem('suarapapan-akurat', nilai ? '1' : '0'); } catch { /* pilihan tetap berlaku di tab ini */ } };
 
-  const pakaiAkurat = () => akuratRef.current && suaraSiapRef.current && rekamDidukung();
+  const finalkan = (c) => {
+    if (c.finalisasi || c.batal) return;
+    c.finalisasi = true;
+    tahanRef.current = false;
+    mendengarRef.current = false;
+    setMendengar(false);
+    setMemeriksa(true);
+    c.pendengar?.berhenti();
+    // Satu pekerjaan mencakup WAV, transkripsi, dan urai: urutannya tidak bisa menyusul.
+    jalankan(async (tiket) => {
+      try {
+        const rek = await c.kontrol.berhenti();
+        await tunggu(500); // beri kesempatan hasil akhir Chrome tiba untuk sesi ini saja
+        c.pendengar?.buang();
+        if (!tiket.berlaku() || c.batal) return;
+        if (!rek || rek.durasi < 0.35 || rek.rms < 0.0008 || !rek.ucapan) {
+          setInfo('Ucapan tidak terdeteksi. Rekaman tidak dikirim untuk transkripsi. Dekatkan mikrofon atau ketik kalimat.');
+          return;
+        }
+        let kalimat = [];
+        let awal = null;
+        if (c.akurat) {
+          const k = konteks(pratinjauRef.current?.adegan ?? papanRef.current);
+          try {
+            const r = await transkripsi(rek.audio, k, { urai: true, signal: tiket.signal });
+            if (!tiket.berlaku()) return;
+            kalimat = r.kalimat?.length ? r.kalimat : r.transkrip ? [r.transkrip] : [];
+            if (r.hasil) awal = { konteks: k, jawaban: r };
+            if (r.availability) setAvailability(r.availability);
+          } catch (e) {
+            if (e.name === 'AbortError') throw e;
+            setAvailability({ status: 'unavailable', reason: e.code || 'PROVIDER_UNAVAILABLE' });
+            setInfo('Transkripsi online belum tersedia. Periksa hasil pengenalan browser sebelum menampilkannya.');
+          }
+        }
+        const cadangan = !kalimat.length;
+        if (cadangan) kalimat = [...c.kalimat];
+        if (!kalimat.length) { setInfo('Belum ada transkrip. Coba lagi atau ketik kalimat.'); return; }
+        for (let i = 0; i < kalimat.length; i++) {
+          if (!tiket.berlaku() || c.batal) return;
+          // Cadangan browser juga melewati filter ucapan WAV di atas.
+          if (cadangan) setKetik(kalimat[i]);
+          await prosesRef.current(kalimat[i], tiket, i === 0 ? awal : null, cadangan);
+        }
+      } finally {
+        c.pendengar?.buang();
+        if (captureRef.current === c) { captureRef.current = null; setMemeriksa(false); setSementara(''); }
+      }
+    });
+  };
 
-  // Tes mikrofon: batang level langsung, supaya jelas apakah mikrofon yang benar menangkap suara.
-  const [tes, setTes] = useState(null); // { level, label, bisu, tenang } saat menyala
+  const mulai = async () => {
+    if (captureRef.current || antrean.jumlah || !sesi.aktif()) return;
+    if (!rekamDidukung()) { setGalat('Rekaman mikrofon tidak tersedia. Gunakan kolom ketik.'); return; }
+    const c = { kalimat: [], batal: false, finalisasi: false,
+      akurat: pilihanRef.current.akurat && Boolean(pilihanRef.current.kesehatan?.suara) };
+    if (!c.akurat && !suaraDidukung()) { setGalat('Pengenalan suara belum tersedia. Ketik kalimat untuk melanjutkan.'); return; }
+    captureRef.current = c;
+    tahanRef.current = true;
+    setGalat(''); setInfo('');
+    try {
+      c.kontrol = await mulaiRekam({ saatBerhenti: () => finalkan(c), saatGalat: (e) => {
+        if (c.batal) return;
+        setGalat(`${pesanMik(e)} Gunakan kolom ketik untuk melanjutkan.`);
+        batalkanProses();
+      } });
+      if (c.batal) { await c.kontrol.berhenti(); return; }
+      if (!tahanRef.current) { finalkan(c); return; }
+      // Tidak menyalakan pengenal browser sebelum izin mikrofon berhasil.
+      if (suaraDidukung()) {
+        c.pendengar = buatPendengar({ kosakata: KOSAKATA,
+          saatSementara: (t) => { if (!c.batal && captureRef.current === c) { setSementara(t); if (t) kirimCaption(t, true); } },
+          saatFinal: (t) => { if (!c.batal && captureRef.current === c && t) c.kalimat.push(t); },
+          saatStatus: () => {},
+          saatGalat: (pesan) => { if (!c.batal && !c.akurat) { setInfo(`${pesan} Ketik kalimat bila diperlukan.`); } },
+        });
+        c.pendengar.mulai();
+      }
+      mendengarRef.current = true;
+      setMendengar(true);
+    } catch (e) {
+      if (!c.batal) { setGalat(`${pesanMik(e)} Gunakan kolom ketik untuk melanjutkan.`); batalkanProses(); }
+    }
+  };
+  const berhenti = () => {
+    tahanRef.current = false;
+    const c = captureRef.current;
+    if (c?.kontrol) finalkan(c);
+  };
+  mulaiRef.current = mulai;
+  berhentiRef.current = berhenti;
+
+  const [tes, setTes] = useState(null);
   const tesRef = useRef(null);
-  const matikanTes = useCallback(() => { tesRef.current?.berhenti(); tesRef.current = null; setTes(null); }, []);
+  const tesEpochRef = useRef(0);
+  const tesMenungguRef = useRef(false);
+  const matikanTes = useCallback(() => { tesEpochRef.current += 1; tesMenungguRef.current = false; tesRef.current?.berhenti(); tesRef.current = null; setTes(null); }, []);
   useEffect(() => matikanTes, [matikanTes]);
   const nyalakanTes = async () => {
-    if (tesRef.current) { matikanTes(); return; }
+    if (tesRef.current || tesMenungguRef.current) { matikanTes(); return; }
+    tesMenungguRef.current = true;
+    const epoch = ++tesEpochRef.current;
+    setTes({ level: 0, label: 'Membuka mikrofon…', bisu: false, tenang: false });
     setGalat('');
     try {
       let tenangSejak = Date.now();
       const k = await mulaiUkurLevel((level) => {
+        if (epoch !== tesEpochRef.current) return;
         if (level > 0.004) tenangSejak = Date.now();
-        setTes((t) => (t ? { ...t, level, tenang: Date.now() - tenangSejak > 3000 } : t));
+        setTes((t) => t ? { ...t, level, tenang: Date.now() - tenangSejak > 3000 } : t);
       });
+      if (epoch !== tesEpochRef.current) { k.berhenti(); return; }
+      tesMenungguRef.current = false;
       tesRef.current = k;
       setTes({ level: 0, label: k.label, bisu: k.bisu, tenang: false });
-    } catch (e) { setGalat(pesanMik(e)); }
+    } catch (e) { if (epoch === tesEpochRef.current) { tesMenungguRef.current = false; setTes(null); setGalat(pesanMik(e)); } }
   };
 
-  const mulai = async () => {
-    if (tahanRef.current) return;
-    tahanRef.current = true;
-    setGalat('');
-    const sesi = ++sesiRef.current;
-    cadanganRef.current = [];
-    const akuratIni = pakaiAkurat();
-    if (!akuratIni && !pendengar.current) {
-      tahanRef.current = false;
-      setGalat('Pengenalan suara tidak tersedia di browser ini. Gunakan Google Chrome, atau ketik kalimat di bawah.');
-      return;
-    }
-    modeAkuratRef.current = akuratIni;
-    setMendengar(true);
-    pendengar.current?.mulai(); // caption langsung (jika browser mendukung)
-    if (!akuratIni) return;
-    try {
-      rekamRef.current = { kontrol: await mulaiRekam(), sesi };
-    } catch (e) {
-      modeAkuratRef.current = false;
-      rekamRef.current = null;
-      setGalat(pesanMik(e));
-      return;
-    }
-    if (!tahanRef.current) berhentiRekam(); // tombol sudah dilepas sambil menunggu izin mikrofon
+  const pindahSejarah = (fungsi) => {
+    batalkanProses(); hapusPratinjau();
+    const baru = fungsi(sejarahRef.current);
+    if (baru !== sejarahRef.current) setSejarah(baru, baru.sekarang.label || '');
   };
-
-  const berhentiRekam = () => {
-    const r = rekamRef.current;
-    rekamRef.current = null;
-    if (r) selesaikan(r.kontrol, r.sesi);
-  };
-
-  const berhenti = () => {
-    if (!tahanRef.current) return;
-    tahanRef.current = false;
-    setMendengar(false);
-    pendengar.current?.berhenti();
-    berhentiRekam();
-  };
-
-  // Spasi = tahan untuk bicara. Tombol clicker presentasi (PageDown/PageUp) = nyala/mati.
+  const batalkan = () => pindahSejarah(Sej.batalkan);
+  const ulangi = () => pindahSejarah(Sej.ulangi);
+  const batalkanRef = useRef(batalkan);
+  const ulangiRef = useRef(ulangi);
+  batalkanRef.current = batalkan; ulangiRef.current = ulangi;
   useEffect(() => {
-    // Hanya kolom yang menerima ketikan yang memblokir pintasan. Kotak centang dan tombol yang masih
-    // fokus (setelah diklik) TIDAK boleh membuat Spasi menggulir halaman atau mengubah pilihan.
-    const diInput = (e) => {
-      const el = e.target;
-      if (el.isContentEditable || ['TEXTAREA', 'SELECT'].includes(el.tagName)) return true;
-      return el.tagName === 'INPUT' && !['checkbox', 'radio', 'button', 'submit', 'range'].includes(el.type);
-    };
+    const diInput = (e) => e.target.isContentEditable || ['TEXTAREA', 'SELECT'].includes(e.target.tagName)
+      || (e.target.tagName === 'INPUT' && !['checkbox', 'radio', 'button', 'submit', 'range'].includes(e.target.type));
     const turun = (e) => {
       if (diInput(e)) return;
       if ((e.ctrlKey || e.metaKey) && !e.altKey) {
@@ -316,119 +339,66 @@ export default function Guru() {
         if (k === 'y' || (k === 'z' && e.shiftKey)) { e.preventDefault(); ulangiRef.current(); return; }
       }
       if (e.repeat) return;
-      if (e.code === 'Space') { e.preventDefault(); document.activeElement?.blur?.(); mulai(); }
-      if (TOMBOL_CLICKER.has(e.key)) { e.preventDefault(); mendengarRef.current ? berhenti() : mulai(); }
+      if (e.code === 'Space') { e.preventDefault(); mulaiRef.current(); }
+      if (TOMBOL_CLICKER.has(e.key)) { e.preventDefault(); captureRef.current && tahanRef.current ? berhentiRef.current() : mulaiRef.current(); }
     };
-    const naik = (e) => {
-      if (diInput(e)) return;
-      if (e.code === 'Space') { e.preventDefault(); berhenti(); }
-    };
-    window.addEventListener('keydown', turun);
-    window.addEventListener('keyup', naik);
-    return () => { window.removeEventListener('keydown', turun); window.removeEventListener('keyup', naik); };
+    const naik = (e) => { if (e.code === 'Space') { e.preventDefault(); berhentiRef.current(); } };
+    const lepas = () => berhentiRef.current();
+    window.addEventListener('keydown', turun); window.addEventListener('keyup', naik); window.addEventListener('blur', lepas);
+    return () => { window.removeEventListener('keydown', turun); window.removeEventListener('keyup', naik); window.removeEventListener('blur', lepas); };
   }, []);
 
-  // /papan yang baru dibuka meminta adegan terakhir.
-  useEffect(() => dengar((m) => {
-    if (m.type === 'halo') kirim({ type: 'adegan', adegan: papanRef.current });
-    // Siswa/guru menggeser karakter di /papan: ikuti tanpa menambah langkah Batalkan.
-    if (m.type === 'geser') setSejarah(Sej.perbarui(sejarahRef.current, pindahkan(papanRef.current, m.id, m.px, m.py, m.beku)));
-  }), [setSejarah]);
-
-  useEffect(() => {
-    const cek = () => cekKesehatan().then((k) => { suaraSiapRef.current = Boolean(k?.suara); setKesehatan(k); });
-    cek();
-    const t = setInterval(cek, 15000);
-    return () => clearInterval(t);
-  }, []);
-
-  // Batalkan / Ulangi: papan (dan /papan di proyektor) pindah ke keadaan sebelum / sesudahnya.
-  // Pratinjau yang menunggu disetujui dibangun di atas papan lama, jadi dibuang.
-  const pindahSejarah = (fungsi) => {
-    const lama = sejarahRef.current;
-    const baru = fungsi(lama);
-    if (baru === lama) return;
-    setSejarah(baru);
-    kirim({ type: 'adegan', adegan: baru.sekarang.adegan });
-    pratinjauRef.current = null;
-    setPratinjau(null);
-    setTafsir(null);
-  };
-  const batalkan = () => pindahSejarah(Sej.batalkan);
-  const ulangi = () => pindahSejarah(Sej.ulangi);
-  const batalkanRef = useRef(batalkan);
-  const ulangiRef = useRef(ulangi);
-  batalkanRef.current = batalkan;
-  ulangiRef.current = ulangi;
-  const buang = () => { pratinjauRef.current = null; setPratinjau(null); };
-  // Menggeser karakter dengan tangan: posisi saja berubah, jumlah tidak, jadi bukan langkah baru di riwayat.
-  const geserDiPapan = (id, px, py, beku) => {
-    setSejarah(Sej.perbarui(sejarahRef.current, pindahkan(papanRef.current, id, px, py, beku)));
-    kirim({ type: 'geser', id, px, py, beku });
-  };
+  const buang = () => ubahManual(() => setInfo('Pratinjau dibuang. Papan tetap.'));
+  const geserDiPapan = (id, px, py, beku) => ubahManual(() => setSejarah(Sej.perbarui(sejarahRef.current, pindahkan(papanRef.current, id, px, py, beku))));
   const geserDiPratinjau = (id, px, py, beku) => {
+    batalkanProses();
     const p = pratinjauRef.current;
-    if (!p) return;
-    const baru = { ...p, adegan: pindahkan(p.adegan, id, px, py, beku) };
-    pratinjauRef.current = baru;
-    setPratinjau(baru);
+    if (p) { const baru = { ...p, adegan: pindahkan(p.adegan, id, px, py, beku) }; pratinjauRef.current = baru; setPratinjau(baru); }
   };
-  // Tafsir lain di pratinjau: "3 kelinci datang" dibaca sebagai "hanya 3", bukan 3 + 3.
   const pakaiAlternatifPratinjau = () => {
+    batalkanProses();
     const p = pratinjauRef.current;
-    if (!p?.alternatif) return;
-    const baru = { ...p, adegan: p.alternatif.adegan, alternatif: null, penjelasan: [`Dibaca sebagai: ${p.alternatif.label.replace('Maksudnya ', '').toLowerCase()}.`] };
-    pratinjauRef.current = baru;
-    setPratinjau(baru);
+    if (p?.alternatif) { const baru = { ...p, adegan: p.alternatif.adegan, alternatif: null, penjelasan: [`Dibaca sebagai: ${p.alternatif.label}.`] }; pratinjauRef.current = baru; setPratinjau(baru); }
   };
-  // Memasukkan satu karakter dari daftar langsung ke papan, tanpa mengganti isinya.
+  const terimaPratinjau = () => { const p = pratinjauRef.current; if (p) ubahManual(() => tampilkan(p.adegan, p.kalimat)); };
   const tambahKarakter = (nama, label) => {
     const dasar = pratinjauRef.current?.adegan ?? papanRef.current;
-    const r = terapkan(dasar, { entitas: [], peristiwa: [{ tipe: 'tambah', target: label, jumlah: 1 }], konsep: 'membilang' });
-    if (!r.berubah) return;
-    tampilkan(r.adegan, `+ ${label}`);
-    setLog((l) => [{
-      id: `${Date.now()}-${Math.random()}`, kalimat: `+ ${label}`, ms: 0, sumber: 'dipilih guru', yakin: null,
-      ringkas: deskripsi(r.adegan), catatan: r.catatan,
-    }, ...l].slice(0, 30));
-    kirimCaption(`Ditambahkan: ${label}`, false, [label]);
+    ubahManual(() => {
+      const r = terapkan(dasar, { entitas: [], peristiwa: [{ tipe: 'tambah', target: label, jumlah: 1 }], konsep: 'membilang' });
+      if (r.berubah) tampilkan(r.adegan, `Ditambahkan: ${label}`);
+      if (r.catatan.length) setInfo(r.catatan.join(' '));
+    });
   };
-  const bersihkan = () => {
-    tampilkan({ ...ADEGAN_KOSONG, versi: papanRef.current.versi + 1 }, 'Papan dibersihkan');
-    kirim({ type: 'caption', teks: '', sementara: false, sorot: [] });
-  };
-  const sematkan = () => {
-    if (!papan.objek.length) return;
-    setSematan((s) => [...s, { id: `${Date.now()}`, adegan: papan, label: deskripsi(papan) }]);
-  };
-  const kirimKetik = (e) => { e.preventDefault(); masukkan(ketik); setKetik(''); };
-
-  const status = kesehatan === null ? 'memeriksa…'
-    : !kesehatan.server ? 'server ML mati'
-      : kesehatan.gemini !== undefined ? (kesehatan.gemini ? 'siap' : 'GEMINI_API_KEY belum diisi')
-      : kesehatan.indobert && kesehatan.ollama ? 'siap'
-        : kesehatan.indobert ? 'IndoBERT siap, LLM cadangan mati'
-          : kesehatan.ollama ? 'hanya LLM (IndoBERT belum dilatih)' : 'model belum siap';
-
+  const bersihkan = () => ubahManual(() => tampilkan({ ...ADEGAN_KOSONG, versi: papanRef.current.versi + 1 }, ''));
+  const sematkan = () => { if (papan.objek.length) setSematan((s) => [...s, { id: `${Date.now()}`, adegan: papan, label: deskripsi(papan) }].slice(-12)); };
+  const kirimKetik = (e) => { e.preventDefault(); masukkan(ketik); };
+  const status = availability?.status === 'unavailable' ? 'layanan online terganggu — mode lokal tersedia'
+    : availability?.status === 'available' ? 'layanan online terhubung · mode lokal tersedia'
+      : kesehatan === null ? 'memeriksa konfigurasi…' : kesehatan.server ? 'mode lokal tersedia · koneksi model belum diuji' : 'mode lokal tersedia';
   return (
     <main className="guru">
       <header className="guru-kepala">
         <h1>SuaraPapan <span>panel guru</span></h1>
         <div className="guru-kepala-kanan">
-          <span className={`chip chip-${status === 'siap' ? 'ok' : 'peringatan'}`}>{kesehatan?.gemini !== undefined ? 'Online (Gemini)' : 'Model'}: {status}</span>
-          <button type="button" className="tombol" onClick={() => window.open('/papan', 'suarapapan-papan')}>Buka papan</button>
+          <span className={`chip chip-${availability?.status === 'unavailable' ? 'peringatan' : 'ok'}`} role="status">{status}</span>
+          <button type="button" className="tombol" onClick={() => window.open(sesi.urlPapan, `suarapapan-${sesi.sesi}`)}>Buka papan kelas ini</button>
         </div>
       </header>
 
       <div className="guru-isi">
         <section className="kartu guru-bicara" aria-label="Bicara">
+          <h2>1. Masukkan kalimat</h2>
+          <p className="petunjuk">Bicara atau ketik → periksa pratinjau → tampilkan di papan.</p>
+          {!berwenang ? <p className="galat" role="alert">Sesi diambil alih tab guru lain. Muat ulang untuk mengambil alih kembali.</p> : null}
           {suaraDidukung() || rekamDidukung() ? (
             <button
               type="button"
+              disabled={memeriksa || sibuk > 0 || !berwenang}
               className={`tombol-mik${mendengar ? ' aktif' : ''}`}
-              onPointerDown={(e) => { e.preventDefault(); mulai(); }}
+              onPointerDown={(e) => { e.preventDefault(); e.currentTarget.setPointerCapture?.(e.pointerId); mulai(); }}
               onPointerUp={berhenti}
               onPointerCancel={berhenti}
+              onLostPointerCapture={berhenti}
               onContextMenu={(e) => e.preventDefault()}
             >
               <span className="tombol-mik-titik" aria-hidden="true" />
@@ -455,20 +425,22 @@ export default function Guru() {
             <label htmlFor="ketik-kalimat">Atau ketik kalimat</label>
             <div className="form-ketik-baris">
               <input id="ketik-kalimat" value={ketik} onChange={(e) => setKetik(e.target.value)} placeholder="contoh: ada tiga kelinci berlari di rumput" autoComplete="off" />
-              <button type="submit" className="tombol tombol-utama">Kirim</button>
+              <button type="submit" className="tombol tombol-utama" disabled={mendengar || memeriksa || sibuk > 0 || !ketik.trim() || !berwenang}>Periksa kalimat</button>
             </div>
           </form>
           <div className="contoh" role="group" aria-label="Contoh kalimat">
             <span className="contoh-judul">Coba contoh (berurutan dari atas; Bersihkan di antara pelajaran):</span>
             <div className="contoh-daftar">
               {CONTOH.map((k) => (
-                <button key={k} type="button" className="tombol tombol-kecil tombol-contoh" onClick={() => masukkan(k)}>{k}</button>
+                <button key={k} type="button" className="tombol tombol-kecil tombol-contoh" disabled={mendengar || memeriksa || sibuk > 0 || !berwenang} onClick={() => masukkan(k)}>{k}</button>
               ))}
             </div>
           </div>
           {galat ? <p className="galat" role="alert">{galat}</p> : null}
+          {info ? <p className="catatan" role="status">{info}</p> : null}
+          {sibuk > 0 || memeriksa || mendengar ? <button type="button" className="tombol" onClick={() => { batalkanProses(); setInfo('Proses dibatalkan. Papan tetap.'); }}>Batalkan proses</button> : null}
           <div className="sakelar">
-            <label><input id="opsi-otomatis" type="checkbox" checked={otomatis} onChange={(e) => setOtomatis(e.target.checked)} /> Tampilkan otomatis tanpa pratinjau</label>
+            <label><input id="opsi-otomatis" type="checkbox" checked={otomatis} onChange={(e) => setOtomatis(e.target.checked)} /> Tampilkan otomatis untuk kalimat yang pasti; tafsiran meragukan tetap diperiksa</label>
             <label title="Merekam suara dan memeriksanya dengan Gemini: lebih tepat untuk kata benda dan angka, tambah 1–3 detik.">
               <input id="opsi-akurat" type="checkbox" checked={akurat && Boolean(kesehatan?.suara)} disabled={!kesehatan?.suara} onChange={(e) => pilihAkurat(e.target.checked)} /> Pengenalan suara akurat (Gemini){kesehatan && !kesehatan.suara ? ' — tidak tersedia' : ''}
             </label>
@@ -480,18 +452,21 @@ export default function Guru() {
             </label>
             <label><input id="opsi-jeda" type="checkbox" checked={jeda} onChange={(e) => setJeda(e.target.checked)} /> Jeda caption di papan</label>
           </div>
+          <p className="petunjuk">Papan kelas tersambung pada browser dan perangkat yang sama. Pengenalan browser dapat memakai layanan online; filter rekaman hanya membatasi kiriman transkripsi aplikasi.</p>
         </section>
 
         <section className="kartu" aria-label="Pratinjau">
-          <h2>Pratinjau</h2>
+          <h2>2. Periksa pratinjau</h2>
           {pratinjau ? (
             <>
+              <p className="ringkas">Kalimat: “{pratinjau.kalimat}”</p>
+              {pratinjau.needsConfirmation ? <p className="catatan" role="status">Perlu persetujuan guru. Tafsiran ini belum ditampilkan di papan.</p> : null}
               <Adegan adegan={pratinjau.adegan} kecil bisaGeser onGeser={geserDiPratinjau} />
               <p className="ringkas">{deskripsi(pratinjau.adegan)}</p>
               {(pratinjau.penjelasan || []).map((c) => <p key={c} className="penjelasan">{c}</p>)}
               {pratinjau.catatan.map((c) => <p key={c} className="catatan">{c}</p>)}
               <div className="baris-tombol">
-                <button type="button" className="tombol tombol-utama" onClick={() => tampilkan(pratinjau.adegan, pratinjau.kalimat)}>Tampilkan di papan</button>
+                <button type="button" className="tombol tombol-utama" disabled={!berwenang} onClick={terimaPratinjau}>Tampilkan di papan</button>
                 {pratinjau.alternatif ? (
                   <button type="button" className="tombol" onClick={pakaiAlternatifPratinjau}>{pratinjau.alternatif.label}</button>
                 ) : null}
@@ -504,14 +479,14 @@ export default function Guru() {
         </section>
 
         <section className="kartu" aria-label="Papan saat ini">
-          <h2>Di papan sekarang</h2>
+          <h2>3. Di papan sekarang</h2>
           <Adegan adegan={papan} kecil bisaGeser onGeser={geserDiPapan} />
           <p className="ringkas">{deskripsi(papan)}</p>
           {tafsir ? (
             <>
               {tafsir.penjelasan.map((c) => <p key={c} className="penjelasan">{c}</p>)}
               <div className="baris-tombol">
-                <button type="button" className="tombol" onClick={() => tampilkan(tafsir.adegan, tafsir.label)}>{tafsir.label}</button>
+                <button type="button" className="tombol" onClick={() => ubahManual(() => tampilkan(tafsir.adegan, tafsir.label))}>{tafsir.label}</button>
               </div>
             </>
           ) : null}
@@ -526,7 +501,7 @@ export default function Guru() {
               <h3>Disematkan</h3>
               {sematan.map((s) => (
                 <div key={s.id} className="sematan-baris">
-                  <button type="button" className="tombol tombol-teks" onClick={() => tampilkan({ ...s.adegan, versi: papanRef.current.versi + 1 }, 'Papan yang disematkan')}>{s.label}</button>
+                  <button type="button" className="tombol tombol-teks" onClick={() => ubahManual(() => tampilkan({ ...s.adegan, versi: papanRef.current.versi + 1 }, 'Papan yang disematkan'))}>{s.label}</button>
                   <button type="button" className="tombol tombol-kecil" onClick={() => setSematan((l) => l.filter((x) => x.id !== s.id))} aria-label={`Lepas sematan: ${s.label}`} title="Lepas sematan">Lepas</button>
                 </div>
               ))}
@@ -546,7 +521,8 @@ export default function Guru() {
               {log.map((l) => (
                 <li key={l.id}>
                   <p className="log-kalimat">“{l.kalimat}”</p>
-                  <p className="log-hasil">{l.ringkas} <span>{l.sumber} · {Math.round(l.ms)} ms{l.yakin != null ? ` · yakin ${Math.round(l.yakin * 100)}%` : ''}</span></p>
+                  <p className="log-hasil">{l.ringkas} <span>{l.sumber} · {Math.round(l.ms || 0)} ms{typeof l.yakin === 'number' ? ` · yakin ${Math.round(l.yakin * 100)}%` : l.yakin ? ` · kepastian ${l.yakin}` : ''}</span></p>
+                  {(l.catatan || []).map((c) => <p className="catatan" key={c}>{c}</p>)}
                 </li>
               ))}
             </ol>

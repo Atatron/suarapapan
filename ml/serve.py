@@ -11,9 +11,9 @@ from pathlib import Path
 
 import httpx
 from fastapi import FastAPI, HTTPException
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
-from bahasa import AKSI_KE_ENUM, normalkan_benda, tokenisasi
+from validasi import amankan, KATALOG
 
 MODEL_NER = Path(__file__).parent / "model" / "indobert-suarapapan"
 OLLAMA_URL = "http://127.0.0.1:11434/api/chat"
@@ -60,6 +60,11 @@ Ubah SATU kalimat guru menjadi JSON adegan. Aturan:
 - "pertanyaan" = soal jika guru bertanya, selain itu "".
 - Jangan mengarang benda yang tidak disebut guru."""
 
+# ID dan sinonim berasal dari file yang sama dengan browser dan Gemini.
+SISTEM += "\nPilih ID kanonik dari katalog ini. Jangan ganti benda asing dengan yang mirip.\n" + "\n".join(
+    f"{a['id']}: {' | '.join(a['aliases'])}" for a in KATALOG if a['kind'] != 'latar')
+SISTEM += "\nLarangan, kutipan, syarat, dan koreksi yang belum jelas harus diperiksa guru. Jangan mengarang subjek/aksi."
+
 CONTOH = [
     ("kosong", "Nah anak-anak, ada tiga kelinci berlari di rumput.",
      '{"entitas":[{"jenis":"kelinci","jumlah":3,"aksi":"lari","posisi":""}],"latar":"rumput","konsep":"membilang","peristiwa":[],"pertanyaan":""}'),
@@ -72,51 +77,26 @@ CONTOH = [
 ]
 
 
-# "di dalam laut" menyebut tempat, bukan letak relatif terhadap sebuah benda.
-TEMPAT_BUKAN_ACUAN = {"laut", "sungai", "kolam", "danau", "hutan", "kelas", "rumput", "kebun", "sawah", "pantai",
-                      "gunung", "langit", "taman", "kota", "pasar", "dapur", "kamar", "sekolah", "peternakan", "desa",
-                      "gurun", "salju", "udara", "air"}
+def rapikan(h: dict, konteks: str = "", kalimat: str = "") -> dict:
+    return amankan(h, kalimat, konteks)
 
 
-def normalkan_jenis(teks: str) -> str:
-    t = teks.strip().lower()
-    t = re.sub(r"^(ekor|buah|biji|batang|lembar|orang)\s+", "", t)
-    return normalkan_benda(t)  # kelinci-kelinci → kelinci, tetapi kupu-kupu tetap kupu-kupu
-
-
-def rapikan(h: dict, konteks: str = "") -> dict:
-    for e in h.get("entitas", []):
-        e["jenis"] = normalkan_jenis(e["jenis"])
-        # "di rumput" adalah latar, bukan posisi relatif seperti "di bawah meja"
-        posisi = e.get("posisi", "").strip()
-        acuan = posisi.split()[-1] if posisi else ""
-        if h.get("latar") and (posisi in (h["latar"], f"di {h['latar']}") or acuan == h["latar"]):
-            e["posisi"] = ""
-        elif acuan in TEMPAT_BUKAN_ACUAN:
-            e["posisi"] = ""
-        e["jumlah"] = max(1, min(int(e.get("jumlah") or 1), 20))
-    for p in h.get("peristiwa", []):
-        p["target"] = normalkan_jenis(p["target"])
-        p["jumlah"] = max(1, min(int(p.get("jumlah") or 1), 20))
-    # Model kecil sering menulis benda yang berubah di "entitas" juga
-    # ("satu kelinci lagi datang"). Benda itu bukan benda baru, jadi dibuang.
-    # Hanya jika benda itu memang sudah ada di papan; kalau belum ("beli lima apel,
-    # lalu beri dua lagi") entitas harus dipertahankan.
-    target = {p["target"] for p in h.get("peristiwa", [])}
-    ada = {x.split(":")[0].strip() for x in konteks.split(",") if x.strip()}
-    h["entitas"] = [e for e in h.get("entitas", []) if not (e["jenis"] in target and e["jenis"] in ada)]
-    # "kucing di bawah meja" adalah pelajaran posisi, bukan membilang
-    if h.get("konsep") == "membilang" and any(e.get("posisi", "").startswith(("di ", "ke ")) and e["jumlah"] == 1 for e in h["entitas"]):
-        h["konsep"] = "posisi"
-    return h
+def jawaban(hasil, sumber, ms, yakin=None, wajib_tinjau=False):
+    kurang_yakin = yakin is not None and yakin < AMBANG_YAKIN
+    review = bool(hasil.get("needsConfirmation") or kurang_yakin or wajib_tinjau)
+    notice = hasil.get("notice")
+    if review and not notice:
+        notice = {"code": "LOW_PROVIDER_CONFIDENCE", "message": "Tafsiran lokal belum pasti. Periksa pratinjau.", "unresolvedSpans": []}
+    return {"hasil": hasil, "sumber": sumber, "ms": ms, "yakin": yakin if yakin is not None else ("rendah" if review else "tinggi"),
+            "needsConfirmation": review, "notice": notice}
 
 
 class Permintaan(BaseModel):
-    kalimat: str
-    konteks: str = "kosong"
+    kalimat: str = Field(min_length=1, max_length=2000)
+    konteks: str = Field(default="kosong", max_length=20000)
 
 
-http = httpx.AsyncClient(timeout=180)
+http = httpx.AsyncClient(timeout=18)
 AMBANG_YAKIN = float(os.environ.get("SUARAPAPAN_AMBANG", "0.85"))
 ner = None  # PengenalNER, dimuat saat server menyala jika model sudah dilatih
 
@@ -134,7 +114,7 @@ async def lifespan(_app):
     # Memuat LLM ke GPU sekali di awal (bisa 30–60 detik), supaya kalimat
     # pertama guru di kelas tidak gagal karena menunggu model dimuat.
     try:
-        await http.post(OLLAMA_URL, json={"model": OLLAMA_MODEL, "messages": [], "keep_alive": "30m"})
+        await http.post(OLLAMA_URL, json={"model": OLLAMA_MODEL, "messages": [], "keep_alive": "30m"}, timeout=60)
     except httpx.HTTPError as e:
         print(f"Peringatan: Ollama belum bisa dihubungi saat server menyala ({e!r}).")
     yield
@@ -165,15 +145,19 @@ async def urai_gabungan(kalimat: str, konteks: str) -> dict:
     """IndoBERT dulu (±50 ms). LLM hanya untuk kalimat yang membuat IndoBERT ragu."""
     if ner is not None:
         r = ner.urai(kalimat, konteks)
+        try:
+            r["hasil"] = rapikan(r["hasil"], konteks, kalimat)
+        except (ValueError, TypeError, KeyError) as e:
+            raise HTTPException(502, f"Format hasil IndoBERT tidak valid: {e}")
         if r["yakin"] >= AMBANG_YAKIN:
-            return {"hasil": r["hasil"], "sumber": "indobert", "ms": r["ms"], "yakin": r["yakin"]}
+            return jawaban(r["hasil"], "indobert", r["ms"], r["yakin"])
         try:
             llm = await tanya_llm(kalimat, konteks, OLLAMA_MODEL)
         except HTTPException:
-            # LLM mati: lebih baik jawaban IndoBERT yang ragu daripada tidak ada apa-apa
-            return {"hasil": r["hasil"], "sumber": "indobert (LLM tidak tersedia)", "ms": r["ms"], "yakin": r["yakin"]}
+            # Kewajiban tinjau tetap utuh ketika LLM cadangan tidak tersedia.
+            return jawaban(r["hasil"], "indobert (LLM tidak tersedia)", r["ms"], r["yakin"], wajib_tinjau=True)
         llm["ms"] = round(llm["ms"] + r["ms"])
-        llm["yakin"] = r["yakin"]
+        # Keluaran LLM sudah melewati batas runtime sendiri.
         return llm
     return await tanya_llm(kalimat, konteks, OLLAMA_MODEL)
 
@@ -195,13 +179,7 @@ async def tanya_llm(kalimat: str, konteks: str, model: str) -> dict:
     except httpx.HTTPError as e:
         raise HTTPException(503, f"Ollama tidak bisa dihubungi. Pastikan aplikasi Ollama berjalan. ({e!r})")
     try:
-        hasil = rapikan(json.loads(r.json()["message"]["content"]), konteks)
-    except (KeyError, ValueError) as e:
+        hasil = rapikan(json.loads(r.json()["message"]["content"]), konteks, kalimat)
+    except (KeyError, ValueError, TypeError) as e:
         raise HTTPException(502, f"Jawaban model tidak bisa dibaca: {e}")
-    # LLM kadang mengarang aksi ("kue berenang"). Aksi hanya dipakai jika kata
-    # kerjanya memang diucapkan guru.
-    kata = set(tokenisasi(kalimat))
-    for e in hasil["entitas"]:
-        if not any(AKSI_KE_ENUM.get(k) == e["aksi"] for k in kata):
-            e["aksi"] = "diam"
-    return {"hasil": hasil, "sumber": model, "ms": round((time.perf_counter() - mulai) * 1000)}
+    return jawaban(hasil, model, round((time.perf_counter() - mulai) * 1000))

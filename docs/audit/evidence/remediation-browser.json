@@ -1,0 +1,62 @@
+{
+  "checkedAt": "2026-10-16T13:53:11.760Z",
+  "origin": "http://127.0.0.1:5174",
+  "provider": "local controlled fixture only",
+  "delayedUndo": {
+    "boardAfterLateReply": "3 apel.",
+    "redoPreserved": true,
+    "delayedReplyNotLogged": true
+  },
+  "projectorRefresh": {
+    "scene": "3 apel.",
+    "caption": "Ada tiga apel.",
+    "connected": true
+  },
+  "uncertainChain": {
+    "autoEnabled": true,
+    "correctedCount": 5,
+    "followedByAddOne": 6,
+    "displayedBoard": "3. Di papan sekarang\n\n3 apel.\n\n3 apel.\n\n↶ Batalkan\n↷ Ulangi\nSematkan\nBersihkan",
+    "preview": "2. Periksa pratinjau\n\nKalimat: “Tambahkan satu kelinci.”\n\nPerlu persetujuan guru. Tafsiran ini belum ditampilkan di papan.\n\n3 apel; 6 kelinci.\n\n3 apel; 6 kelinci.\n\n8 karakter di papan + 1 yang masuk = 9.\n\nTampilkan di papan\nMaksudnya hanya 1 kelinci\nBuang",
+    "projector": "- main:\n  - button \"Layar penuh\"\n  - button \"Latar sederhana\"\n  - status: Terhubung ke panel guru\n  - paragraph: 3 apel.\n  - button \"apel, seret untuk memindahkan, ketuk untuk menghitung\":\n    - img \"apel\"\n  - button \"apel, seret untuk memindahkan, ketuk untuk menghitung\":\n    - img \"apel\"\n  - button \"apel, seret untuk memindahkan, ketuk untuk menghitung\":\n    - img \"apel\"\n  - paragraph: Ada tiga apel."
+  },
+  "quota": {
+    "sentence": "Ada dua unicorn.",
+    "text": "SuaraPapan panel guru\nlayanan online terganggu — mode lokal tersedia\nBuka papan kelas ini\n1. Masukkan kalimat\n\nBicara atau ketik → periksa pratinjau → tampilkan di papan.\n\nTahan untuk bicara\n\nTahan tombol Spasi atau tekan clicker presentasi untuk bicara.\n\nTes mikrofon\n\nTranskrip muncul di sini.\n\nAtau ketik kalimat\nPeriksa kalimat\nCoba contoh (berurutan dari atas; Bersihkan di antara pelajaran):\nAda tiga kelinci berlari di rumput.\nLalu dua kelinci pergi.\nDi hutan ada tiga kelinci dan dua harimau.\nBerapa jumlah hewan semuanya?\nIbu punya satu pizza, kita bagi empat sama besar.\nAdik makan satu potong.\nKucing tidur di bawah meja.\nAda tujuh ikan berenang di kolam.\n\nKuota Gemini habis (fixture lokal). Kalimat tetap tersedia untuk diperbaiki atau dicoba lagi.\n\n Tampilkan otomatis untuk kalimat yang pasti; tafsiran meragukan tetap diperiksa\n Pengenalan suara akurat (Gemini) — tidak tersedia\n Masukkan ke papan tanpa mengganti yang sudah ada\n Hitung semua karakter di papan\n Jeda caption di papan\n\nPapan kelas tersambung pada browser dan perangkat yang sama. Pengenalan browser dapat memakai layanan online; filter rekaman hanya membatasi kiriman transkripsi aplikasi.\n\n2. Periksa pratinjau\n\nBelum ada pratinjau. Ucapkan kalimat seperti “ada tiga kelinci berlari di rumput”.\n\n3. Di papan sekarang\n\n3 apel.\n\n3 apel.\n\n↶ Batalkan\n↷ Ulangi\nSematkan\nBersihkan\nSebelum dan sesudah\nSebelum\n\nPapan kosong.\n\nPapan kosong.\n\n→\nSekarang di papan\n\n3 apel.\n\n3 apel.\n\n“Ada tiga apel.”\n\n⇢\nJika diulangi\n\n3 apel; 2 burung.\n\n3 apel; 2 burung.\n\n“Tambahkan dua burung.”\n\nDari sebelum ke sekarang: +3 apel. Jika diulangi: +2 burung.\n\n↶ Batalkan\n↷ Ulangi\nTambah karakter ke papan (tanpa mengganti yang sudah ada)\nRiwayat kalimat\n\n“Tambahkan satu kelinci.”\n\n3 apel; 6 kelinci. aturan lokal · 0 ms · kepastian tinggi\n\n“Ada tiga kelinci, eh salah, lima kelinci.”\n\n3 apel; 5 kelinci. aturan lokal · 0 ms · kepastian rendah\n\nKoreksi ucapan terdeteksi. Periksa jumlah pengganti sebelum menampilkan.\n\n“Tambahkan dua burung.”\n\n3 apel; 2 burung. aturan lokal · 0 ms · kepastian tinggi\n\n“Ada tiga apel.”\n\n3 apel. aturan lokal · 1 ms · kepastian tinggi"
+  },
+  "human": [
+    {
+      "alt": "",
+      "loaded": true,
+      "src": "/aset/latar/homeyard.webp"
+    },
+    {
+      "alt": "meja",
+      "loaded": true,
+      "src": "/aset/obj/meja.webp"
+    },
+    {
+      "alt": "manusia",
+      "loaded": true,
+      "src": "/aset/obj/anak-laki-laki.webp"
+    }
+  ],
+  "classroomIsolation": "- main:\n  - button \"Layar penuh\"\n  - button \"Latar sederhana\"\n  - status:\n    - text: Panel guru belum terhubung. Papan terakhir tetap ditampilkan.\n    - generic: Panel guru dan papan harus dibuka di browser dan perangkat yang sama.\n  - paragraph: Papan kosong.\n  - paragraph: SuaraPapan\n  - paragraph: Menunggu guru berbicara…",
+  "teacherRefresh": "3. Di papan sekarang\n\n1 manusia di samping meja.\n\nmanusia di samping meja\n\n1 manusia di samping meja.\n\n↶ Batalkan\n↷ Ulangi\nSematkan\nBersihkan",
+  "failedImage": {
+    "alt": "kelinci",
+    "failedBaseImages": 0,
+    "fallbackSvg": 1
+  },
+  "finalLesson": "- main:\n  - button \"Layar penuh\"\n  - button \"Latar sederhana\" [active] [pressed]\n  - status: Terhubung ke panel guru\n  - paragraph: 1 ayam di atas meja; 1 manusia di samping meja.\n  - img \"meja\"\n  - img \"ayam di atas meja\":\n    - img \"ayam\"\n  - img \"manusia di samping meja\":\n    - img \"manusia\"\n  - paragraph: ayam di atas meja, manusia di samping meja\n  - paragraph: Seret ayam ke atas, bawah, atau samping meja.\n  - paragraph: Ada satu ayam di atas meja dan satu manusia di samping meja.",
+  "spatialCrop": [
+    {
+      "height": 123.65625,
+      "width": 90.859375
+    },
+    {
+      "height": 192.296875,
+      "width": 81.765625
+    }
+  ]
+}

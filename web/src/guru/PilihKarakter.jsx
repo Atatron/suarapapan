@@ -3,6 +3,9 @@
 import { useMemo, useState } from 'react';
 import pustaka from '../scene/pustaka.json';
 import { urlGambar } from '../scene/pustaka.js';
+import { katalogAset, normalAset } from '../scene/katalog.js';
+
+const ALIASES = new Map(katalogAset.filter((a) => a.kind === 'obj').map((a) => [a.id, a.aliases]));
 
 const JUDUL = {
   'hewan-ternak': 'Hewan ternak', 'hewan-hutan': 'Hewan hutan', 'hewan-laut': 'Hewan laut', burung: 'Burung',
@@ -25,10 +28,10 @@ export default function PilihKarakter({ onPilih }) {
   const [terbuka, setTerbuka] = useState(false);
 
   const kelompok = useMemo(() => {
-    const q = cari.trim().toLowerCase();
+    const q = normalAset(cari);
     const per = new Map();
     for (const [nama, v] of Object.entries(pustaka.obj)) {
-      if (q && !v.n.toLowerCase().includes(q) && !nama.includes(q)) continue;
+      if (q && !normalAset(v.n).includes(q) && !(ALIASES.get(nama) || []).some((a) => a.includes(q))) continue;
       if (!per.has(v.k)) per.set(v.k, []);
       per.get(v.k).push({ nama, label: v.n.replace(/\s*\(.*\)\s*/, '') });
     }

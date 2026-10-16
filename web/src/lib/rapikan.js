@@ -1,6 +1,8 @@
 // Perapian hasil parser (Gemini atau aturan lokal) menjadi JSON adegan yang aman.
 // Dipakai server (api/_urai.js) dan browser (src/lib/lokal.js), jadi tidak boleh bergantung pada Node.
-// Salinan rapikan() di ml/serve.py; ubah keduanya bersama-sama.
+// Pengaman jalur Python ada di ml/validasi.py; keduanya memakai katalog yang sama.
+import { idAset } from '../scene/katalog.js';
+import { landaskanAdegan } from './landasan.js';
 
 export const AKSI = ['diam', 'lari', 'lompat', 'terbang', 'berenang', 'jatuh'];
 export const KONSEP = ['membilang', 'penjumlahan', 'pengurangan', 'pecahan', 'posisi', 'tidak_ada'];
@@ -32,7 +34,10 @@ export function normalkanJenis(teks) {
   let t = String(teks || '').trim().toLowerCase();
   t = t.replace(/^(ekor|buah|biji|batang|lembar|orang|potong)\s+/, '');
   const m = t.match(/^(\S+)-\1$/); // kelinci-kelinci → kelinci, tetapi kupu-kupu tetap
-  return m && !KATA_ULANG_TETAP.has(t) ? m[1] : t;
+  t = m && !KATA_ULANG_TETAP.has(t) ? m[1] : t;
+  // Retain the teacher's generic human labels; specific sprites and synonyms
+  // share a stable identity so "macan" then "harimau" edits the same group.
+  return ['orang', 'manusia', 'seseorang', 'teman', 'anak', 'murid', 'siswa', 'adik', 'kakak', 'laki-laki'].includes(t) ? t : idAset(t) || t;
 }
 
 // Hanya terima satu emoji pendek, bukan teks bebas dari model.
@@ -45,8 +50,59 @@ export function emojiSah(e) {
 const batasi = (n, min, max) => Math.max(min, Math.min(Math.round(Number(n) || 0), max));
 const tokenisasi = (teks) => teks.toLowerCase().match(/\w+(?:-\w+)*/g) || [];
 
+export class GalatFormatAdegan extends Error {
+  constructor() {
+    super('Format jawaban adegan tidak valid. Coba kalimat yang lebih sederhana.');
+    this.name = 'GalatFormatAdegan';
+    this.code = 'INVALID_SCENE';
+  }
+}
+
+// The provider's JSON-only mode is not a schema validator. Validate container and
+// scalar types before mapping, coercion or clamping; optional legacy fields keep
+// their defaults, but malformed arrays/records are never treated as a scene.
+export function validasiAdegan(h) {
+  const record = (x) => x !== null && typeof x === 'object' && !Array.isArray(x);
+  const scalar = (x, k, tipe) => x[k] === undefined || (typeof x[k] === tipe && (tipe !== 'number' || Number.isFinite(x[k]) && Number.isInteger(x[k])));
+  if (!record(h)) throw new GalatFormatAdegan();
+  for (const k of ['entitas', 'peristiwa']) {
+    if (h[k] === undefined) continue;
+    if (!Array.isArray(h[k]) || h[k].length > 200) throw new GalatFormatAdegan();
+    for (const x of h[k]) {
+      const teks = k === 'entitas' ? ['jenis', 'aksi', 'posisi', 'emoji', 'emoji_acuan'] : ['tipe', 'target', 'posisi', 'aksi', 'aksi_awal'];
+      if (!record(x) || teks.some((nama) => !scalar(x, nama, 'string'))
+        || !scalar(x, 'jumlah', 'number') || k === 'entitas' && !scalar(x, 'bagi', 'number')) throw new GalatFormatAdegan();
+    }
+  }
+  for (const k of ['latar', 'konsep', 'pertanyaan', 'tanya_benda', 'tanya_jenis']) if (!scalar(h, k, 'string')) throw new GalatFormatAdegan();
+  if (!scalar(h, 'gabung', 'boolean')) throw new GalatFormatAdegan();
+  return h;
+}
+
+/** Unsupported scope must be reviewed, never silently converted into a positive command. */
+export function alasanTinjau(kalimat) {
+  const teks = String(kalimat || '');
+  if (/\b(jangan|tidak|tak|bukan|belum|tanpa)\b/i.test(teks)) return { code: 'NEGATION_SCOPE', message: 'Kalimat memuat penyangkalan. Tulis ulang perubahan yang ingin ditampilkan.' };
+  if (/\b(jika|kalau|andaikan|seandainya|misalnya|apabila)\b/i.test(teks)) return { code: 'CONDITIONAL_COMMAND', message: 'Kalimat bersyarat perlu diperjelas sebelum mengubah papan.' };
+  if (/["“”‘’]|'[^']+'/.test(teks)) return { code: 'QUOTED_COMMAND', message: 'Kalimat kutipan perlu diperjelas sebelum mengubah papan.' };
+  return null;
+}
+
 export function rapikan(h, kalimat, konteks = '') {
+  validasiAdegan(h);
+  const tinjau = alasanTinjau(kalimat);
+  if (tinjau) return { ...kosong, entitas: [], peristiwa: [], needsConfirmation: true, notice: { ...tinjau, unresolvedSpans: [String(kalimat)] } };
   const hasil = { ...kosong, ...h };
+  const penyesuaian = [];
+  const labelKonteks = String(konteks).split(/,\s*(?![^()]*\))/)
+    .map((s) => s.match(/^\s*(.+?)\s*:\s*\d+/)?.[1]?.trim()).filter(Boolean);
+  const identitas = (s) => idAset(s) || s;
+  const targetKonteks = (s) => {
+    const nama = normalkanJenis(s);
+    if (labelKonteks.includes(nama)) return nama;
+    const cocok = labelKonteks.filter((label) => identitas(label) === identitas(nama));
+    return cocok.length === 1 ? cocok[0] : nama;
+  };
   hasil.latar = String(hasil.latar || '').trim().toLowerCase();
   const kata = new Set(tokenisasi(kalimat));
 
@@ -60,27 +116,42 @@ export function rapikan(h, kalimat, konteks = '') {
     else if (TEMPAT_BUKAN_ACUAN.has(acuan)) posisi = '';
     // LLM kadang mengarang aksi ("kue berenang"); aksi dipakai hanya jika kata kerjanya diucapkan.
     const aksi = [...kata].some((k) => AKSI_KE_ENUM[k] === e.aksi) ? e.aksi : 'diam';
+    if (e.aksi && e.aksi !== aksi) penyesuaian.push({ field: 'aksi', target: jenis, requested: e.aksi, applied: aksi });
     const bagi = batasi(e.bagi, 0, 12);
+    const jumlah = batasi(e.jumlah, 1, 20);
+    if (e.jumlah !== undefined && e.jumlah !== jumlah) penyesuaian.push({ field: 'jumlah', target: jenis, requested: e.jumlah, applied: jumlah });
+    if (e.bagi !== undefined && e.bagi !== bagi) penyesuaian.push({ field: 'bagi', target: jenis, requested: e.bagi, applied: bagi });
+    if (!jenis) penyesuaian.push({ field: 'entitas', target: '', requested: 'tanpa nama benda', applied: 'diabaikan' });
     return {
-      jenis, jumlah: batasi(e.jumlah, 1, 20), aksi, posisi, bagi: bagi >= 2 ? bagi : 0,
+      jenis, jumlah, aksi, posisi, bagi: bagi >= 2 ? bagi : 0,
       emoji: emojiSah(e.emoji), emoji_acuan: posisi ? emojiSah(e.emoji_acuan) : '',
     };
   }).filter((e) => e.jenis);
 
   hasil.peristiwa = (hasil.peristiwa || [])
-    .filter((p) => TIPE_PERISTIWA.includes(p.tipe))
+    .filter((p) => {
+      if (TIPE_PERISTIWA.includes(p.tipe)) return true;
+      penyesuaian.push({ field: 'peristiwa', target: normalkanJenis(p.target), requested: p.tipe || 'tanpa operasi', applied: 'diabaikan' });
+      return false;
+    })
     .map((p) => {
       const gerak = p.tipe === 'pindah' || p.tipe === 'ubah_aksi'; // jumlah 0 = semuanya
+      const jumlah = batasi(p.jumlah, gerak ? 0 : 1, p.tipe === 'bagi' ? 12 : 20);
+      if (p.jumlah !== undefined && p.jumlah !== jumlah) penyesuaian.push({ field: 'jumlah', target: normalkanJenis(p.target), requested: p.jumlah, applied: jumlah });
+      if (!normalkanJenis(p.target)) penyesuaian.push({ field: 'peristiwa', target: '', requested: 'tanpa target', applied: 'diabaikan' });
       const lagi = {
         tipe: p.tipe,
-        target: normalkanJenis(p.target),
-        jumlah: batasi(p.jumlah, gerak ? 0 : 1, 20),
+        target: targetKonteks(p.target),
+        jumlah,
         posisi: p.tipe === 'pindah' ? String(p.posisi || '').trim().toLowerCase() : '',
       };
       if (p.tipe === 'ubah_aksi') {
         // Gerakan di luar daftar menjadi "diam"; "menari" tidak boleh lolos sebagai aksi yang tidak bisa digambar.
-        lagi.aksi = AKSI.includes(p.aksi) ? p.aksi : 'diam';
-        lagi.aksi_awal = AKSI.includes(p.aksi_awal) ? p.aksi_awal : '';
+        lagi.aksi = AKSI.includes(p.aksi) && (p.aksi === 'diam' || [...kata].some((k) => AKSI_KE_ENUM[k] === p.aksi)) ? p.aksi : 'diam';
+        // The utterance must identify an old action used to select a subgroup.
+        lagi.aksi_awal = AKSI.includes(p.aksi_awal) && (p.aksi_awal === 'diam' || [...kata].some((k) => AKSI_KE_ENUM[k] === p.aksi_awal)) ? p.aksi_awal : '';
+        if (p.aksi && p.aksi !== lagi.aksi) penyesuaian.push({ field: 'aksi', target: lagi.target, requested: p.aksi, applied: lagi.aksi });
+        if (p.aksi_awal && p.aksi_awal !== lagi.aksi_awal) penyesuaian.push({ field: 'aksi_awal', target: lagi.target, requested: p.aksi_awal, applied: lagi.aksi_awal });
       }
       return lagi;
     })
@@ -100,15 +171,15 @@ export function rapikan(h, kalimat, konteks = '') {
   // Benda yang berubah sering ikut ditulis di "entitas" ("satu kelinci lagi datang").
   // Itu bukan benda baru jika benda itu memang sudah ada di papan. Jika belum ada
   // ("Ibu membeli lima apel, lalu memberi dua apel lagi"), entitas harus dipertahankan.
-  const adaDiPapan = new Set(String(konteks).split(',').map((x) => x.split(':')[0].trim()).filter(Boolean));
-  const target = new Set(hasil.peristiwa.map((p) => p.target));
-  hasil.entitas = hasil.entitas.filter((e) => !(target.has(e.jenis) && adaDiPapan.has(e.jenis)));
+  const adaDiPapan = new Set(labelKonteks.map(identitas));
+  const target = new Set(hasil.peristiwa.map((p) => identitas(p.target)));
+  hasil.entitas = hasil.entitas.filter((e) => !(target.has(identitas(e.jenis)) && adaDiPapan.has(identitas(e.jenis))));
 
   // Model kadang melaporkan satu kejadian dua kali: "kelinci yang datang sebanyak 3" menjadi
   // entitas kelinci 3 DAN tambah kelinci 3 (hasilnya 6). Jika bendanya belum ada di papan dan
   // jumlahnya sama, itu satu kejadian, kecuali kalimat jelas memuat dua peristiwa ("lalu", "lagi").
   if (!KATA_DUA_PERISTIWA.test(String(kalimat))) {
-    hasil.peristiwa = hasil.peristiwa.filter((p) => !(p.tipe === 'tambah' && !adaDiPapan.has(p.target)
+    hasil.peristiwa = hasil.peristiwa.filter((p) => !(p.tipe === 'tambah' && !adaDiPapan.has(identitas(p.target))
       && hasil.entitas.some((e) => e.jenis === p.target && e.jumlah === p.jumlah)));
   }
   // "gabung" hanya dari kata yang jelas (terukur: model menandai kalimat pembuka adegan baru sebagai gabung
@@ -124,5 +195,14 @@ export function rapikan(h, kalimat, konteks = '') {
   hasil.pertanyaan = String(hasil.pertanyaan || '').trim();
   hasil.tanya_jenis = hasil.pertanyaan && TANYA_JENIS.includes(h.tanya_jenis) ? h.tanya_jenis : 'tidak_ada';
   hasil.tanya_benda = normalkanJenis(hasil.tanya_benda);
-  return hasil;
+  if (penyesuaian.length) {
+    hasil.needsConfirmation = true;
+    const dibatasi = penyesuaian.some((p) => p.field === 'jumlah' || p.field === 'bagi');
+    hasil.notice = {
+      code: dibatasi ? 'LIMITED_QUANTITY' : 'UNSUPPORTED_OPERATION',
+      message: penyesuaian.map((p) => `${p.target || 'Benda/operasi'}: ${p.requested} → ${p.applied}`).join('; ') + '. Periksa pratinjau atau perbaiki kalimat sebelum menampilkan.',
+      unresolvedSpans: [], adjustments: penyesuaian,
+    };
+  }
+  return landaskanAdegan(hasil, kalimat, konteks);
 }

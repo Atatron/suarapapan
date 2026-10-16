@@ -4,9 +4,9 @@
 // apa yang akan diucapkan ("gurita", "kuda nil", "kerbau" sering salah), tidak
 // jalan di browser selain Chrome, dan tidak tahu konteks adegan. Di sini model
 // menerima daftar kosakata papan + adegan saat ini sebagai petunjuk ejaan.
-import pustaka from '../src/scene/pustaka.json' with { type: 'json' };
-import { panggilGemini, GalatUrai, SKEMA, SISTEM, CONTOH, rapikan } from './_urai.js';
-import { adaUcapan, wavKePcm } from '../src/lib/wav.js';
+import { katalogAset, katalogLatar } from '../src/scene/katalog.js';
+import { panggilGemini, GalatUrai, SKEMA, SISTEM, CONTOH, olahAdeganModel } from './_urai.js';
+import { deteksiUcapan, wavKePcm } from '../src/lib/wav.js';
 
 // ada_ucapan ditulis lebih dulu: model memutuskan apakah ada ucapan manusia
 // sebelum menulis apa pun, supaya derau tidak dikarang menjadi kalimat.
@@ -37,8 +37,7 @@ const ANGKA = ['satu', 'dua', 'tiga', 'empat', 'lima', 'enam', 'tujuh', 'delapan
 /** Kata yang mungkin diucapkan guru: nama benda, tempat, kata kerja, bilangan. */
 export function kosakata() {
   const kata = [
-    ...Object.keys(pustaka.obj).map((s) => s.replace(/-/g, ' ')),
-    ...Object.keys(pustaka.tempat).map((s) => s.replace(/-/g, ' ')),
+    ...[...katalogAset, ...katalogLatar].flatMap((a) => a.aliases.map((s) => s.replace(/-/g, ' '))),
     ...KATA_KERJA, ...ANGKA,
   ];
   return [...new Set(kata)];
@@ -98,13 +97,15 @@ export function pecahKalimat(teks) {
 export async function transkripsiGemini({ audio, mime = 'audio/wav', konteks = 'kosong', urai = false }, opsi = {}) {
   if (typeof audio !== 'string' || !audio) throw new GalatUrai('Rekaman kosong.', 400);
   if (audio.length > BATAS_BASE64) throw new GalatUrai('Rekaman terlalu panjang. Ucapkan lebih singkat.', 413);
-  // Rekaman tanpa ledakan energi ucapan tidak dikirim ke model sama sekali: model
-  // kadang mengarang kalimat dari rekaman sunyi (terukur), dan ini menghemat kuota.
-  if (mime === 'audio/wav' || mime === 'audio/x-wav') {
-    const w = wavKePcm(Buffer.from(audio, 'base64'));
-    if (w && !adaUcapan(w.pcm, { laju: w.laju, minimum: 0.01 }).ada) {
-      return { transkrip: '', kalimat: [], tanpaUcapan: true, sumber: 'vad', ms: 0 };
-    }
+  // Tolak input yang tidak bisa diperiksa; format lain tidak boleh melewati VAD.
+  if (!['audio/wav', 'audio/x-wav'].includes(mime) || audio.length % 4 || !/^[A-Za-z0-9+/]*={0,2}$/.test(audio)) {
+    throw new GalatUrai('Format rekaman tidak valid. Gunakan WAV PCM mono 16-bit.', 400);
+  }
+  const w = wavKePcm(Buffer.from(audio, 'base64'));
+  if (!w) throw new GalatUrai('Format rekaman WAV tidak valid atau terpotong.', 400);
+  if (w.pcm.length > w.laju * 30) throw new GalatUrai('Rekaman terlalu panjang. Maksimal 30 detik.', 413);
+  if (!(await deteksiUcapan(w.pcm, { laju: w.laju, minimum: 0.01 })).ada) {
+    return { transkrip: '', kalimat: [], tanpaUcapan: true, sumber: 'vad', ms: 0 };
   }
   const contents = [{
     role: 'user',
@@ -126,7 +127,7 @@ export async function transkripsiGemini({ audio, mime = 'audio/wav', konteks = '
       // yang salah (terukur dalam uji). Kalimat-kalimat itu diurai satu per satu oleh klien.
       if (urai && kalimat.length === 1) {
         const { transkrip: _t, ada_ucapan: _a, ...adegan } = mentah;
-        hasil.hasil = rapikan(adegan, kalimat[0], String(konteks));
+        hasil.hasil = olahAdeganModel(adegan, kalimat[0], String(konteks));
       }
       return hasil;
     },

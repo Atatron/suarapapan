@@ -4,6 +4,8 @@
 // adegan sebelumnya.
 
 export const BATAS_OBJEK = 20;
+// Animasi keluar tidak memakan jatah benda aktif, tetapi tetap dibatasi sendiri.
+export const BATAS_ANIMASI_KELUAR = BATAS_OBJEK;
 
 export const ADEGAN_KOSONG = Object.freeze({
   objek: [],
@@ -16,7 +18,14 @@ export const ADEGAN_KOSONG = Object.freeze({
 let nomor = 0;
 const idBaru = () => `o${Date.now().toString(36)}${(nomor++).toString(36)}`;
 const AKSI_SAH = ['diam', 'lari', 'lompat', 'terbang', 'berenang', 'jatuh'];
-const batasi = (n) => Math.max(1, Math.min(Number(n) || 1, BATAS_OBJEK));
+const jumlahDiminta = (n) => Number.isFinite(Number(n)) ? Math.max(1, Math.floor(Number(n) || 1)) : 1;
+const batasi = (n) => Math.min(jumlahDiminta(n), BATAS_OBJEK);
+
+function batasiAnimasiKeluar(objek) {
+  let keluar = objek.filter((o) => o.status === 'pergi').length;
+  // Pertahankan animasi yang paling baru; snapshot sebelumnya tidak diubah.
+  return objek.filter((o) => o.status !== 'pergi' || keluar-- <= BATAS_ANIMASI_KELUAR);
+}
 
 export const yangAda = (adegan, jenis) =>
   adegan.objek.filter((o) => o.status !== 'pergi' && (!jenis || o.jenis === jenis));
@@ -82,7 +91,13 @@ export function terapkan(adegan, hasil, opsi = {}) {
   const totalSebelum = jumlahSemua(kelSebelum);
   let dihapusTotal = 0;
   let ditambahTotal = 0;
+  const perubahanHitung = [];
+  let dasarHitung = totalSebelum;
+  let kelompokDasar = kelSebelum;
   const jenisBaru = new Set(); // jenis yang baru masuk ke papan yang sudah berisi karakter lain
+  const catatBatas = (jenis, diminta, diterapkan) => {
+    if (diterapkan < diminta) catatan.push(`Papan dibatasi ${BATAS_OBJEK} benda aktif: diminta ${diminta} ${jenis}, hanya ${diterapkan} ditambahkan.`);
+  };
 
   if (entitas.length) {
     // Kalimat yang memperkenalkan benda baru memulai adegan baru. Jika kalimat yang
@@ -97,23 +112,30 @@ export function terapkan(adegan, hasil, opsi = {}) {
     const pernyataanKeadaan = gabung && !hasil?.tambahEksplisit && !hasil?.gabung && entitas.length >= 2
       && entitas.some((e) => !kelSebelum.some((k) => k.jenis === e.jenis));
     for (const e of entitas) {
-      let n = batasi(e.jumlah);
+      let n = jumlahDiminta(e.jumlah);
       if (pernyataanKeadaan) {
         const sudah = kelSebelum.find((k) => k.jenis === e.jenis)?.n ?? 0;
         n = Math.max(0, n - sudah);
       }
       let masuk = 0;
-      for (let i = 0; i < n && objek.length < BATAS_OBJEK; i++, masuk++) {
+      const ruang = BATAS_OBJEK - yangAda({ objek }).length;
+      for (let i = 0; i < Math.min(n, ruang); i++, masuk++) {
         const o = { id: idBaru(), jenis: e.jenis, aksi: e.aksi || 'diam', posisi: e.posisi || '', status: 'datang' };
         if (e.emoji) o.emoji = e.emoji;
         if (e.emoji_acuan) o.emojiAcuan = e.emoji_acuan;
         if (e.bagi >= 2) Object.assign(o, { bagi: Math.min(e.bagi, 12), diambil: 0 });
         objek.push(o);
       }
+      catatBatas(e.jenis, n, masuk);
       if (gabung && totalSebelum > 0) {
         ditambahTotal += masuk;
+        perubahanHitung.push({ tanda: '+', n: masuk, jenis: e.jenis });
         if (!kelSebelum.some((k) => k.jenis === e.jenis)) jenisBaru.add(e.jenis);
       }
+    }
+    if (!gabung) {
+      kelompokDasar = kelompokJenis({ objek });
+      dasarHitung = jumlahSemua(kelompokDasar);
     }
     if (objek.some((o) => o.bagi)) konsep = 'pecahan';
   }
@@ -122,14 +144,17 @@ export function terapkan(adegan, hasil, opsi = {}) {
   // sudah ada) sama artinya dengan penjumlahan: dicatat di sini untuk penjelasan dan alternatif.
   const tambahan = jenisTambahan(adegan, hasil, gabung);
   if (tambahan && entitas.length) {
-    penjelasan.push(`${tambahan.sebelum} ${tambahan.jenis} + ${tambahan.n} ${tambahan.jenis} yang datang = ${tambahan.sebelum + tambahan.n}.`);
+    penjelasan.push(`${tambahan.sebelum} ${tambahan.jenis} + ${ditambahTotal} ${tambahan.jenis} yang datang = ${tambahan.sebelum + ditambahTotal}.`);
   } else if (gabung && entitas.length && yangAda(adegan).length) {
-    for (const e of entitas) penjelasan.push(`${batasi(e.jumlah)} ${e.jenis} dimasukkan ke papan.`);
+    for (const e of entitas) {
+      const masuk = objek.filter((o) => o.jenis === e.jenis && o.status === 'datang').length;
+      penjelasan.push(`${masuk} ${e.jenis} dimasukkan ke papan.`);
+    }
   }
 
   for (const p of peristiwa) {
     const sebelum = yangAda({ objek }, p.target).length;
-    const n = batasi(p.jumlah);
+    const n = jumlahDiminta(p.jumlah);
 
     if (p.tipe === 'hapus') {
       if (!sebelum) {
@@ -143,8 +168,10 @@ export function terapkan(adegan, hasil, opsi = {}) {
           dihapus++;
         }
       }
-      if (dihapus < n) catatan.push(`Hanya ada ${sebelum} ${p.target}, jadi hanya ${dihapus} yang dihapus.`);
+      if (dihapus < n) catatan.push(`Hanya ada ${sebelum} ${p.target}; dari ${n} yang diminta, hanya ${dihapus} dihapus.`);
       dihapusTotal += dihapus;
+      perubahanHitung.push({ tanda: '−', n: dihapus, jenis: p.target });
+      objek = batasiAnimasiKeluar(objek);
       konsep = 'pengurangan';
       soal = { teks: `${sebelum} − ${dihapus} = ?`, jawaban: sebelum - dihapus };
     }
@@ -208,14 +235,16 @@ export function terapkan(adegan, hasil, opsi = {}) {
     if (p.tipe === 'tambah') {
       const contoh = objek.find((o) => o.jenis === p.target);
       let ditambah = 0;
-      for (let i = 0; i < n && objek.length < BATAS_OBJEK; i++, ditambah++) {
+      const ruang = BATAS_OBJEK - yangAda({ objek }).length;
+      for (let i = 0; i < Math.min(n, ruang); i++, ditambah++) {
         const o = { id: idBaru(), jenis: p.target, aksi: contoh?.aksi || 'diam', posisi: contoh?.posisi || '', status: 'datang' };
         if (contoh?.emoji) o.emoji = contoh.emoji;
         if (contoh?.emojiAcuan) o.emojiAcuan = contoh.emojiAcuan;
         objek.push(o);
       }
-      if (ditambah < n) catatan.push(`Papan dibatasi ${BATAS_OBJEK} benda.`);
+      catatBatas(p.target, n, ditambah);
       ditambahTotal += ditambah;
+      perubahanHitung.push({ tanda: '+', n: ditambah, jenis: p.target });
       if (sebelum === 0 && totalSebelum > 0) jenisBaru.add(p.target);
       if (sebelum > 0) {
         konsep = 'penjumlahan';
@@ -233,20 +262,19 @@ export function terapkan(adegan, hasil, opsi = {}) {
   // Kalimat yang memulai adegan baru (entitas tanpa gabung) tidak memakai isi papan yang lama.
   const gantiAdegan = entitas.length > 0 && !gabung;
   const campur = kelSebelum.length >= 2 || jenisBaru.size > 0;
-  if (hitungSemua && !gantiAdegan && totalSebelum > 0 && (campur || (tambahan && entitas.length))) {
-    if (dihapusTotal > 0) {
-      konsep = 'pengurangan';
-      const sisa = totalSebelum - dihapusTotal;
-      soal = { teks: `${totalSebelum} − ${dihapusTotal} = ?`, jawaban: sisa, rincian: kelSebelum };
-      penjelasan.length = 0;
-      penjelasan.push(`${totalSebelum} karakter di papan − ${dihapusTotal} yang pergi = ${sisa}.`);
-    } else if (ditambahTotal > 0) {
-      konsep = 'penjumlahan';
-      const kelSesudah = kelompokJenis({ objek });
-      soal = { teks: `${totalSebelum} + ${ditambahTotal} = ?`, jawaban: totalSebelum + ditambahTotal, rincian: kelSesudah };
-      penjelasan.length = 0;
-      penjelasan.push(`${totalSebelum} karakter di papan + ${ditambahTotal} yang masuk = ${totalSebelum + ditambahTotal}.`);
-    }
+  const hitungGabungan = !gantiAdegan && totalSebelum > 0 && (campur || (tambahan && entitas.length));
+  const satuJenis = perubahanHitung.length > 1 && perubahanHitung.every((p) => p.jenis === perubahanHitung[0].jenis);
+  if (perubahanHitung.length && (hitungSemua ? hitungGabungan || perubahanHitung.length > 1 : satuJenis)) {
+    konsep = dihapusTotal > 0 ? 'pengurangan' : 'penjumlahan';
+    const kelSesudah = kelompokJenis({ objek });
+    const jenis = hitungSemua ? '' : perubahanHitung[0].jenis;
+    const awal = jenis ? kelompokDasar.find((k) => k.jenis === jenis)?.n ?? 0 : dasarHitung;
+    const jawaban = jenis ? yangAda({ objek }, jenis).length : jumlahSemua(kelSesudah);
+    const operasi = perubahanHitung.map(({ tanda, n }) => `${tanda} ${n}`).join(' ');
+    soal = { teks: `${awal} ${operasi} = ?`, jawaban, rincian: dihapusTotal > 0 ? kelompokDasar : kelSesudah };
+    penjelasan.length = 0;
+    const langkah = perubahanHitung.map(({ tanda, n }) => `${tanda} ${n} yang ${tanda === '−' ? 'pergi' : 'masuk'}`).join(' ');
+    penjelasan.push(`${awal} ${jenis || 'karakter'} di papan ${langkah} = ${jawaban}.`);
   }
 
   // Pertanyaan guru. tanya_jenis: benda (satu jenis), total, selisih, terbanyak, tersedikit.

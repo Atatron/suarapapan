@@ -112,12 +112,12 @@ karakter ke papan** (192 karakter, cari lalu klik) · kotak centang untuk mode g
    benda, aksi, tempat, posisi, dan peristiwa dalam kalimat guru. Median 8 ms di laptop (±100× lebih
    cepat dari LLM 7B pada uji kami), dan bisa berjalan tanpa internet. Versi online memakai Gemini; keduanya
    menghasilkan JSON yang sama.
-3. **Tanpa gambar kejutan.** Semua ilustrasi (192 karakter, 32 latar) dibuat dan dikurasi **sebelumnya**,
+3. **Tanpa gambar kejutan.** Semua ilustrasi (410 objek/karakter, 127 elemen tempat, 32 latar) dibuat dan dikurasi **sebelumnya**,
    tidak dibuat saat kelas berjalan. Cepat, konsisten, dan aman untuk siswa yang peka terhadap perubahan.
 4. **Guru memegang kendali.** Tidak ada yang tampil ke siswa tanpa persetujuan guru (kecuali mode otomatis
    yang dipilih guru), dan setiap perubahan bisa dibatalkan.
-5. **Pengaman terhadap kesalahan AI.** Suara yang tidak berisi ucapan ditolak sebelum menyentuh model,
-   dan hasil model dirapikan dengan aturan yang bisa diuji.
+5. **Pengaman terhadap kesalahan AI.** Rekaman disaring secara lokal dengan WebRTC VAD dan pemeriksaan derau sebelum dikirim untuk transkripsi.
+   Hasil model divalidasi terhadap skema, kalimat, dan katalog aset; tafsiran ragu wajib ditinjau. Derau kelas nyata masih perlu diuji.
 
 ---
 
@@ -223,16 +223,39 @@ Kami lebih suka juri mendengarnya dari kami:
 3. **Belum ada uji coba dengan guru dan siswa nyata.** Pilot di SLB B dan SD inklusi ada di rencana.
 4. **Pengenalan suara belum bisa offline.** Pemahaman kalimat (IndoBERT) bisa lokal, tetapi suara ke teks
    masih butuh internet. Mode offline dengan `faster-whisper` baru rencana.
-5. **Versi online memakai Gemini tingkat gratis**, yang hanya mengizinkan sekitar **20 permintaan per hari per model**
-   dan kadang lambat (sampai belasan detik). Kami menutupnya dengan aturan lokal di browser (pola sederhana tidak
-   memakai kuota sama sekali) dan cache jawaban yang sama; kalimat yang rumit tetap butuh Gemini. Sekolah sungguhan
-   sebaiknya memakai tingkat berbayar.
-6. **Cakupan:** matematika kelas 1–3. Kata di luar pustaka tampil sebagai emoji.
+5. **Versi online tunduk pada kuota layanan Gemini.** Batas bergantung pada model dan akun. Aturan lokal di browser
+   menangani pola sederhana tanpa kuota; kalimat yang memerlukan model diperiksa guru sebelum ditampilkan.
+   Galat kuota/jaringan mempertahankan kalimat dan menyediakan jalur ketik untuk melanjutkan pelajaran.
+6. **Cakupan:** matematika kelas 1–3. Subjek di luar katalog mempertahankan papan dan meminta kalimat diperjelas. SVG/emoji berlabel tetap tersedia sebagai pemulihan jika file gambar gagal dimuat.
 7. **Gambar pose gerak** (berlari, terbang) belum dibuat; alat pemotongnya sudah (`tools/bangun_aksi.py`).
    Saat ini gerakan memakai animasi sederhana.
 8. **Jalur lokal (Python/Ollama)** belum mengenal pertanyaan *total/selisih/paling banyak*; versi online sudah.
 
 ---
+
+## Alur guru dan perbaikan audit
+
+1. **Masukkan kalimat** lewat ketikan atau tahan tombol bicara.
+2. **Periksa pratinjau**: jenis, jumlah, letak, serta catatan batas/ketidakpastian.
+   Mode otomatis hanya berlaku untuk hasil yang pasti. Koreksi, tafsiran ragu,
+   serta seluruh rangkaian pratinjau yang bergantung padanya tetap perlu persetujuan.
+3. **Tampilkan di papan**. Batalkan/Ulangi, Bersihkan, dan perubahan manual
+   membatalkan permintaan lama sehingga hasil terlambat tidak mengambil alih papan.
+
+Gunakan **Buka papan kelas ini**. URL `?sesi=...` memisahkan kelas; panel guru
+terbaru pada sesi yang sama mengambil alih kendali. Sambungan memakai
+BroadcastChannel pada **browser, profil, origin, dan perangkat yang sama**.
+Papan, caption, serta riwayat disimpan secara lokal sampai tujuh hari untuk
+pemulihan saat muat ulang. Rekaman audio tidak ikut disimpan.
+**Latar sederhana** menampilkan papan hijau dengan garis tepi sprite.
+
+Rekaman untuk transkripsi aplikasi melewati filter WAV lokal dan server.
+Caption langsung Web Speech memakai jalur vendor browser yang terpisah;
+filter WAV ini tidak menjamin seluruh lalu lintas pengenal browser ikut tersaring.
+Kegagalan izin/perangkat menyisakan kolom ketik sebagai jalur melanjutkan pelajaran.
+
+Lihat [audit dan status perbaikan](docs/audit/2026-10-16-voice-scene-audit.md).
+Perbaikan diverifikasi lokal. Investigasi/deployment Vercel ditunda atas permintaan pengguna.
 
 ## Untuk pengembang
 
@@ -240,7 +263,7 @@ Kami lebih suka juri mendengarnya dari kami:
 |---|---|
 | `web/` | Aplikasi: React + Vite. `src/guru`, `src/papan`, `src/scene` (mesin adegan, latar, pustaka), `src/lib` (suara); `api/` fungsi serverless Vercel (`parse`, `transkripsi`, `kesehatan`); `public/aset` (gambar) |
 | `ml/` | IndoBERT: `buat_dataset.py`, `latih_ner.py`, `ner.py`, `evaluasi.py`; server lokal `serve.py`; `hasil/` |
-| `tools/` | Pembuat aset: `bangun_aset.py` (sprite sheet → 192 karakter), `bangun_latar.py` (32 latar + pasangan karakter), `bangun_aksi.py` |
+| `tools/` | Pembuat aset: `bangun_aset.py` (sprite sheet → pustaka gambar), `bangun_latar.py` (32 latar + pasangan karakter), `bangun_aksi.py` |
 | `tests/` | Kalimat uji (40 + 51 + 45 + 41 untuk aturan lokal) dan kalimat guru asli |
 | `docs/` | Proses, tangkapan layar, materi pengajuan |
 | `video/` | Sumber video demo (dibuat dengan kode) |
@@ -286,3 +309,25 @@ Server memakai IndoBERT lebih dulu; jika keyakinannya di bawah 85%, kalimat dite
 
 *SuaraPapan dibuat untuk Hackathon Dies Natalis ke-71 FMIPA UGM 2026. Ilustrasi dibuat dengan alat
 generatif dan dikurasi tim. Belum ada lisensi terbuka yang ditetapkan.*
+
+### Katalog dan validasi regresi
+
+`web/src/scene/sinonim.json` menyimpan sinonim yang didukung. Katalog kanonik
+`katalog.json` dibangkitkan dari pustaka/file nyata dan pemetaan 39 sprite sheet;
+browser, prompt Gemini, server lokal, dan pembuat data memakai katalog ini.
+Nama paling spesifik menang; subjek asing tidak diganti dengan benda yang mirip.
+
+```powershell
+node tools/bangun_katalog.mjs --check
+npm --prefix web test
+npm --prefix web run build
+python -m unittest discover -s ml -p "test_*.py"
+python -m unittest discover -s tools -p "test_*.py" # perlu NumPy + Pillow + SciPy
+```
+
+Untuk mengubah sinonim, jalankan `node tools/bangun_katalog.mjs`, lalu
+`python ml/buat_dataset_aset.py`. Dataset baru adalah kalimat sintetis dengan
+keluarga kalimat validasi/uji terpisah; ini bukan hasil pengujian guru asli.
+`python ml/persiapan_latih.py` memeriksa dependensi/bobot tanpa mengunduh model.
+Belum ada bobot IndoBERT baru yang dilatih pada perubahan ini. Pelatihan opsional
+memerlukan paket ML dan dijalankan terpisah melalui `--train`.

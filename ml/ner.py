@@ -15,6 +15,7 @@ KATA_HITUNG = {"hitung", "hitunglah", "menghitung", "dihitung", "cacah"}
 KATA_BAGI = {"dibagi", "membagi", "dibelah", "membelah", "dipotong", "memotong", "bagi"}
 
 from bahasa import AKSI_KE_ENUM, kata_ke_angka, normalkan_benda, tipe_peristiwa, tokenisasi
+from katalog import id_aset
 
 MODEL_DEFAULT = Path(__file__).parent / "model" / "indobert-suarapapan"
 BATAS = 20
@@ -120,7 +121,7 @@ def susun_json(kata, label, prob, konteks: str) -> dict:
     entitas = [{"jenis": j, "jumlah": max(1, min(n or 1, BATAS)), "aksi": aksi_enum, "posisi": teks_posisi} for j, n in pasangan]
     return {
         "entitas": entitas,
-        "latar": tempat[1][-1] if tempat else "",
+        "latar": (id_aset(' '.join(tempat[1]), 'tempat') or ' '.join(tempat[1])) if tempat else "",
         "konsep": "posisi" if teks_posisi else "membilang",
         "peristiwa": [], "pertanyaan": "",
     }

@@ -1,0 +1,952 @@
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "ayam"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "ayam"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "bebek"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "bebek"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "sapi"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "sapi"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "kambing"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "kambing"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "domba"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "domba"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "kuda"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "kuda"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "babi"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "babi"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "kerbau"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "kerbau"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "angsa"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "angsa"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "anjing"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "anjing"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "kucing"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "kucing"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "kelinci"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "kelinci"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "harimau"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "harimau"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "singa"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "singa"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "gajah"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "gajah"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "monyet"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "monyet"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "gorila"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "gorila"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "jerapah"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "jerapah"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "zebra"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "zebra"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "beruang"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "beruang"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "ular"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "ular"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "buaya"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "buaya"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "badak"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "badak"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "kuda", "nil"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "kuda-nil"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "ikan"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "ikan"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "lumba", "lumba"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "lumba-lumba"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "paus"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "paus"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "hiu"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "hiu"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "gurita"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "gurita"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "kepiting"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "kepiting"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "udang"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "udang"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "penyu"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "penyu"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "ubur", "ubur"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "ubur-ubur"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "bintang", "laut"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "bintang-laut"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "kuda", "laut"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "kuda-laut"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "cumi", "cumi"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "cumi-cumi"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "burung"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "burung"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "elang"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "elang"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "burung", "hantu"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "burung-hantu"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "merpati"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "merpati"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "merak"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "merak"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "kakatua"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "kakatua"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "penguin"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "penguin"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "flamingo"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "flamingo"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "pelikan"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "pelikan"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "anak", "bebek"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "anak-bebek"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "burung", "unta"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "burung-unta"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "camar"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "camar"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "kupu", "kupu"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "kupu-kupu"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "lebah"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "lebah"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "semut"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "semut"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "kumbang"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "kumbang"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "kepik"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "kepik"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "belalang"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "belalang"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "capung"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "capung"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "laba", "laba"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "laba-laba"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "siput"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "siput"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "cacing"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "cacing"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "katak"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "katak"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "kura", "kura"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "kura-kura"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "anak", "laki", "laki"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "anak-laki-laki"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "anak", "perempuan"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "anak-perempuan"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "bayi"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "bayi"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "ibu"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "ibu"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "ayah"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "ayah"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "nenek"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "nenek"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "kakek"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "kakek"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "guru"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "guru"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "siswa", "berhijab"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "siswa-berhijab"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "dokter"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "dokter"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "polisi"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "polisi"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "petani"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "petani"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "nelayan"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "nelayan"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "koki"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "koki"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "pak", "pos"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "pak-pos"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "pemadam", "kebakaran"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "pemadam-kebakaran"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "pilot"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "pilot"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "sopir"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "sopir"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "penjual"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "penjual"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "anak", "kursi", "roda"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "anak-kursi-roda"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "anak", "dengan", "alat", "bantu", "dengar"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA", "I-BENDA", "I-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "anak-dengan-alat-bantu-dengar"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "anak", "tunanetra", "dengan", "tongkat"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA", "I-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "anak-tunanetra-dengan-tongkat"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "anak", "bermain", "bola"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "anak-bermain-bola"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "anak", "membaca"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "anak-membaca"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "apel"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "apel"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "pisang"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "pisang"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "jeruk"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "jeruk"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "mangga"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "mangga"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "anggur"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "anggur"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "semangka"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "semangka"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "stroberi"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "stroberi"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "nanas"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "nanas"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "kelapa"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "kelapa"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "pir"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "pir"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "ceri"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "ceri"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "alpukat"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "alpukat"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "wortel"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "wortel"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "jagung"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "jagung"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "tomat"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "tomat"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "terong"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "terong"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "cabai"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "cabai"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "timun"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "timun"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "brokoli"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "brokoli"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "kentang"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "kentang"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "bawang"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "bawang"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "jamur"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "jamur"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "kacang"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "kacang"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "bayam"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "bayam"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "nasi"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "nasi"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "roti"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "roti"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "kue"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "kue"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "pizza"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "pizza"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "donat"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "donat"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "telur"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "telur"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "es", "krim"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "es-krim"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "permen"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "permen"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "susu"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "susu"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "air"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "air"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "bakso"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "bakso"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "sate"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "sate"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "pensil"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "pensil"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "buku"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "buku"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "tas"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "tas"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "penghapus"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "penghapus"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "penggaris"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "penggaris"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "gunting"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "gunting"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "kertas"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "kertas"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "krayon"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "krayon"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "jam"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "jam"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "globe"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "globe"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "papan", "tulis", "kecil"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "papan-tulis-kecil"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "pulpen"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "pulpen"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "meja"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "meja"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "kursi"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "kursi"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "lampu"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "lampu"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "pintu"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "pintu"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "jendela"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "jendela"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "tempat", "tidur"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "tempat-tidur"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "sofa"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "sofa"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "piring"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "piring"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "gelas"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "gelas"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "sendok"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "sendok"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "ember"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "ember"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "keranjang"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "keranjang"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "mobil"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "mobil"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "bus"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "bus"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "motor"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "motor"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "sepeda"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "sepeda"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "kereta"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "kereta"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "pesawat"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "pesawat"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "helikopter"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "helikopter"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "kapal"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "kapal"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "perahu"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "perahu"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "truk"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "truk"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "ambulans"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "ambulans"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "roket"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "roket"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "pohon"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "pohon"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "bunga"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "bunga"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "matahari"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "matahari"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "bulan"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "bulan"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "awan"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "awan"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "hujan"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "hujan"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "pelangi"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "pelangi"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "bintang"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "bintang"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "batu"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "batu"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "gunung", "kecil"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "gunung-kecil"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "api"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "api"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "daun"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "daun"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "baju"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "baju"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "celana"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "celana"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "rok"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "rok"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "topi"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "topi"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "sepatu"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "sepatu"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "sandal"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "sandal"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "kaus", "kaki"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "kaus-kaki"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "kacamata"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "kacamata"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "tas", "kecil"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "tas-kecil"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "payung"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "payung"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "syal"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "syal"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "jaket"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "jaket"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "bola"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "bola"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "balon"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "balon"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "boneka"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "boneka"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "layang", "layang"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "layang-layang"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "kotak"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "kotak"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "lingkaran"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "lingkaran"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "segitiga"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "segitiga"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "persegi"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "persegi"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "hati"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "hati"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "koin"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "koin"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "kado"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "kado"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "bendera"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "bendera"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "piyik", "ayam"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "piyik-ayam"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "kelereng"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "kelereng"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "yoyo"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "yoyo"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "robot", "mainan"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "robot-mainan"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "mobil", "mainan"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "mobil-mainan"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "balok", "mainan"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "balok-mainan"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "keping", "puzel"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "keping-puzel"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "kubus", "rubik"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "kubus-rubik"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "pistol", "air"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "pistol-air"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "plastisin"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "plastisin"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "ketapel"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "ketapel"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "boneka", "beruang"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "boneka-beruang"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "figur", "aksi"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "figur-aksi"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "sapu"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "sapu"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "pel"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "pel"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "kemoceng"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "kemoceng"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "tempat", "sampah"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "tempat-sampah"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "sabun"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "sabun"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "sikat", "gigi"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "sikat-gigi"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "pasta", "gigi"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "pasta-gigi"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "sampo"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "sampo"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "handuk"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "handuk"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "spons"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "spons"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "sikat", "lantai"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "sikat-lantai"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "televisi"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "televisi"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "radio"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "radio"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "ponsel"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "ponsel"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "laptop"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "laptop"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "kipas", "angin"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "kipas-angin"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "kulkas"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "kulkas"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "setrika"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "setrika"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "senter"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "senter"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "mesin", "cuci"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "mesin-cuci"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "oven", "microwave"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "oven-microwave"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "kamera"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "kamera"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "gitar"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "gitar"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "piano"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "piano"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "drum"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "drum"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "seruling"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "seruling"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "biola"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "biola"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "terompet"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "terompet"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "harmonika"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "harmonika"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "angklung"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "angklung"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "tamborin"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "tamborin"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "pianika"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "pianika"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "saksofon"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "saksofon"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "harpa"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "harpa"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "bola", "basket"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "bola-basket"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "raket", "tenis"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "raket-tenis"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "kok"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "kok"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "peluit"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "peluit"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "piala"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "piala"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "medali"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "medali"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "kacamata", "renang"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "kacamata-renang"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "sepatu", "roda"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "sepatu-roda"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "pemukul", "bisbol"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "pemukul-bisbol"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "sarung", "tinju"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "sarung-tinju"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "papan", "selancar"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "papan-selancar"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "palu"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "palu"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "paku"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "paku"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "obeng"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "obeng"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "gergaji"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "gergaji"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "tang"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "tang"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "kuas"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "kuas"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "meteran"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "meteran"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "sekrup"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "sekrup"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "bor"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "bor"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "tangga"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "tangga"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "kunci", "inggris"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "kunci-inggris"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "kapak"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "kapak"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "biskuit"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "biskuit"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "cokelat"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "cokelat"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "keripik", "kentang"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "keripik-kentang"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "puding"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "puding"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "sosis"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "sosis"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "berondong", "jagung"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "berondong-jagung"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "es", "serut"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "es-serut"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "martabak", "manis"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "martabak-manis"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "permen", "lolipop"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "permen-lolipop"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "kerupuk", "udang"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "kerupuk-udang"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "gulali"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "gulali"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "donat", "jajanan"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "donat-jajanan"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "uang", "kertas"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "uang-kertas"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "dompet"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "dompet"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "troli", "belanja"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "troli-belanja"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "keranjang", "belanja"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "keranjang-belanja"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "tas", "belanja"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "tas-belanja"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "paket"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "paket"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "mesin", "kasir"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "mesin-kasir"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "timbangan"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "timbangan"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "celengan"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "celengan"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "kartu", "kredit"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "kartu-kredit"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "mesin", "atm"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "mesin-atm"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "jam", "tangan"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "jam-tangan"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "cincin"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "cincin"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "gelang"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "gelang"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "kalung"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "kalung"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "anting"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "anting"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "ikat", "pinggang"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "ikat-pinggang"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "dasi"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "dasi"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "pita", "rambut"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "pita-rambut"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "jepit", "rambut"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "jepit-rambut"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "bando"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "bando"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "kacamata", "hitam"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "kacamata-hitam"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "sepeda", "roda", "tiga"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "sepeda-roda-tiga"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "skuter"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "skuter"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "becak"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "becak"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "delman"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "delman"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "gerobak"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "gerobak"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "traktor"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "traktor"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "ekskavator"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "ekskavator"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "bajaj"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "bajaj"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "balon", "udara"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "balon-udara"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "rakit"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "rakit"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "kapal", "selam"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "kapal-selam"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "kereta", "gantung"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "kereta-gantung"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "panci"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "panci"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "wajan"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "wajan"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "ketel"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "ketel"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "pisau"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "pisau"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "talenan"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "talenan"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "mangkuk"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "mangkuk"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "parutan"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "parutan"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "spatula"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "spatula"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "sumpit"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "sumpit"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "termos"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "termos"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "peta"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "peta"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "kalender"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "kalender"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "penghapus", "papan"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "penghapus-papan"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "spidol"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "spidol"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "rak", "buku"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "rak-buku"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "tempat", "sampah", "kelas"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "tempat-sampah-kelas"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "jam", "sekolah"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "jam-sekolah"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "kapur"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "kapur"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "rautan"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "rautan"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "kotak", "pensil"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "kotak-pensil"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "lampu", "lalu", "lintas"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "lampu-lalu-lintas"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "tiang", "listrik"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "tiang-listrik"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "bedug"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "bedug"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "tenda"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "tenda"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "api", "unggun"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "api-unggun"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "batu", "karang"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "batu-karang"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "cangkang", "kerang"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "cangkang-kerang"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "sarang", "burung"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "sarang-burung"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "sarang", "lebah"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "sarang-lebah"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "es", "batu"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "es-batu"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "kaktus", "pot"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "kaktus-pot"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "daun", "kering"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "daun-kering"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "ranting"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "ranting"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "tumpukan", "pasir"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "tumpukan-pasir"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "genangan", "lumpur"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "genangan-lumpur"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "jaring", "laba", "laba"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "jaring-laba-laba"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "jamur", "merah"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "jamur-merah"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "bayi", "perempuan"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "bayi-perempuan"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "balita", "laki", "laki"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "balita-laki-laki"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "remaja", "laki", "laki"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "remaja-laki-laki"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "remaja", "perempuan"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "remaja-perempuan"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "ibu", "hamil"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "ibu-hamil"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "ayah", "menggendong", "bayi"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "ayah-menggendong-bayi"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "guru", "berhijab"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "guru-berhijab"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "perawat"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "perawat"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "pekerja", "bangunan"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "pekerja-bangunan"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "petugas", "pos"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "petugas-pos"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "pramugari"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "pramugari"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "astronaut"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "astronaut"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "ilmuwan"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "ilmuwan"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "mekanik"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "mekanik"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "atlet"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "atlet"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "hakim"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "hakim"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "satpam"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "satpam"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "musisi"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "musisi"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "pelukis"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "pelukis"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "petugas", "kebersihan"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "petugas-kebersihan"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "reporter"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA"], "family": "observe-heldout", "asset": "reporter"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "anak", "bertongkat", "kruk"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "anak-bertongkat-kruk"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "pria", "tunanetra"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "pria-tunanetra"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "anak", "sindrom", "down"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "anak-sindrom-down"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "anak", "berkaki", "prostetik"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "anak-berkaki-prostetik"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "anak", "membaca", "braille"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "anak-membaca-braille"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "pengguna", "kursi", "elektrik"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "pengguna-kursi-elektrik"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "tunanetra", "anjing", "pemandu"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "tunanetra-anjing-pemandu"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "anak", "memakai", "headphone"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "anak-memakai-headphone"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "anak", "berisyarat"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "anak-berisyarat"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "kakek", "memakai", "walker"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "kakek-memakai-walker"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "murid", "angkat", "tangan"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "murid-angkat-tangan"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "anak", "makan"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "anak-makan"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "anak", "minum"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "anak-minum"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "anak", "bermain", "layangan"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "anak-bermain-layangan"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "anak", "lompat", "tali"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "anak-lompat-tali"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "anak", "melukis"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "anak-melukis"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "anak", "tidur"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "anak-tidur"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "anak", "menyapu"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "anak-menyapu"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "anak", "membawa", "tas"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "anak-membawa-tas"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "anak", "tertawa"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "anak-tertawa"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "anak", "berambut", "keriting"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "anak-berambut-keriting"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "anak", "perempuan", "pirang"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "anak-perempuan-pirang"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "anak", "berambut", "merah"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "anak-berambut-merah"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "anak", "berkepang"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "anak-berkepang"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "pria", "tinggi"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "pria-tinggi"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "wanita", "bertubuh", "berisi"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "wanita-bertubuh-berisi"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "pria", "berjenggot"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "pria-berjenggot"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "wanita", "bertopi"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "wanita-bertopi"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "anak", "bergigi", "tanggal"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "anak-bergigi-tanggal"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "remaja", "berkawat", "gigi"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "remaja-berkawat-gigi"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "pria", "botak"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "pria-botak"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "wanita", "berambut", "keriting"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "wanita-berambut-keriting"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "pria", "berbatik"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "pria-berbatik"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "wanita", "berkebaya"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "wanita-berkebaya"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "pria", "berpeci"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "pria-berpeci"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "wanita", "berabaya"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "wanita-berabaya"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "pria", "berudeng"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "pria-berudeng"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "wanita", "bali"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "wanita-bali"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "pria", "papua"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "pria-papua"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "wanita", "dayak"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "wanita-dayak"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "pria", "berjubah"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "pria-berjubah"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "anak", "memakai", "hoodie"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "anak-memakai-hoodie"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "anak", "bermantel"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "anak-bermantel"}
+{"konteks": "kosong", "kata": ["perhatikan", "di", "sini", "terdapat", "empat", "anak", "berjas", "hujan"], "label": ["O", "O", "O", "O", "B-JUMLAH", "B-BENDA", "I-BENDA", "I-BENDA"], "family": "observe-heldout", "asset": "anak-berjas-hujan"}
+{"konteks": "kosong", "kata": ["di", "rumput", "terdapat", "empat", "kucing"], "label": ["O", "B-TEMPAT", "O", "B-JUMLAH", "B-BENDA"], "family": "place-heldout", "asset": "rumput"}
+{"konteks": "kosong", "kata": ["di", "hutan", "terdapat", "empat", "kucing"], "label": ["O", "B-TEMPAT", "O", "B-JUMLAH", "B-BENDA"], "family": "place-heldout", "asset": "hutan"}
+{"konteks": "kosong", "kata": ["di", "kebun", "terdapat", "empat", "kucing"], "label": ["O", "B-TEMPAT", "O", "B-JUMLAH", "B-BENDA"], "family": "place-heldout", "asset": "kebun"}
+{"konteks": "kosong", "kata": ["di", "sawah", "terdapat", "empat", "kucing"], "label": ["O", "B-TEMPAT", "O", "B-JUMLAH", "B-BENDA"], "family": "place-heldout", "asset": "sawah"}
+{"konteks": "kosong", "kata": ["di", "peternakan", "terdapat", "empat", "kucing"], "label": ["O", "B-TEMPAT", "O", "B-JUMLAH", "B-BENDA"], "family": "place-heldout", "asset": "peternakan"}
+{"konteks": "kosong", "kata": ["di", "gunung", "terdapat", "empat", "kucing"], "label": ["O", "B-TEMPAT", "O", "B-JUMLAH", "B-BENDA"], "family": "place-heldout", "asset": "gunung"}
+{"konteks": "kosong", "kata": ["di", "sungai", "terdapat", "empat", "kucing"], "label": ["O", "B-TEMPAT", "O", "B-JUMLAH", "B-BENDA"], "family": "place-heldout", "asset": "sungai"}
+{"konteks": "kosong", "kata": ["di", "danau", "terdapat", "empat", "kucing"], "label": ["O", "B-TEMPAT", "O", "B-JUMLAH", "B-BENDA"], "family": "place-heldout", "asset": "danau"}
+{"konteks": "kosong", "kata": ["di", "kolam", "terdapat", "empat", "kucing"], "label": ["O", "B-TEMPAT", "O", "B-JUMLAH", "B-BENDA"], "family": "place-heldout", "asset": "kolam"}
+{"konteks": "kosong", "kata": ["di", "laut", "terdapat", "empat", "kucing"], "label": ["O", "B-TEMPAT", "O", "B-JUMLAH", "B-BENDA"], "family": "place-heldout", "asset": "laut"}
+{"konteks": "kosong", "kata": ["di", "bawah", "laut", "terdapat", "empat", "kucing"], "label": ["O", "B-TEMPAT", "I-TEMPAT", "O", "B-JUMLAH", "B-BENDA"], "family": "place-heldout", "asset": "bawah-laut"}
+{"konteks": "kosong", "kata": ["di", "pantai", "terdapat", "empat", "kucing"], "label": ["O", "B-TEMPAT", "O", "B-JUMLAH", "B-BENDA"], "family": "place-heldout", "asset": "pantai"}
+{"konteks": "kosong", "kata": ["di", "dapur", "terdapat", "empat", "kucing"], "label": ["O", "B-TEMPAT", "O", "B-JUMLAH", "B-BENDA"], "family": "place-heldout", "asset": "dapur"}
+{"konteks": "kosong", "kata": ["di", "kamar", "terdapat", "empat", "kucing"], "label": ["O", "B-TEMPAT", "O", "B-JUMLAH", "B-BENDA"], "family": "place-heldout", "asset": "kamar"}
+{"konteks": "kosong", "kata": ["di", "kelas", "terdapat", "empat", "kucing"], "label": ["O", "B-TEMPAT", "O", "B-JUMLAH", "B-BENDA"], "family": "place-heldout", "asset": "kelas"}
+{"konteks": "kosong", "kata": ["di", "sekolah", "terdapat", "empat", "kucing"], "label": ["O", "B-TEMPAT", "O", "B-JUMLAH", "B-BENDA"], "family": "place-heldout", "asset": "sekolah"}
+{"konteks": "kosong", "kata": ["di", "pasar", "terdapat", "empat", "kucing"], "label": ["O", "B-TEMPAT", "O", "B-JUMLAH", "B-BENDA"], "family": "place-heldout", "asset": "pasar"}
+{"konteks": "kosong", "kata": ["di", "kota", "terdapat", "empat", "kucing"], "label": ["O", "B-TEMPAT", "O", "B-JUMLAH", "B-BENDA"], "family": "place-heldout", "asset": "kota"}
+{"konteks": "kosong", "kata": ["di", "jalan", "desa", "terdapat", "empat", "kucing"], "label": ["O", "B-TEMPAT", "I-TEMPAT", "O", "B-JUMLAH", "B-BENDA"], "family": "place-heldout", "asset": "jalan-desa"}
+{"konteks": "kosong", "kata": ["di", "gurun", "terdapat", "empat", "kucing"], "label": ["O", "B-TEMPAT", "O", "B-JUMLAH", "B-BENDA"], "family": "place-heldout", "asset": "gurun"}
+{"konteks": "kosong", "kata": ["di", "salju", "terdapat", "empat", "kucing"], "label": ["O", "B-TEMPAT", "O", "B-JUMLAH", "B-BENDA"], "family": "place-heldout", "asset": "salju"}
+{"konteks": "kosong", "kata": ["di", "kebun", "binatang", "terdapat", "empat", "kucing"], "label": ["O", "B-TEMPAT", "I-TEMPAT", "O", "B-JUMLAH", "B-BENDA"], "family": "place-heldout", "asset": "kebun-binatang"}
+{"konteks": "kosong", "kata": ["di", "taman", "kota", "terdapat", "empat", "kucing"], "label": ["O", "B-TEMPAT", "I-TEMPAT", "O", "B-JUMLAH", "B-BENDA"], "family": "place-heldout", "asset": "taman-kota"}
+{"konteks": "kosong", "kata": ["di", "halaman", "rumah", "terdapat", "empat", "kucing"], "label": ["O", "B-TEMPAT", "I-TEMPAT", "O", "B-JUMLAH", "B-BENDA"], "family": "place-heldout", "asset": "halaman-rumah"}
+{"konteks": "kosong", "kata": ["di", "rumah", "sakit", "terdapat", "empat", "kucing"], "label": ["O", "B-TEMPAT", "I-TEMPAT", "O", "B-JUMLAH", "B-BENDA"], "family": "place-heldout", "asset": "rumah-sakit"}
+{"konteks": "kosong", "kata": ["di", "kantor", "polisi", "terdapat", "empat", "kucing"], "label": ["O", "B-TEMPAT", "I-TEMPAT", "O", "B-JUMLAH", "B-BENDA"], "family": "place-heldout", "asset": "kantor-polisi"}
+{"konteks": "kosong", "kata": ["di", "halte", "bus", "terdapat", "empat", "kucing"], "label": ["O", "B-TEMPAT", "I-TEMPAT", "O", "B-JUMLAH", "B-BENDA"], "family": "place-heldout", "asset": "halte-bus"}
+{"konteks": "kosong", "kata": ["di", "stasiun", "kereta", "terdapat", "empat", "kucing"], "label": ["O", "B-TEMPAT", "I-TEMPAT", "O", "B-JUMLAH", "B-BENDA"], "family": "place-heldout", "asset": "stasiun-kereta"}
+{"konteks": "kosong", "kata": ["di", "bandara", "terdapat", "empat", "kucing"], "label": ["O", "B-TEMPAT", "O", "B-JUMLAH", "B-BENDA"], "family": "place-heldout", "asset": "bandara"}
+{"konteks": "kosong", "kata": ["di", "kantor", "pos", "terdapat", "empat", "kucing"], "label": ["O", "B-TEMPAT", "I-TEMPAT", "O", "B-JUMLAH", "B-BENDA"], "family": "place-heldout", "asset": "kantor-pos"}
+{"konteks": "kosong", "kata": ["di", "bank", "terdapat", "empat", "kucing"], "label": ["O", "B-TEMPAT", "O", "B-JUMLAH", "B-BENDA"], "family": "place-heldout", "asset": "bank"}
+{"konteks": "kosong", "kata": ["di", "pom", "bensin", "terdapat", "empat", "kucing"], "label": ["O", "B-TEMPAT", "I-TEMPAT", "O", "B-JUMLAH", "B-BENDA"], "family": "place-heldout", "asset": "pom-bensin"}
+{"konteks": "kosong", "kata": ["di", "markas", "pemadam", "terdapat", "empat", "kucing"], "label": ["O", "B-TEMPAT", "I-TEMPAT", "O", "B-JUMLAH", "B-BENDA"], "family": "place-heldout", "asset": "markas-pemadam"}
+{"konteks": "kosong", "kata": ["di", "klinik", "terdapat", "empat", "kucing"], "label": ["O", "B-TEMPAT", "O", "B-JUMLAH", "B-BENDA"], "family": "place-heldout", "asset": "klinik"}
+{"konteks": "kosong", "kata": ["di", "balai", "kota", "terdapat", "empat", "kucing"], "label": ["O", "B-TEMPAT", "I-TEMPAT", "O", "B-JUMLAH", "B-BENDA"], "family": "place-heldout", "asset": "balai-kota"}
+{"konteks": "kosong", "kata": ["di", "perpustakaan", "terdapat", "empat", "kucing"], "label": ["O", "B-TEMPAT", "O", "B-JUMLAH", "B-BENDA"], "family": "place-heldout", "asset": "perpustakaan"}
+{"konteks": "kosong", "kata": ["di", "warung", "makan", "terdapat", "empat", "kucing"], "label": ["O", "B-TEMPAT", "I-TEMPAT", "O", "B-JUMLAH", "B-BENDA"], "family": "place-heldout", "asset": "warung-makan"}
+{"konteks": "kosong", "kata": ["di", "minimarket", "terdapat", "empat", "kucing"], "label": ["O", "B-TEMPAT", "O", "B-JUMLAH", "B-BENDA"], "family": "place-heldout", "asset": "minimarket"}
+{"konteks": "kosong", "kata": ["di", "supermarket", "terdapat", "empat", "kucing"], "label": ["O", "B-TEMPAT", "O", "B-JUMLAH", "B-BENDA"], "family": "place-heldout", "asset": "supermarket"}
+{"konteks": "kosong", "kata": ["di", "apotek", "terdapat", "empat", "kucing"], "label": ["O", "B-TEMPAT", "O", "B-JUMLAH", "B-BENDA"], "family": "place-heldout", "asset": "apotek"}
+{"konteks": "kosong", "kata": ["di", "toko", "buku", "terdapat", "empat", "kucing"], "label": ["O", "B-TEMPAT", "I-TEMPAT", "O", "B-JUMLAH", "B-BENDA"], "family": "place-heldout", "asset": "toko-buku"}
+{"konteks": "kosong", "kata": ["di", "restoran", "terdapat", "empat", "kucing"], "label": ["O", "B-TEMPAT", "O", "B-JUMLAH", "B-BENDA"], "family": "place-heldout", "asset": "restoran"}
+{"konteks": "kosong", "kata": ["di", "kafe", "terdapat", "empat", "kucing"], "label": ["O", "B-TEMPAT", "O", "B-JUMLAH", "B-BENDA"], "family": "place-heldout", "asset": "kafe"}
+{"konteks": "kosong", "kata": ["di", "toko", "roti", "terdapat", "empat", "kucing"], "label": ["O", "B-TEMPAT", "I-TEMPAT", "O", "B-JUMLAH", "B-BENDA"], "family": "place-heldout", "asset": "toko-roti"}
+{"konteks": "kosong", "kata": ["di", "toko", "mainan", "terdapat", "empat", "kucing"], "label": ["O", "B-TEMPAT", "I-TEMPAT", "O", "B-JUMLAH", "B-BENDA"], "family": "place-heldout", "asset": "toko-mainan"}
+{"konteks": "kosong", "kata": ["di", "tenda", "pasar", "malam", "terdapat", "empat", "kucing"], "label": ["O", "B-TEMPAT", "I-TEMPAT", "I-TEMPAT", "O", "B-JUMLAH", "B-BENDA"], "family": "place-heldout", "asset": "tenda-pasar-malam"}
+{"konteks": "kosong", "kata": ["di", "kios", "buah", "terdapat", "empat", "kucing"], "label": ["O", "B-TEMPAT", "I-TEMPAT", "O", "B-JUMLAH", "B-BENDA"], "family": "place-heldout", "asset": "kios-buah"}
+{"konteks": "kosong", "kata": ["di", "butik", "terdapat", "empat", "kucing"], "label": ["O", "B-TEMPAT", "O", "B-JUMLAH", "B-BENDA"], "family": "place-heldout", "asset": "butik"}
+{"konteks": "kosong", "kata": ["di", "ruang", "tamu", "terdapat", "empat", "kucing"], "label": ["O", "B-TEMPAT", "I-TEMPAT", "O", "B-JUMLAH", "B-BENDA"], "family": "place-heldout", "asset": "ruang-tamu"}
+{"konteks": "kosong", "kata": ["di", "kamar", "rumah", "terdapat", "empat", "kucing"], "label": ["O", "B-TEMPAT", "I-TEMPAT", "O", "B-JUMLAH", "B-BENDA"], "family": "place-heldout", "asset": "kamar-rumah"}
+{"konteks": "kosong", "kata": ["di", "dapur", "rumah", "terdapat", "empat", "kucing"], "label": ["O", "B-TEMPAT", "I-TEMPAT", "O", "B-JUMLAH", "B-BENDA"], "family": "place-heldout", "asset": "dapur-rumah"}
+{"konteks": "kosong", "kata": ["di", "kamar", "mandi", "terdapat", "empat", "kucing"], "label": ["O", "B-TEMPAT", "I-TEMPAT", "O", "B-JUMLAH", "B-BENDA"], "family": "place-heldout", "asset": "kamar-mandi"}
+{"konteks": "kosong", "kata": ["di", "garasi", "terdapat", "empat", "kucing"], "label": ["O", "B-TEMPAT", "O", "B-JUMLAH", "B-BENDA"], "family": "place-heldout", "asset": "garasi"}
+{"konteks": "kosong", "kata": ["di", "halaman", "depan", "terdapat", "empat", "kucing"], "label": ["O", "B-TEMPAT", "I-TEMPAT", "O", "B-JUMLAH", "B-BENDA"], "family": "place-heldout", "asset": "halaman-depan"}
+{"konteks": "kosong", "kata": ["di", "teras", "terdapat", "empat", "kucing"], "label": ["O", "B-TEMPAT", "O", "B-JUMLAH", "B-BENDA"], "family": "place-heldout", "asset": "teras"}
+{"konteks": "kosong", "kata": ["di", "ruang", "makan", "rumah", "terdapat", "empat", "kucing"], "label": ["O", "B-TEMPAT", "I-TEMPAT", "I-TEMPAT", "O", "B-JUMLAH", "B-BENDA"], "family": "place-heldout", "asset": "ruang-makan-rumah"}
+{"konteks": "kosong", "kata": ["di", "loteng", "terdapat", "empat", "kucing"], "label": ["O", "B-TEMPAT", "O", "B-JUMLAH", "B-BENDA"], "family": "place-heldout", "asset": "loteng"}
+{"konteks": "kosong", "kata": ["di", "atap", "rumah", "terdapat", "empat", "kucing"], "label": ["O", "B-TEMPAT", "I-TEMPAT", "O", "B-JUMLAH", "B-BENDA"], "family": "place-heldout", "asset": "atap-rumah"}
+{"konteks": "kosong", "kata": ["di", "balkon", "terdapat", "empat", "kucing"], "label": ["O", "B-TEMPAT", "O", "B-JUMLAH", "B-BENDA"], "family": "place-heldout", "asset": "balkon"}
+{"konteks": "kosong", "kata": ["di", "ruang", "cuci", "terdapat", "empat", "kucing"], "label": ["O", "B-TEMPAT", "I-TEMPAT", "O", "B-JUMLAH", "B-BENDA"], "family": "place-heldout", "asset": "ruang-cuci"}
+{"konteks": "kosong", "kata": ["di", "kelas", "sekolah", "terdapat", "empat", "kucing"], "label": ["O", "B-TEMPAT", "I-TEMPAT", "O", "B-JUMLAH", "B-BENDA"], "family": "place-heldout", "asset": "kelas-sekolah"}
+{"konteks": "kosong", "kata": ["di", "perpustakaan", "sekolah", "terdapat", "empat", "kucing"], "label": ["O", "B-TEMPAT", "I-TEMPAT", "O", "B-JUMLAH", "B-BENDA"], "family": "place-heldout", "asset": "perpustakaan-sekolah"}
+{"konteks": "kosong", "kata": ["di", "kantin", "terdapat", "empat", "kucing"], "label": ["O", "B-TEMPAT", "O", "B-JUMLAH", "B-BENDA"], "family": "place-heldout", "asset": "kantin"}
+{"konteks": "kosong", "kata": ["di", "lapangan", "olahraga", "terdapat", "empat", "kucing"], "label": ["O", "B-TEMPAT", "I-TEMPAT", "O", "B-JUMLAH", "B-BENDA"], "family": "place-heldout", "asset": "lapangan-olahraga"}
+{"konteks": "kosong", "kata": ["di", "ruang", "guru", "terdapat", "empat", "kucing"], "label": ["O", "B-TEMPAT", "I-TEMPAT", "O", "B-JUMLAH", "B-BENDA"], "family": "place-heldout", "asset": "ruang-guru"}
+{"konteks": "kosong", "kata": ["di", "uks", "terdapat", "empat", "kucing"], "label": ["O", "B-TEMPAT", "O", "B-JUMLAH", "B-BENDA"], "family": "place-heldout", "asset": "uks"}
+{"konteks": "kosong", "kata": ["di", "gerbang", "sekolah", "terdapat", "empat", "kucing"], "label": ["O", "B-TEMPAT", "I-TEMPAT", "O", "B-JUMLAH", "B-BENDA"], "family": "place-heldout", "asset": "gerbang-sekolah"}
+{"konteks": "kosong", "kata": ["di", "toilet", "sekolah", "terdapat", "empat", "kucing"], "label": ["O", "B-TEMPAT", "I-TEMPAT", "O", "B-JUMLAH", "B-BENDA"], "family": "place-heldout", "asset": "toilet-sekolah"}
+{"konteks": "kosong", "kata": ["di", "koridor", "sekolah", "terdapat", "empat", "kucing"], "label": ["O", "B-TEMPAT", "I-TEMPAT", "O", "B-JUMLAH", "B-BENDA"], "family": "place-heldout", "asset": "koridor-sekolah"}
+{"konteks": "kosong", "kata": ["di", "aula", "sekolah", "terdapat", "empat", "kucing"], "label": ["O", "B-TEMPAT", "I-TEMPAT", "O", "B-JUMLAH", "B-BENDA"], "family": "place-heldout", "asset": "aula-sekolah"}
+{"konteks": "kosong", "kata": ["di", "laboratorium", "komputer", "terdapat", "empat", "kucing"], "label": ["O", "B-TEMPAT", "I-TEMPAT", "O", "B-JUMLAH", "B-BENDA"], "family": "place-heldout", "asset": "laboratorium-komputer"}
+{"konteks": "kosong", "kata": ["di", "laboratorium", "sains", "terdapat", "empat", "kucing"], "label": ["O", "B-TEMPAT", "I-TEMPAT", "O", "B-JUMLAH", "B-BENDA"], "family": "place-heldout", "asset": "laboratorium-sains"}
+{"konteks": "kosong", "kata": ["di", "taman", "bermain", "terdapat", "empat", "kucing"], "label": ["O", "B-TEMPAT", "I-TEMPAT", "O", "B-JUMLAH", "B-BENDA"], "family": "place-heldout", "asset": "taman-bermain"}
+{"konteks": "kosong", "kata": ["di", "kolam", "renang", "terdapat", "empat", "kucing"], "label": ["O", "B-TEMPAT", "I-TEMPAT", "O", "B-JUMLAH", "B-BENDA"], "family": "place-heldout", "asset": "kolam-renang"}
+{"konteks": "kosong", "kata": ["di", "bioskop", "terdapat", "empat", "kucing"], "label": ["O", "B-TEMPAT", "O", "B-JUMLAH", "B-BENDA"], "family": "place-heldout", "asset": "bioskop"}
+{"konteks": "kosong", "kata": ["di", "museum", "terdapat", "empat", "kucing"], "label": ["O", "B-TEMPAT", "O", "B-JUMLAH", "B-BENDA"], "family": "place-heldout", "asset": "museum"}
+{"konteks": "kosong", "kata": ["di", "alun", "alun", "terdapat", "empat", "kucing"], "label": ["O", "B-TEMPAT", "I-TEMPAT", "O", "B-JUMLAH", "B-BENDA"], "family": "place-heldout", "asset": "alun-alun"}
+{"konteks": "kosong", "kata": ["di", "stadion", "terdapat", "empat", "kucing"], "label": ["O", "B-TEMPAT", "O", "B-JUMLAH", "B-BENDA"], "family": "place-heldout", "asset": "stadion"}
+{"konteks": "kosong", "kata": ["di", "sirkus", "terdapat", "empat", "kucing"], "label": ["O", "B-TEMPAT", "O", "B-JUMLAH", "B-BENDA"], "family": "place-heldout", "asset": "sirkus"}
+{"konteks": "kosong", "kata": ["di", "akuarium", "terdapat", "empat", "kucing"], "label": ["O", "B-TEMPAT", "O", "B-JUMLAH", "B-BENDA"], "family": "place-heldout", "asset": "akuarium"}
+{"konteks": "kosong", "kata": ["di", "komidi", "putar", "terdapat", "empat", "kucing"], "label": ["O", "B-TEMPAT", "I-TEMPAT", "O", "B-JUMLAH", "B-BENDA"], "family": "place-heldout", "asset": "komidi-putar"}
+{"konteks": "kosong", "kata": ["di", "panggung", "konser", "terdapat", "empat", "kucing"], "label": ["O", "B-TEMPAT", "I-TEMPAT", "O", "B-JUMLAH", "B-BENDA"], "family": "place-heldout", "asset": "panggung-konser"}
+{"konteks": "kosong", "kata": ["di", "gerbang", "kebun", "binatang", "terdapat", "empat", "kucing"], "label": ["O", "B-TEMPAT", "I-TEMPAT", "I-TEMPAT", "O", "B-JUMLAH", "B-BENDA"], "family": "place-heldout", "asset": "gerbang-kebun-binatang"}
+{"konteks": "kosong", "kata": ["di", "bianglala", "terdapat", "empat", "kucing"], "label": ["O", "B-TEMPAT", "O", "B-JUMLAH", "B-BENDA"], "family": "place-heldout", "asset": "bianglala"}
+{"konteks": "kosong", "kata": ["di", "saung", "terdapat", "empat", "kucing"], "label": ["O", "B-TEMPAT", "O", "B-JUMLAH", "B-BENDA"], "family": "place-heldout", "asset": "saung"}
+{"konteks": "kosong", "kata": ["di", "kandang", "ayam", "terdapat", "empat", "kucing"], "label": ["O", "B-TEMPAT", "I-TEMPAT", "O", "B-JUMLAH", "B-BENDA"], "family": "place-heldout", "asset": "kandang-ayam"}
+{"konteks": "kosong", "kata": ["di", "lumbung", "terdapat", "empat", "kucing"], "label": ["O", "B-TEMPAT", "O", "B-JUMLAH", "B-BENDA"], "family": "place-heldout", "asset": "lumbung"}
+{"konteks": "kosong", "kata": ["di", "sumur", "terdapat", "empat", "kucing"], "label": ["O", "B-TEMPAT", "O", "B-JUMLAH", "B-BENDA"], "family": "place-heldout", "asset": "sumur"}
+{"konteks": "kosong", "kata": ["di", "pagar", "kayu", "terdapat", "empat", "kucing"], "label": ["O", "B-TEMPAT", "I-TEMPAT", "O", "B-JUMLAH", "B-BENDA"], "family": "place-heldout", "asset": "pagar-kayu"}
+{"konteks": "kosong", "kata": ["di", "kincir", "angin", "terdapat", "empat", "kucing"], "label": ["O", "B-TEMPAT", "I-TEMPAT", "O", "B-JUMLAH", "B-BENDA"], "family": "place-heldout", "asset": "kincir-angin"}
+{"konteks": "kosong", "kata": ["di", "kincir", "air", "terdapat", "empat", "kucing"], "label": ["O", "B-TEMPAT", "I-TEMPAT", "O", "B-JUMLAH", "B-BENDA"], "family": "place-heldout", "asset": "kincir-air"}
+{"konteks": "kosong", "kata": ["di", "dermaga", "terdapat", "empat", "kucing"], "label": ["O", "B-TEMPAT", "O", "B-JUMLAH", "B-BENDA"], "family": "place-heldout", "asset": "dermaga"}
+{"konteks": "kosong", "kata": ["di", "jembatan", "bambu", "terdapat", "empat", "kucing"], "label": ["O", "B-TEMPAT", "I-TEMPAT", "O", "B-JUMLAH", "B-BENDA"], "family": "place-heldout", "asset": "jembatan-bambu"}
+{"konteks": "kosong", "kata": ["di", "pos", "ronda", "terdapat", "empat", "kucing"], "label": ["O", "B-TEMPAT", "I-TEMPAT", "O", "B-JUMLAH", "B-BENDA"], "family": "place-heldout", "asset": "pos-ronda"}
+{"konteks": "kosong", "kata": ["di", "silo", "terdapat", "empat", "kucing"], "label": ["O", "B-TEMPAT", "O", "B-JUMLAH", "B-BENDA"], "family": "place-heldout", "asset": "silo"}
+{"konteks": "kosong", "kata": ["di", "kandang", "kuda", "terdapat", "empat", "kucing"], "label": ["O", "B-TEMPAT", "I-TEMPAT", "O", "B-JUMLAH", "B-BENDA"], "family": "place-heldout", "asset": "kandang-kuda"}
+{"konteks": "kosong", "kata": ["di", "jembatan", "terdapat", "empat", "kucing"], "label": ["O", "B-TEMPAT", "O", "B-JUMLAH", "B-BENDA"], "family": "place-heldout", "asset": "jembatan"}
+{"konteks": "kosong", "kata": ["di", "rel", "kereta", "terdapat", "empat", "kucing"], "label": ["O", "B-TEMPAT", "I-TEMPAT", "O", "B-JUMLAH", "B-BENDA"], "family": "place-heldout", "asset": "rel-kereta"}
+{"konteks": "kosong", "kata": ["di", "trotoar", "terdapat", "empat", "kucing"], "label": ["O", "B-TEMPAT", "O", "B-JUMLAH", "B-BENDA"], "family": "place-heldout", "asset": "trotoar"}
+{"konteks": "kosong", "kata": ["di", "terowongan", "terdapat", "empat", "kucing"], "label": ["O", "B-TEMPAT", "O", "B-JUMLAH", "B-BENDA"], "family": "place-heldout", "asset": "terowongan"}
+{"konteks": "kosong", "kata": ["di", "jembatan", "penyeberangan", "terdapat", "empat", "kucing"], "label": ["O", "B-TEMPAT", "I-TEMPAT", "O", "B-JUMLAH", "B-BENDA"], "family": "place-heldout", "asset": "jembatan-penyeberangan"}
+{"konteks": "kosong", "kata": ["di", "zebra", "cross", "terdapat", "empat", "kucing"], "label": ["O", "B-TEMPAT", "I-TEMPAT", "O", "B-JUMLAH", "B-BENDA"], "family": "place-heldout", "asset": "zebra-cross"}
+{"konteks": "kosong", "kata": ["di", "gang", "terdapat", "empat", "kucing"], "label": ["O", "B-TEMPAT", "O", "B-JUMLAH", "B-BENDA"], "family": "place-heldout", "asset": "gang"}
+{"konteks": "kosong", "kata": ["di", "gardu", "tol", "terdapat", "empat", "kucing"], "label": ["O", "B-TEMPAT", "I-TEMPAT", "O", "B-JUMLAH", "B-BENDA"], "family": "place-heldout", "asset": "gardu-tol"}
+{"konteks": "kosong", "kata": ["di", "bundaran", "air", "mancur", "terdapat", "empat", "kucing"], "label": ["O", "B-TEMPAT", "I-TEMPAT", "I-TEMPAT", "O", "B-JUMLAH", "B-BENDA"], "family": "place-heldout", "asset": "bundaran-air-mancur"}
+{"konteks": "kosong", "kata": ["di", "halte", "trem", "terdapat", "empat", "kucing"], "label": ["O", "B-TEMPAT", "I-TEMPAT", "O", "B-JUMLAH", "B-BENDA"], "family": "place-heldout", "asset": "halte-trem"}
+{"konteks": "kosong", "kata": ["di", "masjid", "terdapat", "empat", "kucing"], "label": ["O", "B-TEMPAT", "O", "B-JUMLAH", "B-BENDA"], "family": "place-heldout", "asset": "masjid"}
+{"konteks": "kosong", "kata": ["di", "gereja", "terdapat", "empat", "kucing"], "label": ["O", "B-TEMPAT", "O", "B-JUMLAH", "B-BENDA"], "family": "place-heldout", "asset": "gereja"}
+{"konteks": "kosong", "kata": ["di", "pura", "terdapat", "empat", "kucing"], "label": ["O", "B-TEMPAT", "O", "B-JUMLAH", "B-BENDA"], "family": "place-heldout", "asset": "pura"}
+{"konteks": "kosong", "kata": ["di", "wihara", "terdapat", "empat", "kucing"], "label": ["O", "B-TEMPAT", "O", "B-JUMLAH", "B-BENDA"], "family": "place-heldout", "asset": "wihara"}
+{"konteks": "kosong", "kata": ["di", "kelenteng", "terdapat", "empat", "kucing"], "label": ["O", "B-TEMPAT", "O", "B-JUMLAH", "B-BENDA"], "family": "place-heldout", "asset": "kelenteng"}
+{"konteks": "kosong", "kata": ["di", "musala", "terdapat", "empat", "kucing"], "label": ["O", "B-TEMPAT", "O", "B-JUMLAH", "B-BENDA"], "family": "place-heldout", "asset": "musala"}
+{"konteks": "kosong", "kata": ["di", "kapel", "terdapat", "empat", "kucing"], "label": ["O", "B-TEMPAT", "O", "B-JUMLAH", "B-BENDA"], "family": "place-heldout", "asset": "kapel"}
+{"konteks": "kosong", "kata": ["di", "menara", "lonceng", "terdapat", "empat", "kucing"], "label": ["O", "B-TEMPAT", "I-TEMPAT", "O", "B-JUMLAH", "B-BENDA"], "family": "place-heldout", "asset": "menara-lonceng"}
+{"konteks": "kosong", "kata": ["di", "kubah", "terdapat", "empat", "kucing"], "label": ["O", "B-TEMPAT", "O", "B-JUMLAH", "B-BENDA"], "family": "place-heldout", "asset": "kubah"}
+{"konteks": "kosong", "kata": ["di", "gapura", "candi", "terdapat", "empat", "kucing"], "label": ["O", "B-TEMPAT", "I-TEMPAT", "O", "B-JUMLAH", "B-BENDA"], "family": "place-heldout", "asset": "gapura-candi"}
+{"konteks": "kosong", "kata": ["di", "altar", "terdapat", "empat", "kucing"], "label": ["O", "B-TEMPAT", "O", "B-JUMLAH", "B-BENDA"], "family": "place-heldout", "asset": "altar"}
+{"konteks": "kosong", "kata": ["di", "jembatan", "gantung", "terdapat", "empat", "kucing"], "label": ["O", "B-TEMPAT", "I-TEMPAT", "O", "B-JUMLAH", "B-BENDA"], "family": "place-heldout", "asset": "jembatan-gantung"}
+{"konteks": "kosong", "kata": ["di", "gua", "terdapat", "empat", "kucing"], "label": ["O", "B-TEMPAT", "O", "B-JUMLAH", "B-BENDA"], "family": "place-heldout", "asset": "gua"}
+{"konteks": "kosong", "kata": ["di", "rumah", "pohon", "terdapat", "empat", "kucing"], "label": ["O", "B-TEMPAT", "I-TEMPAT", "O", "B-JUMLAH", "B-BENDA"], "family": "place-heldout", "asset": "rumah-pohon"}
+{"konteks": "kosong", "kata": ["di", "bendungan", "terdapat", "empat", "kucing"], "label": ["O", "B-TEMPAT", "O", "B-JUMLAH", "B-BENDA"], "family": "place-heldout", "asset": "bendungan"}
+{"konteks": "kosong", "kata": ["di", "mercusuar", "terdapat", "empat", "kucing"], "label": ["O", "B-TEMPAT", "O", "B-JUMLAH", "B-BENDA"], "family": "place-heldout", "asset": "mercusuar"}
+{"konteks": "kosong", "kata": ["di", "tambang", "terdapat", "empat", "kucing"], "label": ["O", "B-TEMPAT", "O", "B-JUMLAH", "B-BENDA"], "family": "place-heldout", "asset": "tambang"}
+{"konteks": "kosong", "kata": ["di", "menara", "pengawas", "terdapat", "empat", "kucing"], "label": ["O", "B-TEMPAT", "I-TEMPAT", "O", "B-JUMLAH", "B-BENDA"], "family": "place-heldout", "asset": "menara-pengawas"}
+{"konteks": "kosong", "kata": ["di", "jalur", "tanah", "terdapat", "empat", "kucing"], "label": ["O", "B-TEMPAT", "I-TEMPAT", "O", "B-JUMLAH", "B-BENDA"], "family": "place-heldout", "asset": "jalur-tanah"}
+{"konteks": "kosong", "kata": ["di", "air", "terjun", "terdapat", "empat", "kucing"], "label": ["O", "B-TEMPAT", "I-TEMPAT", "O", "B-JUMLAH", "B-BENDA"], "family": "place-heldout", "asset": "air-terjun"}
+{"konteks": "kosong", "kata": ["di", "anjungan", "minyak", "terdapat", "empat", "kucing"], "label": ["O", "B-TEMPAT", "I-TEMPAT", "O", "B-JUMLAH", "B-BENDA"], "family": "place-heldout", "asset": "anjungan-minyak"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "ayam"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "ayam"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "bebek"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "bebek"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "sapi"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "sapi"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "kambing"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "kambing"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "domba"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "domba"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "kuda"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "kuda"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "babi"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "babi"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "kerbau"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "kerbau"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "angsa"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "angsa"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "anjing"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "anjing"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "kucing"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "kucing"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "kelinci"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "kelinci"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "harimau"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "harimau"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "singa"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "singa"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "gajah"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "gajah"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "monyet"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "monyet"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "gorila"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "gorila"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "jerapah"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "jerapah"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "zebra"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "zebra"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "beruang"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "beruang"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "ular"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "ular"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "buaya"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "buaya"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "badak"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "badak"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "kuda", "nil"], "label": ["O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "kuda-nil"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "ikan"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "ikan"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "lumba", "lumba"], "label": ["O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "lumba-lumba"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "paus"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "paus"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "hiu"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "hiu"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "gurita"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "gurita"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "kepiting"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "kepiting"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "udang"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "udang"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "penyu"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "penyu"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "ubur", "ubur"], "label": ["O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "ubur-ubur"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "bintang", "laut"], "label": ["O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "bintang-laut"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "kuda", "laut"], "label": ["O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "kuda-laut"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "cumi", "cumi"], "label": ["O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "cumi-cumi"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "burung"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "burung"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "elang"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "elang"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "burung", "hantu"], "label": ["O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "burung-hantu"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "merpati"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "merpati"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "merak"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "merak"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "kakatua"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "kakatua"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "penguin"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "penguin"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "flamingo"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "flamingo"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "pelikan"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "pelikan"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "anak", "bebek"], "label": ["O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "anak-bebek"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "burung", "unta"], "label": ["O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "burung-unta"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "camar"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "camar"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "kupu", "kupu"], "label": ["O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "kupu-kupu"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "lebah"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "lebah"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "semut"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "semut"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "kumbang"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "kumbang"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "kepik"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "kepik"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "belalang"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "belalang"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "capung"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "capung"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "laba", "laba"], "label": ["O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "laba-laba"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "siput"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "siput"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "cacing"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "cacing"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "katak"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "katak"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "kura", "kura"], "label": ["O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "kura-kura"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "anak", "laki", "laki"], "label": ["O", "O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "anak-laki-laki"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "anak", "perempuan"], "label": ["O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "anak-perempuan"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "bayi"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "bayi"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "ibu"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "ibu"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "ayah"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "ayah"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "nenek"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "nenek"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "kakek"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "kakek"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "guru"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "guru"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "siswa", "berhijab"], "label": ["O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "siswa-berhijab"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "dokter"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "dokter"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "polisi"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "polisi"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "petani"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "petani"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "nelayan"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "nelayan"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "koki"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "koki"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "pak", "pos"], "label": ["O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "pak-pos"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "pemadam", "kebakaran"], "label": ["O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "pemadam-kebakaran"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "pilot"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "pilot"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "sopir"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "sopir"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "penjual"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "penjual"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "anak", "kursi", "roda"], "label": ["O", "O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "anak-kursi-roda"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "anak", "dengan", "alat", "bantu", "dengar"], "label": ["O", "O", "O", "O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "anak-dengan-alat-bantu-dengar"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "anak", "tunanetra", "dengan", "tongkat"], "label": ["O", "O", "O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "anak-tunanetra-dengan-tongkat"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "anak", "bermain", "bola"], "label": ["O", "O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "anak-bermain-bola"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "anak", "membaca"], "label": ["O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "anak-membaca"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "apel"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "apel"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "pisang"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "pisang"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "jeruk"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "jeruk"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "mangga"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "mangga"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "anggur"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "anggur"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "semangka"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "semangka"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "stroberi"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "stroberi"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "nanas"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "nanas"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "kelapa"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "kelapa"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "pir"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "pir"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "ceri"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "ceri"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "alpukat"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "alpukat"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "wortel"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "wortel"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "jagung"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "jagung"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "tomat"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "tomat"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "terong"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "terong"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "cabai"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "cabai"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "timun"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "timun"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "brokoli"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "brokoli"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "kentang"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "kentang"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "bawang"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "bawang"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "jamur"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "jamur"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "kacang"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "kacang"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "bayam"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "bayam"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "nasi"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "nasi"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "roti"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "roti"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "kue"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "kue"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "pizza"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "pizza"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "donat"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "donat"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "telur"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "telur"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "es", "krim"], "label": ["O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "es-krim"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "permen"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "permen"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "susu"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "susu"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "air"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "air"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "bakso"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "bakso"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "sate"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "sate"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "pensil"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "pensil"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "buku"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "buku"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "tas"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "tas"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "penghapus"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "penghapus"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "penggaris"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "penggaris"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "gunting"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "gunting"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "kertas"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "kertas"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "krayon"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "krayon"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "jam"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "jam"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "globe"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "globe"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "papan", "tulis", "kecil"], "label": ["O", "O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "papan-tulis-kecil"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "pulpen"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "pulpen"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "meja"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "meja"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "kursi"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "kursi"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "lampu"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "lampu"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "pintu"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "pintu"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "jendela"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "jendela"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "tempat", "tidur"], "label": ["O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "tempat-tidur"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "sofa"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "sofa"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "piring"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "piring"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "gelas"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "gelas"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "sendok"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "sendok"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "ember"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "ember"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "keranjang"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "keranjang"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "mobil"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "mobil"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "bus"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "bus"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "motor"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "motor"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "sepeda"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "sepeda"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "kereta"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "kereta"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "pesawat"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "pesawat"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "helikopter"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "helikopter"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "kapal"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "kapal"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "perahu"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "perahu"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "truk"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "truk"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "ambulans"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "ambulans"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "roket"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "roket"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "pohon"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "pohon"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "bunga"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "bunga"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "matahari"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "matahari"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "bulan"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "bulan"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "awan"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "awan"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "hujan"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "hujan"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "pelangi"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "pelangi"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "bintang"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "bintang"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "batu"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "batu"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "gunung", "kecil"], "label": ["O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "gunung-kecil"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "api"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "api"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "daun"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "daun"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "baju"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "baju"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "celana"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "celana"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "rok"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "rok"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "topi"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "topi"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "sepatu"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "sepatu"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "sandal"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "sandal"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "kaus", "kaki"], "label": ["O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "kaus-kaki"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "kacamata"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "kacamata"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "tas", "kecil"], "label": ["O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "tas-kecil"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "payung"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "payung"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "syal"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "syal"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "jaket"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "jaket"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "bola"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "bola"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "balon"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "balon"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "boneka"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "boneka"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "layang", "layang"], "label": ["O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "layang-layang"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "kotak"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "kotak"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "lingkaran"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "lingkaran"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "segitiga"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "segitiga"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "persegi"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "persegi"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "hati"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "hati"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "koin"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "koin"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "kado"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "kado"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "bendera"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "bendera"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "piyik", "ayam"], "label": ["O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "piyik-ayam"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "kelereng"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "kelereng"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "yoyo"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "yoyo"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "robot", "mainan"], "label": ["O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "robot-mainan"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "mobil", "mainan"], "label": ["O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "mobil-mainan"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "balok", "mainan"], "label": ["O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "balok-mainan"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "keping", "puzel"], "label": ["O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "keping-puzel"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "kubus", "rubik"], "label": ["O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "kubus-rubik"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "pistol", "air"], "label": ["O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "pistol-air"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "plastisin"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "plastisin"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "ketapel"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "ketapel"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "boneka", "beruang"], "label": ["O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "boneka-beruang"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "figur", "aksi"], "label": ["O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "figur-aksi"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "sapu"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "sapu"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "pel"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "pel"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "kemoceng"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "kemoceng"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "tempat", "sampah"], "label": ["O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "tempat-sampah"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "sabun"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "sabun"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "sikat", "gigi"], "label": ["O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "sikat-gigi"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "pasta", "gigi"], "label": ["O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "pasta-gigi"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "sampo"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "sampo"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "handuk"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "handuk"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "spons"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "spons"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "sikat", "lantai"], "label": ["O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "sikat-lantai"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "televisi"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "televisi"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "radio"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "radio"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "ponsel"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "ponsel"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "laptop"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "laptop"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "kipas", "angin"], "label": ["O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "kipas-angin"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "kulkas"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "kulkas"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "setrika"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "setrika"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "senter"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "senter"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "mesin", "cuci"], "label": ["O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "mesin-cuci"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "oven", "microwave"], "label": ["O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "oven-microwave"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "kamera"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "kamera"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "gitar"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "gitar"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "piano"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "piano"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "drum"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "drum"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "seruling"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "seruling"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "biola"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "biola"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "terompet"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "terompet"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "harmonika"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "harmonika"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "angklung"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "angklung"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "tamborin"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "tamborin"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "pianika"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "pianika"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "saksofon"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "saksofon"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "harpa"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "harpa"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "bola", "basket"], "label": ["O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "bola-basket"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "raket", "tenis"], "label": ["O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "raket-tenis"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "kok"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "kok"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "peluit"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "peluit"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "piala"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "piala"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "medali"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "medali"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "kacamata", "renang"], "label": ["O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "kacamata-renang"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "sepatu", "roda"], "label": ["O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "sepatu-roda"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "pemukul", "bisbol"], "label": ["O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "pemukul-bisbol"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "sarung", "tinju"], "label": ["O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "sarung-tinju"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "papan", "selancar"], "label": ["O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "papan-selancar"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "palu"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "palu"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "paku"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "paku"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "obeng"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "obeng"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "gergaji"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "gergaji"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "tang"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "tang"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "kuas"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "kuas"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "meteran"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "meteran"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "sekrup"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "sekrup"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "bor"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "bor"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "tangga"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "tangga"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "kunci", "inggris"], "label": ["O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "kunci-inggris"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "kapak"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "kapak"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "biskuit"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "biskuit"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "cokelat"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "cokelat"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "keripik", "kentang"], "label": ["O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "keripik-kentang"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "puding"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "puding"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "sosis"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "sosis"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "berondong", "jagung"], "label": ["O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "berondong-jagung"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "es", "serut"], "label": ["O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "es-serut"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "martabak", "manis"], "label": ["O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "martabak-manis"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "permen", "lolipop"], "label": ["O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "permen-lolipop"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "kerupuk", "udang"], "label": ["O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "kerupuk-udang"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "gulali"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "gulali"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "donat", "jajanan"], "label": ["O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "donat-jajanan"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "uang", "kertas"], "label": ["O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "uang-kertas"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "dompet"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "dompet"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "troli", "belanja"], "label": ["O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "troli-belanja"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "keranjang", "belanja"], "label": ["O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "keranjang-belanja"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "tas", "belanja"], "label": ["O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "tas-belanja"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "paket"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "paket"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "mesin", "kasir"], "label": ["O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "mesin-kasir"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "timbangan"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "timbangan"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "celengan"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "celengan"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "kartu", "kredit"], "label": ["O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "kartu-kredit"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "mesin", "atm"], "label": ["O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "mesin-atm"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "jam", "tangan"], "label": ["O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "jam-tangan"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "cincin"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "cincin"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "gelang"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "gelang"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "kalung"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "kalung"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "anting"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "anting"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "ikat", "pinggang"], "label": ["O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "ikat-pinggang"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "dasi"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "dasi"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "pita", "rambut"], "label": ["O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "pita-rambut"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "jepit", "rambut"], "label": ["O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "jepit-rambut"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "bando"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "bando"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "kacamata", "hitam"], "label": ["O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "kacamata-hitam"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "sepeda", "roda", "tiga"], "label": ["O", "O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "sepeda-roda-tiga"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "skuter"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "skuter"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "becak"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "becak"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "delman"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "delman"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "gerobak"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "gerobak"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "traktor"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "traktor"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "ekskavator"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "ekskavator"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "bajaj"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "bajaj"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "balon", "udara"], "label": ["O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "balon-udara"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "rakit"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "rakit"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "kapal", "selam"], "label": ["O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "kapal-selam"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "kereta", "gantung"], "label": ["O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "kereta-gantung"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "panci"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "panci"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "wajan"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "wajan"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "ketel"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "ketel"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "pisau"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "pisau"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "talenan"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "talenan"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "mangkuk"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "mangkuk"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "parutan"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "parutan"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "spatula"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "spatula"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "sumpit"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "sumpit"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "termos"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "termos"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "peta"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "peta"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "kalender"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "kalender"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "penghapus", "papan"], "label": ["O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "penghapus-papan"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "spidol"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "spidol"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "rak", "buku"], "label": ["O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "rak-buku"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "tempat", "sampah", "kelas"], "label": ["O", "O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "tempat-sampah-kelas"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "jam", "sekolah"], "label": ["O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "jam-sekolah"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "kapur"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "kapur"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "rautan"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "rautan"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "kotak", "pensil"], "label": ["O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "kotak-pensil"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "lampu", "lalu", "lintas"], "label": ["O", "O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "lampu-lalu-lintas"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "tiang", "listrik"], "label": ["O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "tiang-listrik"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "bedug"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "bedug"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "tenda"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "tenda"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "api", "unggun"], "label": ["O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "api-unggun"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "batu", "karang"], "label": ["O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "batu-karang"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "cangkang", "kerang"], "label": ["O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "cangkang-kerang"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "sarang", "burung"], "label": ["O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "sarang-burung"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "sarang", "lebah"], "label": ["O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "sarang-lebah"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "es", "batu"], "label": ["O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "es-batu"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "kaktus", "pot"], "label": ["O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "kaktus-pot"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "daun", "kering"], "label": ["O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "daun-kering"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "ranting"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "ranting"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "tumpukan", "pasir"], "label": ["O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "tumpukan-pasir"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "genangan", "lumpur"], "label": ["O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "genangan-lumpur"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "jaring", "laba", "laba"], "label": ["O", "O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "jaring-laba-laba"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "jamur", "merah"], "label": ["O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "jamur-merah"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "bayi", "perempuan"], "label": ["O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "bayi-perempuan"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "balita", "laki", "laki"], "label": ["O", "O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "balita-laki-laki"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "remaja", "laki", "laki"], "label": ["O", "O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "remaja-laki-laki"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "remaja", "perempuan"], "label": ["O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "remaja-perempuan"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "ibu", "hamil"], "label": ["O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "ibu-hamil"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "ayah", "menggendong", "bayi"], "label": ["O", "O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "ayah-menggendong-bayi"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "guru", "berhijab"], "label": ["O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "guru-berhijab"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "perawat"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "perawat"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "pekerja", "bangunan"], "label": ["O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "pekerja-bangunan"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "petugas", "pos"], "label": ["O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "petugas-pos"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "pramugari"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "pramugari"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "astronaut"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "astronaut"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "ilmuwan"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "ilmuwan"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "mekanik"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "mekanik"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "atlet"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "atlet"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "hakim"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "hakim"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "satpam"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "satpam"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "musisi"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "musisi"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "pelukis"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "pelukis"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "petugas", "kebersihan"], "label": ["O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "petugas-kebersihan"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "reporter"], "label": ["O", "O", "O", "O"], "family": "negative-validasi", "asset": "reporter"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "anak", "bertongkat", "kruk"], "label": ["O", "O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "anak-bertongkat-kruk"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "pria", "tunanetra"], "label": ["O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "pria-tunanetra"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "anak", "sindrom", "down"], "label": ["O", "O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "anak-sindrom-down"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "anak", "berkaki", "prostetik"], "label": ["O", "O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "anak-berkaki-prostetik"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "anak", "membaca", "braille"], "label": ["O", "O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "anak-membaca-braille"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "pengguna", "kursi", "elektrik"], "label": ["O", "O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "pengguna-kursi-elektrik"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "tunanetra", "anjing", "pemandu"], "label": ["O", "O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "tunanetra-anjing-pemandu"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "anak", "memakai", "headphone"], "label": ["O", "O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "anak-memakai-headphone"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "anak", "berisyarat"], "label": ["O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "anak-berisyarat"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "kakek", "memakai", "walker"], "label": ["O", "O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "kakek-memakai-walker"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "murid", "angkat", "tangan"], "label": ["O", "O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "murid-angkat-tangan"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "anak", "makan"], "label": ["O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "anak-makan"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "anak", "minum"], "label": ["O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "anak-minum"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "anak", "bermain", "layangan"], "label": ["O", "O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "anak-bermain-layangan"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "anak", "lompat", "tali"], "label": ["O", "O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "anak-lompat-tali"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "anak", "melukis"], "label": ["O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "anak-melukis"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "anak", "tidur"], "label": ["O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "anak-tidur"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "anak", "menyapu"], "label": ["O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "anak-menyapu"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "anak", "membawa", "tas"], "label": ["O", "O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "anak-membawa-tas"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "anak", "tertawa"], "label": ["O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "anak-tertawa"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "anak", "berambut", "keriting"], "label": ["O", "O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "anak-berambut-keriting"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "anak", "perempuan", "pirang"], "label": ["O", "O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "anak-perempuan-pirang"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "anak", "berambut", "merah"], "label": ["O", "O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "anak-berambut-merah"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "anak", "berkepang"], "label": ["O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "anak-berkepang"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "pria", "tinggi"], "label": ["O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "pria-tinggi"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "wanita", "bertubuh", "berisi"], "label": ["O", "O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "wanita-bertubuh-berisi"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "pria", "berjenggot"], "label": ["O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "pria-berjenggot"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "wanita", "bertopi"], "label": ["O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "wanita-bertopi"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "anak", "bergigi", "tanggal"], "label": ["O", "O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "anak-bergigi-tanggal"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "remaja", "berkawat", "gigi"], "label": ["O", "O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "remaja-berkawat-gigi"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "pria", "botak"], "label": ["O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "pria-botak"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "wanita", "berambut", "keriting"], "label": ["O", "O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "wanita-berambut-keriting"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "pria", "berbatik"], "label": ["O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "pria-berbatik"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "wanita", "berkebaya"], "label": ["O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "wanita-berkebaya"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "pria", "berpeci"], "label": ["O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "pria-berpeci"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "wanita", "berabaya"], "label": ["O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "wanita-berabaya"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "pria", "berudeng"], "label": ["O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "pria-berudeng"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "wanita", "bali"], "label": ["O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "wanita-bali"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "pria", "papua"], "label": ["O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "pria-papua"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "wanita", "dayak"], "label": ["O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "wanita-dayak"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "pria", "berjubah"], "label": ["O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "pria-berjubah"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "anak", "memakai", "hoodie"], "label": ["O", "O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "anak-memakai-hoodie"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "anak", "bermantel"], "label": ["O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "anak-bermantel"}
+{"konteks": "kosong", "kata": ["kalau", "ada", "tiga", "anak", "berjas", "hujan"], "label": ["O", "O", "O", "O", "O", "O"], "family": "negative-validasi", "asset": "anak-berjas-hujan"}
+{"konteks": "kosong", "kata": ["lihat", "tiga", "unicorn"], "label": ["O", "O", "O"], "family": "unknown-validasi", "asset": ""}
+{"konteks": "kosong", "kata": ["lihat", "tiga", "robot", "kuantum"], "label": ["O", "O", "O", "O"], "family": "unknown-validasi", "asset": ""}
+{"konteks": "kosong", "kata": ["lihat", "tiga", "kol"], "label": ["O", "O", "O"], "family": "unknown-validasi", "asset": ""}
+{"konteks": "kosong", "kata": ["lihat", "tiga", "lemari"], "label": ["O", "O", "O"], "family": "unknown-validasi", "asset": ""}
+{"konteks": "kosong", "kata": ["lihat", "tiga", "naga", "kristal"], "label": ["O", "O", "O", "O"], "family": "unknown-validasi", "asset": ""}

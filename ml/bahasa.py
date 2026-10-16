@@ -4,6 +4,7 @@ Satu sumber ini memastikan kata yang dilatih sama dengan kata yang dikenali
 saat aplikasi berjalan.
 """
 import re
+from katalog import id_aset
 
 LABEL_JENIS = ["JUMLAH", "BENDA", "AKSI", "TEMPAT", "POSISI", "PERISTIWA"]
 LABEL = ["O"] + [f"{p}-{j}" for j in LABEL_JENIS for p in ("B", "I")]
@@ -100,4 +101,7 @@ KATA_ULANG_TETAP = {"kupu-kupu", "kura-kura", "laba-laba", "biri-biri", "undur-u
 
 def normalkan_benda(kata: str) -> str:
     m = re.fullmatch(r"(\w+)-\1", kata)  # kelinci-kelinci → kelinci
-    return m.group(1) if m and kata not in KATA_ULANG_TETAP else kata
+    dasar = m.group(1) if m and kata not in KATA_ULANG_TETAP else kata
+    if dasar in {'anak', 'orang', 'manusia', 'seseorang', 'teman', 'murid', 'siswa', 'adik', 'kakak'}:
+        return dasar
+    return id_aset(dasar) or dasar

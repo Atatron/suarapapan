@@ -7,6 +7,7 @@ Pakai:  .venv\\Scripts\\python latih_ner.py
 Hasil:  model/indobert-suarapapan/  dan  hasil/metrik_latih.json, hasil/confusion_matrix.png
 """
 import json
+import argparse
 import random
 import time
 from pathlib import Path
@@ -23,11 +24,12 @@ DASAR = "indobenchmark/indobert-base-p1"
 AKAR = Path(__file__).parent
 SIMPAN = AKAR / "model" / "indobert-suarapapan"
 HASIL = AKAR / "hasil"
-CFG = {"lr": 3e-5, "batch": 16, "epoch": 5, "max_len": 64, "warmup": 0.1, "seed": 2026}
+CFG = {"lr": 3e-5, "batch": 4, "epoch": 5, "max_len": 96, "warmup": 0.1, "seed": 2026}
+DATA = AKAR / 'data'
 
 
 def baca(nama):
-    with open(AKAR / "data" / f"{nama}.jsonl", encoding="utf-8") as f:
+    with open(DATA / f"{nama}.jsonl", encoding="utf-8") as f:
         return [json.loads(b) for b in f]
 
 
@@ -65,6 +67,16 @@ def prediksi(model, tok, contoh, perangkat):
 
 
 def main():
+    global DATA, SIMPAN, HASIL
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--data-dir', type=Path, default=DATA)
+    parser.add_argument('--output', type=Path, default=SIMPAN)
+    parser.add_argument('--results', type=Path, default=HASIL)
+    parser.add_argument('--epochs', type=int, default=CFG['epoch'])
+    parser.add_argument('--batch', type=int, default=CFG['batch'])
+    args = parser.parse_args()
+    DATA, SIMPAN, HASIL = args.data_dir.resolve(), args.output.resolve(), args.results.resolve()
+    CFG.update(epoch=max(1, args.epochs), batch=max(1, args.batch))
     random.seed(CFG["seed"]); np.random.seed(CFG["seed"]); torch.manual_seed(CFG["seed"])
     perangkat = "cuda" if torch.cuda.is_available() else "cpu"
     print(f"Perangkat: {perangkat} {torch.cuda.get_device_name(0) if perangkat == 'cuda' else ''}")
@@ -115,7 +127,8 @@ def main():
     simpan_cm(cm, jenis)
     with open(HASIL / "metrik_latih.json", "w", encoding="utf-8") as f:
         json.dump({
-            "model_dasar": DASAR, "konfigurasi": CFG, "perangkat": torch.cuda.get_device_name(0) if perangkat == "cuda" else "cpu",
+            "model_dasar": DASAR, "konfigurasi": CFG, "data_dir": str(DATA), "data_manifest": json.loads((DATA / 'manifest.json').read_text(encoding='utf-8')) if (DATA / 'manifest.json').exists() else None,
+            "perangkat": torch.cuda.get_device_name(0) if perangkat == "cuda" else "cpu",
             "jumlah_data": {"latih": len(latih), "validasi": len(validasi), "uji_templat": len(uji)},
             "riwayat": riwayat, "f1_validasi_terbaik": round(terbaik, 4),
             "uji_templat": {k: {m: round(float(v), 4) for m, v in d.items()} for k, d in laporan.items()},

@@ -41,8 +41,10 @@ export function buatPendengar({ saatSementara, saatFinal, saatStatus, saatGalat,
   // pada pengenalan di perangkat; selain itu Chrome mengirim galat "phrases-not-supported"
   // dan pengenalan berhenti. Petunjuk kosakata ada di jalur Gemini (api/_suara.js).
   let aktif = false;
+  let dibuang = false;
 
   r.onresult = (e) => {
+    if (dibuang) return;
     let sementara = '';
     for (let i = e.resultIndex; i < e.results.length; i++) {
       const hasil = e.results[i];
@@ -56,6 +58,7 @@ export function buatPendengar({ saatSementara, saatFinal, saatStatus, saatGalat,
     saatSementara(sementara.trim());
   };
   r.onerror = (e) => {
+    if (dibuang) return;
     if (e.error === 'no-speech' || e.error === 'aborted') return; // jeda biasa, bukan masalah
     aktif = false;
     saatGalat(PESAN_GALAT[e.error] || `Pengenalan suara berhenti (${e.error}).`);
@@ -63,6 +66,7 @@ export function buatPendengar({ saatSementara, saatFinal, saatStatus, saatGalat,
   // Chrome menghentikan pengenalan setelah hening beberapa detik; selama guru
   // masih menahan tombol, kita nyalakan lagi.
   r.onend = () => {
+    if (dibuang) return;
     if (aktif) {
       try { r.start(); } catch { /* sudah berjalan */ }
     } else {
@@ -72,14 +76,22 @@ export function buatPendengar({ saatSementara, saatFinal, saatStatus, saatGalat,
 
   return {
     mulai() {
-      if (aktif) return;
+      if (aktif || dibuang) return;
       aktif = true;
       try { r.start(); } catch { /* sudah berjalan */ }
       saatStatus(true);
     },
     berhenti() {
       aktif = false;
-      r.stop();
+      try { r.stop(); } catch { /* izin ditolak atau pengenal sudah berakhir */ }
+    },
+    buang() {
+      dibuang = true;
+      aktif = false;
+      r.onresult = null;
+      r.onerror = null;
+      r.onend = null;
+      try { r.abort(); } catch { /* pengenal sudah berakhir */ }
     },
   };
 }

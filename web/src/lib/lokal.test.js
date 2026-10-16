@@ -4,7 +4,6 @@ import { readFileSync } from 'node:fs';
 import { uraiLokal, bacaKonteks } from './lokal.js';
 import { cariGambar } from '../scene/pustaka.js';
 import { ADEGAN_KOSONG, terapkan, konteks, yangAda } from '../scene/engine.js';
-import { cariGambar } from '../scene/pustaka.js';
 
 const baca = (nama) => JSON.parse(readFileSync(new URL(`../../../tests/${nama}.json`, import.meta.url), 'utf8'));
 

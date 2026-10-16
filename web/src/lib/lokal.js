@@ -5,8 +5,9 @@
 //     dalam milidetik dan tidak memakai kuota.
 // Hanya benda yang ada di pustaka gambar yang dikenali; kata lain → null (diserahkan ke Gemini).
 // Keluarannya dirapikan oleh rapikan() yang sama dengan jalur Gemini, jadi bentuk JSON-nya identik.
-import { rapikan } from './rapikan.js';
+import { rapikan, kosong, alasanTinjau, normalkanJenis } from './rapikan.js';
 import { _untukTes as P, cariTempat } from '../scene/pustaka.js';
+import { idAset, aliasAset } from '../scene/katalog.js';
 
 const SATUAN = { nol: 0, satu: 1, dua: 2, tiga: 3, empat: 4, lima: 5, enam: 6, tujuh: 7, delapan: 8, sembilan: 9 };
 const KHUSUS = { sepuluh: 10, sebelas: 11, seratus: 100 };
@@ -42,16 +43,16 @@ function bendaTunggal(t) {
   if (!t) return null;
   const ulang = t.match(/^([a-z]+)-\1$/);
   const dasar = ulang && !['kupu-kupu', 'kura-kura', 'laba-laba', 'biri-biri', 'lumba-lumba', 'ubur-ubur', 'laki-laki'].includes(t) ? ulang[1] : t;
-  if (adaBenda(dasar)) return dasar;
+  if (adaBenda(dasar)) return normalkanJenis(dasar);
   const tanpaNya = dasar.replace(/nya$/, '');
-  return tanpaNya !== dasar && adaBenda(tanpaNya) ? tanpaNya : null;
+  return tanpaNya !== dasar && adaBenda(tanpaNya) ? normalkanJenis(tanpaNya) : null;
 }
 /** Frasa benda terpanjang lebih dulu, termasuk "anak menggunakan kursi roda". */
 function bendaDi(t, i) {
   if (i >= t.length) return null;
   for (let n = Math.min(MAKS_KATA_BENDA, t.length - i); n >= 2; n--) {
     const jenis = t.slice(i, i + n).join('-');
-    if (adaBenda(jenis)) return { jenis, panjang: n };
+    if (adaBenda(jenis)) return { jenis: normalkanJenis(jenis), panjang: n };
   }
   const b = bendaTunggal(t[i]);
   return b ? { jenis: b, panjang: 1 } : null;
@@ -63,8 +64,8 @@ function bacaAngka(t, i) {
   for (; j < t.length; j++) {
     const k = t[j];
     if (/^\d+$/.test(k)) { if (j > i) break; sekarang += Number(k); terakhirSatuan = false; }
-    else if (k in SATUAN) { if (terakhirSatuan) break; sekarang += SATUAN[k]; terakhirSatuan = true; }
-    else if (k in KHUSUS) { sekarang += KHUSUS[k]; terakhirSatuan = false; }
+    else if (Object.hasOwn(SATUAN, k)) { if (terakhirSatuan) break; sekarang += SATUAN[k]; terakhirSatuan = true; }
+    else if (Object.hasOwn(KHUSUS, k)) { sekarang += KHUSUS[k]; terakhirSatuan = false; }
     else if (SE.has(k)) { if (j > i) break; sekarang += 1; terakhirSatuan = false; }
     else if (k === 'belas' && j > i) { sekarang = (sekarang || 1) + 10; terakhirSatuan = false; }
     else if (k === 'puluh' && j > i) { sekarang = (sekarang || 1) * 10; terakhirSatuan = false; }
@@ -116,13 +117,18 @@ function cariKelompok(t) {
 }
 
 const caritempat = (t) => {
+  const max = Math.max(...Object.keys({ ...aliasAset('tempat'), ...aliasAset('latar') }).map((s) => s.split('-').length));
   for (let i = 0; i < t.length; i++) {
     if (!['di', 'ke', 'dari', 'dalam', 'sekitar'].includes(t[i - 1] ?? '')) continue;
+    for (let n = Math.min(max, t.length - i); n >= 2; n--) {
+      const tempat = idAset(t.slice(i, i + n).join(' '), 'tempat') || idAset(t.slice(i, i + n).join(' '), 'latar');
+      if (tempat) return tempat;
+    }
     if (REL.has(t[i]) && t[i] !== 'dalam') continue;
-    const dua = i + 1 < t.length ? cariTempat(`${t[i]}-${t[i + 1]}`) : null;
-    if (dua && `${t[i]}-${t[i + 1]}` in P.TEMPAT) return dua;
     const satu = cariTempat(t[i]);
     if (satu && !bendaDi(t, i)?.jenis?.startsWith('meja')) return satu;
+    const latar = idAset(t[i], 'latar');
+    if (latar) return t[i];
   }
   return '';
 };
@@ -139,7 +145,7 @@ function cariPosisi(t, dari = 0, sampai = t.length) {
 }
 
 function cariAksi(t, dari, sampai) {
-  for (let i = dari; i < sampai; i++) if (AKSI[t[i]]) return AKSI[t[i]];
+  for (let i = dari; i < sampai; i++) if (Object.hasOwn(AKSI, t[i])) return AKSI[t[i]];
   return 'diam';
 }
 
@@ -174,10 +180,22 @@ function cariTanya(kalimat, t, papan, kelompok) {
  */
 export function uraiLokal(kalimat, konteks = 'kosong') {
   const mulai = typeof performance !== 'undefined' ? performance.now() : Date.now();
+  const tinjau = alasanTinjau(kalimat);
+  if (tinjau) return perluTinjau(mulai, { ...kosong, entitas: [], peristiwa: [] }, tinjau, [String(kalimat)]);
+  // A repair restates the intended quantity; it is not a second addition. Only
+  // a complete replacement clause is offered, and it still requires review.
+  const koreksi = String(kalimat).match(/\b(?:eh\s+salah|ralat|maksudnya)\b[\s,:-]*(.+)$/i);
+  if (koreksi) {
+    const pengganti = uraiLokal(`Ada ${koreksi[1]}`, konteks);
+    if (pengganti?.hasil.entitas.length === 1 && !pengganti.hasil.peristiwa.length) {
+      return perluTinjau(mulai, pengganti.hasil, { code: 'SELF_CORRECTION', message: 'Koreksi ucapan terdeteksi. Periksa jumlah pengganti sebelum menampilkan.' }, []);
+    }
+    return perluTinjau(mulai, { ...kosong, entitas: [], peristiwa: [] }, { code: 'SELF_CORRECTION', message: 'Koreksi belum jelas. Tulis ulang jumlah akhir yang dimaksud.' }, [String(kalimat)]);
+  }
   const t = token(kalimat);
   if (!t.length) return null;
   const papan = bacaKonteks(konteks);
-  const adaDi = (j) => papan.find((x) => x.jenis === j);
+  const adaDi = (j) => papan.find((x) => (idAset(x.jenis) || x.jenis) === (idAset(j) || j));
   const pernyataan = { entitas: [], peristiwa: [], latar: '', gabung: false, pertanyaan: '', tanya_benda: '', tanya_jenis: 'tidak_ada', konsep: 'tidak_ada' };
   const kelompok = cariKelompok(t);
   const kataKunci = (daftar) => t.some((k) => daftar.has(k));
@@ -201,7 +219,34 @@ export function uraiLokal(kalimat, konteks = 'kosong') {
   const dipakaiSebagaiBagi = new Set();
   if (bagiN) kelompok.forEach((k, idx) => { if (k.mulai > iBagi && k.n === bagiN) dipakaiSebagaiBagi.add(idx); });
   const bendaKelompok = kelompok.filter((k, idx) => k.jenis && !dipakaiSebagaiBagi.has(idx));
-  const sisaTanpaBenda = kelompok.some((k, idx) => !k.jenis && !k.potong && !dipakaiSebagaiBagi.has(idx) && !(bagiN && k.n === bagiN));
+  const jumlahPeristiwa = new Map();
+  const angkaPeristiwa = new Set();
+  // "Tiga apel itu dimakan satu": tiga describes the existing set; satu is
+  // the event operand. Do not subtract the reference count or create it twice.
+  for (const [idx, k] of bendaKelompok.entries()) {
+    const sampai = bendaKelompok[idx + 1]?.mulai ?? t.length;
+    const iHapus = t.findIndex((kata, i) => i >= k.akhir && i < sampai && HAPUS.has(kata));
+    const operand = kelompok.find((g) => !g.jenis && !g.potong && g.mulai > iHapus && g.mulai < sampai
+      && (g.akhir >= sampai || ['lagi', 'saja', 'oleh', 'di', 'ke', 'dari', 'dan', 'lalu', 'kemudian'].includes(t[g.akhir])));
+    if (adaDi(k.jenis) && iHapus >= 0 && operand) {
+      jumlahPeristiwa.set(k, operand.n);
+      angkaPeristiwa.add(operand);
+    }
+  }
+  const takDipahami = kelompok.filter((k, idx) => !k.jenis && !k.potong && !angkaPeristiwa.has(k) && !dipakaiSebagaiBagi.has(idx) && !(bagiN && k.n === bagiN));
+  // A known first subject must not make an unnumbered unknown second subject
+  // disappear ("ada tiga kelinci dan unicorn"). Ambiguous continuations go to review.
+  const sambunganTakDikenal = [];
+  for (let i = 0; i < t.length - 1; i++) {
+    if (!['dan', 'serta'].includes(t[i])) continue;
+    let j = i + 1;
+    if (['ada', 'terdapat'].includes(t[j])) j++;
+    const k = t[j];
+    if (!k || bacaAngka(t, j) || Object.hasOwn(AKSI, k) || HAPUS.has(k) || TAMBAH.has(k) || BAGI.has(k) || PINDAH.has(k)
+      || ['yang', 'di', 'ke', 'dari', 'sama', 'berhenti', 'diam', 'duduk', 'tidur', 'berdiri', 'sekarang', 'kemudian', 'lalu', 'semuanya', 'jumlahnya'].includes(k)) continue;
+    sambunganTakDikenal.push(t.slice(j, j + 4).join(' '));
+  }
+  const sisaTanpaBenda = takDipahami.length > 0;
 
   const tanya = cariTanya(kalimat, t, papan, kelompok);
 
@@ -213,7 +258,7 @@ export function uraiLokal(kalimat, konteks = 'kosong') {
     if (ada && pindahKe) {
       pernyataan.peristiwa.push({ tipe: 'pindah', target: k.jenis, jumlah: k.n >= ada.n ? 0 : k.n, posisi: pindahKe.teks, aksi: '', aksi_awal: '' });
     } else if (ada && pastiHapus) {
-      pernyataan.peristiwa.push({ tipe: 'hapus', target: k.jenis, jumlah: k.n, posisi: '', aksi: '', aksi_awal: '' });
+      pernyataan.peristiwa.push({ tipe: 'hapus', target: k.jenis, jumlah: jumlahPeristiwa.get(k) ?? k.n, posisi: '', aksi: '', aksi_awal: '' });
     } else if (ada && bagiAda && bagiN && !ada.bagi) {
       pernyataan.peristiwa.push({ tipe: 'bagi', target: k.jenis, jumlah: bagiN, posisi: '', aksi: '', aksi_awal: '' });
     } else if (ada && !adaTambah && cariAksi(t, k.akhir, t.length) !== 'diam' && t.slice(k.akhir).includes('ke')) {
@@ -223,7 +268,7 @@ export function uraiLokal(kalimat, konteks = 'kosong') {
       pernyataan.peristiwa.push({ tipe: 'tambah', target: k.jenis, jumlah: k.n, posisi: '', aksi: '', aksi_awal: '' });
     } else if (ada && adaHapus && !tanya) {
       const potongan = ada.bagi;
-      pernyataan.peristiwa.push({ tipe: potongan ? 'ambil' : 'hapus', target: k.jenis, jumlah: k.n, posisi: '', aksi: '', aksi_awal: '' });
+      pernyataan.peristiwa.push({ tipe: potongan ? 'ambil' : 'hapus', target: k.jenis, jumlah: jumlahPeristiwa.get(k) ?? k.n, posisi: '', aksi: '', aksi_awal: '' });
     } else if (!ada && papan.length === 0 && pastiHapus && !adaTambah) {
       yakin = 'rendah'; // "dua kelinci pergi" padahal papan kosong: ambigu
       pernyataan.entitas.push({ jenis: k.jenis, jumlah: k.n, aksi: 'diam', posisi: '', bagi: 0, emoji: '', emoji_acuan: '' });
@@ -303,14 +348,23 @@ export function uraiLokal(kalimat, konteks = 'kosong') {
   if (!dipahami) {
     // Tidak ada benda berangka atau pertanyaan. Tanpa benda pustaka sama sekali, ini sapaan/instruksi ("selamat pagi anak-anak").
     const adaBendaSungguh = t.some((k, i) => { const b = bendaDi(t, i); return b && !SAPAAN.has(b.jenis); });
-    if (kelompok.length || adaBendaSungguh) return null;
-    return { hasil: rapikan(pernyataan, kalimat, konteks), sumber: 'aturan lokal', yakin: 'tinggi', ms: ahir(mulai) };
+    if (kelompok.length || adaBendaSungguh || t.some((k) => ['ada', 'terdapat', 'punya', 'memiliki'].includes(k))) return null;
+    return { hasil: rapikan(pernyataan, kalimat, konteks), sumber: 'aturan lokal', yakin: 'tinggi', needsConfirmation: false, notice: null, ms: ahir(mulai) };
   }
   // Angka yang tidak berpasangan dengan benda pustaka ("ada tiga kodok-kodokan"): bukan pola yang kami pahami.
-  if (sisaTanpaBenda) yakin = 'rendah';
+  if (sisaTanpaBenda || sambunganTakDikenal.length) {
+    return perluTinjau(mulai, { ...kosong, entitas: [], peristiwa: [] }, { code: 'INCOMPLETE_COVERAGE', message: 'Sebagian benda atau jumlah belum dikenali. Papan dipertahankan; tulis ulang kalimat lengkap.' }, [...takDipahami.map((k) => t.slice(k.mulai, Math.max(k.akhir + 2, k.mulai + 1)).join(' ')), ...sambunganTakDikenal]);
+  }
   if (t.length > 14 || kataKunci(new Set(['bukan', 'maksudnya', 'eh', 'salah', 'tadi', 'ralat']))) yakin = 'rendah'; // koreksi diri atau kalimat panjang
   if (pernyataan.entitas.length === 0 && pernyataan.peristiwa.length === 0 && !tanya) return null;
-  return { hasil: rapikan(pernyataan, kalimat, konteks), sumber: 'aturan lokal', yakin, ms: ahir(mulai) };
+  const hasil = rapikan(pernyataan, kalimat, konteks);
+  if (hasil.needsConfirmation) return perluTinjau(mulai, hasil, hasil.notice, hasil.notice?.unresolvedSpans || []);
+  if (yakin === 'rendah') return perluTinjau(mulai, hasil, { code: 'AMBIGUOUS_LOCAL_PARSE', message: 'Tafsiran lokal belum pasti. Periksa pratinjau sebelum menampilkan.' }, []);
+  return { hasil, sumber: 'aturan lokal', yakin, needsConfirmation: false, notice: null, ms: ahir(mulai) };
 }
 
 function ahir(mulai) { return (typeof performance !== 'undefined' ? performance.now() : Date.now()) - mulai; }
+
+function perluTinjau(mulai, hasil, alasan, unresolvedSpans) {
+  return { hasil, sumber: 'aturan lokal', yakin: 'rendah', needsConfirmation: true, notice: { ...alasan, unresolvedSpans }, ms: ahir(mulai) };
+}
