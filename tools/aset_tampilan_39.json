@@ -1,0 +1,2862 @@
+{
+  "sheets": [
+    {
+      "number": 1,
+      "slug": "hewan-ternak",
+      "kind": "obj",
+      "items": [
+        {
+          "source": "chicken",
+          "id": "ayam",
+          "name": "ayam"
+        },
+        {
+          "source": "duck",
+          "id": "bebek",
+          "name": "bebek"
+        },
+        {
+          "source": "cow",
+          "id": "sapi",
+          "name": "sapi"
+        },
+        {
+          "source": "goat",
+          "id": "kambing",
+          "name": "kambing"
+        },
+        {
+          "source": "sheep",
+          "id": "domba",
+          "name": "domba"
+        },
+        {
+          "source": "horse",
+          "id": "kuda",
+          "name": "kuda"
+        },
+        {
+          "source": "pig",
+          "id": "babi",
+          "name": "babi"
+        },
+        {
+          "source": "water buffalo",
+          "id": "kerbau",
+          "name": "kerbau"
+        },
+        {
+          "source": "goose",
+          "id": "angsa",
+          "name": "angsa"
+        },
+        {
+          "source": "dog",
+          "id": "anjing",
+          "name": "anjing"
+        },
+        {
+          "source": "cat",
+          "id": "kucing",
+          "name": "kucing"
+        },
+        {
+          "source": "rabbit",
+          "id": "kelinci",
+          "name": "kelinci"
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "slug": "hewan-hutan",
+      "kind": "obj",
+      "items": [
+        {
+          "source": "tiger",
+          "id": "harimau",
+          "name": "harimau"
+        },
+        {
+          "source": "lion",
+          "id": "singa",
+          "name": "singa"
+        },
+        {
+          "source": "elephant",
+          "id": "gajah",
+          "name": "gajah"
+        },
+        {
+          "source": "monkey",
+          "id": "monyet",
+          "name": "monyet"
+        },
+        {
+          "source": "gorilla",
+          "id": "gorila",
+          "name": "gorila"
+        },
+        {
+          "source": "giraffe",
+          "id": "jerapah",
+          "name": "jerapah"
+        },
+        {
+          "source": "zebra",
+          "id": "zebra",
+          "name": "zebra"
+        },
+        {
+          "source": "brown bear",
+          "id": "beruang",
+          "name": "beruang"
+        },
+        {
+          "source": "snake",
+          "id": "ular",
+          "name": "ular"
+        },
+        {
+          "source": "crocodile",
+          "id": "buaya",
+          "name": "buaya"
+        },
+        {
+          "source": "rhinoceros",
+          "id": "badak",
+          "name": "badak"
+        },
+        {
+          "source": "hippopotamus",
+          "id": "kuda-nil",
+          "name": "kuda nil"
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "slug": "hewan-laut",
+      "kind": "obj",
+      "items": [
+        {
+          "source": "small fish",
+          "id": "ikan",
+          "name": "ikan"
+        },
+        {
+          "source": "dolphin",
+          "id": "lumba-lumba",
+          "name": "lumba lumba"
+        },
+        {
+          "source": "whale",
+          "id": "paus",
+          "name": "paus"
+        },
+        {
+          "source": "shark",
+          "id": "hiu",
+          "name": "hiu"
+        },
+        {
+          "source": "octopus",
+          "id": "gurita",
+          "name": "gurita"
+        },
+        {
+          "source": "crab",
+          "id": "kepiting",
+          "name": "kepiting"
+        },
+        {
+          "source": "shrimp",
+          "id": "udang",
+          "name": "udang"
+        },
+        {
+          "source": "sea turtle",
+          "id": "penyu",
+          "name": "penyu"
+        },
+        {
+          "source": "jellyfish",
+          "id": "ubur-ubur",
+          "name": "ubur ubur"
+        },
+        {
+          "source": "starfish",
+          "id": "bintang-laut",
+          "name": "bintang laut"
+        },
+        {
+          "source": "seahorse",
+          "id": "kuda-laut",
+          "name": "kuda laut"
+        },
+        {
+          "source": "squid",
+          "id": "cumi-cumi",
+          "name": "cumi cumi"
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "slug": "burung",
+      "kind": "obj",
+      "items": [
+        {
+          "source": "small blue bird",
+          "id": "burung",
+          "name": "burung"
+        },
+        {
+          "source": "eagle",
+          "id": "elang",
+          "name": "elang"
+        },
+        {
+          "source": "owl",
+          "id": "burung-hantu",
+          "name": "burung hantu"
+        },
+        {
+          "source": "pigeon",
+          "id": "merpati",
+          "name": "merpati"
+        },
+        {
+          "source": "peacock",
+          "id": "merak",
+          "name": "merak"
+        },
+        {
+          "source": "parrot",
+          "id": "kakatua",
+          "name": "kakatua"
+        },
+        {
+          "source": "penguin",
+          "id": "penguin",
+          "name": "penguin"
+        },
+        {
+          "source": "flamingo",
+          "id": "flamingo",
+          "name": "flamingo"
+        },
+        {
+          "source": "pelican",
+          "id": "pelikan",
+          "name": "pelikan"
+        },
+        {
+          "source": "baby chick",
+          "id": "piyik-ayam",
+          "name": "piyik ayam",
+          "height": 0.12,
+          "background": "farm"
+        },
+        {
+          "source": "ostrich",
+          "id": "burung-unta",
+          "name": "burung unta"
+        },
+        {
+          "source": "seagull",
+          "id": "camar",
+          "name": "camar"
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "slug": "serangga",
+      "kind": "obj",
+      "items": [
+        {
+          "source": "butterfly",
+          "id": "kupu-kupu",
+          "name": "kupu kupu"
+        },
+        {
+          "source": "bee",
+          "id": "lebah",
+          "name": "lebah"
+        },
+        {
+          "source": "ant",
+          "id": "semut",
+          "name": "semut"
+        },
+        {
+          "source": "beetle",
+          "id": "kumbang",
+          "name": "kumbang"
+        },
+        {
+          "source": "ladybug",
+          "id": "kepik",
+          "name": "kepik"
+        },
+        {
+          "source": "grasshopper",
+          "id": "belalang",
+          "name": "belalang"
+        },
+        {
+          "source": "dragonfly",
+          "id": "capung",
+          "name": "capung"
+        },
+        {
+          "source": "spider",
+          "id": "laba-laba",
+          "name": "laba laba"
+        },
+        {
+          "source": "snail",
+          "id": "siput",
+          "name": "siput"
+        },
+        {
+          "source": "earthworm",
+          "id": "cacing",
+          "name": "cacing"
+        },
+        {
+          "source": "frog",
+          "id": "katak",
+          "name": "katak"
+        },
+        {
+          "source": "small tortoise",
+          "id": "kura-kura",
+          "name": "kura kura"
+        }
+      ]
+    },
+    {
+      "number": 6,
+      "slug": "buah",
+      "kind": "obj",
+      "items": [
+        {
+          "source": "red apple",
+          "id": "apel",
+          "name": "apel"
+        },
+        {
+          "source": "yellow banana",
+          "id": "pisang",
+          "name": "pisang"
+        },
+        {
+          "source": "orange fruit",
+          "id": "jeruk",
+          "name": "jeruk"
+        },
+        {
+          "source": "mango",
+          "id": "mangga",
+          "name": "mangga"
+        },
+        {
+          "source": "bunch of purple grapes",
+          "id": "anggur",
+          "name": "anggur"
+        },
+        {
+          "source": "slice of watermelon",
+          "id": "semangka",
+          "name": "semangka"
+        },
+        {
+          "source": "strawberry",
+          "id": "stroberi",
+          "name": "stroberi"
+        },
+        {
+          "source": "pineapple",
+          "id": "nanas",
+          "name": "nanas"
+        },
+        {
+          "source": "coconut",
+          "id": "kelapa",
+          "name": "kelapa"
+        },
+        {
+          "source": "pear",
+          "id": "pir",
+          "name": "pir"
+        },
+        {
+          "source": "cherry",
+          "id": "ceri",
+          "name": "ceri"
+        },
+        {
+          "source": "avocado",
+          "id": "alpukat",
+          "name": "alpukat"
+        }
+      ]
+    },
+    {
+      "number": 7,
+      "slug": "sayur",
+      "kind": "obj",
+      "items": [
+        {
+          "source": "carrot",
+          "id": "wortel",
+          "name": "wortel"
+        },
+        {
+          "source": "corn on the cob",
+          "id": "jagung",
+          "name": "jagung"
+        },
+        {
+          "source": "red tomato",
+          "id": "tomat",
+          "name": "tomat"
+        },
+        {
+          "source": "purple eggplant",
+          "id": "terong",
+          "name": "terong"
+        },
+        {
+          "source": "red chili pepper",
+          "id": "cabai",
+          "name": "cabai"
+        },
+        {
+          "source": "cucumber",
+          "id": "timun",
+          "name": "timun"
+        },
+        {
+          "source": "green broccoli",
+          "id": "brokoli",
+          "name": "brokoli"
+        },
+        {
+          "source": "potato",
+          "id": "kentang",
+          "name": "kentang"
+        },
+        {
+          "source": "onion",
+          "id": "bawang",
+          "name": "bawang"
+        },
+        {
+          "source": "mushroom",
+          "id": "jamur",
+          "name": "jamur"
+        },
+        {
+          "source": "green beans",
+          "id": "kacang",
+          "name": "kacang"
+        },
+        {
+          "source": "spinach leaves",
+          "id": "bayam",
+          "name": "bayam"
+        }
+      ]
+    },
+    {
+      "number": 8,
+      "slug": "makanan-minuman",
+      "kind": "obj",
+      "items": [
+        {
+          "source": "bowl of white rice",
+          "id": "nasi",
+          "name": "nasi"
+        },
+        {
+          "source": "slice of bread",
+          "id": "roti",
+          "name": "roti"
+        },
+        {
+          "source": "slice of cake",
+          "id": "kue",
+          "name": "kue"
+        },
+        {
+          "source": "slice of pizza",
+          "id": "pizza",
+          "name": "pizza"
+        },
+        {
+          "source": "glazed donut",
+          "id": "donat",
+          "name": "donat"
+        },
+        {
+          "source": "fried egg",
+          "id": "telur",
+          "name": "telur"
+        },
+        {
+          "source": "ice cream cone",
+          "id": "es-krim",
+          "name": "es krim"
+        },
+        {
+          "source": "wrapped candy",
+          "id": "permen",
+          "name": "permen"
+        },
+        {
+          "source": "glass of milk",
+          "id": "susu",
+          "name": "susu"
+        },
+        {
+          "source": "glass of water",
+          "id": "air",
+          "name": "air"
+        },
+        {
+          "source": "bowl of meatball soup",
+          "id": "bakso",
+          "name": "bakso"
+        },
+        {
+          "source": "chicken satay skewers",
+          "id": "sate",
+          "name": "sate"
+        }
+      ]
+    },
+    {
+      "number": 9,
+      "slug": "lingkungan-1",
+      "kind": "tempat",
+      "items": [
+        {
+          "source": "kitchen interior isolated diorama",
+          "id": "dapur",
+          "name": "dapur"
+        },
+        {
+          "source": "child's bedroom isolated diorama",
+          "id": "kamar",
+          "name": "kamar"
+        },
+        {
+          "source": "classroom interior isolated diorama",
+          "id": "kelas",
+          "name": "kelas"
+        },
+        {
+          "source": "school building exterior isolated diorama",
+          "id": "sekolah",
+          "name": "sekolah"
+        },
+        {
+          "source": "traditional market stalls diorama",
+          "id": "pasar",
+          "name": "pasar"
+        },
+        {
+          "source": "city street crosswalk diorama",
+          "id": "kota",
+          "name": "kota"
+        },
+        {
+          "source": "village road with huts diorama",
+          "id": "jalan-desa",
+          "name": "jalan desa"
+        },
+        {
+          "source": "desert with dunes diorama",
+          "id": "gurun",
+          "name": "gurun"
+        },
+        {
+          "source": "snowy landscape diorama",
+          "id": "salju",
+          "name": "salju"
+        },
+        {
+          "source": "zoo path diorama",
+          "id": "kebun-binatang",
+          "name": "kebun binatang"
+        },
+        {
+          "source": "wide green meadow diorama",
+          "id": "rumput",
+          "name": "rumput"
+        },
+        {
+          "source": "tropical jungle clearing diorama",
+          "id": "hutan",
+          "name": "hutan"
+        }
+      ]
+    },
+    {
+      "number": 10,
+      "slug": "lingkungan-2",
+      "kind": "tempat",
+      "items": [
+        {
+          "source": "vegetable garden diorama",
+          "id": "kebun",
+          "name": "kebun"
+        },
+        {
+          "source": "terraced rice fields diorama",
+          "id": "sawah",
+          "name": "sawah"
+        },
+        {
+          "source": "countryside farm diorama",
+          "id": "peternakan",
+          "name": "peternakan"
+        },
+        {
+          "source": "snow mountain base diorama",
+          "id": "gunung",
+          "name": "gunung"
+        },
+        {
+          "source": "winding river meadow diorama",
+          "id": "sungai",
+          "name": "sungai"
+        },
+        {
+          "source": "calm lake diorama",
+          "id": "danau",
+          "name": "danau"
+        },
+        {
+          "source": "garden pond diorama",
+          "id": "kolam",
+          "name": "kolam"
+        },
+        {
+          "source": "open ocean waves diorama",
+          "id": "laut",
+          "name": "laut"
+        },
+        {
+          "source": "underwater coral reef diorama",
+          "id": "bawah-laut",
+          "name": "bawah laut"
+        },
+        {
+          "source": "tropical sandy beach diorama",
+          "id": "pantai",
+          "name": "pantai"
+        },
+        {
+          "source": "city park with benches diorama",
+          "id": "taman-kota",
+          "name": "taman kota"
+        },
+        {
+          "source": "house front yard diorama",
+          "id": "halaman-rumah",
+          "name": "halaman rumah"
+        }
+      ]
+    },
+    {
+      "number": 11,
+      "slug": "mainan",
+      "kind": "obj",
+      "items": [
+        {
+          "source": "glass marbles",
+          "id": "kelereng",
+          "name": "kelereng",
+          "height": 0.02
+        },
+        {
+          "source": "wooden yoyo",
+          "id": "yoyo",
+          "name": "yoyo",
+          "height": 0.06
+        },
+        {
+          "source": "toy robot",
+          "id": "robot-mainan",
+          "name": "robot mainan"
+        },
+        {
+          "source": "toy car",
+          "id": "mobil-mainan",
+          "name": "mobil mainan",
+          "height": 0.08
+        },
+        {
+          "source": "plastic building blocks",
+          "id": "balok-mainan",
+          "name": "balok mainan",
+          "height": 0.15
+        },
+        {
+          "source": "jigsaw puzzle piece",
+          "id": "keping-puzel",
+          "name": "keping puzel",
+          "height": 0.1
+        },
+        {
+          "source": "rubik's cube",
+          "id": "kubus-rubik",
+          "name": "kubus rubik",
+          "height": 0.06
+        },
+        {
+          "source": "plastic water gun",
+          "id": "pistol-air",
+          "name": "pistol air",
+          "height": 0.15
+        },
+        {
+          "source": "colorful playdough",
+          "id": "plastisin",
+          "name": "plastisin",
+          "height": 0.1
+        },
+        {
+          "source": "wooden slingshot",
+          "id": "ketapel",
+          "name": "ketapel",
+          "height": 0.2
+        },
+        {
+          "source": "teddy bear",
+          "id": "boneka-beruang",
+          "name": "boneka beruang"
+        },
+        {
+          "source": "action figure",
+          "id": "figur-aksi",
+          "name": "figur aksi",
+          "height": 0.18
+        }
+      ]
+    },
+    {
+      "number": 12,
+      "slug": "alat-kebersihan",
+      "kind": "obj",
+      "items": [
+        {
+          "source": "sweeping broom",
+          "id": "sapu",
+          "name": "sapu",
+          "height": 1.2
+        },
+        {
+          "source": "floor mop",
+          "id": "pel",
+          "name": "pel",
+          "height": 1.2
+        },
+        {
+          "source": "feather duster",
+          "id": "kemoceng",
+          "name": "kemoceng",
+          "height": 0.65
+        },
+        {
+          "source": "plastic trash can",
+          "id": "tempat-sampah",
+          "name": "tempat sampah",
+          "height": 0.65
+        },
+        {
+          "source": "bar of soap",
+          "id": "sabun",
+          "name": "sabun",
+          "height": 0.08
+        },
+        {
+          "source": "toothbrush",
+          "id": "sikat-gigi",
+          "name": "sikat gigi",
+          "height": 0.18
+        },
+        {
+          "source": "toothpaste tube",
+          "id": "pasta-gigi",
+          "name": "pasta gigi",
+          "height": 0.18
+        },
+        {
+          "source": "shampoo bottle",
+          "id": "sampo",
+          "name": "sampo"
+        },
+        {
+          "source": "folded towel",
+          "id": "handuk",
+          "name": "handuk"
+        },
+        {
+          "source": "cleaning sponge",
+          "id": "spons",
+          "name": "spons",
+          "height": 0.1
+        },
+        {
+          "source": "plastic bucket",
+          "id": "ember",
+          "name": "ember"
+        },
+        {
+          "source": "floor scrub brush",
+          "id": "sikat-lantai",
+          "name": "sikat lantai",
+          "height": 0.15
+        }
+      ]
+    },
+    {
+      "number": 13,
+      "slug": "elektronik",
+      "kind": "obj",
+      "items": [
+        {
+          "source": "television set",
+          "id": "televisi",
+          "name": "televisi",
+          "height": 0.6
+        },
+        {
+          "source": "vintage radio",
+          "id": "radio",
+          "name": "radio"
+        },
+        {
+          "source": "smartphone",
+          "id": "ponsel",
+          "name": "ponsel",
+          "height": 0.16
+        },
+        {
+          "source": "open laptop",
+          "id": "laptop",
+          "name": "laptop"
+        },
+        {
+          "source": "desk fan",
+          "id": "kipas-angin",
+          "name": "kipas angin",
+          "height": 0.45
+        },
+        {
+          "source": "refrigerator",
+          "id": "kulkas",
+          "name": "kulkas",
+          "height": 1.7
+        },
+        {
+          "source": "clothes iron",
+          "id": "setrika",
+          "name": "setrika",
+          "height": 0.15
+        },
+        {
+          "source": "round wall clock",
+          "id": "jam",
+          "name": "jam"
+        },
+        {
+          "source": "flashlight",
+          "id": "senter",
+          "name": "senter",
+          "height": 0.2
+        },
+        {
+          "source": "washing machine",
+          "id": "mesin-cuci",
+          "name": "mesin cuci",
+          "height": 0.9
+        },
+        {
+          "source": "microwave oven",
+          "id": "oven-microwave",
+          "name": "oven microwave"
+        },
+        {
+          "source": "digital camera",
+          "id": "kamera",
+          "name": "kamera",
+          "height": 0.1
+        }
+      ]
+    },
+    {
+      "number": 14,
+      "slug": "alat-musik",
+      "kind": "obj",
+      "items": [
+        {
+          "source": "acoustic guitar",
+          "id": "gitar",
+          "name": "gitar",
+          "height": 1.0
+        },
+        {
+          "source": "classic piano",
+          "id": "piano",
+          "name": "piano",
+          "height": 1.0
+        },
+        {
+          "source": "snare drum",
+          "id": "drum",
+          "name": "drum"
+        },
+        {
+          "source": "wooden flute",
+          "id": "seruling",
+          "name": "seruling",
+          "height": 0.6
+        },
+        {
+          "source": "violin with bow",
+          "id": "biola",
+          "name": "biola",
+          "height": 0.6
+        },
+        {
+          "source": "brass trumpet",
+          "id": "terompet",
+          "name": "terompet",
+          "height": 0.5
+        },
+        {
+          "source": "harmonica",
+          "id": "harmonika",
+          "name": "harmonika",
+          "height": 0.1
+        },
+        {
+          "source": "bamboo angklung",
+          "id": "angklung",
+          "name": "angklung",
+          "height": 0.6
+        },
+        {
+          "source": "tambourine",
+          "id": "tamborin",
+          "name": "tamborin"
+        },
+        {
+          "source": "melodica",
+          "id": "pianika",
+          "name": "pianika"
+        },
+        {
+          "source": "saxophone",
+          "id": "saksofon",
+          "name": "saksofon",
+          "height": 0.75
+        },
+        {
+          "source": "classic harp",
+          "id": "harpa",
+          "name": "harpa",
+          "height": 1.6,
+          "backgroundThreshold": 248,
+          "pocketMin": 8
+        }
+      ]
+    },
+    {
+      "number": 15,
+      "slug": "alat-olahraga",
+      "kind": "obj",
+      "items": [
+        {
+          "source": "soccer ball",
+          "id": "bola",
+          "name": "bola"
+        },
+        {
+          "source": "basketball",
+          "id": "bola-basket",
+          "name": "bola basket"
+        },
+        {
+          "source": "tennis racket",
+          "id": "raket-tenis",
+          "name": "raket tenis",
+          "height": 0.7,
+          "pocketMin": 5
+        },
+        {
+          "source": "badminton shuttlecock",
+          "id": "kok",
+          "name": "kok",
+          "height": 0.09
+        },
+        {
+          "source": "referee whistle",
+          "id": "peluit",
+          "name": "peluit",
+          "height": 0.05
+        },
+        {
+          "source": "gold trophy",
+          "id": "piala",
+          "name": "piala",
+          "height": 0.45
+        },
+        {
+          "source": "gold medal with ribbon",
+          "id": "medali",
+          "name": "medali"
+        },
+        {
+          "source": "swimming goggles",
+          "id": "kacamata-renang",
+          "name": "kacamata renang",
+          "height": 0.08
+        },
+        {
+          "source": "roller skates",
+          "id": "sepatu-roda",
+          "name": "sepatu roda"
+        },
+        {
+          "source": "baseball bat",
+          "id": "pemukul-bisbol",
+          "name": "pemukul bisbol",
+          "height": 1.0
+        },
+        {
+          "source": "boxing gloves",
+          "id": "sarung-tinju",
+          "name": "sarung tinju"
+        },
+        {
+          "source": "surfboard",
+          "id": "papan-selancar",
+          "name": "papan selancar",
+          "height": 1.8,
+          "background": "beach"
+        }
+      ]
+    },
+    {
+      "number": 16,
+      "slug": "perkakas",
+      "kind": "obj",
+      "items": [
+        {
+          "source": "steel hammer",
+          "id": "palu",
+          "name": "palu"
+        },
+        {
+          "source": "metal nail",
+          "id": "paku",
+          "name": "paku",
+          "height": 0.06
+        },
+        {
+          "source": "screwdriver",
+          "id": "obeng",
+          "name": "obeng"
+        },
+        {
+          "source": "hand saw",
+          "id": "gergaji",
+          "name": "gergaji",
+          "height": 0.6
+        },
+        {
+          "source": "metal pliers",
+          "id": "tang",
+          "name": "tang",
+          "height": 0.2
+        },
+        {
+          "source": "paintbrush",
+          "id": "kuas",
+          "name": "kuas",
+          "height": 0.2
+        },
+        {
+          "source": "measuring tape",
+          "id": "meteran",
+          "name": "meteran",
+          "height": 0.08
+        },
+        {
+          "source": "metal screw",
+          "id": "sekrup",
+          "name": "sekrup",
+          "height": 0.04
+        },
+        {
+          "source": "power drill",
+          "id": "bor",
+          "name": "bor"
+        },
+        {
+          "source": "step ladder",
+          "id": "tangga",
+          "name": "tangga",
+          "height": 1.8
+        },
+        {
+          "source": "steel wrench",
+          "id": "kunci-inggris",
+          "name": "kunci inggris"
+        },
+        {
+          "source": "wood axe",
+          "id": "kapak",
+          "name": "kapak",
+          "height": 0.8
+        }
+      ]
+    },
+    {
+      "number": 17,
+      "slug": "jajanan",
+      "kind": "obj",
+      "items": [
+        {
+          "source": "chocolate chip biscuit",
+          "id": "biskuit",
+          "name": "biskuit",
+          "height": 0.08
+        },
+        {
+          "source": "chocolate bar",
+          "id": "cokelat",
+          "name": "cokelat",
+          "height": 0.15
+        },
+        {
+          "source": "bowl of potato chips",
+          "id": "keripik-kentang",
+          "name": "keripik kentang",
+          "height": 0.15
+        },
+        {
+          "source": "jelly pudding on a plate",
+          "id": "puding",
+          "name": "puding",
+          "height": 0.12
+        },
+        {
+          "source": "cooked sausage",
+          "id": "sosis",
+          "name": "sosis",
+          "height": 0.18
+        },
+        {
+          "source": "box of popcorn",
+          "id": "berondong-jagung",
+          "name": "berondong jagung"
+        },
+        {
+          "source": "bowl of shaved ice",
+          "id": "es-serut",
+          "name": "es serut"
+        },
+        {
+          "source": "sweet stuffed pancake",
+          "id": "martabak-manis",
+          "name": "martabak manis",
+          "height": 0.15
+        },
+        {
+          "source": "swirl lollipop",
+          "id": "permen-lolipop",
+          "name": "permen lolipop",
+          "height": 0.2
+        },
+        {
+          "source": "prawn crackers",
+          "id": "kerupuk-udang",
+          "name": "kerupuk udang",
+          "height": 0.1
+        },
+        {
+          "source": "pink cotton candy",
+          "id": "gulali",
+          "name": "gulali"
+        },
+        {
+          "source": "glazed donut",
+          "id": "donat-jajanan",
+          "name": "donat jajanan",
+          "height": 0.1
+        }
+      ]
+    },
+    {
+      "number": 18,
+      "slug": "uang-belanja",
+      "kind": "obj",
+      "items": [
+        {
+          "source": "stack of gold coins",
+          "id": "koin",
+          "name": "koin"
+        },
+        {
+          "source": "stack of paper money banknotes",
+          "id": "uang-kertas",
+          "name": "uang kertas",
+          "height": 0.08
+        },
+        {
+          "source": "leather wallet",
+          "id": "dompet",
+          "name": "dompet",
+          "height": 0.12
+        },
+        {
+          "source": "metal shopping cart",
+          "id": "troli-belanja",
+          "name": "troli belanja",
+          "height": 1.0
+        },
+        {
+          "source": "plastic shopping basket",
+          "id": "keranjang-belanja",
+          "name": "keranjang belanja"
+        },
+        {
+          "source": "reusable tote bag",
+          "id": "tas-belanja",
+          "name": "tas belanja"
+        },
+        {
+          "source": "cardboard parcel box",
+          "id": "paket",
+          "name": "paket"
+        },
+        {
+          "source": "modern cash register",
+          "id": "mesin-kasir",
+          "name": "mesin kasir",
+          "height": 0.45
+        },
+        {
+          "source": "weighing scale",
+          "id": "timbangan",
+          "name": "timbangan"
+        },
+        {
+          "source": "piggy bank",
+          "id": "celengan",
+          "name": "celengan"
+        },
+        {
+          "source": "credit card",
+          "id": "kartu-kredit",
+          "name": "kartu kredit",
+          "height": 0.054
+        },
+        {
+          "source": "ATM machine",
+          "id": "mesin-atm",
+          "name": "mesin ATM",
+          "height": 1.6
+        }
+      ]
+    },
+    {
+      "number": 19,
+      "slug": "aksesoris",
+      "kind": "obj",
+      "items": [
+        {
+          "source": "analog wristwatch",
+          "id": "jam-tangan",
+          "name": "jam tangan",
+          "height": 0.2
+        },
+        {
+          "source": "gold ring",
+          "id": "cincin",
+          "name": "cincin",
+          "height": 0.025
+        },
+        {
+          "source": "beaded bracelet",
+          "id": "gelang",
+          "name": "gelang",
+          "height": 0.08
+        },
+        {
+          "source": "pearl necklace",
+          "id": "kalung",
+          "name": "kalung",
+          "backgroundSeeds": [
+            [
+              101,
+              249
+            ]
+          ]
+        },
+        {
+          "source": "pair of earrings",
+          "id": "anting",
+          "name": "anting",
+          "height": 0.04
+        },
+        {
+          "source": "leather belt",
+          "id": "ikat-pinggang",
+          "name": "ikat pinggang"
+        },
+        {
+          "source": "necktie",
+          "id": "dasi",
+          "name": "dasi",
+          "height": 0.5
+        },
+        {
+          "source": "hair ribbon",
+          "id": "pita-rambut",
+          "name": "pita rambut",
+          "height": 0.1
+        },
+        {
+          "source": "hair clip",
+          "id": "jepit-rambut",
+          "name": "jepit rambut",
+          "height": 0.07
+        },
+        {
+          "source": "headband",
+          "id": "bando",
+          "name": "bando",
+          "height": 0.16
+        },
+        {
+          "source": "baseball cap",
+          "id": "topi",
+          "name": "topi"
+        },
+        {
+          "source": "sunglasses",
+          "id": "kacamata-hitam",
+          "name": "kacamata hitam",
+          "height": 0.06
+        }
+      ]
+    },
+    {
+      "number": 20,
+      "slug": "kendaraan-ekstra",
+      "kind": "obj",
+      "items": [
+        {
+          "source": "child's tricycle",
+          "id": "sepeda-roda-tiga",
+          "name": "sepeda roda tiga",
+          "height": 0.65
+        },
+        {
+          "source": "kick scooter",
+          "id": "skuter",
+          "name": "skuter",
+          "height": 1.0
+        },
+        {
+          "source": "cycle rickshaw",
+          "id": "becak",
+          "name": "becak",
+          "height": 1.8
+        },
+        {
+          "source": "horse carriage",
+          "id": "delman",
+          "name": "delman",
+          "height": 2.2,
+          "background": "farm"
+        },
+        {
+          "source": "wooden pushcart",
+          "id": "gerobak",
+          "name": "gerobak",
+          "height": 1.2
+        },
+        {
+          "source": "farm tractor",
+          "id": "traktor",
+          "name": "traktor",
+          "height": 2.5,
+          "background": "farm"
+        },
+        {
+          "source": "construction excavator",
+          "id": "ekskavator",
+          "name": "ekskavator",
+          "height": 3.0
+        },
+        {
+          "source": "auto rickshaw bajaj",
+          "id": "bajaj",
+          "name": "bajaj",
+          "height": 1.8
+        },
+        {
+          "source": "hot air balloon",
+          "id": "balon-udara",
+          "name": "balon udara",
+          "height": 12.0,
+          "background": "open-sky"
+        },
+        {
+          "source": "bamboo raft",
+          "id": "rakit",
+          "name": "rakit",
+          "background": "river"
+        },
+        {
+          "source": "yellow submarine",
+          "id": "kapal-selam",
+          "name": "kapal selam",
+          "height": 5.0,
+          "background": "deep-ocean"
+        },
+        {
+          "source": "cable car",
+          "id": "kereta-gantung",
+          "name": "kereta gantung",
+          "height": 2.5,
+          "background": "mountains"
+        }
+      ]
+    },
+    {
+      "number": 21,
+      "slug": "alat-dapur",
+      "kind": "obj",
+      "items": [
+        {
+          "source": "cooking pot",
+          "id": "panci",
+          "name": "panci"
+        },
+        {
+          "source": "frying pan",
+          "id": "wajan",
+          "name": "wajan",
+          "height": 0.15
+        },
+        {
+          "source": "boiling kettle",
+          "id": "ketel",
+          "name": "ketel",
+          "backgroundSeeds": [
+            [
+              169,
+              171
+            ]
+          ]
+        },
+        {
+          "source": "chef's knife",
+          "id": "pisau",
+          "name": "pisau"
+        },
+        {
+          "source": "wooden cutting board",
+          "id": "talenan",
+          "name": "talenan"
+        },
+        {
+          "source": "ceramic bowl",
+          "id": "mangkuk",
+          "name": "mangkuk",
+          "height": 0.15
+        },
+        {
+          "source": "cheese grater",
+          "id": "parutan",
+          "name": "parutan"
+        },
+        {
+          "source": "cooking spatula",
+          "id": "spatula",
+          "name": "spatula"
+        },
+        {
+          "source": "pair of chopsticks",
+          "id": "sumpit",
+          "name": "sumpit"
+        },
+        {
+          "source": "thermos bottle",
+          "id": "termos",
+          "name": "termos"
+        },
+        {
+          "source": "dining plate",
+          "id": "piring",
+          "name": "piring"
+        },
+        {
+          "source": "glass cup",
+          "id": "gelas",
+          "name": "gelas"
+        }
+      ]
+    },
+    {
+      "number": 22,
+      "slug": "benda-kelas",
+      "kind": "obj",
+      "items": [
+        {
+          "source": "earth globe",
+          "id": "globe",
+          "name": "globe"
+        },
+        {
+          "source": "rolled paper map",
+          "id": "peta",
+          "name": "peta",
+          "height": 0.5
+        },
+        {
+          "source": "desk calendar",
+          "id": "kalender",
+          "name": "kalender"
+        },
+        {
+          "source": "blackboard eraser",
+          "id": "penghapus-papan",
+          "name": "penghapus papan",
+          "height": 0.06
+        },
+        {
+          "source": "whiteboard marker",
+          "id": "spidol",
+          "name": "spidol",
+          "height": 0.15
+        },
+        {
+          "source": "small bookshelf",
+          "id": "rak-buku",
+          "name": "rak buku",
+          "height": 1.0
+        },
+        {
+          "source": "classroom trash bin",
+          "id": "tempat-sampah-kelas",
+          "name": "tempat sampah kelas",
+          "height": 0.6
+        },
+        {
+          "source": "school wall clock",
+          "id": "jam-sekolah",
+          "name": "jam sekolah"
+        },
+        {
+          "source": "pieces of chalk",
+          "id": "kapur",
+          "name": "kapur",
+          "height": 0.08
+        },
+        {
+          "source": "pencil sharpener",
+          "id": "rautan",
+          "name": "rautan",
+          "height": 0.04
+        },
+        {
+          "source": "fabric pencil case",
+          "id": "kotak-pensil",
+          "name": "kotak pensil",
+          "height": 0.1
+        },
+        {
+          "source": "small whiteboard",
+          "id": "papan-tulis-kecil",
+          "name": "papan tulis kecil"
+        }
+      ]
+    },
+    {
+      "number": 23,
+      "slug": "fasilitas-umum",
+      "kind": "tempat",
+      "items": [
+        {
+          "source": "hospital building icon",
+          "id": "rumah-sakit",
+          "name": "rumah sakit"
+        },
+        {
+          "source": "police station building",
+          "id": "kantor-polisi",
+          "name": "kantor polisi"
+        },
+        {
+          "source": "bus stop shelter",
+          "id": "halte-bus",
+          "name": "halte bus"
+        },
+        {
+          "source": "train station building",
+          "id": "stasiun-kereta",
+          "name": "stasiun kereta"
+        },
+        {
+          "source": "airport terminal building",
+          "id": "bandara",
+          "name": "bandara"
+        },
+        {
+          "source": "post office building",
+          "id": "kantor-pos",
+          "name": "kantor pos"
+        },
+        {
+          "source": "bank building",
+          "id": "bank",
+          "name": "bank"
+        },
+        {
+          "source": "gas station structure",
+          "id": "pom-bensin",
+          "name": "pom bensin"
+        },
+        {
+          "source": "fire station building",
+          "id": "markas-pemadam",
+          "name": "markas pemadam"
+        },
+        {
+          "source": "small clinic building",
+          "id": "klinik",
+          "name": "klinik"
+        },
+        {
+          "source": "city hall building",
+          "id": "balai-kota",
+          "name": "balai kota"
+        },
+        {
+          "source": "public library building",
+          "id": "perpustakaan",
+          "name": "perpustakaan"
+        }
+      ]
+    },
+    {
+      "number": 24,
+      "slug": "tempat-belanja",
+      "kind": "tempat",
+      "items": [
+        {
+          "source": "street food kiosk",
+          "id": "warung-makan",
+          "name": "warung makan"
+        },
+        {
+          "source": "convenience store building",
+          "id": "minimarket",
+          "name": "minimarket"
+        },
+        {
+          "source": "grocery supermarket building",
+          "id": "supermarket",
+          "name": "supermarket"
+        },
+        {
+          "source": "pharmacy store building",
+          "id": "apotek",
+          "name": "apotek"
+        },
+        {
+          "source": "bookstore building",
+          "id": "toko-buku",
+          "name": "toko buku"
+        },
+        {
+          "source": "restaurant building",
+          "id": "restoran",
+          "name": "restoran"
+        },
+        {
+          "source": "cafe building",
+          "id": "kafe",
+          "name": "kafe"
+        },
+        {
+          "source": "bakery shop building",
+          "id": "toko-roti",
+          "name": "toko roti"
+        },
+        {
+          "source": "toy store building",
+          "id": "toko-mainan",
+          "name": "toko mainan"
+        },
+        {
+          "source": "night market tent",
+          "id": "tenda-pasar-malam",
+          "name": "tenda pasar malam"
+        },
+        {
+          "source": "fruit stand stall",
+          "id": "kios-buah",
+          "name": "kios buah"
+        },
+        {
+          "source": "clothing boutique building",
+          "id": "butik",
+          "name": "butik"
+        }
+      ]
+    },
+    {
+      "number": 25,
+      "slug": "area-rumah",
+      "kind": "tempat",
+      "items": [
+        {
+          "source": "living room isolated diorama",
+          "id": "ruang-tamu",
+          "name": "ruang tamu"
+        },
+        {
+          "source": "bedroom isolated diorama",
+          "id": "kamar-rumah",
+          "name": "kamar rumah"
+        },
+        {
+          "source": "kitchen isolated diorama",
+          "id": "dapur-rumah",
+          "name": "dapur rumah"
+        },
+        {
+          "source": "bathroom isolated diorama",
+          "id": "kamar-mandi",
+          "name": "kamar mandi"
+        },
+        {
+          "source": "home garage isolated diorama",
+          "id": "garasi",
+          "name": "garasi"
+        },
+        {
+          "source": "front yard isolated diorama",
+          "id": "halaman-depan",
+          "name": "halaman depan"
+        },
+        {
+          "source": "house porch isolated diorama",
+          "id": "teras",
+          "name": "teras"
+        },
+        {
+          "source": "dining room isolated diorama",
+          "id": "ruang-makan-rumah",
+          "name": "ruang makan rumah"
+        },
+        {
+          "source": "house attic isolated diorama",
+          "id": "loteng",
+          "name": "loteng"
+        },
+        {
+          "source": "house roof isolated diorama",
+          "id": "atap-rumah",
+          "name": "atap rumah"
+        },
+        {
+          "source": "house balcony isolated diorama",
+          "id": "balkon",
+          "name": "balkon"
+        },
+        {
+          "source": "laundry room isolated diorama",
+          "id": "ruang-cuci",
+          "name": "ruang cuci"
+        }
+      ]
+    },
+    {
+      "number": 26,
+      "slug": "area-sekolah",
+      "kind": "tempat",
+      "items": [
+        {
+          "source": "classroom isolated diorama",
+          "id": "kelas-sekolah",
+          "name": "kelas sekolah"
+        },
+        {
+          "source": "school library isolated diorama",
+          "id": "perpustakaan-sekolah",
+          "name": "perpustakaan sekolah"
+        },
+        {
+          "source": "school canteen isolated diorama",
+          "id": "kantin",
+          "name": "kantin"
+        },
+        {
+          "source": "sports court isolated diorama",
+          "id": "lapangan-olahraga",
+          "name": "lapangan olahraga"
+        },
+        {
+          "source": "teacher's office isolated diorama",
+          "id": "ruang-guru",
+          "name": "ruang guru"
+        },
+        {
+          "source": "school clinic isolated diorama",
+          "id": "uks",
+          "name": "UKS"
+        },
+        {
+          "source": "school gate isolated diorama",
+          "id": "gerbang-sekolah",
+          "name": "gerbang sekolah"
+        },
+        {
+          "source": "school restroom isolated diorama",
+          "id": "toilet-sekolah",
+          "name": "toilet sekolah"
+        },
+        {
+          "source": "school hallway isolated diorama",
+          "id": "koridor-sekolah",
+          "name": "koridor sekolah"
+        },
+        {
+          "source": "school auditorium isolated diorama",
+          "id": "aula-sekolah",
+          "name": "aula sekolah"
+        },
+        {
+          "source": "computer lab isolated diorama",
+          "id": "laboratorium-komputer",
+          "name": "laboratorium komputer"
+        },
+        {
+          "source": "science lab isolated diorama",
+          "id": "laboratorium-sains",
+          "name": "laboratorium sains"
+        }
+      ]
+    },
+    {
+      "number": 27,
+      "slug": "tempat-rekreasi",
+      "kind": "tempat",
+      "items": [
+        {
+          "source": "playground isolated diorama",
+          "id": "taman-bermain",
+          "name": "taman bermain"
+        },
+        {
+          "source": "swimming pool isolated diorama",
+          "id": "kolam-renang",
+          "name": "kolam renang"
+        },
+        {
+          "source": "cinema building",
+          "id": "bioskop",
+          "name": "bioskop"
+        },
+        {
+          "source": "museum building",
+          "id": "museum",
+          "name": "museum"
+        },
+        {
+          "source": "city square isolated diorama",
+          "id": "alun-alun",
+          "name": "alun alun"
+        },
+        {
+          "source": "sports stadium building",
+          "id": "stadion",
+          "name": "stadion"
+        },
+        {
+          "source": "circus tent",
+          "id": "sirkus",
+          "name": "sirkus"
+        },
+        {
+          "source": "large aquarium isolated diorama",
+          "id": "akuarium",
+          "name": "akuarium"
+        },
+        {
+          "source": "carousel ride structure",
+          "id": "komidi-putar",
+          "name": "komidi putar"
+        },
+        {
+          "source": "concert stage structure",
+          "id": "panggung-konser",
+          "name": "panggung konser"
+        },
+        {
+          "source": "zoo entrance gate",
+          "id": "gerbang-kebun-binatang",
+          "name": "gerbang kebun binatang"
+        },
+        {
+          "source": "ferris wheel structure",
+          "id": "bianglala",
+          "name": "bianglala"
+        }
+      ]
+    },
+    {
+      "number": 28,
+      "slug": "pedesaan-struktur",
+      "kind": "tempat",
+      "items": [
+        {
+          "source": "wooden rice field hut",
+          "id": "saung",
+          "name": "saung"
+        },
+        {
+          "source": "wooden chicken coop",
+          "id": "kandang-ayam",
+          "name": "kandang ayam"
+        },
+        {
+          "source": "traditional rice barn",
+          "id": "lumbung",
+          "name": "lumbung"
+        },
+        {
+          "source": "stone water well",
+          "id": "sumur",
+          "name": "sumur"
+        },
+        {
+          "source": "section of wooden fence",
+          "id": "pagar-kayu",
+          "name": "pagar kayu"
+        },
+        {
+          "source": "rustic windmill",
+          "id": "kincir-angin",
+          "name": "kincir angin"
+        },
+        {
+          "source": "wooden waterwheel",
+          "id": "kincir-air",
+          "name": "kincir air"
+        },
+        {
+          "source": "small wooden dock",
+          "id": "dermaga",
+          "name": "dermaga"
+        },
+        {
+          "source": "bamboo bridge",
+          "id": "jembatan-bambu",
+          "name": "jembatan bambu"
+        },
+        {
+          "source": "wooden community guard post",
+          "id": "pos-ronda",
+          "name": "pos ronda"
+        },
+        {
+          "source": "grain silo building",
+          "id": "silo",
+          "name": "silo"
+        },
+        {
+          "source": "horse stable building",
+          "id": "kandang-kuda",
+          "name": "kandang kuda"
+        }
+      ]
+    },
+    {
+      "number": 29,
+      "slug": "infrastruktur",
+      "kind": "tempat",
+      "items": [
+        {
+          "source": "concrete bridge structure",
+          "id": "jembatan",
+          "name": "jembatan"
+        },
+        {
+          "source": "traffic light post",
+          "id": "lampu-lalu-lintas",
+          "name": "lampu lalu lintas",
+          "kind": "obj",
+          "height": 3.0
+        },
+        {
+          "source": "segment of train tracks",
+          "id": "rel-kereta",
+          "name": "rel kereta"
+        },
+        {
+          "source": "segment of paved sidewalk",
+          "id": "trotoar",
+          "name": "trotoar"
+        },
+        {
+          "source": "concrete tunnel entrance",
+          "id": "terowongan",
+          "name": "terowongan"
+        },
+        {
+          "source": "pedestrian overpass bridge",
+          "id": "jembatan-penyeberangan",
+          "name": "jembatan penyeberangan"
+        },
+        {
+          "source": "crosswalk street segment",
+          "id": "zebra-cross",
+          "name": "zebra cross"
+        },
+        {
+          "source": "narrow alleyway diorama",
+          "id": "gang",
+          "name": "gang"
+        },
+        {
+          "source": "highway toll booth",
+          "id": "gardu-tol",
+          "name": "gardu tol"
+        },
+        {
+          "source": "water fountain roundabout diorama",
+          "id": "bundaran-air-mancur",
+          "name": "bundaran air mancur"
+        },
+        {
+          "source": "tram stop shelter",
+          "id": "halte-trem",
+          "name": "halte trem"
+        },
+        {
+          "source": "wooden utility pole",
+          "id": "tiang-listrik",
+          "name": "tiang listrik",
+          "kind": "obj",
+          "height": 7.0
+        }
+      ]
+    },
+    {
+      "number": 30,
+      "slug": "tempat-ibadah",
+      "kind": "tempat",
+      "items": [
+        {
+          "source": "mosque building",
+          "id": "masjid",
+          "name": "masjid"
+        },
+        {
+          "source": "church building",
+          "id": "gereja",
+          "name": "gereja"
+        },
+        {
+          "source": "balinese temple building",
+          "id": "pura",
+          "name": "pura"
+        },
+        {
+          "source": "buddhist temple building",
+          "id": "wihara",
+          "name": "wihara"
+        },
+        {
+          "source": "chinese temple building",
+          "id": "kelenteng",
+          "name": "kelenteng"
+        },
+        {
+          "source": "small prayer room building",
+          "id": "musala",
+          "name": "musala"
+        },
+        {
+          "source": "chapel building",
+          "id": "kapel",
+          "name": "kapel"
+        },
+        {
+          "source": "tall bell tower",
+          "id": "menara-lonceng",
+          "name": "menara lonceng"
+        },
+        {
+          "source": "architectural dome structure",
+          "id": "kubah",
+          "name": "kubah"
+        },
+        {
+          "source": "ancient temple gate",
+          "id": "gapura-candi",
+          "name": "gapura candi"
+        },
+        {
+          "source": "religious altar diorama",
+          "id": "altar",
+          "name": "altar"
+        },
+        {
+          "source": "large mosque drum (bedug)",
+          "id": "bedug",
+          "name": "bedug",
+          "kind": "obj",
+          "height": 1.2
+        }
+      ]
+    },
+    {
+      "number": 31,
+      "slug": "alam-struktur",
+      "kind": "tempat",
+      "items": [
+        {
+          "source": "camping tent",
+          "id": "tenda",
+          "name": "tenda",
+          "kind": "obj",
+          "height": 1.5
+        },
+        {
+          "source": "burning campfire",
+          "id": "api-unggun",
+          "name": "api unggun",
+          "kind": "obj",
+          "height": 0.6
+        },
+        {
+          "source": "wooden suspension bridge",
+          "id": "jembatan-gantung",
+          "name": "jembatan gantung"
+        },
+        {
+          "source": "stone cave entrance",
+          "id": "gua",
+          "name": "gua"
+        },
+        {
+          "source": "wooden treehouse",
+          "id": "rumah-pohon",
+          "name": "rumah pohon"
+        },
+        {
+          "source": "concrete water dam structure",
+          "id": "bendungan",
+          "name": "bendungan"
+        },
+        {
+          "source": "tall lighthouse building",
+          "id": "mercusuar",
+          "name": "mercusuar"
+        },
+        {
+          "source": "dark mine entrance",
+          "id": "tambang",
+          "name": "tambang"
+        },
+        {
+          "source": "wooden forest watchtower",
+          "id": "menara-pengawas",
+          "name": "menara pengawas",
+          "backgroundSeeds": [
+            [
+              168,
+              164
+            ],
+            [
+              226,
+              165
+            ],
+            [
+              162,
+              244
+            ],
+            [
+              176,
+              266
+            ],
+            [
+              210,
+              285
+            ],
+            [
+              152,
+              292
+            ],
+            [
+              240,
+              287
+            ],
+            [
+              149,
+              321
+            ]
+          ]
+        },
+        {
+          "source": "segment of dirt trail",
+          "id": "jalur-tanah",
+          "name": "jalur tanah"
+        },
+        {
+          "source": "waterfall isolated diorama",
+          "id": "air-terjun",
+          "name": "air terjun"
+        },
+        {
+          "source": "industrial oil rig structure",
+          "id": "anjungan-minyak",
+          "name": "anjungan minyak"
+        }
+      ]
+    },
+    {
+      "number": 32,
+      "slug": "alam-ekstra",
+      "kind": "obj",
+      "items": [
+        {
+          "source": "coral rock",
+          "id": "batu-karang",
+          "name": "batu karang",
+          "background": "beach"
+        },
+        {
+          "source": "seashell",
+          "id": "cangkang-kerang",
+          "name": "cangkang kerang",
+          "height": 0.1,
+          "background": "beach"
+        },
+        {
+          "source": "bird's nest with eggs",
+          "id": "sarang-burung",
+          "name": "sarang burung",
+          "height": 0.2,
+          "background": "woodland"
+        },
+        {
+          "source": "hanging beehive",
+          "id": "sarang-lebah",
+          "name": "sarang lebah",
+          "height": 0.45,
+          "background": "flower-garden"
+        },
+        {
+          "source": "frozen ice block",
+          "id": "es-batu",
+          "name": "es batu",
+          "background": "polar"
+        },
+        {
+          "source": "potted cactus",
+          "id": "kaktus-pot",
+          "name": "kaktus pot"
+        },
+        {
+          "source": "dry autumn leaf",
+          "id": "daun-kering",
+          "name": "daun kering",
+          "height": 0.1,
+          "background": "woodland"
+        },
+        {
+          "source": "wooden tree branch",
+          "id": "ranting",
+          "name": "ranting",
+          "height": 0.5,
+          "background": "woodland"
+        },
+        {
+          "source": "small sand mound",
+          "id": "tumpukan-pasir",
+          "name": "tumpukan pasir",
+          "height": 0.5,
+          "background": "beach"
+        },
+        {
+          "source": "mud puddle",
+          "id": "genangan-lumpur",
+          "name": "genangan lumpur",
+          "background": "wetland"
+        },
+        {
+          "source": "spider web",
+          "id": "jaring-laba-laba",
+          "name": "jaring laba laba",
+          "background": "woodland",
+          "backgroundThreshold": 220,
+          "pocketMin": 5,
+          "pocketWhite": 0
+        },
+        {
+          "source": "red mushroom",
+          "id": "jamur-merah",
+          "name": "jamur merah",
+          "height": 0.15,
+          "background": "woodland"
+        }
+      ]
+    },
+    {
+      "number": 33,
+      "slug": "orang-keluarga-usia",
+      "kind": "obj",
+      "items": [
+        {
+          "source": "baby boy crawling",
+          "id": "bayi",
+          "name": "bayi"
+        },
+        {
+          "source": "baby girl sitting",
+          "id": "bayi-perempuan",
+          "name": "bayi perempuan",
+          "height": 0.5,
+          "background": "living-room"
+        },
+        {
+          "source": "toddler boy playing",
+          "id": "balita-laki-laki",
+          "name": "balita laki laki",
+          "background": "homeyard"
+        },
+        {
+          "source": "little girl smiling",
+          "id": "anak-perempuan",
+          "name": "anak perempuan"
+        },
+        {
+          "source": "teenage boy standing",
+          "id": "remaja-laki-laki",
+          "name": "remaja laki laki",
+          "height": 1.65,
+          "background": "homeyard"
+        },
+        {
+          "source": "teenage girl waving",
+          "id": "remaja-perempuan",
+          "name": "remaja perempuan",
+          "height": 1.55,
+          "background": "homeyard"
+        },
+        {
+          "source": "adult man as a father",
+          "id": "ayah",
+          "name": "ayah"
+        },
+        {
+          "source": "adult woman as a mother",
+          "id": "ibu",
+          "name": "ibu"
+        },
+        {
+          "source": "pregnant woman standing",
+          "id": "ibu-hamil",
+          "name": "ibu hamil",
+          "background": "homeyard"
+        },
+        {
+          "source": "elderly man grandfather with walking stick",
+          "id": "kakek",
+          "name": "kakek"
+        },
+        {
+          "source": "elderly woman grandmother knitting",
+          "id": "nenek",
+          "name": "nenek"
+        },
+        {
+          "source": "adult man holding a newborn baby",
+          "id": "ayah-menggendong-bayi",
+          "name": "ayah menggendong bayi",
+          "height": 1.75,
+          "background": "homeyard"
+        }
+      ]
+    },
+    {
+      "number": 34,
+      "slug": "orang-profesi-1",
+      "kind": "obj",
+      "items": [
+        {
+          "source": "male teacher holding a book",
+          "id": "guru",
+          "name": "guru"
+        },
+        {
+          "source": "female teacher in hijab holding a pointer",
+          "id": "guru-berhijab",
+          "name": "guru berhijab",
+          "background": "classroom"
+        },
+        {
+          "source": "male police officer in uniform",
+          "id": "polisi",
+          "name": "polisi"
+        },
+        {
+          "source": "female doctor with stethoscope",
+          "id": "dokter",
+          "name": "dokter"
+        },
+        {
+          "source": "male firefighter with red helmet",
+          "id": "pemadam-kebakaran",
+          "name": "pemadam kebakaran"
+        },
+        {
+          "source": "female nurse in uniform",
+          "id": "perawat",
+          "name": "perawat",
+          "background": "clinic"
+        },
+        {
+          "source": "male farmer with a hoe",
+          "id": "petani",
+          "name": "petani"
+        },
+        {
+          "source": "female chef with a frying pan",
+          "id": "koki",
+          "name": "koki"
+        },
+        {
+          "source": "male construction worker with hard hat",
+          "id": "pekerja-bangunan",
+          "name": "pekerja bangunan"
+        },
+        {
+          "source": "female postman carrying a mail bag",
+          "id": "petugas-pos",
+          "name": "petugas pos"
+        },
+        {
+          "source": "male pilot in uniform",
+          "id": "pilot",
+          "name": "pilot"
+        },
+        {
+          "source": "female flight attendant",
+          "id": "pramugari",
+          "name": "pramugari",
+          "background": "airport"
+        }
+      ]
+    },
+    {
+      "number": 35,
+      "slug": "orang-profesi-2",
+      "kind": "obj",
+      "items": [
+        {
+          "source": "male fisherman holding a fishing net",
+          "id": "nelayan",
+          "name": "nelayan"
+        },
+        {
+          "source": "female traditional market seller with a basket",
+          "id": "penjual",
+          "name": "penjual"
+        },
+        {
+          "source": "male astronaut in spacesuit",
+          "id": "astronaut",
+          "name": "astronaut",
+          "background": "space"
+        },
+        {
+          "source": "female scientist holding a test tube",
+          "id": "ilmuwan",
+          "name": "ilmuwan",
+          "background": "classroom"
+        },
+        {
+          "source": "male mechanic holding a wrench",
+          "id": "mekanik",
+          "name": "mekanik",
+          "background": "homeyard"
+        },
+        {
+          "source": "female athlete in sports gear",
+          "id": "atlet",
+          "name": "atlet",
+          "background": "playground"
+        },
+        {
+          "source": "male judge holding a wooden gavel",
+          "id": "hakim",
+          "name": "hakim"
+        },
+        {
+          "source": "female security guard",
+          "id": "satpam",
+          "name": "satpam"
+        },
+        {
+          "source": "male musician playing acoustic guitar",
+          "id": "musisi",
+          "name": "musisi",
+          "background": "classroom"
+        },
+        {
+          "source": "female painter holding a color palette",
+          "id": "pelukis",
+          "name": "pelukis",
+          "background": "classroom"
+        },
+        {
+          "source": "male janitor holding a mop",
+          "id": "petugas-kebersihan",
+          "name": "petugas kebersihan",
+          "background": "classroom"
+        },
+        {
+          "source": "female news reporter holding a microphone",
+          "id": "reporter",
+          "name": "reporter"
+        }
+      ]
+    },
+    {
+      "number": 36,
+      "slug": "orang-inklusi-disabilitas",
+      "kind": "obj",
+      "items": [
+        {
+          "source": "young boy sitting in a manual wheelchair",
+          "id": "anak-kursi-roda",
+          "name": "anak kursi roda"
+        },
+        {
+          "source": "young girl walking with arm crutches",
+          "id": "anak-bertongkat-kruk",
+          "name": "anak bertongkat kruk",
+          "background": "playground"
+        },
+        {
+          "source": "blind man walking with a white cane",
+          "id": "pria-tunanetra",
+          "name": "pria tunanetra"
+        },
+        {
+          "source": "deaf girl wearing hearing aids pointing forward",
+          "id": "anak-dengan-alat-bantu-dengar",
+          "name": "anak dengan alat bantu dengar"
+        },
+        {
+          "source": "smiling boy with down syndrome",
+          "id": "anak-sindrom-down",
+          "name": "anak sindrom down",
+          "background": "playground"
+        },
+        {
+          "source": "standing girl with a prosthetic leg",
+          "id": "anak-berkaki-prostetik",
+          "name": "anak berkaki prostetik",
+          "background": "playground"
+        },
+        {
+          "source": "child wearing glasses reading a braille book",
+          "id": "anak-membaca-braille",
+          "name": "anak membaca braille",
+          "background": "classroom"
+        },
+        {
+          "source": "woman sitting in a motorized electric wheelchair",
+          "id": "pengguna-kursi-elektrik",
+          "name": "pengguna kursi elektrik",
+          "height": 1.3
+        },
+        {
+          "source": "blind man walking with a guide dog",
+          "id": "tunanetra-anjing-pemandu",
+          "name": "tunanetra anjing pemandu"
+        },
+        {
+          "source": "boy wearing noise-canceling headphones",
+          "id": "anak-memakai-headphone",
+          "name": "anak memakai headphone",
+          "background": "playground"
+        },
+        {
+          "source": "girl signing hello in sign language",
+          "id": "anak-berisyarat",
+          "name": "anak berisyarat",
+          "background": "playground"
+        },
+        {
+          "source": "elderly man using a walking frame",
+          "id": "kakek-memakai-walker",
+          "name": "kakek memakai walker",
+          "height": 1.6
+        }
+      ]
+    },
+    {
+      "number": 37,
+      "slug": "orang-aktivitas",
+      "kind": "obj",
+      "items": [
+        {
+          "source": "school boy raising his hand",
+          "id": "murid-angkat-tangan",
+          "name": "murid angkat tangan",
+          "background": "classroom"
+        },
+        {
+          "source": "school girl in hijab reading a book",
+          "id": "siswa-berhijab",
+          "name": "siswa berhijab"
+        },
+        {
+          "source": "young boy eating a sandwich",
+          "id": "anak-makan",
+          "name": "anak makan",
+          "background": "kitchen"
+        },
+        {
+          "source": "young girl drinking from a water bottle",
+          "id": "anak-minum",
+          "name": "anak minum",
+          "background": "kitchen"
+        },
+        {
+          "source": "boy running while flying a kite",
+          "id": "anak-bermain-layangan",
+          "name": "anak bermain layangan",
+          "background": "playground"
+        },
+        {
+          "source": "girl jumping rope",
+          "id": "anak-lompat-tali",
+          "name": "anak lompat tali",
+          "background": "playground"
+        },
+        {
+          "source": "boy kicking a black and white soccer ball",
+          "id": "anak-bermain-bola",
+          "name": "anak bermain bola"
+        },
+        {
+          "source": "girl painting on a small canvas",
+          "id": "anak-melukis",
+          "name": "anak melukis",
+          "background": "classroom"
+        },
+        {
+          "source": "boy sleeping on a school desk",
+          "id": "anak-tidur",
+          "name": "anak tidur",
+          "height": 1.0,
+          "background": "classroom",
+          "backgroundSeeds": [
+            [
+              297,
+              325
+            ],
+            [
+              95,
+              334
+            ],
+            [
+              276,
+              348
+            ],
+            [
+              189,
+              355
+            ]
+          ]
+        },
+        {
+          "source": "girl sweeping the floor with a broom",
+          "id": "anak-menyapu",
+          "name": "anak menyapu",
+          "background": "homeyard"
+        },
+        {
+          "source": "boy carrying a heavy school backpack",
+          "id": "anak-membawa-tas",
+          "name": "anak membawa tas",
+          "background": "classroom"
+        },
+        {
+          "source": "girl laughing out loud",
+          "id": "anak-tertawa",
+          "name": "anak tertawa",
+          "background": "playground"
+        }
+      ]
+    },
+    {
+      "number": 38,
+      "slug": "orang-fisik-keberagaman",
+      "kind": "obj",
+      "items": [
+        {
+          "source": "boy with curly hair and dark skin",
+          "id": "anak-berambut-keriting",
+          "name": "anak berambut keriting"
+        },
+        {
+          "source": "girl with straight blonde hair",
+          "id": "anak-perempuan-pirang",
+          "name": "anak perempuan pirang"
+        },
+        {
+          "source": "boy with freckles and red hair",
+          "id": "anak-berambut-merah",
+          "name": "anak berambut merah"
+        },
+        {
+          "source": "girl with braided hair and tanned skin",
+          "id": "anak-berkepang",
+          "name": "anak berkepang"
+        },
+        {
+          "source": "very tall thin man standing",
+          "id": "pria-tinggi",
+          "name": "pria tinggi",
+          "height": 1.95
+        },
+        {
+          "source": "short chubby woman smiling",
+          "id": "wanita-bertubuh-berisi",
+          "name": "wanita bertubuh berisi",
+          "height": 1.5
+        },
+        {
+          "source": "adult man with a thick beard and glasses",
+          "id": "pria-berjenggot",
+          "name": "pria berjenggot"
+        },
+        {
+          "source": "young woman with short hair wearing a cap",
+          "id": "wanita-bertopi",
+          "name": "wanita bertopi"
+        },
+        {
+          "source": "smiling boy missing a front tooth",
+          "id": "anak-bergigi-tanggal",
+          "name": "anak bergigi tanggal"
+        },
+        {
+          "source": "smiling teenage girl wearing dental braces",
+          "id": "remaja-berkawat-gigi",
+          "name": "remaja berkawat gigi",
+          "height": 1.55
+        },
+        {
+          "source": "bald man wearing a formal suit",
+          "id": "pria-botak",
+          "name": "pria botak"
+        },
+        {
+          "source": "woman with long curly hair wearing a dress",
+          "id": "wanita-berambut-keriting",
+          "name": "wanita berambut keriting"
+        }
+      ]
+    },
+    {
+      "number": 39,
+      "slug": "orang-pakaian-budaya",
+      "kind": "obj",
+      "items": [
+        {
+          "source": "man wearing traditional batik shirt",
+          "id": "pria-berbatik",
+          "name": "pria berbatik"
+        },
+        {
+          "source": "woman wearing traditional kebaya dress",
+          "id": "wanita-berkebaya",
+          "name": "wanita berkebaya"
+        },
+        {
+          "source": "muslim man wearing peci cap and sarong",
+          "id": "pria-berpeci",
+          "name": "pria berpeci"
+        },
+        {
+          "source": "muslim woman wearing a long abaya and hijab",
+          "id": "wanita-berabaya",
+          "name": "wanita berabaya"
+        },
+        {
+          "source": "balinese man wearing udeng headpiece",
+          "id": "pria-berudeng",
+          "name": "pria berudeng"
+        },
+        {
+          "source": "balinese woman wearing traditional sash",
+          "id": "wanita-bali",
+          "name": "wanita bali"
+        },
+        {
+          "source": "papuan man wearing traditional headgear",
+          "id": "pria-papua",
+          "name": "pria papua"
+        },
+        {
+          "source": "dayak woman wearing traditional beads",
+          "id": "wanita-dayak",
+          "name": "wanita dayak"
+        },
+        {
+          "source": "man wearing plain white thobe",
+          "id": "pria-berjubah",
+          "name": "pria berjubah"
+        },
+        {
+          "source": "boy wearing a casual hoodie",
+          "id": "anak-memakai-hoodie",
+          "name": "anak memakai hoodie"
+        },
+        {
+          "source": "girl wearing a winter coat and scarf",
+          "id": "anak-bermantel",
+          "name": "anak bermantel"
+        },
+        {
+          "source": "child wearing a yellow raincoat",
+          "id": "anak-berjas-hujan",
+          "name": "anak berjas hujan"
+        }
+      ]
+    }
+  ]
+}

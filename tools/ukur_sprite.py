@@ -80,11 +80,13 @@ def kotak_isi(f):
 
 def main():
     hasil, tanpa = {}, []
+    lama = json.loads(KELUAR.read_text(encoding="utf-8")) if KELUAR.exists() else {}
     for f in sorted(OBJ.glob("*.webp")):
         nama = f.stem
-        if nama not in TINGGI:
+        tinggi = TINGGI.get(nama, lama.get(nama, {}).get("t"))
+        if tinggi is None:
             tanpa.append(nama)
-        hasil[nama] = {"t": TINGGI.get(nama, .3), **kotak_isi(f)}
+        hasil[nama] = {"t": tinggi if tinggi is not None else .3, **kotak_isi(f)}
     KELUAR.write_text(json.dumps(hasil, ensure_ascii=False, indent=0), encoding="utf-8")
     print(f"{len(hasil)} sprite ditulis ke {KELUAR}")
     if tanpa:
