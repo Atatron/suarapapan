@@ -898,3 +898,85 @@ test('"sekarang ditambah dengan 3 kucing": kelinci tetap ada, kucing bergabung',
   assert.equal(yangAda(r.adegan, 'kelinci').length, 2);
   assert.equal(yangAda(r.adegan, 'kucing').length, 3);
 });
+
+// ---------- tata letak, proporsi, dan seret ----------
+import { tataObjek, perspektif, tinggiTampil, ukuranKarakter } from './tata.js';
+import { pindahkan } from './engine.js';
+
+const adeganDari = (...pasang) => {
+  let a = ADEGAN_KOSONG;
+  for (const [jenis, jumlah] of pasang) a = terapkan(a, { entitas: [{ jenis, jumlah }], peristiwa: [] }, { gabung: true }).adegan;
+  return a;
+};
+
+test('proporsi: guru lebih tinggi dari murid; gajah lebih tinggi dari kelinci; semut tetap terbaca', () => {
+  const t = (jenis) => ukuranKarakter(jenis, 0.8, 1).isi;
+  assert.ok(t('guru') > t('anak-laki-laki'), 'guru > murid');
+  assert.ok(t('gajah') > t('guru'), 'gajah > guru');
+  assert.ok(t('kelinci') < t('anak-laki-laki'), 'kelinci < murid');
+  assert.ok(t('semut') >= 7, 'semut tidak jadi titik');
+  assert.ok(t('jerapah') <= 70, 'jerapah tidak menembus papan');
+});
+
+test('proporsi: orang dewasa ≈ 44% tinggi papan di depan; makin ke belakang makin kecil', () => {
+  const depan = ukuranKarakter('guru', 0.92, 1).isi;
+  const belakang = ukuranKarakter('guru', 0.56, 1).isi;
+  assert.ok(depan > 38 && depan < 50, `depan ${depan}`);
+  assert.ok(belakang < depan * 0.7, 'perspektif');
+  assert.ok(perspektif(0.92) > perspektif(0.56));
+  assert.ok(tinggiTampil(0.03) >= 0.55 && tinggiTampil(5) <= 3.2);
+});
+
+test('tata: semua karakter di dalam papan dan tidak bertumpuk berlebihan', () => {
+  for (const a of [adeganDari(['kelinci', 3]), adeganDari(['kelinci', 3], ['harimau', 2], ['gajah', 1]), adeganDari(['apel', 20])]) {
+    const t = tataObjek(a.objek);
+    assert.equal(t.length, a.objek.length);
+    for (const p of t) {
+      assert.ok(p.px > 0.02 && p.px < 0.98, `px ${p.px}`);
+      assert.ok(p.py > 0.3 && p.py <= 0.92, `py ${p.py}`);
+      assert.ok(p.px - p.lebar / 2 > -0.05 && p.px + p.lebar / 2 < 1.05, 'tidak keluar papan');
+    }
+  }
+});
+
+test('tata: tiga kelinci sebaris, berjarak, urut kiri ke kanan', () => {
+  const t = tataObjek(adeganDari(['kelinci', 3]).objek);
+  assert.equal(new Set(t.map((p) => p.py)).size, 1);
+  assert.ok(t[0].px < t[1].px && t[1].px < t[2].px);
+  assert.ok(t[1].px - t[0].px >= t[0].lebar * 0.99, 'tidak saling menimpa');
+});
+
+test('seret: pindahkan menyimpan px/py, membatasi, dan karakter lain tetap berpola susunan', () => {
+  const a = adeganDari(['kelinci', 3]);
+  const id = a.objek[1].id;
+  const b = pindahkan(a, id, 0.3, 0.7);
+  assert.equal(b.objek[1].px, 0.3);
+  assert.equal(b.objek[1].py, 0.7);
+  assert.equal(b.objek[0].px, undefined);
+  assert.equal(yangAda(b).length, 3);
+  assert.equal(pindahkan(a, id, 5, -2).objek[1].px, 0.98);
+  assert.equal(pindahkan(a, id, 5, -2).objek[1].py, 0.02);
+  assert.equal(pindahkan(a, 'tidak-ada', 0.5, 0.5), a);
+  const t = tataObjek(b.objek);
+  assert.equal(t[1].px, 0.3);
+  assert.equal(t[1].py, 0.7);
+});
+
+test('seret: posisi bertahan saat kalimat berikutnya menambah karakter lain', () => {
+  const a = adeganDari(['kelinci', 3]);
+  const b = pindahkan(a, a.objek[0].id, 0.2, 0.65);
+  const c = terapkan(b, { entitas: [{ jenis: 'harimau', jumlah: 1 }], peristiwa: [] }, { gabung: true }).adegan;
+  const lama = c.objek.find((o) => o.id === a.objek[0].id);
+  assert.equal(lama.px, 0.2);
+  assert.equal(lama.py, 0.65);
+});
+
+test('sejarah.perbarui mengganti papan tanpa menambah langkah Batalkan', () => {
+  const a = adeganDari(['kelinci', 2]);
+  const s = Sej.catat(Sej.awalSejarah(ADEGAN_KOSONG), a, 'dua kelinci');
+  const b = pindahkan(a, a.objek[0].id, 0.4, 0.7);
+  const s2 = Sej.perbarui(s, b);
+  assert.equal(s2.lalu.length, s.lalu.length);
+  assert.equal(s2.sekarang.adegan.objek[0].px, 0.4);
+  assert.equal(s2.sekarang.label, 'dua kelinci');
+});

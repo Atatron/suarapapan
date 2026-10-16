@@ -331,3 +331,21 @@ export function deskripsi(adegan) {
   const latar = adegan.latar ? ` di ${adegan.latar}` : '';
   return `${bagian.join('; ')}${latar}.`;
 }
+
+/**
+ * Memindahkan satu karakter (kaki di px, py = pecahan lebar/tinggi papan). Tidak mengubah jumlah atau riwayat.
+ * `beku` = { id: {px, py} }: posisi susunan otomatis karakter lain, disimpan saat pertama kali ada yang
+ * diseret supaya mereka tidak berpindah ketika satu karakter keluar dari barisan.
+ */
+export function pindahkan(adegan, id, px, py, beku = {}) {
+  if (!adegan.objek.some((o) => o.id === id)) return adegan;
+  const b = (v) => Math.min(0.98, Math.max(0.02, v));
+  return {
+    ...adegan,
+    objek: adegan.objek.map((o) => {
+      if (o.id === id) return { ...o, px: b(px), py: b(py) };
+      if (Number.isFinite(o.px) || !beku[o.id]) return o;
+      return { ...o, px: b(beku[o.id].px), py: b(beku[o.id].py) };
+    }),
+  };
+}

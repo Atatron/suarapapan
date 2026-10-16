@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import Adegan from '../scene/Adegan.jsx';
 import { Benda } from '../scene/aset.jsx';
-import { ADEGAN_KOSONG } from '../scene/engine.js';
+import { ADEGAN_KOSONG, pindahkan } from '../scene/engine.js';
 import { kirim, dengar } from '../lib/saluran.js';
 
 function Soal({ soal, versi }) {
@@ -83,10 +83,17 @@ export default function Papan() {
     const lepas = dengar((m) => {
       if (m.type === 'adegan') setAdegan(m.adegan);
       if (m.type === 'caption') setCaption(m);
+      if (m.type === 'geser') setAdegan((a) => pindahkan(a, m.id, m.px, m.py, m.beku));
     });
     kirim({ type: 'halo' }); // minta adegan terakhir dari /guru
     return lepas;
   }, []);
+
+  // Karakter diseret langsung di proyektor: papan berubah seketika, dan /guru ikut mencatat posisinya.
+  const geserDiPapan = (id, px, py, beku) => {
+    setAdegan((a) => pindahkan(a, id, px, py, beku));
+    kirim({ type: 'geser', id, px, py, beku });
+  };
 
   const layarPenuh = () => {
     document.documentElement.requestFullscreen?.().catch(() => {});
@@ -97,7 +104,7 @@ export default function Papan() {
       <button type="button" className="papan-layar-penuh" onClick={layarPenuh}>Layar penuh</button>
       <div className="papan-atas">{adegan.soal ? <Soal soal={adegan.soal} versi={adegan.versi} /> : null}</div>
       <div className="papan-panggung">
-        <Adegan adegan={adegan} interaktif />
+        <Adegan adegan={adegan} interaktif bisaGeser onGeser={geserDiPapan} />
         {adegan.objek.length ? null : (
           <div className="papan-lapis-kosong">
             <div>

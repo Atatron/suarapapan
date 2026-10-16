@@ -113,6 +113,13 @@ button { font: inherit; }
 .obj.ukuran-kecil { width: 9.5cqw; }
 .obj.ukuran-mini { width: 6.5cqw; }
 .obj-gerak { display: block; }
+/* Tata letak bebas: posisi dan ukuran dihitung di tata.js (kaki karakter di titik px, py). */
+.adegan-bebas { position: relative; overflow: hidden; }
+.obj.obj-bebas { position: absolute; padding: 0; }
+.obj.obj-bebas.bisa-geser { cursor: grab; touch-action: none; }
+.obj.obj-bebas.diseret { cursor: grabbing; filter: drop-shadow(0 1.2cqh 1cqh rgba(0, 0, 0, 0.35)); }
+.obj.obj-bebas:focus-visible { outline: 3px solid var(--kuning); outline-offset: 2px; border-radius: 12px; }
+.obj-bebas .benda-img { width: 100%; height: auto; display: block; }
 .benda-svg { display: block; width: 100%; height: auto; overflow: visible; }
 .benda-cadangan { display: grid; justify-items: center; }
 .benda-emoji { font-size: clamp(24px, 6vw, 120px); line-height: 1.1; }

@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import Adegan from '../scene/Adegan.jsx';
-import { ADEGAN_KOSONG, terapkan, konteks, deskripsi } from '../scene/engine.js';
+import { ADEGAN_KOSONG, terapkan, konteks, deskripsi, pindahkan } from '../scene/engine.js';
 import { kirim, dengar } from '../lib/saluran.js';
 import { suaraDidukung, buatPendengar } from '../lib/suara.js';
 import { uraikan, cekKesehatan, transkripsi } from '../lib/api.js';
@@ -283,7 +283,9 @@ export default function Guru() {
   // /papan yang baru dibuka meminta adegan terakhir.
   useEffect(() => dengar((m) => {
     if (m.type === 'halo') kirim({ type: 'adegan', adegan: papanRef.current });
-  }), []);
+    // Siswa/guru menggeser karakter di /papan: ikuti tanpa menambah langkah Batalkan.
+    if (m.type === 'geser') setSejarah(Sej.perbarui(sejarahRef.current, pindahkan(papanRef.current, m.id, m.px, m.py, m.beku)));
+  }), [setSejarah]);
 
   useEffect(() => {
     const cek = () => cekKesehatan().then((k) => { suaraSiapRef.current = Boolean(k?.suara); setKesehatan(k); });
@@ -311,6 +313,18 @@ export default function Guru() {
   batalkanRef.current = batalkan;
   ulangiRef.current = ulangi;
   const buang = () => { pratinjauRef.current = null; setPratinjau(null); };
+  // Menggeser karakter dengan tangan: posisi saja berubah, jumlah tidak, jadi bukan langkah baru di riwayat.
+  const geserDiPapan = (id, px, py, beku) => {
+    setSejarah(Sej.perbarui(sejarahRef.current, pindahkan(papanRef.current, id, px, py, beku)));
+    kirim({ type: 'geser', id, px, py, beku });
+  };
+  const geserDiPratinjau = (id, px, py, beku) => {
+    const p = pratinjauRef.current;
+    if (!p) return;
+    const baru = { ...p, adegan: pindahkan(p.adegan, id, px, py, beku) };
+    pratinjauRef.current = baru;
+    setPratinjau(baru);
+  };
   // Tafsir lain di pratinjau: "3 kelinci datang" dibaca sebagai "hanya 3", bukan 3 + 3.
   const pakaiAlternatifPratinjau = () => {
     const p = pratinjauRef.current;
@@ -403,7 +417,7 @@ export default function Guru() {
           <h2>Pratinjau</h2>
           {pratinjau ? (
             <>
-              <Adegan adegan={pratinjau.adegan} kecil />
+              <Adegan adegan={pratinjau.adegan} kecil bisaGeser onGeser={geserDiPratinjau} />
               <p className="ringkas">{deskripsi(pratinjau.adegan)}</p>
               {(pratinjau.penjelasan || []).map((c) => <p key={c} className="penjelasan">{c}</p>)}
               {pratinjau.catatan.map((c) => <p key={c} className="catatan">{c}</p>)}
@@ -422,7 +436,7 @@ export default function Guru() {
 
         <section className="kartu" aria-label="Papan saat ini">
           <h2>Di papan sekarang</h2>
-          <Adegan adegan={papan} kecil />
+          <Adegan adegan={papan} kecil bisaGeser onGeser={geserDiPapan} />
           <p className="ringkas">{deskripsi(papan)}</p>
           {tafsir ? (
             <>

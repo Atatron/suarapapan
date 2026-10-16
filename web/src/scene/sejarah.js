@@ -59,3 +59,6 @@ export function ringkasBeda(sebelum, sesudah) {
   if (sesudah.latar && (sebelum.latar || '') !== sesudah.latar) daftar.push(`tempat: ${sebelum.latar || '—'} → ${sesudah.latar}`);
   return daftar;
 }
+
+/** Mengganti adegan yang sedang tampil tanpa mencatat langkah baru (mis. karakter hanya digeser). */
+export const perbarui = (s, adegan) => ({ ...s, sekarang: { ...s.sekarang, adegan } });
