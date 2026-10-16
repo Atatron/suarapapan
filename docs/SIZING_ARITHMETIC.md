@@ -38,7 +38,7 @@ The completed run used five initial epochs and two continued epochs on the local
 
 The final runtime report covers 587 cases: 545 have the expected visible outcome, including 394 of 410 synthetic catalog sentences. Of 304 high-confidence cases accepted without a review flag, none has a wrong visible outcome. The other 283 cases need review because of low confidence or validation; this is a measured coverage limit, not proof of zero noise. One accepted result uses a different but visibly equivalent introduction schema, retained in the exact-mismatch metric. Explicit changes such as **hapus dua buku** are held for correction when the model misses the event instead of silently replacing the objects or doing nothing.
 
-Validation completed: 185 browser/unit tests passed with one existing optional skip; 16 Python ML tests and five asset-tool tests passed; the catalog audit verified 569 assets, 39 source sheets and 468 frames; the production frontend build passed. The local API reports IndoBERT available and correctly parses **Tiga kali dua apel** and the compound **anak menggunakan kursi roda**. Ollama is unavailable on this machine; low-confidence results remain flagged for review.
+Validation after merging the latest main: 188 browser/unit tests passed with one existing optional skip; 16 Python ML tests and five asset-tool tests passed; the catalog audit verified 569 assets, 39 source sheets and 468 frames; the production frontend build passed. The local API reports IndoBERT available and correctly parses **Tiga kali dua apel** and the compound **anak menggunakan kursi roda**. Ollama is unavailable on this machine; low-confidence results remain flagged for review.
 
 Commands from the repository root (PowerShell):
 
@@ -63,7 +63,7 @@ npm run build --prefix web
 
 Weights are saved locally in `ml/model/indobert-suarapapan` (Git-ignored). Reports go into `ml/hasil/aset`. The online Gemini service does not use these IndoBERT weights; it benefits from the shared vocabulary, browser parser and deterministic validation. Run the Python backend to use the trained local model.
 
-The code and documentation are local changes on `codex/size-arithmetic-training`; they have not been deployed. The local frontend preview on port 5181 connects to the trained backend on port 8000.
+The code and documentation have been pushed to `codex/size-arithmetic-training`; they have not been deployed. The local frontend preview on port 5181 connects to the trained backend on port 8000.
 
 ## Visual evidence
 

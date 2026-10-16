@@ -176,7 +176,7 @@ perbaiki) ada di [`docs/PROSES_PENGEMBANGAN.md`](docs/PROSES_PENGEMBANGAN.md).
 
 | Pengukuran | Hasil | Catatan jujur |
 |---|---|---|
-| Uji otomatis | **113 uji** (112 lulus, 1 dilewati) | `cd web && npm test` |
+| Uji otomatis | **189 uji** (188 lulus, 1 dilewati) | `cd web && npm test` |
 | IndoBERT vs LLM, 40 kalimat tulisan tim (**sebelum** perbaikan, 13 Okt) | IndoBERT **38/40**, 7,9 ms · LLM Qwen2.5-7B 38/40, 760 ms · gabungan 39/40 | Angka paling jujur; [berkasnya](ml/hasil/perbandingan_sebelum_perbaikan.md) disimpan sebelum perbaikan |
 | Set yang sama **sesudah** perbaikan | 40/40 | **Bukan bukti independen**: set itu dipakai untuk memperbaiki |
 | 51 kalimat bebas + 45 kalimat perintah | 51/51 · 45/45 | Disusun saat memperkuat model; berfungsi sebagai uji regresi |
