@@ -38,7 +38,7 @@ for (const asset of assets) {
 const output = JSON.stringify(assets, null, 2) + '\n';
 const target = new URL('web/src/scene/katalog.json', root);
 if (process.argv.includes('--check')) {
-  if (!fs.existsSync(target) || fs.readFileSync(target, 'utf8') !== output) throw new Error('Catalog is stale. Run node tools/bangun_katalog.mjs');
+  if (!fs.existsSync(target) || fs.readFileSync(target, 'utf8').replace(/\r\n/g, '\n') !== output) throw new Error('Catalog is stale. Run node tools/bangun_katalog.mjs');
 } else fs.writeFileSync(target, output);
 console.log(JSON.stringify({ assets: assets.length, sheets: mapping.sheets.length, frames: frames.size,
   counts: Object.fromEntries(['obj', 'tempat', 'latar'].map((kind) => [kind, assets.filter((a) => a.kind === kind).length])),

@@ -233,7 +233,7 @@ Before: [reported screenshot](img/reported-emoji-fallback.png). After: [verified
 
 ## Fix verification and deployment follow-up
 
-- `npm --prefix web test`: **176 passed, 1 skipped** (177 total). The optional
+- `npm --prefix web test`: **177 passed, 1 skipped** (178 total). The optional
   `WAV_UJI` Indonesian audio fixture is absent; the checked-in upstream positive
   speech fixture and synthetic noise regressions run normally.
 - Python catalog/backend boundary regressions: **10 passed**.
