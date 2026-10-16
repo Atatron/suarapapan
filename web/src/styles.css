@@ -161,14 +161,31 @@ button { font: inherit; }
 .adegan-kecil .obj.status-pergi { animation: none; opacity: 0.22; }
 
 /* ---------- papan (proyektor) ---------- */
-.papan { height: 100%; display: flex; flex-direction: column; padding: 1.2vh 2vw; gap: 1.2vh; }
+.papan { position: relative; height: 100%; display: flex; flex-direction: column; padding: 64px 2vw 1.2vh; gap: 1.2vh; }
 .papan .adegan { border-radius: 0; background: transparent; }
-.papan-layar-penuh {
-  position: fixed; top: 12px; right: 12px; z-index: 5; background: transparent; color: var(--kapur-redup);
-  border: 1px solid var(--papan-garis); border-radius: 6px; padding: 6px 12px; font-size: 14px; cursor: pointer; opacity: 0.6;
+.papan-kontrol { position: absolute; top: 12px; right: 2vw; z-index: 5; display: flex; gap: 8px; }
+.papan-layar-penuh, .papan-mode-jelas {
+  background: var(--papan); color: var(--kapur);
+  border: 2px solid var(--kapur-redup); border-radius: 6px; padding: 8px 12px; font-size: 15px; cursor: pointer;
 }
-.papan-layar-penuh:hover { opacity: 1; }
+.papan-layar-penuh:hover, .papan-mode-jelas:hover { background: var(--papan-2); }
+.papan-mode-jelas[aria-pressed='true'] { background: var(--kuning); color: var(--tinta); border-color: var(--kuning); }
 :fullscreen .papan-layar-penuh { display: none; }
+.papan-koneksi { position: absolute; top: 10px; left: 2vw; max-width: calc(100% - 360px); color: var(--kapur); font-size: 14px; line-height: 1.35; }
+.papan-koneksi small { display: block; color: var(--kapur-redup); font-size: 12px; }
+.papan-koneksi.terhubung { padding-top: 9px; color: var(--mint); }
+.papan-galat { margin: 0; color: var(--kapur); background: var(--papan-2); padding: 8px 12px; border: 2px solid var(--kuning); }
+.papan-jelas .adegan { background: var(--papan); }
+.papan-jelas .adegan-lukisan, .papan-jelas .adegan-pemandangan { display: none; }
+.adegan-tempat-tepat { position: absolute; z-index: 2; top: 2%; right: 2%; margin: 0; width: 19%; max-height: 35%; text-align: center; pointer-events: none; }
+.adegan-tempat-tepat img { display: block; width: 100%; height: 17cqh; object-fit: contain; }
+.adegan-tempat-tepat figcaption { display: inline-block; max-width: 100%; padding: .15em .55em; border-radius: .5em; background: #fffdf2ed; color: #16302a; font-size: clamp(.6rem, 2.3cqh, 1.1rem); line-height: 1.25; }
+.papan-jelas .benda-img { filter: drop-shadow(1px 0 0 var(--kapur)) drop-shadow(-1px 0 0 var(--kapur)) drop-shadow(0 1px 0 var(--kapur)) drop-shadow(0 -1px 0 var(--kapur)); }
+@media (max-width: 700px) {
+  .papan { padding-top: 112px; }
+  .papan-koneksi { top: 64px; max-width: 96%; }
+  .papan-koneksi.terhubung { padding-top: 0; }
+}
 /* Tinggi baris soal dan caption tetap (tidak melompat saat muncul), tetapi dibuat ringkas supaya latar mendapat ruang. */
 .papan-atas { min-height: 11vh; display: flex; justify-content: center; align-items: center; padding: 0 9vw; }
 .papan-kosong { flex: 1; display: grid; place-content: center; text-align: center; color: var(--kapur-redup); font-size: clamp(18px, 2vw, 32px); }
@@ -176,10 +193,10 @@ button { font: inherit; }
 .papan-bawah { min-height: 10vh; display: flex; align-items: center; justify-content: center; }
 .caption {
   margin: 0; max-width: 90vw; text-align: center; font-family: var(--font-judul); font-weight: 600;
-  font-size: clamp(28px, 3.4vw, 64px); line-height: 1.25; padding: 0.3em 0.7em; border-radius: 10px; background: rgba(0, 0, 0, 0.28);
+  font-size: clamp(28px, 3.4vw, 64px); line-height: 1.25; padding: 0.3em 0.7em; border-radius: 10px; background: var(--papan);
 }
 .caption mark { background: none; color: var(--kuning); }
-.caption-sementara { opacity: 0.7; }
+.caption-sementara { font-style: italic; }
 
 .soal { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 0.6vh 2.4vw; }
 .soal-teks { margin: 0; font-family: var(--font-judul); font-weight: 700; font-size: clamp(26px, 3.6vw, 68px); }
@@ -230,16 +247,18 @@ button { font: inherit; }
 .zona-dalam .posisi-benda { width: 34%; }
 .posisi-benda.bisa-seret { cursor: grab; }
 .posisi-benda.diseret { cursor: grabbing; z-index: 5; position: relative; filter: drop-shadow(0 8px 10px rgba(0, 0, 0, 0.4)); }
-.posisi-label, .posisi-petunjuk { order: -1; }
-.posisi-label { margin: 0; font-family: var(--font-tangan); font-size: clamp(16px, 3.4vw, 60px); color: var(--kuning); text-align: center; }
+.posisi-label, .posisi-petunjuk { position: absolute; left: 2%; right: 2%; z-index: 3; pointer-events: none; text-align: center; }
+.posisi-label { top: 2%; margin: 0; font-family: var(--font-tangan); font-size: clamp(16px, 2.8vw, 44px); color: var(--kuning); }
 .adegan-kecil .posisi-label { font-size: 18px; margin: 4px 0 0; }
-.posisi-petunjuk { margin: 0 0 2vh; font-size: clamp(12px, 1.4vw, 24px); color: var(--kapur-redup); }
+.posisi-petunjuk { top: 20%; margin: 0; font-size: clamp(12px, 1.4vw, 24px); color: var(--kapur-redup); }
 @media (prefers-reduced-motion: no-preference) {
   .posisi-benda.status-datang { animation: masuk 0.6s ease-out both; animation-delay: var(--tunda); }
 }
 
 /* ---------- gambar kartun ---------- */
 .benda-img { display: block; width: 100%; height: auto; pointer-events: none; user-select: none; }
+.benda-pangkas { display: block; width: 100%; position: relative; overflow: hidden; }
+.benda-pangkas > span { position: absolute; display: block; }
 /* Pemandangan ada di belakang benda dan dibuat redup, supaya yang dihitung siswa tetap yang paling jelas. */
 .adegan-pemandangan {
   position: absolute; left: 4%; right: 4%; top: 4%; bottom: 14%; width: 92%; height: 82%;
@@ -294,7 +313,7 @@ button { font: inherit; }
 .papan-panggung { position: relative; flex: 1; min-height: 0; container-type: size; display: grid; place-items: center; }
 .papan-panggung > .adegan { width: min(100cqw, 177.78cqh); height: min(100cqh, 56.25cqw); flex: none; }
 .papan .adegan.dengan-latar { border-radius: 18px; }
-.dengan-latar .benda-label { background: rgba(22, 48, 42, 0.82); color: var(--kapur); padding: 0.05em 0.6em; border-radius: 10px; }
+.dengan-latar .benda-label { background: var(--papan); color: var(--kapur); padding: 0.05em 0.6em; border-radius: 10px; }
 
 /* ---------- tambah karakter + penjelasan ---------- */
 .penjelasan { margin: 0; font-size: 15px; color: var(--hijau); font-weight: 600; }

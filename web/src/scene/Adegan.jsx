@@ -3,6 +3,7 @@ import { Benda } from './aset.jsx';
 import { deskripsi, uraiPosisi } from './engine.js';
 import { Pecahan, PanggungPosisi } from './Matematika.jsx';
 import { cariTempat, urlTempat } from './pustaka.js';
+import { idAset } from './katalog.js';
 import { pilihLatar } from './latar.js';
 import { tataObjek, ukuranKarakter, batasi01, WILAYAH_BAWAAN } from './tata.js';
 
@@ -75,12 +76,22 @@ export default function Adegan({ adegan, interaktif = false, kecil = false, bisa
   const lukisan = latar
     ? <img className="adegan-lukisan" src={latar.file} alt="" aria-hidden="true" draggable={false} />
     : null;
+  // The large backdrop supplies atmosphere, but must not erase a specifically
+  // requested place (e.g. ruang-guru and perpustakaan share the classroom art).
+  const tempat = idAset(adegan.latar, 'tempat');
+  const penandaTempat = tempat ? (
+    <figure className="adegan-tempat-tepat" aria-label={`Tempat: ${tempat.replaceAll('-', ' ')}`}>
+      <img src={urlTempat(tempat)} alt="" draggable={false} />
+      <figcaption>{tempat.replaceAll('-', ' ')}</figcaption>
+    </figure>
+  ) : null;
 
   if (adegan.objek.some((o) => o.status !== 'pergi' && uraiPosisi(o.posisi))) {
     return (
       <div className={`${kelas} adegan-posisi`}>
         <p className="sr-only" aria-live="polite">{deskripsi(adegan)}</p>
         {lukisan}
+        {penandaTempat}
         <PanggungPosisi adegan={adegan} interaktif={interaktif} />
         {latar ? null : <div className="adegan-tanah" aria-hidden="true" />}
       </div>
@@ -97,6 +108,7 @@ export default function Adegan({ adegan, interaktif = false, kecil = false, bisa
     <div className={`${kelas}${bebas ? ' adegan-bebas' : ''}`} data-latar={latar?.id} ref={akar}>
       <p className="sr-only" aria-live="polite">{deskripsi(adegan)}</p>
       {lukisan}
+      {penandaTempat}
       {bebas ? adegan.objek.map((o, i) => {
         const diseret = seret?.id === o.id && seret.gerak;
         const t = diseret

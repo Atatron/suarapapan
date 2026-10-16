@@ -1,4 +1,6 @@
+import { useState } from 'react';
 import { cariGambar, urlGambar, urlPose } from './pustaka.js';
+import UKURAN from './ukuran.json' with { type: 'json' };
 
 // Pustaka gambar benda. Semua digambar dengan bentuk sederhana dalam gaya yang
 // sama (viewBox 200×160), supaya adegan terasa konsisten bagi siswa autis.
@@ -182,20 +184,7 @@ export function adaGambar(jenis) {
 
 const cariEmoji = (jenis) => EMOJI[jenis] || EMOJI[jenis.replace(/[\s-]+/g, '_')] || EMOJI[jenis.split(/\s+/)[0]];
 
-/** Gambar buatan sendiri dulu, lalu kamus emoji, lalu emoji pilihan Gemini. */
-export function Benda({ jenis, indeks = 0, emoji, aksi }) {
-  const nama = cariGambar(jenis);
-  if (nama) {
-    const pose = urlPose(nama, aksi);
-    // Pose yang gagal dimuat (file belum diunggah) kembali ke gambar biasa.
-    const cadangan = (e) => {
-      if (pose && !e.currentTarget.src.endsWith(urlGambar(nama))) e.currentTarget.src = urlGambar(nama);
-    };
-    return (
-      <img key={pose || nama} src={pose || urlGambar(nama)} className={`benda-img${pose ? ' benda-pose' : ''}`} alt={jenis}
-        draggable={false} decoding="async" onError={cadangan} />
-    );
-  }
+function GambarCadangan({ jenis, indeks, emoji }) {
   const kunci = PETA_SINONIM[jenis] || jenis;
   const gambar = GAMBAR[kunci];
   if (gambar) {
@@ -211,4 +200,35 @@ export function Benda({ jenis, indeks = 0, emoji, aksi }) {
       <span className="benda-label">{jenis}</span>
     </div>
   );
+}
+
+function GambarBenda({ jenis, indeks, emoji, sumber, pose, batas }) {
+  const [gagal, setGagal] = useState(0);
+  if (gagal >= sumber.length) return <GambarCadangan jenis={jenis} indeks={indeks} emoji={emoji} />;
+  const url = sumber[gagal];
+  const cadangan = () => {
+    // Setiap URL dicoba sekali. Error pada gambar dasar berakhir di SVG/emoji,
+    // bukan terus memuat URL yang sama atau menyisakan ikon gambar rusak.
+    window.dispatchEvent(new CustomEvent('suarapapan:aset-gagal', { detail: { jenis, url } }));
+    setGagal((n) => n === gagal ? Math.min(n + 1, sumber.length) : n);
+  };
+  const gambar = (
+    <img key={url} src={url} className={`benda-img${pose === url ? ' benda-pose' : ''}`} alt={jenis}
+      draggable={false} decoding="async" onError={cadangan} />
+  );
+  // Normalisasi ruang transparan hanya untuk pelajaran posisi. Tata bebas sudah
+  // memperhitungkan bbox sendiri; gambar cadangan juga memakai kotaknya sendiri.
+  if (!batas || pose === url) return gambar;
+  return <span className="benda-pangkas" style={{ aspectRatio: `${1.25 * batas.w} / ${batas.h}` }}>
+    <span style={{ width: `${100 / batas.w}%`, left: `${-100 * batas.x / batas.w}%`, top: `${-100 * batas.y / batas.h}%` }}>{gambar}</span>
+  </span>;
+}
+
+/** Raster → gambar dasar → SVG/emoji berlabel; ganti aset memulai ulang pemuatan. */
+export function Benda({ jenis, indeks = 0, emoji, aksi, pangkas = false }) {
+  const nama = cariGambar(jenis);
+  if (!nama) return <GambarCadangan jenis={jenis} indeks={indeks} emoji={emoji} />;
+  const pose = urlPose(nama, aksi);
+  const sumber = [...new Set([pose, urlGambar(nama)].filter(Boolean))];
+  return <GambarBenda key={sumber.join('|')} jenis={jenis} indeks={indeks} emoji={emoji} sumber={sumber} pose={pose} batas={pangkas ? UKURAN[nama] : null} />;
 }

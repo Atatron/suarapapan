@@ -1,4 +1,5 @@
 import { test } from 'node:test';
+import { speechWav } from '../lib/fixtures/audio.js';
 import assert from 'node:assert/strict';
 import { ADEGAN_KOSONG, terapkan, yangAda, konteks, deskripsi, uraiPosisi } from './engine.js';
 import { hitungWer, normalisasi } from '../lib/wer.js';
@@ -378,11 +379,11 @@ test('transkripsiGemini: kirim audio inline + konteks, kembalikan kalimat', asyn
     badan = JSON.parse(opsi.body);
     return Response.json({ candidates: [{ content: { parts: [{ text: '{"transkrip":"Ada tiga gurita di laut. Lalu satu pergi."}' }] } }] });
   };
-  const r = await transkripsiGemini({ audio: 'QUJD', mime: 'audio/wav', konteks: 'ikan: 2' }, { kunci: 'tes', fetchFn: fetchPalsu });
+  const r = await transkripsiGemini({ audio: speechWav, mime: 'audio/wav', konteks: 'ikan: 2' }, { kunci: 'tes', fetchFn: fetchPalsu });
   assert.deepEqual(r.kalimat, ['Ada tiga gurita di laut.', 'Lalu satu pergi.']);
   const bagian = badan.contents[0].parts;
   assert.equal(bagian[1].inlineData.mimeType, 'audio/wav');
-  assert.equal(bagian[1].inlineData.data, 'QUJD');
+  assert.equal(bagian[1].inlineData.data, speechWav);
   assert.match(bagian[0].text, /ikan: 2/);
   assert.equal(badan.generationConfig.responseSchema.properties.transkrip.type, 'STRING');
   _setelUlangUntukTes();
@@ -406,7 +407,7 @@ test('transkripsiGemini urai=true: transkrip + adegan kalimat pertama dalam satu
     };
     return Response.json({ candidates: [{ content: { parts: [{ text: JSON.stringify(jawab) }] } }] });
   };
-  const r = await transkripsiGemini({ audio: 'QUJD', konteks: 'kosong', urai: true }, { kunci: 'tes', fetchFn: fetchPalsu });
+  const r = await transkripsiGemini({ audio: speechWav, konteks: 'kosong', urai: true }, { kunci: 'tes', fetchFn: fetchPalsu });
   assert.equal(r.kalimat.length, 1);
   assert.equal(r.hasil.entitas[0].jenis, 'kelinci', 'dirapikan seperti jalur teks');
   assert.equal(r.hasil.entitas[0].aksi, 'lari', 'aksi benar karena "berlari" memang diucapkan');
@@ -424,7 +425,7 @@ test('transkripsiGemini urai=true: tanpa ucapan → tanpa hasil', async () => {
     if (url.includes('/models?')) return Response.json({ models: [{ name: 'models/gemini-9-flash-lite' }] });
     return Response.json({ candidates: [{ content: { parts: [{ text: '{"transkrip":"","entitas":[],"latar":"","konsep":"tidak_ada","peristiwa":[],"pertanyaan":"","tanya_benda":""}' }] } }] });
   };
-  const r = await transkripsiGemini({ audio: 'QUJD', urai: true }, { kunci: 'tes', fetchFn: fetchPalsu });
+  const r = await transkripsiGemini({ audio: speechWav, urai: true }, { kunci: 'tes', fetchFn: fetchPalsu });
   assert.deepEqual(r.kalimat, []);
   assert.equal(r.hasil, undefined);
   _setelUlangUntukTes();
@@ -437,7 +438,7 @@ test('transkripsiGemini urai=true: beberapa kalimat → hasil gabungan dibuang, 
     const jawab = { transkrip: 'Anak-anak, perhatikan papan. Ada dua belas bebek.', entitas: [{ jenis: 'bebek', jumlah: 12, aksi: 'diam', posisi: '', bagi: 0, emoji: '', emoji_acuan: '' }], latar: '', konsep: 'membilang', peristiwa: [], pertanyaan: '', tanya_benda: '' };
     return Response.json({ candidates: [{ content: { parts: [{ text: JSON.stringify(jawab) }] } }] });
   };
-  const r = await transkripsiGemini({ audio: 'QUJD', urai: true }, { kunci: 'tes', fetchFn: fetchPalsu });
+  const r = await transkripsiGemini({ audio: speechWav, urai: true }, { kunci: 'tes', fetchFn: fetchPalsu });
   assert.equal(r.kalimat.length, 2);
   assert.equal(r.hasil, undefined, 'tidak boleh memakai urai yang mungkin salah kalimat');
   _setelUlangUntukTes();
@@ -479,7 +480,7 @@ test('suara: ada_ucapan=false → transkrip kosong walau model menulis sesuatu',
     if (url.includes('/models?')) return Response.json({ models: [{ name: 'models/gemini-9-flash-lite' }] });
     return Response.json({ candidates: [{ content: { parts: [{ text: '{"ada_ucapan":false,"transkrip":"Ada lima balon di kelas."}' }] } }] });
   };
-  const r = await transkripsiGemini({ audio: 'QUJD' }, { kunci: 'tes', fetchFn: fetchPalsu });
+  const r = await transkripsiGemini({ audio: speechWav }, { kunci: 'tes', fetchFn: fetchPalsu });
   assert.equal(r.transkrip, '');
   assert.deepEqual(r.kalimat, []);
   _setelUlangUntukTes();
@@ -655,9 +656,9 @@ test('rapikan: "di dalam laut" adalah tempat, bukan pelajaran posisi; "di bawah 
   });
   assert.equal(rapikan(dasar('di dalam laut', 'laut'), 'tiga ikan di laut').entitas[0].posisi, '');
   assert.equal(rapikan(dasar('di dalam laut', ''), 'tiga ikan di laut').entitas[0].posisi, '', 'meski latar kosong');
-  assert.equal(rapikan(dasar('di atas rumput', 'rumput'), 'x').entitas[0].posisi, '');
-  assert.equal(rapikan(dasar('di bawah meja', ''), 'kucing di bawah meja').entitas[0].posisi, 'di bawah meja');
-  assert.equal(rapikan(dasar('di atas kursi', 'kelas'), 'x').entitas[0].posisi, 'di atas kursi');
+  assert.equal(rapikan(dasar('di atas rumput', 'rumput'), 'tiga ikan di atas rumput').entitas[0].posisi, '');
+  assert.equal(rapikan(dasar('di bawah meja', ''), 'tiga ikan di bawah meja').entitas[0].posisi, 'di bawah meja');
+  assert.equal(rapikan(dasar('di atas kursi', 'kelas'), 'tiga ikan di atas kursi di kelas').entitas[0].posisi, 'di atas kursi');
 });
 
 // ---------- menambah karakter ke adegan yang ada ----------

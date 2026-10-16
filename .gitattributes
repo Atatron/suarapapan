@@ -1,0 +1,5 @@
+# Generated catalog bytes and hashes must remain reproducible on Windows/Linux.
+/web/src/scene/katalog.json text eol=lf
+/ml/data/aset/*.json text eol=lf
+/ml/data/aset/*.jsonl text eol=lf
+/docs/audit/assets/audit.json text eol=lf

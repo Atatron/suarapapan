@@ -97,6 +97,7 @@ const KANDIDAT = {
 export function calonLatar(latar) {
   const k = bersih(latar).replace(/^(?:di|ke|dari)-/, '');
   if (!k) return [];
+  if (Object.hasOwn(LATAR, k)) return [k];
   if (KANDIDAT[k]) return KANDIDAT[k];
   const ikon = cariTempat(latar);
   if (ikon && KANDIDAT[ikon]) return KANDIDAT[ikon];

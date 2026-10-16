@@ -1,8 +1,8 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import Adegan from '../scene/Adegan.jsx';
 import { Benda } from '../scene/aset.jsx';
 import { ADEGAN_KOSONG, pindahkan } from '../scene/engine.js';
-import { kirim, dengar } from '../lib/saluran.js';
+import { bacaSesi, bolehTerimaSnapshot, buatSaluran, sesiDariUrl } from '../lib/saluran.js';
 
 function Soal({ soal, versi }) {
   const [pilihan, setPilihan] = useState(null);
@@ -76,35 +76,78 @@ function demoDariUrl() {
 
 export default function Papan() {
   const demo = useMemo(demoDariUrl, []);
-  const [adegan, setAdegan] = useState(() => demo?.adegan ?? ADEGAN_KOSONG);
-  const [caption, setCaption] = useState({ teks: demo?.teks ?? '', sementara: false, sorot: [] });
+  const sesi = useMemo(() => sesiDariUrl(), []);
+  const [snapshot, setSnapshot] = useState(() => demo ? null : bacaSesi(sesi));
+  const snapshotRef = useRef(snapshot);
+  const saluranRef = useRef(null);
+  const [koneksi, setKoneksi] = useState(sesi ? 'menghubungkan' : 'tanpa-sesi');
+  const [galatLayar, setGalatLayar] = useState('');
+  const [jelas, setJelas] = useState(false);
+  const adegan = snapshot?.adegan ?? demo?.adegan ?? ADEGAN_KOSONG;
+  const caption = snapshot?.caption ?? { teks: demo?.teks ?? '', sementara: false, sorot: [] };
 
   useEffect(() => {
-    const lepas = dengar((m) => {
-      if (m.type === 'adegan') setAdegan(m.adegan);
-      if (m.type === 'caption') setCaption(m);
-      if (m.type === 'geser') setAdegan((a) => pindahkan(a, m.id, m.px, m.py, m.beku));
+    if (demo || !sesi) return undefined;
+    const saluran = buatSaluran(sesi);
+    saluranRef.current = saluran;
+    if (!saluran.tersedia) { setKoneksi('tidak-didukung'); return () => saluran.tutup(); }
+    let terakhir = 0;
+    const lepas = saluran.dengar((m) => {
+      if (m.type !== 'snapshot' || !bolehTerimaSnapshot(snapshotRef.current, m.snapshot, sesi)) return;
+      terakhir = Date.now();
+      setKoneksi('terhubung');
+      // Satu pembaruan React memulihkan objek, caption, dan sorot secara serentak.
+      if (snapshotRef.current?.controllerId !== m.snapshot.controllerId || snapshotRef.current?.revision !== m.snapshot.revision) {
+        snapshotRef.current = m.snapshot;
+        setSnapshot(m.snapshot);
+      }
     });
-    kirim({ type: 'halo' }); // minta adegan terakhir dari /guru
-    return lepas;
-  }, []);
+    saluran.kirim({ type: 'halo' });
+    const mulai = Date.now();
+    const t = setInterval(() => {
+      if (Date.now() - (terakhir || mulai) > 9000) setKoneksi('terputus');
+      saluran.kirim({ type: 'halo' });
+    }, 3000);
+    return () => { clearInterval(t); lepas(); saluran.tutup(); saluranRef.current = null; };
+  }, [sesi, demo]);
 
   // Karakter diseret langsung di proyektor: papan berubah seketika, dan /guru ikut mencatat posisinya.
   const geserDiPapan = (id, px, py, beku) => {
-    setAdegan((a) => pindahkan(a, id, px, py, beku));
-    kirim({ type: 'geser', id, px, py, beku });
+    const kini = snapshotRef.current;
+    if (!kini || koneksi !== 'terhubung') return;
+    const baru = { ...kini, adegan: pindahkan(kini.adegan, id, px, py, beku) };
+    snapshotRef.current = baru;
+    setSnapshot(baru);
+    saluranRef.current?.kirim({ type: 'geser', id, px, py, beku, controllerId: kini.controllerId, generation: kini.generation, revision: kini.revision });
   };
 
-  const layarPenuh = () => {
-    document.documentElement.requestFullscreen?.().catch(() => {});
+  const layarPenuh = async () => {
+    try {
+      if (!document.documentElement.requestFullscreen) throw new Error();
+      await document.documentElement.requestFullscreen();
+      setGalatLayar('');
+    } catch { setGalatLayar('Layar penuh tidak tersedia. Gunakan tombol layar penuh pada browser.'); }
   };
+  const pesanKoneksi = koneksi === 'terhubung' ? 'Terhubung ke panel guru'
+    : koneksi === 'menghubungkan' ? 'Menghubungkan ke panel guru…'
+      : koneksi === 'tanpa-sesi' ? 'Buka papan lewat tombol “Buka papan” di panel guru.'
+        : koneksi === 'tidak-didukung' ? 'Browser ini tidak mendukung sambungan antartab.'
+          : 'Panel guru belum terhubung. Papan terakhir tetap ditampilkan.';
 
   return (
-    <main className="papan">
-      <button type="button" className="papan-layar-penuh" onClick={layarPenuh}>Layar penuh</button>
+    <main className={`papan${jelas ? ' papan-jelas' : ''}`}>
+      <div className="papan-kontrol">
+        <button type="button" className="papan-layar-penuh" onClick={layarPenuh}>Layar penuh</button>
+        <button type="button" className="papan-mode-jelas" aria-pressed={jelas} onClick={() => setJelas((x) => !x)}>Latar sederhana</button>
+      </div>
+      {!demo ? <div className={`papan-koneksi${koneksi === 'terhubung' ? ' terhubung' : ''}`} role="status">
+        <span>{pesanKoneksi}</span>
+        {koneksi !== 'terhubung' ? <small>Panel guru dan papan harus dibuka di browser dan perangkat yang sama.</small> : null}
+      </div> : null}
+      {galatLayar ? <p className="papan-galat" role="alert">{galatLayar}</p> : null}
       <div className="papan-atas">{adegan.soal ? <Soal soal={adegan.soal} versi={adegan.versi} /> : null}</div>
       <div className="papan-panggung">
-        <Adegan adegan={adegan} interaktif bisaGeser onGeser={geserDiPapan} />
+        <Adegan adegan={adegan} interaktif bisaGeser={koneksi === 'terhubung'} onGeser={geserDiPapan} />
         {adegan.objek.length ? null : (
           <div className="papan-lapis-kosong">
             <div>

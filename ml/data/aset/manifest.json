@@ -1,0 +1,22 @@
+{
+  "catalog_sha256": "a8cae8c344ec7b867cb0ea222720c550142ee99af74ac35420acc978fdecb722",
+  "objects": 410,
+  "places": 127,
+  "splits": {
+    "latih": 2786,
+    "validasi": 952,
+    "uji_templat": 952
+  },
+  "ambiguous_aliases": [
+    {
+      "kind": "obj",
+      "phrase": "glazed-donut",
+      "ids": [
+        "donat",
+        "donat-jajanan"
+      ]
+    }
+  ],
+  "training_performed": false,
+  "evaluation_scope": "Synthetic held-out sentence families; not human teacher accuracy."
+}

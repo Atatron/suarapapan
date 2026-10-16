@@ -2,49 +2,16 @@
 // tools/bangun_aset.py; di sini hanya pencarian: kata dari parser → nama file.
 import pustaka from './pustaka.json' with { type: 'json' };
 import POSE from './aksi.json' with { type: 'json' };
+import { aliasAset } from './katalog.js';
 
 const OBJ = pustaka.obj;
 const TEMPAT = pustaka.tempat;
 
 // Kata lain untuk benda yang sama. Kunci = kata dari guru/parser, nilai = nama
 // file di pustaka. Setiap nilai diperiksa oleh tes (engine.test.js).
-const ALIAS_OBJ = {
-  macan: 'harimau', kera: 'monyet', kodok: 'katak', 'biri-biri': 'domba', lembu: 'sapi', jago: 'ayam', 'ayam-jago': 'ayam',
-  kakaktua: 'kakatua', dara: 'merpati', 'anak-ayam': 'anak-bebek', 'bebek-kecil': 'anak-bebek', hippo: 'kuda-nil',
-  cumi: 'cumi-cumi', kupu: 'kupu-kupu', 'burung-kecil': 'burung', 'burung-gereja': 'burung', 'burung-pipit': 'burung',
-  anak: 'anak-laki-laki', adik: 'anak-perempuan', kakak: 'anak-laki-laki', murid: 'anak-laki-laki', siswa: 'anak-laki-laki',
-  // Nama orang tanpa ciri memakai karakter anak bawaan yang juga dipakai untuk
-  // "anak"/"murid"; label semantik aslinya tetap disimpan oleh mesin adegan.
-  manusia: 'anak-laki-laki', orang: 'anak-laki-laki', seseorang: 'anak-laki-laki', teman: 'anak-laki-laki',
-  'anak-menggunakan-kursi-roda': 'anak-kursi-roda', 'anak-memakai-kursi-roda': 'anak-kursi-roda',
-  'anak-dengan-kursi-roda': 'anak-kursi-roda', 'anak-di-kursi-roda': 'anak-kursi-roda',
-  'anak-pengguna-kursi-roda': 'anak-kursi-roda', 'pengguna-kursi-roda': 'anak-kursi-roda',
-  'anak-menggunakan-alat-bantu-dengar': 'anak-dengan-alat-bantu-dengar',
-  'anak-memakai-alat-bantu-dengar': 'anak-dengan-alat-bantu-dengar',
-  bocah: 'anak-laki-laki', cowok: 'anak-laki-laki', cewek: 'anak-perempuan', bapak: 'ayah', papa: 'ayah', bunda: 'ibu',
-  mama: 'ibu', eyang: 'nenek', oma: 'nenek', opa: 'kakek', tukang: 'sopir', 'tukang-pos': 'pak-pos', pemadam: 'pemadam-kebakaran',
-  supir: 'sopir', pedagang: 'penjual', juru: 'koki', 'juru-masak': 'koki', 'anak-berhijab': 'siswa-berhijab', hijab: 'siswa-berhijab',
-  cabe: 'cabai', mentimun: 'timun', kol: 'brokoli', sawi: 'bayam', eskrim: 'es-krim', es: 'es-krim', 'ice-cream': 'es-krim',
-  bakpao: 'roti', 'kue-tart': 'kue', tart: 'kue', 'telur-ayam': 'telur', 'air-putih': 'air', 'segelas-air': 'air',
-  'buku-tulis': 'buku', pena: 'pulpen', bolpoin: 'pulpen', ransel: 'tas', 'tas-sekolah': 'tas', 'papan-tulis': 'papan-tulis-kecil',
-  'jam-dinding': 'jam', 'bola-dunia': 'globe', lemari: 'keranjang', ranjang: 'tempat-tidur', kasur: 'tempat-tidur',
-  'mobil-mobilan': 'mobil', 'sepeda-motor': 'motor', 'kereta-api': 'kereta', 'pesawat-terbang': 'pesawat', ship: 'kapal',
-  layang: 'layang-layang', hadiah: 'kado', 'bola-kaki': 'bola', pepohonan: 'pohon', 'bunga-bunga': 'bunga', mentari: 'matahari',
-  gunung: 'gunung-kecil', bukit: 'gunung-kecil', kaos: 'baju', kemeja: 'baju', gaun: 'rok', kerudung: 'syal', 'kaus': 'baju',
-  'laki-laki': 'anak-laki-laki', laki: 'anak-laki-laki', perempuan: 'anak-perempuan', 'anak-laki': 'anak-laki-laki',
-  lingkar: 'lingkaran', bulat: 'lingkaran', uang: 'koin',
-};
+const ALIAS_OBJ = aliasAset('obj');
 
-const ALIAS_TEMPAT = {
-  'padang-rumput': 'rumput', lapangan: 'rumput', halaman: 'rumput', padang: 'rumput', ladang: 'kebun',
-  'hutan-rimba': 'hutan', rimba: 'hutan', belantara: 'hutan', 'hutan-lebat': 'hutan',
-  'kebun-sayur': 'kebun', 'kebun-buah': 'kebun', pertanian: 'peternakan', kandang: 'peternakan', 'sawah-padi': 'sawah',
-  padi: 'sawah', pegunungan: 'gunung', bukit: 'gunung', kali: 'sungai', telaga: 'danau', waduk: 'danau', empang: 'kolam',
-  tambak: 'kolam', lautan: 'laut', samudra: 'laut', samudera: 'laut', 'dalam-laut': 'bawah-laut', 'dasar-laut': 'bawah-laut',
-  'bawah-air': 'bawah-laut', 'kamar-tidur': 'kamar', 'ruang-kelas': 'kelas', 'dalam-kelas': 'kelas', 'ruang-makan': 'dapur',
-  'jalan-raya': 'kota', jalan: 'kota', 'padang-pasir': 'gurun', kutub: 'salju', zoo: 'kebun-binatang',
-  desa: 'jalan-desa', kampung: 'jalan-desa', 'pasar-malam': 'pasar', toko: 'pasar',
-};
+const ALIAS_TEMPAT = aliasAset('tempat');
 
 // Batasi pencarian oleh frasa terpanjang yang benar-benar didukung pustaka,
 // bukan tiga kata: nama inklusi seperti "anak dengan alat bantu dengar" lebih panjang.

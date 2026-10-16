@@ -1,6 +1,6 @@
 // Merekam suara guru untuk dikirim ke transkripsi Gemini. Berjalan berdampingan
 // dengan Web Speech API (yang hanya dipakai untuk caption langsung).
-import { LAJU, pcmKeWav, hitungRms, normalkan, keBase64, adaUcapan } from './wav.js';
+import { LAJU, pcmKeWav, hitungRms, normalkan, keBase64, deteksiUcapan } from './wav.js';
 
 const BATAS_DETIK = 30;
 
@@ -13,6 +13,7 @@ const PESAN = {
   NotAllowedError: 'Izin mikrofon ditolak. Klik ikon gembok di address bar, izinkan mikrofon, lalu muat ulang halaman.',
   NotFoundError: 'Mikrofon tidak ditemukan. Periksa apakah mikrofon atau earphone sudah tersambung.',
   NotReadableError: 'Mikrofon sedang dipakai aplikasi lain. Tutup aplikasi itu lalu coba lagi.',
+  MicrophoneDisconnectedError: 'Mikrofon terputus atau izinnya dicabut. Sambungkan dan izinkan mikrofon, lalu coba lagi.',
 };
 export const pesanMik = (e) => PESAN[e?.name] || `Mikrofon tidak bisa dibuka (${e?.name || 'galat'}).`;
 
@@ -49,16 +50,18 @@ async function dekode(blob) {
   const ctx = new Ctx();
   try {
     const audio = await ctx.decodeAudioData(await blob.arrayBuffer());
-    const n = Math.max(1, Math.ceil(audio.duration * LAJU));
+    if (!Number.isFinite(audio.duration) || audio.duration <= 0) throw new Error('Durasi rekaman tidak valid.');
+    const durasi = Math.min(audio.duration, BATAS_DETIK);
+    const n = Math.max(1, Math.ceil(durasi * LAJU));
     const off = new OfflineAudioContext(1, n, LAJU);
     const sumber = off.createBufferSource();
     sumber.buffer = audio;
     sumber.connect(off.destination);
     sumber.start();
     const hasil = await off.startRendering();
-    return { pcm: hasil.getChannelData(0), durasi: audio.duration };
+    return { pcm: hasil.getChannelData(0), durasi };
   } finally {
-    ctx.close?.();
+    await ctx.close?.();
   }
 }
 
@@ -66,24 +69,59 @@ async function dekode(blob) {
  * Mulai merekam. Mengembalikan { berhenti() } yang menghasilkan
  * { audio: base64 WAV, mime, durasi, rms, ucapan } atau null jika rekaman tidak berguna.
  */
-export async function mulaiRekam() {
+export async function mulaiRekam({ saatBerhenti, saatGalat } = {}) {
   const s = await siapkanMik();
+  const trek = s.getAudioTracks();
+  if (!trek.length || !trek.some((t) => t.readyState === 'live')) throw Object.assign(new Error('Mikrofon terputus.'), { name: 'MicrophoneDisconnectedError' });
   const potongan = [];
   const mime = pilihMime();
   const rec = new MediaRecorder(s, mime ? { mimeType: mime } : undefined);
   rec.ondataavailable = (e) => { if (e.data?.size) potongan.push(e.data); };
-  const selesai = new Promise((res) => { rec.onstop = res; });
-  rec.start();
-  const pengaman = setTimeout(() => { if (rec.state === 'recording') rec.stop(); }, BATAS_DETIK * 1000);
+  let galat = null;
+  let pengaman;
+  let tuntas = false;
+  let akhiri;
+  const selesai = new Promise((res) => { akhiri = res; });
+  const bersihkan = () => {
+    clearTimeout(pengaman);
+    for (const t of trek) t.removeEventListener?.('ended', terputus);
+  };
+  const tutup = () => {
+    if (tuntas) return;
+    tuntas = true; bersihkan(); akhiri(); saatBerhenti?.();
+  };
+  const hentikan = () => {
+    if (rec.state !== 'inactive') {
+      try { rec.stop(); } catch (e) { galat ||= e; tutup(); }
+    }
+  };
+  const gagal = (e) => {
+    if (galat || tuntas) return;
+    galat = e;
+    // Jadwalkan stop lebih dulu: callback UI boleh membatalkan pekerjaan ini.
+    hentikan(); saatGalat?.(e);
+    if (rec.state === 'inactive') tutup();
+  };
+  const terputus = () => {
+    if (aliran === s) aliran = null;
+    gagal(Object.assign(new Error(PESAN.MicrophoneDisconnectedError), { name: 'MicrophoneDisconnectedError' }));
+  };
+  for (const t of trek) t.addEventListener?.('ended', terputus, { once: true });
+  rec.onstop = tutup;
+  rec.onerror = (e) => gagal(e.error || Object.assign(new Error('Rekaman mikrofon gagal.'), { name: 'NotReadableError' }));
+  try { rec.start(); } catch (e) { bersihkan(); throw e; }
+  pengaman = setTimeout(hentikan, BATAS_DETIK * 1000);
   let hasil = null;
 
   return {
-    async berhenti() {
+    berhenti() {
       clearTimeout(pengaman);
       if (hasil) return hasil;
-      hasil = (async () => {
-        if (rec.state !== 'inactive') rec.stop();
+      // Tetapkan promise sebelum stop memicu callback; pemanggilan ulang tetap satu finalisasi.
+      hasil = Promise.resolve().then(async () => {
+        hentikan();
         await selesai;
+        if (galat) throw galat;
         if (!potongan.length) return null;
         const { pcm, durasi } = await dekode(new Blob(potongan, { type: rec.mimeType || mime }));
         const rms = hitungRms(pcm);
@@ -91,9 +129,9 @@ export async function mulaiRekam() {
         const keras = normalkan(pcm);
         let puncak = 0;
         for (let i = 0; i < pcm.length; i++) puncak = Math.max(puncak, Math.abs(pcm[i]));
-        const ucapan = adaUcapan(keras).ada;
+        const ucapan = (await deteksiUcapan(keras)).ada;
         return { audio: keBase64(pcmKeWav(keras)), mime: 'audio/wav', durasi, rms, puncak, ucapan };
-      })().catch((e) => { console.error('Rekaman gagal diproses:', e); return null; });
+      });
       return hasil;
     },
   };
