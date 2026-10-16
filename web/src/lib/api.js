@@ -7,7 +7,7 @@ import { rapikan } from './rapikan.js';
 export async function uraikan(kalimat, konteks, { signal, timeoutMs = 18000 } = {}) {
   if (signal?.aborted) throw batal();
   const lokal = uraiLokal(kalimat, konteks);
-  if (lokal?.yakin === 'tinggi' || ['NEGATION_SCOPE', 'CONDITIONAL_COMMAND', 'QUOTED_COMMAND', 'SELF_CORRECTION', 'LIMITED_QUANTITY'].includes(lokal?.notice?.code)) return { ...lokal, availability: null };
+  if (lokal?.yakin === 'tinggi' || ['NEGATION_SCOPE', 'CONDITIONAL_COMMAND', 'QUOTED_COMMAND', 'SELF_CORRECTION', 'LIMITED_QUANTITY', 'UNSUPPORTED_ARITHMETIC'].includes(lokal?.notice?.code)) return { ...lokal, availability: null };
   try {
     const data = await kirim('/api/parse', { kalimat, konteks }, { signal, timeoutMs });
     const hasil = rapikan(data.hasil, kalimat, konteks);

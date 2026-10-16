@@ -3,9 +3,9 @@
   "objects": 410,
   "places": 127,
   "splits": {
-    "latih": 2786,
-    "validasi": 952,
-    "uji_templat": 952
+    "latih": 8935,
+    "validasi": 1436,
+    "uji_templat": 1436
   },
   "ambiguous_aliases": [
     {
@@ -18,5 +18,75 @@
     }
   ],
   "training_performed": false,
-  "evaluation_scope": "Synthetic held-out sentence families; not human teacher accuracy."
+  "labels": [
+    "O",
+    "B-JUMLAH",
+    "I-JUMLAH",
+    "B-BENDA",
+    "I-BENDA",
+    "B-AKSI",
+    "I-AKSI",
+    "B-TEMPAT",
+    "I-TEMPAT",
+    "B-POSISI",
+    "I-POSISI",
+    "B-PERISTIWA",
+    "I-PERISTIWA",
+    "B-OPERATOR",
+    "I-OPERATOR"
+  ],
+  "label_counts": {
+    "latih": {
+      "O": 26091,
+      "B-JUMLAH": 7992,
+      "I-JUMLAH": 503,
+      "B-BENDA": 5139,
+      "I-BENDA": 1633,
+      "B-AKSI": 926,
+      "I-AKSI": 40,
+      "B-TEMPAT": 1766,
+      "I-TEMPAT": 818,
+      "B-POSISI": 699,
+      "I-POSISI": 1434,
+      "B-PERISTIWA": 1881,
+      "I-PERISTIWA": 364,
+      "B-OPERATOR": 1456,
+      "I-OPERATOR": 364
+    },
+    "validasi": {
+      "O": 5889,
+      "B-JUMLAH": 1385,
+      "I-JUMLAH": 28,
+      "B-BENDA": 657,
+      "I-BENDA": 207,
+      "B-AKSI": 490,
+      "I-AKSI": 40,
+      "B-TEMPAT": 127,
+      "I-TEMPAT": 68,
+      "B-POSISI": 40,
+      "I-POSISI": 80,
+      "B-PERISTIWA": 40,
+      "I-PERISTIWA": 40,
+      "B-OPERATOR": 364,
+      "I-OPERATOR": 0
+    },
+    "uji_templat": {
+      "O": 4190,
+      "B-JUMLAH": 1385,
+      "I-JUMLAH": 28,
+      "B-BENDA": 657,
+      "I-BENDA": 207,
+      "B-AKSI": 490,
+      "I-AKSI": 40,
+      "B-TEMPAT": 537,
+      "I-TEMPAT": 281,
+      "B-POSISI": 40,
+      "I-POSISI": 80,
+      "B-PERISTIWA": 40,
+      "I-PERISTIWA": 40,
+      "B-OPERATOR": 364,
+      "I-OPERATOR": 0
+    }
+  },
+  "evaluation_scope": "Synthetic development/regression sets with separate sentence families; reused to diagnose missing symbol coverage. Not independent teacher field accuracy."
 }

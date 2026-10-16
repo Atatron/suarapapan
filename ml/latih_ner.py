@@ -73,6 +73,7 @@ def main():
     parser.add_argument('--output', type=Path, default=SIMPAN)
     parser.add_argument('--results', type=Path, default=HASIL)
     parser.add_argument('--epochs', type=int, default=CFG['epoch'])
+    parser.add_argument('--base-model', default=DASAR)
     parser.add_argument('--batch', type=int, default=CFG['batch'])
     args = parser.parse_args()
     DATA, SIMPAN, HASIL = args.data_dir.resolve(), args.output.resolve(), args.results.resolve()
@@ -82,9 +83,10 @@ def main():
     print(f"Perangkat: {perangkat} {torch.cuda.get_device_name(0) if perangkat == 'cuda' else ''}")
 
     latih, validasi, uji = baca("latih"), baca("validasi"), baca("uji_templat")
-    tok = AutoTokenizer.from_pretrained(DASAR)
+    tok = AutoTokenizer.from_pretrained(args.base_model)
     model = AutoModelForTokenClassification.from_pretrained(
-        DASAR, id2label=dict(enumerate(LABEL)), label2id=LABEL2ID).to(perangkat)
+        args.base_model, id2label=dict(enumerate(LABEL)), label2id=LABEL2ID).to(perangkat)
+    print(f"Data: {len(latih)} train, {len(validasi)} validation, {len(uji)} test; labels: {LABEL}", flush=True)
 
     pemuat = DataLoader(latih, batch_size=CFG["batch"], shuffle=True, collate_fn=lambda b: enkode(tok, b))
     langkah = len(pemuat) * CFG["epoch"]
@@ -111,14 +113,17 @@ def main():
             model.save_pretrained(SIMPAN); tok.save_pretrained(SIMPAN)
 
     # evaluasi akhir pada data uji templat dengan model terbaik
+    del opt, jadwal, pemuat, model
+    if perangkat == 'cuda':
+        torch.cuda.empty_cache()
     model = AutoModelForTokenClassification.from_pretrained(SIMPAN).to(perangkat)
     asli = [c["label"] for c in uji]
     tebak = prediksi(model, tok, uji, perangkat)
     laporan = classification_report(asli, tebak, output_dict=True, zero_division=0)
     print(classification_report(asli, tebak, digits=3, zero_division=0))
 
-    HASIL.mkdir(exist_ok=True)
-    jenis = ["O", "JUMLAH", "BENDA", "AKSI", "TEMPAT", "POSISI", "PERISTIWA"]
+    HASIL.mkdir(parents=True, exist_ok=True)
+    jenis = ["O", "JUMLAH", "BENDA", "AKSI", "TEMPAT", "POSISI", "PERISTIWA", "OPERATOR"]
     ke = lambda l: l.split("-", 1)[1] if l != "O" else "O"
     cm = np.zeros((len(jenis), len(jenis)), dtype=int)
     for a, t in zip(asli, tebak):
@@ -127,7 +132,7 @@ def main():
     simpan_cm(cm, jenis)
     with open(HASIL / "metrik_latih.json", "w", encoding="utf-8") as f:
         json.dump({
-            "model_dasar": DASAR, "konfigurasi": CFG, "data_dir": str(DATA), "data_manifest": json.loads((DATA / 'manifest.json').read_text(encoding='utf-8')) if (DATA / 'manifest.json').exists() else None,
+            "training_performed": True, "model_dasar": str(args.base_model), "konfigurasi": CFG, "data_dir": str(DATA), "data_manifest": json.loads((DATA / 'manifest.json').read_text(encoding='utf-8')) if (DATA / 'manifest.json').exists() else None,
             "perangkat": torch.cuda.get_device_name(0) if perangkat == "cuda" else "cpu",
             "jumlah_data": {"latih": len(latih), "validasi": len(validasi), "uji_templat": len(uji)},
             "riwayat": riwayat, "f1_validasi_terbaik": round(terbaik, 4),

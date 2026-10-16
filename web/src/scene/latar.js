@@ -11,6 +11,7 @@
 //   3. Papan kosong atau benda belum dikenal → ruang kelas.
 import data from './latar.json' with { type: 'json' };
 import { cariGambar, bersih, cariTempat } from './pustaka.js';
+import { areaUntuk } from './permukaan.js';
 
 export const LATAR = data.latar;
 const BENDA = data.benda;
@@ -42,6 +43,7 @@ const KANDIDAT = {
   'kebun-binatang': ['savanna', 'jungle'],
   langit: ['open-sky'],
   taman: ['flower-garden', 'playground', 'nature'],
+  park: ['flower-garden'],
   'taman-bermain': ['playground'],
   malam: ['night-forest'],
   rumah: ['homeyard', 'living-room'],
@@ -174,6 +176,8 @@ export function pilihLatar(adegan) {
   return {
     id, file: `/aset/latar/${id}.webp`, nama: LATAR[id].nama,
     permukaan: cocokPer.get(id)?.permukaan ?? LATAR[id].permukaan, x, y, alasan,
+    perJenis: Object.fromEntries(objek.map((o) => [o.jenis, areaUntuk(o, id, BENDA[cariGambar(o.jenis)] || {})])),
+    perObjek: Object.fromEntries(objek.filter((o) => o.id).map((o) => [o.id, areaUntuk(o, id, BENDA[cariGambar(o.jenis)] || {})])),
   };
 }
 

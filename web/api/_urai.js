@@ -74,6 +74,9 @@ KATALOG TEMPAT (gunakan ID ini untuk tempat yang disebut):
 ${teksKatalog('tempat')}
 
 Ubah SATU kalimat guru menjadi JSON adegan. Aturan:
+- Penjumlahan, pengurangan, perkalian, pembagian eksplisit selalu dihitung kode aplikasi. Jangan isi jawaban akhir dari tebakan model.
+  Pertahankan urutan: "dua pergi lalu tiga datang" bukan dua penambahan atau dua pengurangan.
+  "satu pizza dibagi empat" adalah pecahan; "dua belas apel dibagi tiga kelompok" adalah pembagian benda.
 - "entitas": benda yang DIPERKENALKAN di kalimat ini, misalnya "ada tiga kelinci".
   "jenis" = kata benda tunggal, huruf kecil, tanpa kata penggolong (ekor, buah, biji, batang, lembar, potong).
   "jumlah" = angka. Jika jumlah tidak disebut, pakai 1.

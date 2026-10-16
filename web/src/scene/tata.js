@@ -37,6 +37,27 @@ export function kategoriJenis(jenis) {
   return 'properti';
 }
 
+// Presentation profiles are independent of parser roles. A person who is the
+// object of a sentence still uses a human scale; a toy person is a small prop.
+export function profilJenis(jenis) {
+  const nama = cariGambar(jenis);
+  const category = PUSTAKA.obj[nama]?.k || '';
+  const coarse = kategoriJenis(jenis);
+  if (coarse === 'manusia') return /^(bayi|balita)/.test(nama) ? 'bayi' : /^(anak|murid|siswa|remaja)/.test(nama) ? 'anak' : 'dewasa';
+  if (coarse === 'hewan') return category === 'serangga' ? 'hewan-kecil' : 'hewan';
+  if (category.startsWith('kendaraan')) return 'kendaraan';
+  if (['benda-rumah', 'benda-kelas', 'elektronik', 'alat-musik'].includes(category)) return 'perabot';
+  if (['alam', 'alam-ekstra', 'alam-struktur', 'infrastruktur', 'pedesaan-struktur'].includes(category)) return 'lingkungan';
+  return 'benda-kecil';
+}
+
+export const PROFIL_UKURAN = Object.freeze({
+  dewasa: { min: 36, max: 52, factor: 1 }, anak: { min: 28, max: 40, factor: 1 }, bayi: { min: 20, max: 29, factor: 1 },
+  hewan: { min: 17, max: 68, factor: 1 }, 'hewan-kecil': { min: 11, max: 23, factor: .9 },
+  kendaraan: { min: 26, max: 68, factor: 1 }, perabot: { min: 17, max: 48, factor: .95 },
+  lingkungan: { min: 13, max: 70, factor: 1 }, 'benda-kecil': { min: 15, max: 30, factor: .88 },
+});
+
 /**
  * Tinggi isi dasar (cqh, sebelum perspektif dan kepadatan) menurut kategori:
  *  - manusia  : mengikuti tinggi nyata (dewasa ≈ 44% tinggi papan, anak lebih pendek)
@@ -65,11 +86,19 @@ export const kepadatan = (n) => (n <= 4 ? 1 : n <= 8 ? 0.86 : n <= 14 ? 0.72 : n
 export function ukuranKarakter(jenis, py, n, wilayah) {
   const d = adaGambar(jenis) || { t: 0.3, x: 0, y: 0, w: 1, h: 1 };
   const kategori = kategoriJenis(jenis);
-  const isi = Math.min(MAKS_CQH, Math.max(MIN_CQH, ukuranDasar(kategori, d.t) * perspektif(py, wilayah) * kepadatan(n)));
+  const profil = profilJenis(jenis);
+  const range = PROFIL_UKURAN[profil];
+  const dasar = Math.max(range.min, Math.min(range.max, ukuranDasar(kategori, d.t) * range.factor)) * (wilayah?.skala || 1);
+  let isi = Math.min(MAKS_CQH, Math.max(MIN_CQH, dasar * perspektif(py, wilayah) * kepadatan(n)));
+  // A wide bus/table must fit horizontally too. Preserve aspect ratio; do not
+  // stretch sprites or give a pencil the same size as a human.
+  const lebarIsi = isi / d.h * SEL * d.w * CQH_KE_LEBAR;
+  const maxLebar = wilayah?.batasiX ? Math.min(80, (wilayah.x[1] - wilayah.x[0]) * 100) : 80;
+  if (lebarIsi > maxLebar) isi *= maxLebar / lebarIsi;
   const selTinggi = isi / d.h;
   const selLebar = selTinggi * SEL;
   return {
-    isi, selTinggi, selLebar, kategori,
+    isi, selTinggi, selLebar, kategori, profil,
     // lebar isi sebagai pecahan lebar papan, untuk menata baris
     lebar: (selLebar * d.w * CQH_KE_LEBAR) / 100,
     // titik kaki di dalam sel (pecahan sel)
@@ -84,23 +113,38 @@ export function ukuranKarakter(jenis, py, n, wilayah) {
  * yang lain disusun berbaris dari depan ke belakang di dalam wilayah. Hasil sejajar dengan objek.
  */
 export function tataObjek(objek, wilayah = WILAYAH_BAWAAN) {
+  if (wilayah.perJenis) {
+    const result = new Array(objek.length);
+    const groups = new Map();
+    objek.forEach((o, i) => {
+      const region = wilayah.perObjek?.[o.id] || wilayah.perJenis[o.jenis] || wilayah;
+      const key = JSON.stringify(region);
+      if (!groups.has(key)) groups.set(key, { region, entries: [] });
+      groups.get(key).entries.push({ o, i });
+    });
+    for (const { region, entries } of groups.values()) {
+      const layout = tataObjek(entries.map((e) => e.o), { ...region, jumlahGlobal: objek.length });
+      layout.forEach((p, i) => { result[entries[i].i] = p; });
+    }
+    return result;
+  }
   const n = objek.length;
   // Sebar di seluruh lebar papan (bukan hanya area sempit yang disarankan latar): karakter tidak
   // menumpuk di satu sisi dan tidak perlu mengecil. Latar hanya menentukan kedalaman (tanah/air).
-  const x0 = 0.07;
-  const x1 = 0.93;
+  const x0 = wilayah.batasiX ? wilayah.x[0] : 0.07;
+  const x1 = wilayah.batasiX ? wilayah.x[1] : 0.93;
   const [y0, y1] = wilayah.y;
   const langkahY = 0.4 * (y1 - y0);
   const hasil = new Array(n);
   const aliran = [];
   objek.forEach((o, i) => {
     if (Number.isFinite(o.px) && Number.isFinite(o.py)) {
-      hasil[i] = { px: o.px, py: o.py, ...ukuranKarakter(o.jenis, o.py, n, wilayah) };
+      hasil[i] = { px: o.px, py: o.py, ...ukuranKarakter(o.jenis, o.py, wilayah.jumlahGlobal || n, wilayah) };
     } else aliran.push(i);
   });
 
   // Langkah 1: berapa baris yang dibutuhkan (penuhi baris dari depan, ukuran memakai garis kaki baris itu).
-  const lebarPada = (i, py) => ukuranKarakter(objek[i].jenis, py, n, wilayah).lebar;
+  const lebarPada = (i, py) => ukuranKarakter(objek[i].jenis, py, wilayah.jumlahGlobal || n, wilayah).lebar;
   const selaAntara = (i, j) => (objek[i].jenis !== objek[j].jenis ? 0.03 : 0.012);
   const jumlahBaris = (() => {
     let baris = 0;
@@ -128,7 +172,7 @@ export function tataObjek(objek, wilayah = WILAYAH_BAWAAN) {
   for (let baris = 0, mulai = 0; mulai < aliran.length; baris++, mulai += perBaris) {
     const py = Math.max(y0, y1 - baris * langkahY);
     const isi = aliran.slice(mulai, mulai + perBaris).map((i, k, arr) => ({
-      i, u: ukuranKarakter(objek[i].jenis, py, n, wilayah), sela: k ? selaAntara(arr[k - 1], i) : 0,
+      i, u: ukuranKarakter(objek[i].jenis, py, wilayah.jumlahGlobal || n, wilayah), sela: k ? selaAntara(arr[k - 1], i) : 0,
     }));
     const lebarBaris = isi.reduce((t, e) => t + e.sela + e.u.lebar, 0);
     // Cukup lega: tiap karakter mendapat slot yang sama lebar di seluruh papan (dua hewan duduk sekitar ¼ dan ¾,
@@ -153,7 +197,7 @@ export function tataObjek(objek, wilayah = WILAYAH_BAWAAN) {
         pyi = Math.min(y1, Math.max(y0, py + (acak(id, 2) - 0.5) * 0.6 * langkahY));
       }
       px = Math.min(x1 - u.lebar / 2, Math.max(x0 + u.lebar / 2, px));
-      hasil[i] = { px, py: pyi, ...(sebar ? ukuranKarakter(objek[i].jenis, pyi, n, wilayah) : u) };
+      hasil[i] = { px, py: pyi, ...(sebar ? ukuranKarakter(objek[i].jenis, pyi, wilayah.jumlahGlobal || n, wilayah) : u) };
     });
   }
   return hasil;

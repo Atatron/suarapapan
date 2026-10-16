@@ -4,7 +4,7 @@
     "tempat": 127,
     "latar": 32
   },
-  "catalog_sha256": "a8cae8c344ec7b867cb0ea222720c550142ee99af74ac35420acc978fdecb722",
+  "catalog_sha256": "84af8f3c8eae63f69bff4ff4d2e85ac7e50a342c81c9089fdc40764b2c208327",
   "source_checks": [
     {
       "file": "final/01-hewan-ternak.png",
@@ -14297,7 +14297,8 @@
       "aliases": [
         "flower-garden",
         "kebun-bunga-dan-habitat-kecil",
-        "taman"
+        "taman",
+        "park"
       ],
       "source": null,
       "sheet": null,
@@ -14311,7 +14312,7 @@
         1280,
         720
       ],
-      "sha256": "b47637abc17019519aa4b9b1b0a342bc089c8e4f87f6d7b6803c7e04979a6849"
+      "sha256": "2eef1a5809da567129a6153b18587aff7fb59ee3d87458c24ad9a3f3422baf31"
     },
     {
       "id": "homeyard",
@@ -14450,7 +14451,7 @@
         1280,
         720
       ],
-      "sha256": "4242b6cbd7b382ba13aa1d5a413bb063859cf000c04ffb1f2867d146d2e307d4"
+      "sha256": "086a7060542acd89ed145158416523aec9a967893ea19795de5d958bcaafdf02"
     },
     {
       "id": "living-room",

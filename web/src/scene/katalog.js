@@ -61,6 +61,11 @@ export function aliasAset(kind = 'obj') {
   return Object.fromEntries([...indexes.get(kind).exact].map(([phrase, a]) => [phrase, a.id]));
 }
 
+export function namaAset(text, kind = 'obj') {
+  if (kind === 'obj' && ['anak','orang','manusia','seseorang','teman','murid','siswa','adik','kakak'].includes(text)) return text;
+  return indexes.get(kind)?.exact.get(normalAset(text))?.name || String(text || '').replaceAll('-', ' ');
+}
+
 export function teksKatalog(kind = 'obj') {
   return catalog.filter((a) => a.kind === kind).map((a) => `${a.id}: ${a.aliases.filter((p) => p !== a.id).map((p) => p.replaceAll('-', ' ')).join(' | ')}`).join('\n');
 }

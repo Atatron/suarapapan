@@ -12,6 +12,11 @@ const slug = (s) => (s || 'kosong').toLowerCase().replace(/[^a-z]+/g, '-');
 // Karakter sejenis dikelompokkan; beri jarak di awal tiap kelompok supaya "3 kelinci" dan "2 harimau" terlihat terpisah.
 const awalKelompok = (adegan, i) => (i > 0 && adegan.objek[i - 1].jenis !== adegan.objek[i].jenis ? ' awal-kelompok' : '');
 const persen = (v) => `${(v * 100).toFixed(2)}%`;
+const TEMPAT_LATAR = { kelas: 'classroom', 'kelas-sekolah': 'classroom', peternakan: 'farm', hutan: 'jungle',
+  'bawah-laut': 'underwater', 'taman-kota': 'flower-garden', 'halaman-rumah': 'homeyard', dapur: 'kitchen',
+  'dapur-rumah': 'kitchen', 'ruang-tamu': 'living-room', 'jalan-desa': 'rice-fields', sawah: 'rice-fields',
+  sungai: 'river', pantai: 'beach', klinik: 'clinic', bandara: 'airport', 'stasiun-kereta': 'railway',
+  'taman-bermain': 'playground', gunung: 'mountains' };
 
 /**
  * Menggambar satu adegan. Dipakai besar di /papan dan kecil sebagai pratinjau di /guru.
@@ -35,7 +40,7 @@ export default function Adegan({ adegan, interaktif = false, kecil = false, bisa
   // Tata letak bebas (posisi + ukuran nyata + perspektif) dipakai bila ada latar dan tanpa pecahan;
   // pecahan dan pelajaran posisi memakai tata letak khusus mereka.
   const bebas = Boolean(latar) && !adegan.objek.some((o) => o.bagi);
-  const wilayah = latar ? { x: latar.x, y: latar.y } : WILAYAH_BAWAAN;
+  const wilayah = latar ? { x: latar.x, y: latar.y, perJenis: latar.perJenis, perObjek: latar.perObjek } : WILAYAH_BAWAAN;
   const tata = useMemo(() => (bebas ? tataObjek(adegan.objek, wilayah) : null), [bebas, adegan.objek, latar]); // eslint-disable-line react-hooks/exhaustive-deps
   const ketuk = (o) => {
     if (baruSeret.current) { baruSeret.current = false; return; }
@@ -79,12 +84,46 @@ export default function Adegan({ adegan, interaktif = false, kecil = false, bisa
   // The large backdrop supplies atmosphere, but must not erase a specifically
   // requested place (e.g. ruang-guru and perpustakaan share the classroom art).
   const tempat = idAset(adegan.latar, 'tempat');
-  const penandaTempat = tempat ? (
+  const penandaTempat = tempat && TEMPAT_LATAR[tempat] !== latar?.id ? (
     <figure className="adegan-tempat-tepat" aria-label={`Tempat: ${tempat.replaceAll('-', ' ')}`}>
       <img src={urlTempat(tempat)} alt="" draggable={false} />
       <figcaption>{tempat.replaceAll('-', ' ')}</figcaption>
     </figure>
   ) : null;
+
+  if (adegan.operasi && ['kali', 'bagi'].includes(adegan.operasi.operator) && adegan.objek.length) {
+    const count = adegan.operasi.operator === 'kali' ? adegan.operasi.kiri : adegan.operasi.kanan;
+    const groups = [...Array.from({ length: count }, (_, i) => i + 1), ...(adegan.objek.some((o) => o.kelompok === 0) ? [0] : [])];
+    return (
+      <div className={`${kelas} adegan-kelompok`}>
+        {lukisan}
+        <p className="sr-only" aria-live="polite">{deskripsi(adegan)}</p>
+        <div className="kelompok-grid" style={{ '--kolom': Math.ceil(Math.sqrt(groups.length)) }}>
+          {groups.map((group) => (
+            <section className="kelompok-kartu" key={group} aria-label={group === 0 ? 'Sisa' : `Kelompok ${group}`}>
+              <span className="kelompok-label">{group === 0 ? 'Sisa' : `Kelompok ${group}`}</span>
+              <div className="kelompok-isi">
+                {adegan.objek.filter((o) => o.kelompok === group).map((o, i) => (
+                  <button key={o.id} className="kelompok-sprite" type="button" onClick={() => ketuk(o)} disabled={!interaktif}
+                    aria-label={`${o.jenis}${hitungan[o.id] ? ` nomor ${hitungan[o.id]}` : ', ketuk untuk menghitung'}`}
+                    style={{ width: `${Math.min(26, ukuranKarakter(o.jenis, .92, adegan.objek.length).selLebar * .8)}cqh` }}>
+                    <Benda jenis={o.jenis} indeks={i} />
+                    {hitungan[o.id] ? <span className="obj-nomor">{hitungan[o.id]}</span> : null}
+                  </button>
+                ))}
+              </div>
+            </section>
+          ))}
+        </div>
+      </div>
+    );
+  }
+  if (adegan.operasi && !adegan.objek.length) return (
+    <div className={`${kelas} adegan-bilangan`}>
+      {lukisan}
+      <p className="operasi-bilangan" aria-label={adegan.soal?.teks}>{adegan.soal?.teks}</p>
+    </div>
+  );
 
   if (adegan.objek.some((o) => o.status !== 'pergi' && uraiPosisi(o.posisi))) {
     return (
@@ -112,7 +151,7 @@ export default function Adegan({ adegan, interaktif = false, kecil = false, bisa
       {bebas ? adegan.objek.map((o, i) => {
         const diseret = seret?.id === o.id && seret.gerak;
         const t = diseret
-          ? { ...tata[i], px: seret.px, py: seret.py, ...ukuranKarakter(o.jenis, seret.py, adegan.objek.length, wilayah) }
+          ? { ...tata[i], px: seret.px, py: seret.py, ...ukuranKarakter(o.jenis, seret.py, adegan.objek.length, latar?.perObjek[o.id] || wilayah) }
           : tata[i];
         const pos = diseret ? { px: seret.px, py: seret.py } : t;
         return (

@@ -176,7 +176,7 @@ perbaiki) ada di [`docs/PROSES_PENGEMBANGAN.md`](docs/PROSES_PENGEMBANGAN.md).
 
 | Pengukuran | Hasil | Catatan jujur |
 |---|---|---|
-| Uji otomatis | **181 uji** (180 lulus, 1 dilewati) | `cd web && npm test` |
+| Uji otomatis | **189 uji** (188 lulus, 1 dilewati) | `cd web && npm test` |
 | IndoBERT vs LLM, 40 kalimat tulisan tim (**sebelum** perbaikan, 13 Okt) | IndoBERT **38/40**, 7,9 ms · LLM Qwen2.5-7B 38/40, 760 ms · gabungan 39/40 | Angka paling jujur; [berkasnya](ml/hasil/perbandingan_sebelum_perbaikan.md) disimpan sebelum perbaikan |
 | Set yang sama **sesudah** perbaikan | 40/40 | **Bukan bukti independen**: set itu dipakai untuk memperbaiki |
 | 51 kalimat bebas + 45 kalimat perintah | 51/51 · 45/45 | Disusun saat memperkuat model; berfungsi sebagai uji regresi |
@@ -277,7 +277,7 @@ npm install
 SUARAPAPAN_API=https://suarapapan.vercel.app npm run dev     # PowerShell: $env:SUARAPAPAN_API="https://suarapapan.vercel.app"; npm run dev
 # atau pakai kunci Gemini sendiri:
 echo GEMINI_API_KEY=isi_kunci_anda > .env.local && npm run dev
-npm test                                                     # 181 uji otomatis
+npm test                                                     # uji otomatis browser dan mesin adegan
 ```
 
 Buka `http://127.0.0.1:5173/guru`. Deploy: `cd web && vercel deploy --prod` dengan variabel `GEMINI_API_KEY`
@@ -287,19 +287,17 @@ Buka `http://127.0.0.1:5173/guru`. Deploy: `cd web && vercel deploy --prod` deng
 <summary><b>Jalur lokal: IndoBERT + Ollama (Windows)</b></summary>
 
 Butuh Python 3.12, [Ollama](https://ollama.com) dengan model `qwen2.5:7b-instruct`, dan GPU untuk melatih.
-Bobot model (±500 MB) tidak disimpan di GitHub; buat ulang dalam ±2 menit:
+Bobot model (±500 MB) tidak disimpan di GitHub. Waktu pelatihan bergantung GPU; jalankan dari akar repositori:
 
 ```bash
-cd ml
 python -m venv .venv
 .venv\Scripts\pip install fastapi==0.115.6 "uvicorn[standard]==0.34.0" httpx==0.28.1
 .venv\Scripts\pip install torch --index-url https://download.pytorch.org/whl/cu128
-.venv\Scripts\pip install transformers datasets seqeval accelerate matplotlib
-.venv\Scripts\python buat_dataset.py      # kalimat berlabel → data/
-.venv\Scripts\python latih_ner.py         # → model/indobert-suarapapan + hasil/metrik_latih.json
-.venv\Scripts\python evaluasi.py          # IndoBERT vs LLM vs gabungan → hasil/perbandingan.md
-.venv\Scripts\python uji_sulit.py - kalimat_uji_sulit.json      # uji 51 kalimat bebas
-.venv\Scripts\python -m uvicorn serve:app --port 8000          # server lokal untuk `npm run dev`
+.venv\Scripts\pip install -r ml/requirements-training.txt
+.venv\Scripts\python ml/buat_dataset_aset.py
+.venv\Scripts\python ml/latih_ner.py --data-dir ml/data/aset --results ml/hasil/aset --batch 4 --epochs 5
+.venv\Scripts\python ml/evaluasi_aset.py
+.venv\Scripts\python -m uvicorn serve:app --app-dir ml --host 127.0.0.1 --port 8000
 ```
 
 Server memakai IndoBERT lebih dulu; jika keyakinannya di bawah 85%, kalimat diteruskan ke LLM (Ollama).
@@ -329,5 +327,7 @@ Untuk mengubah sinonim, jalankan `node tools/bangun_katalog.mjs`, lalu
 `python ml/buat_dataset_aset.py`. Dataset baru adalah kalimat sintetis dengan
 keluarga kalimat validasi/uji terpisah; ini bukan hasil pengujian guru asli.
 `python ml/persiapan_latih.py` memeriksa dependensi/bobot tanpa mengunduh model.
-Belum ada bobot IndoBERT baru yang dilatih pada perubahan ini. Pelatihan opsional
-memerlukan paket ML dan dijalankan terpisah melalui `--train`.
+Pelatihan IndoBERT untuk katalog dan label operator disertai laporan di `ml/hasil/`;
+bobot lokal disimpan di `ml/model/indobert-suarapapan` dan tidak dimasukkan ke Git.
+Instruksi pelatihan ulang, aturan ukuran, permukaan latar, dan contoh `+ − × ÷`
+ada di [audit ukuran dan aritmetika](docs/SIZING_ARITHMETIC.md).

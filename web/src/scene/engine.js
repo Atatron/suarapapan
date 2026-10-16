@@ -4,6 +4,8 @@
 // adegan sebelumnya.
 
 export const BATAS_OBJEK = 20;
+import { hitungOperasi } from '../lib/aritmetika.js';
+import { namaAset, idAset } from './katalog.js';
 // Animasi keluar tidak memakan jatah benda aktif, tetapi tetap dibatasi sendiri.
 export const BATAS_ANIMASI_KELUAR = BATAS_OBJEK;
 
@@ -59,6 +61,46 @@ const jumlahSemua = (kel) => kel.reduce((a, k) => a + k.n, 0);
  * tidak menggambarkan apa pun (misalnya salam), jadi cukup caption saja.
  */
 export function terapkan(adegan, hasil, opsi = {}) {
+  if (Array.isArray(hasil?.langkah) && hasil.langkah.length >= 2 && hasil.langkah.length <= 8) {
+    let next = adegan;
+    const catatan = [], penjelasan = [];
+    let awalHitung = yangAda(adegan).length;
+    const rangkaian = [];
+    let aritmetikaMurni = true;
+    let berubah = false;
+    for (const step of hasil.langkah) {
+      if (step.langkah) return { adegan, berubah: false, catatan: ['Urutan operasi bertingkat belum didukung.'], penjelasan: [], alternatif: null };
+      const applied = terapkan(next, step, opsi);
+      const delta = yangAda(applied.adegan).length - yangAda(next).length;
+      if (step.entitas?.length && !rangkaian.length) awalHitung = yangAda(applied.adegan).length;
+      else if (step.peristiwa?.length && step.peristiwa.every((p) => ['tambah', 'hapus'].includes(p.tipe))) rangkaian.push(`${delta < 0 ? '−' : '+'} ${Math.abs(delta)}`);
+      else aritmetikaMurni = false;
+      next = applied.adegan;
+      catatan.push(...applied.catatan); penjelasan.push(...applied.penjelasan);
+      berubah ||= applied.berubah;
+    }
+    if (aritmetikaMurni && rangkaian.length > 1) {
+      const answer = yangAda(next).length;
+      next = { ...next, soal: { teks: `${awalHitung} ${rangkaian.join(' ')} = ?`, jawaban: answer, opsi: opsiAngka(answer) } };
+    }
+    return { adegan: next, berubah, catatan, penjelasan, alternatif: null };
+  }
+  if (hasil?.operasi) {
+    const op = hasil.operasi;
+    const math = hitungOperasi(op);
+    if (math.error) return { adegan, berubah: false, catatan: [math.error], penjelasan: [], alternatif: null };
+    const objects = op.jenis ? Array.from({ length: math.total }, (_, i) => ({ id: idBaru(), jenis: op.jenis, aksi: 'diam', posisi: '', status: op.operator === 'kurang' && i >= math.answer ? 'pergi' : 'ada',
+      ...(op.operator === 'kali' ? { kelompok: Math.floor(i / Math.max(1, op.kanan)) + 1 }
+        : op.operator === 'bagi' ? { kelompok: i >= math.total - math.remainder ? 0 : Math.floor(i / Math.max(1, math.answer)) + 1 } : {}) })) : [];
+    const answer = math.remainder ? `${math.answer} sisa ${math.remainder}` : math.answer;
+    const options = math.remainder ? [answer, `${math.answer + 1} sisa ${math.remainder}`, `${math.answer} sisa 0`] : opsiAngka(math.answer);
+    const explanation = op.operator === 'kali' ? `${op.kiri} kelompok, masing-masing ${op.kanan} ${op.jenis || 'benda'}: ${math.answer}.`
+      : op.operator === 'bagi' ? `${op.kiri} dibagi ke ${op.kanan} kelompok: ${math.answer} per kelompok${math.remainder ? `, sisa ${math.remainder}` : ''}.`
+        : `${math.text.replace('?', String(answer))}`;
+    return { adegan: { objek: objects, latar: hasil.latar || '', konsep: math.concept, operasi: op,
+      soal: { teks: math.text, jawaban: answer, opsi: options }, versi: adegan.versi + 1 }, berubah: true,
+      catatan: [], penjelasan: [explanation], alternatif: null };
+  }
   const entitas = hasil?.entitas ?? [];
   // gabung: benda baru dimasukkan ke papan tanpa menghapus yang sudah ada (dari kalimat
   // "ada juga ...", "... datang", atau pilihan guru di panel).
@@ -79,6 +121,7 @@ export function terapkan(adegan, hasil, opsi = {}) {
   const bertanya = Boolean(hasil?.pertanyaan) && yangAda(adegan).length > 0;
 
   if (!entitas.length && !peristiwa.length && !bertanya) {
+    if (hasil?.latar && hasil.latar !== adegan.latar) return { adegan: { ...adegan, latar: hasil.latar, versi: adegan.versi + 1 }, berubah: true, catatan, penjelasan, alternatif: null };
     return { adegan, berubah: false, catatan, penjelasan, alternatif: null };
   }
 
@@ -373,6 +416,11 @@ const KATA_AKSI = { lari: 'berlari', lompat: 'melompat', terbang: 'terbang', ber
 
 /** Deskripsi teks untuk guru dan pembaca layar (dan nanti untuk audio siswa tunanetra). */
 export function deskripsi(adegan) {
+  if (adegan.operasi) {
+    const op = adegan.operasi;
+    const math = hitungOperasi(op);
+    if (!math.error) return `${math.text}${op.jenis ? ` ${math.total} ${op.jenis} ditampilkan${op.operator === 'kali' ? ` dalam ${op.kiri} kelompok` : op.operator === 'bagi' ? ` dibagi ke ${op.kanan} kelompok${math.remainder ? ` dan sisa ${math.remainder}` : ''}` : ''}.` : ''}`;
+  }
   if (!adegan.objek.length) return 'Papan kosong.';
   // Satu kelompok = benda yang jenis, gerakan, letak, dan keadaan potongannya sama; yang berbeda ditulis terpisah
   // ("2 kelinci berlari; 3 kelinci melompat"), bukan digabung dengan gerakan benda pertama.
@@ -389,9 +437,9 @@ export function deskripsi(adegan) {
     const posisi = k.posisi && !k.posisi.endsWith(adegan.latar || '\u0000') ? ` ${k.posisi}` : '';
     const pergi = k.pergi ? `, ${k.pergi} pergi` : '';
     const potong = k.bagi ? ` dibagi ${k.bagi} potong${k.diambil ? `, ${k.diambil} potong diambil (${k.diambil}/${k.bagi})` : ''}` : '';
-    return `${k.ada} ${jenis}${aksi}${posisi}${potong}${pergi}`;
+    return `${k.ada} ${namaAset(jenis)}${aksi}${posisi}${potong}${pergi}`;
   });
-  const latar = adegan.latar ? ` di ${adegan.latar}` : '';
+  const latar = adegan.latar ? ` di ${namaAset(adegan.latar, idAset(adegan.latar, 'tempat') ? 'tempat' : 'latar').toLowerCase()}` : '';
   return `${bagian.join('; ')}${latar}.`;
 }
 

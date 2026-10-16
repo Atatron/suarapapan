@@ -148,7 +148,7 @@ export default function Papan() {
       <div className="papan-atas">{adegan.soal ? <Soal soal={adegan.soal} versi={adegan.versi} /> : null}</div>
       <div className="papan-panggung">
         <Adegan adegan={adegan} interaktif bisaGeser={koneksi === 'terhubung'} onGeser={geserDiPapan} />
-        {adegan.objek.length ? null : (
+        {adegan.objek.length || adegan.soal ? null : (
           <div className="papan-lapis-kosong">
             <div>
               <p className="papan-logo">SuaraPapan</p>

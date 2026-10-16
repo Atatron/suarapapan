@@ -8,6 +8,8 @@
 import { rapikan, kosong, alasanTinjau, normalkanJenis } from './rapikan.js';
 import { _untukTes as P, cariTempat } from '../scene/pustaka.js';
 import { idAset, aliasAset } from '../scene/katalog.js';
+import { uraiOperasi } from './aritmetika.js';
+import { ADEGAN_KOSONG, terapkan, konteks as tulisKonteks } from '../scene/engine.js';
 
 const SATUAN = { nol: 0, satu: 1, dua: 2, tiga: 3, empat: 4, lima: 5, enam: 6, tujuh: 7, delapan: 8, sembilan: 9 };
 const KHUSUS = { sepuluh: 10, sebelas: 11, seratus: 100 };
@@ -178,10 +180,32 @@ function cariTanya(kalimat, t, papan, kelompok) {
  * yakin: 'tinggi' = pola sederhana yang terukur andal, aman dipakai tanpa Gemini;
  *        'rendah' = tebakan terbaik, dipakai hanya jika Gemini tidak bisa dihubungi.
  */
-export function uraiLokal(kalimat, konteks = 'kosong') {
+export function uraiLokal(kalimat, konteks = 'kosong', tunggal = false) {
   const mulai = typeof performance !== 'undefined' ? performance.now() : Date.now();
   const tinjau = alasanTinjau(kalimat);
   if (tinjau) return perluTinjau(mulai, { ...kosong, entitas: [], peristiwa: [] }, tinjau, [String(kalimat)]);
+  if (uraiOperasi(kalimat)) {
+    const hasil = rapikan({ ...kosong }, kalimat, konteks);
+    return { hasil, sumber: 'aritmetika lokal', yakin: hasil.needsConfirmation ? 'rendah' : 'tinggi',
+      needsConfirmation: Boolean(hasil.needsConfirmation), notice: hasil.notice || null, ms: ahir(mulai) };
+  }
+  // Resolve clauses in order. A keyword in a later clause must not change the
+  // operator of an earlier subject ("dua pergi, lalu tiga datang").
+  const klausa = String(kalimat).split(/\s*(?:[,;]?\s*\b(?:lalu|kemudian|setelah itu)\b|\bdan\b(?=[^.!?]*(?:pergi|dimakan|diambil|datang|tambah|dikurangi)))\s*/i).filter(Boolean);
+  if (!tunggal && klausa.length > 1 && klausa.length <= 8 && !/\b(eh|ralat|maksudnya|salah)\b/i.test(kalimat)) {
+    let papanSementara = { ...ADEGAN_KOSONG, objek: bacaKonteks(konteks).flatMap((g, i) => Array.from({ length: Math.min(20, g.n) }, (_, k) => ({ id: `k${i}-${k}`, jenis: g.jenis, status: 'ada', aksi: 'diam' }))) };
+    const langkah = [];
+    let aman = true;
+    for (const clause of klausa) {
+      const parsed = uraiLokal(clause, tulisKonteks(papanSementara), true);
+      if (!parsed || parsed.needsConfirmation || parsed.yakin !== 'tinggi' || parsed.hasil.operasi) { aman = false; break; }
+      const applied = terapkan(papanSementara, parsed.hasil);
+      if (!applied.berubah || applied.catatan.length) { aman = false; break; }
+      langkah.push(parsed.hasil);
+      papanSementara = applied.adegan;
+    }
+    if (aman) return { hasil: { ...kosong, langkah, konsep: papanSementara.konsep }, sumber: 'aturan lokal berurutan', yakin: 'tinggi', needsConfirmation: false, notice: null, ms: ahir(mulai) };
+  }
   // A repair restates the intended quantity; it is not a second addition. Only
   // a complete replacement clause is offered, and it still requires review.
   const koreksi = String(kalimat).match(/\b(?:eh\s+salah|ralat|maksudnya)\b[\s,:-]*(.+)$/i);
@@ -204,6 +228,9 @@ export function uraiLokal(kalimat, konteks = 'kosong') {
   const adaHapus = kataKunci(HAPUS);
   const bagiAda = kataKunci(BAGI);
   const adaPindah = kataKunci(PINDAH);
+  if (adaHapus && t.some((k) => ['datang', 'bertambah', 'tambah', 'tambahkan', 'ditambah', 'menambah', 'memberi', 'diberi', 'membeli'].includes(k))) {
+    return perluTinjau(mulai, { ...kosong, entitas: [], peristiwa: [] }, { code: 'MIXED_OPERATORS', message: 'Urutan tambah dan kurang belum jelas. Pisahkan tiap perubahan dengan “lalu”.' }, [String(kalimat)]);
+  }
   let yakin = 'tinggi';
   let dipahami = false;
 
@@ -319,7 +346,8 @@ export function uraiLokal(kalimat, konteks = 'kosong') {
     const iCue = t.findIndex((k, i) => (t[i - 1] === 'ada' || t[i - 1] === 'terdapat') && bendaDi(t, i));
     for (let i = 0; i < t.length && !dipahami; i++) {
       const b = bendaDi(t, i);
-      if (!b || SAPAAN.has(b.jenis) && i !== iCue) { if (b) i += b.panjang - 1; continue; }
+      const subjekTempat = b && i === 0 && ['di', 'ke'].includes(t[i + b.panjang]) && Boolean(caritempat(t));
+      if (!b || SAPAAN.has(b.jenis) && i !== iCue && !subjekTempat) { if (b) i += b.panjang - 1; continue; }
       const sebelumnya = t[i - 1];
       if (['di', 'ke', 'dari', 'atas', 'bawah', 'samping', 'sebelah', 'depan', 'belakang', 'dalam'].includes(sebelumnya)) { i += b.panjang - 1; continue; }
       const ada = adaDi(b.jenis);
@@ -330,9 +358,12 @@ export function uraiLokal(kalimat, konteks = 'kosong') {
       } else if (ada && posisi && (adaPindah || t[i + b.panjang] === 'ke' || t[i - 0] !== undefined)) {
         dipahami = true;
         pernyataan.peristiwa.push({ tipe: 'pindah', target: b.jenis, jumlah: 0, posisi: posisi.teks, aksi: '', aksi_awal: '' });
-      } else if (!ada && (i === iCue || t[i - 1] === 'seekor' || posisi || cariAksi(t, i + b.panjang, Math.min(t.length, i + b.panjang + 3)) !== 'diam' || t.slice(i + b.panjang, i + b.panjang + 3).some((k) => ['tidur', 'duduk', 'berdiri', 'makan'].includes(k)))) {
+      } else if (ada && subjekTempat) {
+        dipahami = true; // Keep the existing count; only the named place changes.
+        pernyataan.latar = caritempat(t);
+      } else if (!ada && (subjekTempat || i === iCue || t[i - 1] === 'seekor' || posisi || cariAksi(t, i + b.panjang, Math.min(t.length, i + b.panjang + 3)) !== 'diam' || t.slice(i + b.panjang, i + b.panjang + 3).some((k) => ['tidur', 'duduk', 'berdiri', 'makan'].includes(k)))) {
         dipahami = true;
-        if (!(i === iCue || t[i - 1] === 'seekor' || posisi)) yakin = 'rendah'; // satu benda tanpa angka dan tanpa petunjuk jelas: tebakan
+        if (!(subjekTempat || i === iCue || t[i - 1] === 'seekor' || posisi)) yakin = 'rendah'; // satu benda tanpa angka dan tanpa petunjuk jelas: tebakan
         const aksi = cariAksi(t, i + b.panjang, t.length);
         pernyataan.entitas.push({ jenis: b.jenis, jumlah: 1, aksi, posisi: posisi?.teks || '', bagi: 0, emoji: '', emoji_acuan: posisi ? '' : '' });
       }
@@ -347,7 +378,11 @@ export function uraiLokal(kalimat, konteks = 'kosong') {
   }
 
   // --- latar ---
-  pernyataan.latar = pernyataan.entitas.length ? caritempat(t) : '';
+  const gantiLatar = caritempat(t);
+  if (pernyataan.entitas.length || /^\s*(?:(?:ganti|ubah|pindah(?:kan)?)\s+(?:latar|tempat)(?:\s+ke)?|di|ke)\b/i.test(kalimat)) {
+    pernyataan.latar = gantiLatar;
+    if (gantiLatar) dipahami = true;
+  }
 
   // --- konsep ---
   if (pernyataan.peristiwa.some((p) => p.tipe === 'hapus')) pernyataan.konsep = 'pengurangan';
@@ -367,7 +402,7 @@ export function uraiLokal(kalimat, konteks = 'kosong') {
     return perluTinjau(mulai, { ...kosong, entitas: [], peristiwa: [] }, { code: 'INCOMPLETE_COVERAGE', message: 'Sebagian benda atau jumlah belum dikenali. Papan dipertahankan; tulis ulang kalimat lengkap.' }, [...takDipahami.map((k) => t.slice(k.mulai, Math.max(k.akhir + 2, k.mulai + 1)).join(' ')), ...sambunganTakDikenal]);
   }
   if (t.length > 14 || kataKunci(new Set(['bukan', 'maksudnya', 'eh', 'salah', 'tadi', 'ralat']))) yakin = 'rendah'; // koreksi diri atau kalimat panjang
-  if (pernyataan.entitas.length === 0 && pernyataan.peristiwa.length === 0 && !tanya) return null;
+  if (pernyataan.entitas.length === 0 && pernyataan.peristiwa.length === 0 && !tanya && !pernyataan.latar) return null;
   const hasil = rapikan(pernyataan, kalimat, konteks);
   if (hasil.needsConfirmation) return perluTinjau(mulai, hasil, hasil.notice, hasil.notice?.unresolvedSpans || []);
   if (yakin === 'rendah') return perluTinjau(mulai, hasil, { code: 'AMBIGUOUS_LOCAL_PARSE', message: 'Tafsiran lokal belum pasti. Periksa pratinjau sebelum menampilkan.' }, []);

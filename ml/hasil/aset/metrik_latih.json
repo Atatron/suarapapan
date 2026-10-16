@@ -1,0 +1,295 @@
+{
+  "model_dasar": "indobenchmark/indobert-base-p1",
+  "konfigurasi": {
+    "lr": 3e-05,
+    "batch": 4,
+    "epoch": 5,
+    "max_len": 96,
+    "warmup": 0.1,
+    "seed": 2026
+  },
+  "data_dir": "C:\\Users\\ASUS TUF\\Documents\\ChatGPT\\Project_Papan_Suara\\suarapapan\\ml\\data\\aset",
+  "data_manifest": {
+    "catalog_sha256": "a8cae8c344ec7b867cb0ea222720c550142ee99af74ac35420acc978fdecb722",
+    "objects": 410,
+    "places": 127,
+    "splits": {
+      "latih": 6203,
+      "validasi": 1436,
+      "uji_templat": 1436
+    },
+    "ambiguous_aliases": [
+      {
+        "kind": "obj",
+        "phrase": "glazed-donut",
+        "ids": [
+          "donat",
+          "donat-jajanan"
+        ]
+      }
+    ],
+    "training_performed": false,
+    "labels": [
+      "O",
+      "B-JUMLAH",
+      "I-JUMLAH",
+      "B-BENDA",
+      "I-BENDA",
+      "B-AKSI",
+      "I-AKSI",
+      "B-TEMPAT",
+      "I-TEMPAT",
+      "B-POSISI",
+      "I-POSISI",
+      "B-PERISTIWA",
+      "I-PERISTIWA",
+      "B-OPERATOR",
+      "I-OPERATOR"
+    ],
+    "label_counts": {
+      "latih": {
+        "O": 15783,
+        "B-JUMLAH": 5808,
+        "I-JUMLAH": 419,
+        "B-BENDA": 5139,
+        "I-BENDA": 1633,
+        "B-AKSI": 926,
+        "I-AKSI": 40,
+        "B-TEMPAT": 1766,
+        "I-TEMPAT": 818,
+        "B-POSISI": 699,
+        "I-POSISI": 1434,
+        "B-PERISTIWA": 1881,
+        "I-PERISTIWA": 364,
+        "B-OPERATOR": 364,
+        "I-OPERATOR": 364
+      },
+      "validasi": {
+        "O": 5889,
+        "B-JUMLAH": 1385,
+        "I-JUMLAH": 28,
+        "B-BENDA": 657,
+        "I-BENDA": 207,
+        "B-AKSI": 490,
+        "I-AKSI": 40,
+        "B-TEMPAT": 127,
+        "I-TEMPAT": 68,
+        "B-POSISI": 40,
+        "I-POSISI": 80,
+        "B-PERISTIWA": 40,
+        "I-PERISTIWA": 40,
+        "B-OPERATOR": 364,
+        "I-OPERATOR": 0
+      },
+      "uji_templat": {
+        "O": 4190,
+        "B-JUMLAH": 1385,
+        "I-JUMLAH": 28,
+        "B-BENDA": 657,
+        "I-BENDA": 207,
+        "B-AKSI": 490,
+        "I-AKSI": 40,
+        "B-TEMPAT": 537,
+        "I-TEMPAT": 281,
+        "B-POSISI": 40,
+        "I-POSISI": 80,
+        "B-PERISTIWA": 40,
+        "I-PERISTIWA": 40,
+        "B-OPERATOR": 364,
+        "I-OPERATOR": 0
+      }
+    },
+    "evaluation_scope": "Synthetic held-out sentence families; not human teacher accuracy."
+  },
+  "perangkat": "NVIDIA GeForce RTX 3050 Laptop GPU",
+  "jumlah_data": {
+    "latih": 6203,
+    "validasi": 1436,
+    "uji_templat": 1436
+  },
+  "riwayat": [
+    {
+      "epoch": 1,
+      "loss": 0.1903,
+      "f1_validasi": 0.7634
+    },
+    {
+      "epoch": 2,
+      "loss": 0.0102,
+      "f1_validasi": 0.7686
+    },
+    {
+      "epoch": 3,
+      "loss": 0.0016,
+      "f1_validasi": 0.7336
+    },
+    {
+      "epoch": 4,
+      "loss": 0.0016,
+      "f1_validasi": 0.766
+    },
+    {
+      "epoch": 5,
+      "loss": 0.0002,
+      "f1_validasi": 0.7756
+    }
+  ],
+  "f1_validasi_terbaik": 0.7756,
+  "uji_templat": {
+    "AKSI": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 490.0
+    },
+    "BENDA": {
+      "precision": 0.6264,
+      "recall": 0.9954,
+      "f1-score": 0.769,
+      "support": 657.0
+    },
+    "JUMLAH": {
+      "precision": 0.8059,
+      "recall": 0.9206,
+      "f1-score": 0.8595,
+      "support": 1385.0
+    },
+    "OPERATOR": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1-score": 0.0,
+      "support": 364.0
+    },
+    "PERISTIWA": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 40.0
+    },
+    "POSISI": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 40.0
+    },
+    "TEMPAT": {
+      "precision": 0.9355,
+      "recall": 1.0,
+      "f1-score": 0.9667,
+      "support": 537.0
+    },
+    "micro avg": {
+      "precision": 0.8053,
+      "recall": 0.8642,
+      "f1-score": 0.8337,
+      "support": 3513.0
+    },
+    "macro avg": {
+      "precision": 0.7668,
+      "recall": 0.8451,
+      "f1-score": 0.7993,
+      "support": 3513.0
+    },
+    "weighted avg": {
+      "precision": 0.7402,
+      "recall": 0.8642,
+      "f1-score": 0.7927,
+      "support": 3513.0
+    }
+  },
+  "confusion_matrix": {
+    "label": [
+      "O",
+      "JUMLAH",
+      "BENDA",
+      "AKSI",
+      "TEMPAT",
+      "POSISI",
+      "PERISTIWA",
+      "OPERATOR"
+    ],
+    "nilai": [
+      [
+        3393,
+        307,
+        453,
+        0,
+        37,
+        0,
+        0,
+        0
+      ],
+      [
+        110,
+        1303,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        864,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        530,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        818,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        120,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        80,
+        0
+      ],
+      [
+        364,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    ]
+  },
+  "durasi_detik": 794
+}

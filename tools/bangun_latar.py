@@ -13,12 +13,13 @@ import sys
 from collections import Counter
 from pathlib import Path
 
-from PIL import Image, ImageDraw
+from PIL import Image, ImageDraw, ImageOps
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from bangun_aset import slug  # noqa: E402  (aturan nama file yang sama dengan pustaka benda)
 
 UKURAN = (1280, 720)
+OVERRIDE = Path(__file__).resolve().parent / 'latar_override'
 
 
 def main():
@@ -34,7 +35,12 @@ def main():
     latar = {}
     kecil = []
     for b in peta["backgrounds"]:
-        im = Image.open(src / b["file"]).convert("RGB")
+        # Keep user-approved replacements when rebuilding the original pack.
+        replacements = [p for p in OVERRIDE.glob(f"{b['id']}.*") if p.suffix.lower() in {'.png', '.jpg', '.jpeg', '.webp'}]
+        if len(replacements) > 1:
+            raise ValueError(f"Multiple background replacements for {b['id']}")
+        source = replacements[0] if replacements else src / b["file"]
+        im = ImageOps.exif_transpose(Image.open(source)).convert("RGB")
         im = im.resize(UKURAN, Image.LANCZOS)
         im.save(out / f"{b['id']}.webp", "WEBP", quality=82, method=4)
         latar[b["id"]] = {"nama": b["name"], "jenis": b["type"], "kategori": b.get("category"), "permukaan": b["defaultSurface"]}
