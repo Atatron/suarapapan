@@ -13,6 +13,14 @@ const ALIAS_OBJ = {
   kakaktua: 'kakatua', dara: 'merpati', 'anak-ayam': 'anak-bebek', 'bebek-kecil': 'anak-bebek', hippo: 'kuda-nil',
   cumi: 'cumi-cumi', kupu: 'kupu-kupu', 'burung-kecil': 'burung', 'burung-gereja': 'burung', 'burung-pipit': 'burung',
   anak: 'anak-laki-laki', adik: 'anak-perempuan', kakak: 'anak-laki-laki', murid: 'anak-laki-laki', siswa: 'anak-laki-laki',
+  // Nama orang tanpa ciri memakai karakter anak bawaan yang juga dipakai untuk
+  // "anak"/"murid"; label semantik aslinya tetap disimpan oleh mesin adegan.
+  manusia: 'anak-laki-laki', orang: 'anak-laki-laki', seseorang: 'anak-laki-laki', teman: 'anak-laki-laki',
+  'anak-menggunakan-kursi-roda': 'anak-kursi-roda', 'anak-memakai-kursi-roda': 'anak-kursi-roda',
+  'anak-dengan-kursi-roda': 'anak-kursi-roda', 'anak-di-kursi-roda': 'anak-kursi-roda',
+  'anak-pengguna-kursi-roda': 'anak-kursi-roda', 'pengguna-kursi-roda': 'anak-kursi-roda',
+  'anak-menggunakan-alat-bantu-dengar': 'anak-dengan-alat-bantu-dengar',
+  'anak-memakai-alat-bantu-dengar': 'anak-dengan-alat-bantu-dengar',
   bocah: 'anak-laki-laki', cowok: 'anak-laki-laki', cewek: 'anak-perempuan', bapak: 'ayah', papa: 'ayah', bunda: 'ibu',
   mama: 'ibu', eyang: 'nenek', oma: 'nenek', opa: 'kakek', tukang: 'sopir', 'tukang-pos': 'pak-pos', pemadam: 'pemadam-kebakaran',
   supir: 'sopir', pedagang: 'penjual', juru: 'koki', 'juru-masak': 'koki', 'anak-berhijab': 'siswa-berhijab', hijab: 'siswa-berhijab',
@@ -38,26 +46,32 @@ const ALIAS_TEMPAT = {
   desa: 'jalan-desa', kampung: 'jalan-desa', 'pasar-malam': 'pasar', toko: 'pasar',
 };
 
+// Batasi pencarian oleh frasa terpanjang yang benar-benar didukung pustaka,
+// bukan tiga kata: nama inklusi seperti "anak dengan alat bantu dengar" lebih panjang.
+const panjangFrasa = (daftar, alias) => Math.max(1, ...Object.keys({ ...daftar, ...alias }).map((k) => k.split('-').length));
+const PANJANG_OBJ = panjangFrasa(OBJ, ALIAS_OBJ);
+const PANJANG_TEMPAT = panjangFrasa(TEMPAT, ALIAS_TEMPAT);
+
 // Kata pelengkap yang bukan nama benda ("apel merah", "kucing kecil", "ekor kucing").
 const LEWATI = new Set(['anak', 'kecil', 'besar', 'baru', 'si', 'sang', 'seekor', 'sebuah', 'buah', 'ekor', 'biji', 'butir', 'potong',
-  'batang', 'lembar', 'orang', 'warna', 'merah', 'biru', 'hijau', 'kuning', 'putih', 'hitam', 'coklat', 'cokelat', 'pink', 'oranye',
+  'batang', 'lembar', 'orang', 'manusia', 'seseorang', 'teman', 'warna', 'merah', 'biru', 'hijau', 'kuning', 'putih', 'hitam', 'coklat', 'cokelat', 'pink', 'oranye',
   'ungu', 'abu-abu', 'di', 'ke', 'dari', 'dekat', 'yang', 'dan', 'lagi', 'itu', 'ini']);
 
 export const bersih = (s) => String(s || '')
   .normalize('NFKD').replace(/[̀-ͯ]/g, '')
   .toLowerCase().trim().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
 
-function cari(teks, daftar, alias) {
+function cari(teks, daftar, alias, panjang) {
   const k = bersih(teks);
   if (!k) return null;
-  const coba = (x) => (daftar[x] ? x : alias[x] && daftar[alias[x]] ? alias[x] : null);
+  const coba = (x) => (Object.hasOwn(daftar, x) ? x : Object.hasOwn(alias, x) && Object.hasOwn(daftar, alias[x]) ? alias[x] : null);
   const ulang = k.match(/^([a-z0-9]+)-\1$/); // kelinci-kelinci → kelinci
   const langsung = coba(k) || (ulang && coba(ulang[1]));
   if (langsung) return langsung;
   const kata = k.split('-');
-  // Frasa dua kata ("kuda nil", "bintang laut") lebih dulu, lalu kata tunggal dari depan
+  // Frasa paling spesifik lebih dulu, lalu kata tunggal dari depan
   // ("kucing kecil" → kucing), dengan melewati kata pelengkap.
-  for (let n = Math.min(3, kata.length); n >= 2; n--) {
+  for (let n = Math.min(panjang, kata.length); n >= 2; n--) {
     for (let i = 0; i + n <= kata.length; i++) {
       const r = coba(kata.slice(i, i + n).join('-'));
       if (r) return r;
@@ -72,9 +86,9 @@ function cari(teks, daftar, alias) {
 }
 
 /** Nama file gambar kartun untuk benda ("harimau" → "harimau"), atau null. */
-export const cariGambar = (jenis) => cari(jenis, OBJ, ALIAS_OBJ);
+export const cariGambar = (jenis) => cari(jenis, OBJ, ALIAS_OBJ, PANJANG_OBJ);
 /** Nama file gambar tempat untuk latar ("di hutan" → "hutan"), atau null. */
-export const cariTempat = (latar) => cari(latar, TEMPAT, ALIAS_TEMPAT);
+export const cariTempat = (latar) => cari(latar, TEMPAT, ALIAS_TEMPAT, PANJANG_TEMPAT);
 
 const KATA_PENDUKUNG = ['satu', 'dua', 'tiga', 'empat', 'lima', 'enam', 'tujuh', 'delapan', 'sembilan', 'sepuluh', 'sebelas', 'belas', 'puluh',
   'berlari', 'melompat', 'terbang', 'berenang', 'jatuh', 'pergi', 'datang', 'lagi', 'dibagi', 'potong', 'berapa', 'atas', 'bawah', 'samping'];

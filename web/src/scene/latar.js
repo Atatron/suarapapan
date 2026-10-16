@@ -59,11 +59,43 @@ const KANDIDAT = {
   'tepi-hutan': ['woodland'],
   savana: ['savanna'],
   sabana: ['savanna'],
+  // Diorama dan bangunan baru tetap memakai latar 16:9 yang sudah dikurasi.
+  'taman-kota': ['flower-garden', 'playground'], 'halaman-rumah': ['homeyard'],
+  'kantor-polisi': ['community'], 'halte-bus': ['city-road'], 'stasiun-kereta': ['railway'],
+  'kantor-pos': ['community'], bank: ['community'], 'pom-bensin': ['city-road'],
+  'markas-pemadam': ['city-road'], 'balai-kota': ['community'], perpustakaan: ['classroom'],
+  'warung-makan': ['fruit-market', 'kitchen'], minimarket: ['fruit-market'], supermarket: ['fruit-market'],
+  apotek: ['clinic'], 'toko-buku': ['community'], restoran: ['kitchen'], kafe: ['kitchen'],
+  'toko-roti': ['kitchen'], 'toko-mainan': ['playroom', 'community'],
+  'tenda-pasar-malam': ['fruit-market'], 'kios-buah': ['fruit-market'], butik: ['dressing-room'],
+  'ruang-tamu': ['living-room'], 'kamar-rumah': ['dressing-room', 'playroom'], 'dapur-rumah': ['kitchen'],
+  'kamar-mandi': ['living-room'], garasi: ['homeyard'], 'halaman-depan': ['homeyard'], teras: ['homeyard'],
+  'ruang-makan-rumah': ['kitchen'], loteng: ['living-room'], 'atap-rumah': ['homeyard'],
+  balkon: ['homeyard'], 'ruang-cuci': ['living-room'],
+  'kelas-sekolah': ['classroom'], 'perpustakaan-sekolah': ['classroom'], kantin: ['kitchen'],
+  'lapangan-olahraga': ['playground'], 'ruang-guru': ['classroom'], uks: ['clinic'],
+  'gerbang-sekolah': ['playground'], 'toilet-sekolah': ['classroom'], 'koridor-sekolah': ['classroom'],
+  'aula-sekolah': ['classroom'], 'laboratorium-komputer': ['classroom'], 'laboratorium-sains': ['classroom'],
+  'kolam-renang': ['wetland'], bioskop: ['community'], museum: ['community'], 'alun-alun': ['community'],
+  stadion: ['playground'], sirkus: ['playground'], akuarium: ['underwater'], 'komidi-putar': ['playground'],
+  'panggung-konser': ['community'], 'gerbang-kebun-binatang': ['savanna', 'jungle'], bianglala: ['playground'],
+  saung: ['rice-fields'], 'kandang-ayam': ['farm'], lumbung: ['farm'], sumur: ['homeyard'],
+  'pagar-kayu': ['farm'], 'kincir-angin': ['farm'], 'kincir-air': ['river'], dermaga: ['harbor'],
+  'jembatan-bambu': ['river'], 'pos-ronda': ['homeyard'], silo: ['farm'], 'kandang-kuda': ['farm'],
+  jembatan: ['river'], 'rel-kereta': ['railway'], trotoar: ['city-road'], terowongan: ['city-road'],
+  'jembatan-penyeberangan': ['city-road'], 'zebra-cross': ['city-road'], gang: ['city-road'],
+  'gardu-tol': ['city-road'], 'bundaran-air-mancur': ['community'], 'halte-trem': ['city-road'],
+  masjid: ['community'], gereja: ['community'], pura: ['community'], wihara: ['community'],
+  kelenteng: ['community'], musala: ['community'], kapel: ['community'], 'menara-lonceng': ['community'],
+  kubah: ['community'], 'gapura-candi': ['community'], altar: ['community'],
+  'jembatan-gantung': ['river'], gua: ['mountains'], 'rumah-pohon': ['woodland'], bendungan: ['river'],
+  mercusuar: ['harbor'], tambang: ['mountains'], 'menara-pengawas': ['woodland'],
+  'jalur-tanah': ['woodland'], 'air-terjun': ['river'], 'anjungan-minyak': ['deep-ocean'],
 };
 
 /** "di hutan lebat" → ['jungle', 'woodland', 'night-forest']; tidak dikenal → []. */
 export function calonLatar(latar) {
-  const k = bersih(latar);
+  const k = bersih(latar).replace(/^(?:di|ke|dari)-/, '');
   if (!k) return [];
   if (KANDIDAT[k]) return KANDIDAT[k];
   const ikon = cariTempat(latar);

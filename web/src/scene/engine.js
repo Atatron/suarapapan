@@ -25,9 +25,9 @@ const RELASI = ['atas', 'bawah', 'samping', 'depan', 'belakang', 'dalam'];
 
 /** "di bawah meja" → { relasi: 'bawah', acuan: 'meja' }, selain itu null. */
 export function uraiPosisi(posisi) {
-  const m = String(posisi || '').toLowerCase().match(/^(?:di|ke)\s+(atas|bawah|samping|sebelah|depan|belakang|dalam)\s+(?:sebuah\s+|si\s+)?([a-z-]+)/);
+  const m = String(posisi || '').toLowerCase().trim().match(/^(?:di|ke)\s+(atas|bawah|samping|sebelah|depan|belakang|dalam)\s+(?:sebuah\s+|si\s+)?([a-z][a-z\s-]*)(?:[.!?,;]|$)/);
   if (!m) return null;
-  return { relasi: m[1] === 'sebelah' ? 'samping' : m[1], acuan: m[2] };
+  return { relasi: m[1] === 'sebelah' ? 'samping' : m[1], acuan: m[2].trim().replace(/\s+/g, ' ') };
 }
 export const tulisPosisi = (relasi, acuan) => (RELASI.includes(relasi) && acuan ? `di ${relasi} ${acuan}` : '');
 

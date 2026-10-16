@@ -2945,6 +2945,2840 @@
     0.58,
     0.9
    ]
+  },
+  "piyik-ayam": {
+   "latar": "farm",
+   "permukaan": "ground",
+   "jangkar": "bottom-center",
+   "x": [
+    0.17,
+    0.73
+   ],
+   "y": [
+    0.58,
+    0.9
+   ]
+  },
+  "kelereng": {
+   "latar": "playroom",
+   "permukaan": "ground",
+   "jangkar": "bottom-center",
+   "x": [
+    0.17,
+    0.73
+   ],
+   "y": [
+    0.58,
+    0.9
+   ]
+  },
+  "yoyo": {
+   "latar": "playroom",
+   "permukaan": "ground",
+   "jangkar": "bottom-center",
+   "x": [
+    0.17,
+    0.73
+   ],
+   "y": [
+    0.58,
+    0.9
+   ]
+  },
+  "robot-mainan": {
+   "latar": "playroom",
+   "permukaan": "ground",
+   "jangkar": "bottom-center",
+   "x": [
+    0.17,
+    0.73
+   ],
+   "y": [
+    0.58,
+    0.9
+   ]
+  },
+  "mobil-mainan": {
+   "latar": "playroom",
+   "permukaan": "ground",
+   "jangkar": "bottom-center",
+   "x": [
+    0.17,
+    0.73
+   ],
+   "y": [
+    0.58,
+    0.9
+   ]
+  },
+  "balok-mainan": {
+   "latar": "playroom",
+   "permukaan": "ground",
+   "jangkar": "bottom-center",
+   "x": [
+    0.17,
+    0.73
+   ],
+   "y": [
+    0.58,
+    0.9
+   ]
+  },
+  "keping-puzel": {
+   "latar": "playroom",
+   "permukaan": "ground",
+   "jangkar": "bottom-center",
+   "x": [
+    0.17,
+    0.73
+   ],
+   "y": [
+    0.58,
+    0.9
+   ]
+  },
+  "kubus-rubik": {
+   "latar": "playroom",
+   "permukaan": "ground",
+   "jangkar": "bottom-center",
+   "x": [
+    0.17,
+    0.73
+   ],
+   "y": [
+    0.58,
+    0.9
+   ]
+  },
+  "pistol-air": {
+   "latar": "playroom",
+   "permukaan": "ground",
+   "jangkar": "bottom-center",
+   "x": [
+    0.17,
+    0.73
+   ],
+   "y": [
+    0.58,
+    0.9
+   ]
+  },
+  "plastisin": {
+   "latar": "playroom",
+   "permukaan": "ground",
+   "jangkar": "bottom-center",
+   "x": [
+    0.17,
+    0.73
+   ],
+   "y": [
+    0.58,
+    0.9
+   ]
+  },
+  "ketapel": {
+   "latar": "playroom",
+   "permukaan": "ground",
+   "jangkar": "bottom-center",
+   "x": [
+    0.17,
+    0.73
+   ],
+   "y": [
+    0.58,
+    0.9
+   ]
+  },
+  "boneka-beruang": {
+   "latar": "playroom",
+   "permukaan": "ground",
+   "jangkar": "bottom-center",
+   "x": [
+    0.17,
+    0.73
+   ],
+   "y": [
+    0.58,
+    0.9
+   ]
+  },
+  "figur-aksi": {
+   "latar": "playroom",
+   "permukaan": "ground",
+   "jangkar": "bottom-center",
+   "x": [
+    0.17,
+    0.73
+   ],
+   "y": [
+    0.58,
+    0.9
+   ]
+  },
+  "sapu": {
+   "latar": "homeyard",
+   "permukaan": "ground",
+   "jangkar": "bottom-center",
+   "x": [
+    0.17,
+    0.73
+   ],
+   "y": [
+    0.58,
+    0.9
+   ]
+  },
+  "pel": {
+   "latar": "homeyard",
+   "permukaan": "ground",
+   "jangkar": "bottom-center",
+   "x": [
+    0.17,
+    0.73
+   ],
+   "y": [
+    0.58,
+    0.9
+   ]
+  },
+  "kemoceng": {
+   "latar": "homeyard",
+   "permukaan": "ground",
+   "jangkar": "bottom-center",
+   "x": [
+    0.17,
+    0.73
+   ],
+   "y": [
+    0.58,
+    0.9
+   ]
+  },
+  "tempat-sampah": {
+   "latar": "homeyard",
+   "permukaan": "ground",
+   "jangkar": "bottom-center",
+   "x": [
+    0.17,
+    0.73
+   ],
+   "y": [
+    0.58,
+    0.9
+   ]
+  },
+  "sabun": {
+   "latar": "homeyard",
+   "permukaan": "ground",
+   "jangkar": "bottom-center",
+   "x": [
+    0.17,
+    0.73
+   ],
+   "y": [
+    0.58,
+    0.9
+   ]
+  },
+  "sikat-gigi": {
+   "latar": "homeyard",
+   "permukaan": "ground",
+   "jangkar": "bottom-center",
+   "x": [
+    0.17,
+    0.73
+   ],
+   "y": [
+    0.58,
+    0.9
+   ]
+  },
+  "pasta-gigi": {
+   "latar": "homeyard",
+   "permukaan": "ground",
+   "jangkar": "bottom-center",
+   "x": [
+    0.17,
+    0.73
+   ],
+   "y": [
+    0.58,
+    0.9
+   ]
+  },
+  "sampo": {
+   "latar": "homeyard",
+   "permukaan": "ground",
+   "jangkar": "bottom-center",
+   "x": [
+    0.17,
+    0.73
+   ],
+   "y": [
+    0.58,
+    0.9
+   ]
+  },
+  "handuk": {
+   "latar": "homeyard",
+   "permukaan": "ground",
+   "jangkar": "bottom-center",
+   "x": [
+    0.17,
+    0.73
+   ],
+   "y": [
+    0.58,
+    0.9
+   ]
+  },
+  "spons": {
+   "latar": "homeyard",
+   "permukaan": "ground",
+   "jangkar": "bottom-center",
+   "x": [
+    0.17,
+    0.73
+   ],
+   "y": [
+    0.58,
+    0.9
+   ]
+  },
+  "sikat-lantai": {
+   "latar": "homeyard",
+   "permukaan": "ground",
+   "jangkar": "bottom-center",
+   "x": [
+    0.17,
+    0.73
+   ],
+   "y": [
+    0.58,
+    0.9
+   ]
+  },
+  "televisi": {
+   "latar": "living-room",
+   "permukaan": "ground",
+   "jangkar": "bottom-center",
+   "x": [
+    0.17,
+    0.73
+   ],
+   "y": [
+    0.58,
+    0.9
+   ]
+  },
+  "radio": {
+   "latar": "living-room",
+   "permukaan": "ground",
+   "jangkar": "bottom-center",
+   "x": [
+    0.17,
+    0.73
+   ],
+   "y": [
+    0.58,
+    0.9
+   ]
+  },
+  "ponsel": {
+   "latar": "living-room",
+   "permukaan": "ground",
+   "jangkar": "bottom-center",
+   "x": [
+    0.17,
+    0.73
+   ],
+   "y": [
+    0.58,
+    0.9
+   ]
+  },
+  "laptop": {
+   "latar": "living-room",
+   "permukaan": "ground",
+   "jangkar": "bottom-center",
+   "x": [
+    0.17,
+    0.73
+   ],
+   "y": [
+    0.58,
+    0.9
+   ]
+  },
+  "kipas-angin": {
+   "latar": "living-room",
+   "permukaan": "ground",
+   "jangkar": "bottom-center",
+   "x": [
+    0.17,
+    0.73
+   ],
+   "y": [
+    0.58,
+    0.9
+   ]
+  },
+  "kulkas": {
+   "latar": "living-room",
+   "permukaan": "ground",
+   "jangkar": "bottom-center",
+   "x": [
+    0.17,
+    0.73
+   ],
+   "y": [
+    0.58,
+    0.9
+   ]
+  },
+  "setrika": {
+   "latar": "living-room",
+   "permukaan": "ground",
+   "jangkar": "bottom-center",
+   "x": [
+    0.17,
+    0.73
+   ],
+   "y": [
+    0.58,
+    0.9
+   ]
+  },
+  "senter": {
+   "latar": "living-room",
+   "permukaan": "ground",
+   "jangkar": "bottom-center",
+   "x": [
+    0.17,
+    0.73
+   ],
+   "y": [
+    0.58,
+    0.9
+   ]
+  },
+  "mesin-cuci": {
+   "latar": "living-room",
+   "permukaan": "ground",
+   "jangkar": "bottom-center",
+   "x": [
+    0.17,
+    0.73
+   ],
+   "y": [
+    0.58,
+    0.9
+   ]
+  },
+  "oven-microwave": {
+   "latar": "living-room",
+   "permukaan": "ground",
+   "jangkar": "bottom-center",
+   "x": [
+    0.17,
+    0.73
+   ],
+   "y": [
+    0.58,
+    0.9
+   ]
+  },
+  "kamera": {
+   "latar": "living-room",
+   "permukaan": "ground",
+   "jangkar": "bottom-center",
+   "x": [
+    0.17,
+    0.73
+   ],
+   "y": [
+    0.58,
+    0.9
+   ]
+  },
+  "gitar": {
+   "latar": "classroom",
+   "permukaan": "table",
+   "jangkar": "bottom-center",
+   "x": [
+    0.5,
+    0.85
+   ],
+   "y": [
+    0.62,
+    0.87
+   ]
+  },
+  "piano": {
+   "latar": "classroom",
+   "permukaan": "table",
+   "jangkar": "bottom-center",
+   "x": [
+    0.5,
+    0.85
+   ],
+   "y": [
+    0.62,
+    0.87
+   ]
+  },
+  "drum": {
+   "latar": "classroom",
+   "permukaan": "table",
+   "jangkar": "bottom-center",
+   "x": [
+    0.5,
+    0.85
+   ],
+   "y": [
+    0.62,
+    0.87
+   ]
+  },
+  "seruling": {
+   "latar": "classroom",
+   "permukaan": "table",
+   "jangkar": "bottom-center",
+   "x": [
+    0.5,
+    0.85
+   ],
+   "y": [
+    0.62,
+    0.87
+   ]
+  },
+  "biola": {
+   "latar": "classroom",
+   "permukaan": "table",
+   "jangkar": "bottom-center",
+   "x": [
+    0.5,
+    0.85
+   ],
+   "y": [
+    0.62,
+    0.87
+   ]
+  },
+  "terompet": {
+   "latar": "classroom",
+   "permukaan": "table",
+   "jangkar": "bottom-center",
+   "x": [
+    0.5,
+    0.85
+   ],
+   "y": [
+    0.62,
+    0.87
+   ]
+  },
+  "harmonika": {
+   "latar": "classroom",
+   "permukaan": "table",
+   "jangkar": "bottom-center",
+   "x": [
+    0.5,
+    0.85
+   ],
+   "y": [
+    0.62,
+    0.87
+   ]
+  },
+  "angklung": {
+   "latar": "classroom",
+   "permukaan": "table",
+   "jangkar": "bottom-center",
+   "x": [
+    0.5,
+    0.85
+   ],
+   "y": [
+    0.62,
+    0.87
+   ]
+  },
+  "tamborin": {
+   "latar": "classroom",
+   "permukaan": "table",
+   "jangkar": "bottom-center",
+   "x": [
+    0.5,
+    0.85
+   ],
+   "y": [
+    0.62,
+    0.87
+   ]
+  },
+  "pianika": {
+   "latar": "classroom",
+   "permukaan": "table",
+   "jangkar": "bottom-center",
+   "x": [
+    0.5,
+    0.85
+   ],
+   "y": [
+    0.62,
+    0.87
+   ]
+  },
+  "saksofon": {
+   "latar": "classroom",
+   "permukaan": "table",
+   "jangkar": "bottom-center",
+   "x": [
+    0.5,
+    0.85
+   ],
+   "y": [
+    0.62,
+    0.87
+   ]
+  },
+  "harpa": {
+   "latar": "classroom",
+   "permukaan": "table",
+   "jangkar": "bottom-center",
+   "x": [
+    0.5,
+    0.85
+   ],
+   "y": [
+    0.62,
+    0.87
+   ]
+  },
+  "bola-basket": {
+   "latar": "playground",
+   "permukaan": "ground",
+   "jangkar": "bottom-center",
+   "x": [
+    0.17,
+    0.73
+   ],
+   "y": [
+    0.58,
+    0.9
+   ]
+  },
+  "raket-tenis": {
+   "latar": "playground",
+   "permukaan": "ground",
+   "jangkar": "bottom-center",
+   "x": [
+    0.17,
+    0.73
+   ],
+   "y": [
+    0.58,
+    0.9
+   ]
+  },
+  "kok": {
+   "latar": "playground",
+   "permukaan": "ground",
+   "jangkar": "bottom-center",
+   "x": [
+    0.17,
+    0.73
+   ],
+   "y": [
+    0.58,
+    0.9
+   ]
+  },
+  "peluit": {
+   "latar": "playground",
+   "permukaan": "ground",
+   "jangkar": "bottom-center",
+   "x": [
+    0.17,
+    0.73
+   ],
+   "y": [
+    0.58,
+    0.9
+   ]
+  },
+  "piala": {
+   "latar": "playground",
+   "permukaan": "ground",
+   "jangkar": "bottom-center",
+   "x": [
+    0.17,
+    0.73
+   ],
+   "y": [
+    0.58,
+    0.9
+   ]
+  },
+  "medali": {
+   "latar": "playground",
+   "permukaan": "ground",
+   "jangkar": "bottom-center",
+   "x": [
+    0.17,
+    0.73
+   ],
+   "y": [
+    0.58,
+    0.9
+   ]
+  },
+  "kacamata-renang": {
+   "latar": "playground",
+   "permukaan": "ground",
+   "jangkar": "bottom-center",
+   "x": [
+    0.17,
+    0.73
+   ],
+   "y": [
+    0.58,
+    0.9
+   ]
+  },
+  "sepatu-roda": {
+   "latar": "playground",
+   "permukaan": "ground",
+   "jangkar": "bottom-center",
+   "x": [
+    0.17,
+    0.73
+   ],
+   "y": [
+    0.58,
+    0.9
+   ]
+  },
+  "pemukul-bisbol": {
+   "latar": "playground",
+   "permukaan": "ground",
+   "jangkar": "bottom-center",
+   "x": [
+    0.17,
+    0.73
+   ],
+   "y": [
+    0.58,
+    0.9
+   ]
+  },
+  "sarung-tinju": {
+   "latar": "playground",
+   "permukaan": "ground",
+   "jangkar": "bottom-center",
+   "x": [
+    0.17,
+    0.73
+   ],
+   "y": [
+    0.58,
+    0.9
+   ]
+  },
+  "papan-selancar": {
+   "latar": "beach",
+   "permukaan": "ground",
+   "jangkar": "bottom-center",
+   "x": [
+    0.17,
+    0.73
+   ],
+   "y": [
+    0.58,
+    0.9
+   ]
+  },
+  "palu": {
+   "latar": "homeyard",
+   "permukaan": "ground",
+   "jangkar": "bottom-center",
+   "x": [
+    0.17,
+    0.73
+   ],
+   "y": [
+    0.58,
+    0.9
+   ]
+  },
+  "paku": {
+   "latar": "homeyard",
+   "permukaan": "ground",
+   "jangkar": "bottom-center",
+   "x": [
+    0.17,
+    0.73
+   ],
+   "y": [
+    0.58,
+    0.9
+   ]
+  },
+  "obeng": {
+   "latar": "homeyard",
+   "permukaan": "ground",
+   "jangkar": "bottom-center",
+   "x": [
+    0.17,
+    0.73
+   ],
+   "y": [
+    0.58,
+    0.9
+   ]
+  },
+  "gergaji": {
+   "latar": "homeyard",
+   "permukaan": "ground",
+   "jangkar": "bottom-center",
+   "x": [
+    0.17,
+    0.73
+   ],
+   "y": [
+    0.58,
+    0.9
+   ]
+  },
+  "tang": {
+   "latar": "homeyard",
+   "permukaan": "ground",
+   "jangkar": "bottom-center",
+   "x": [
+    0.17,
+    0.73
+   ],
+   "y": [
+    0.58,
+    0.9
+   ]
+  },
+  "kuas": {
+   "latar": "homeyard",
+   "permukaan": "ground",
+   "jangkar": "bottom-center",
+   "x": [
+    0.17,
+    0.73
+   ],
+   "y": [
+    0.58,
+    0.9
+   ]
+  },
+  "meteran": {
+   "latar": "homeyard",
+   "permukaan": "ground",
+   "jangkar": "bottom-center",
+   "x": [
+    0.17,
+    0.73
+   ],
+   "y": [
+    0.58,
+    0.9
+   ]
+  },
+  "sekrup": {
+   "latar": "homeyard",
+   "permukaan": "ground",
+   "jangkar": "bottom-center",
+   "x": [
+    0.17,
+    0.73
+   ],
+   "y": [
+    0.58,
+    0.9
+   ]
+  },
+  "bor": {
+   "latar": "homeyard",
+   "permukaan": "ground",
+   "jangkar": "bottom-center",
+   "x": [
+    0.17,
+    0.73
+   ],
+   "y": [
+    0.58,
+    0.9
+   ]
+  },
+  "tangga": {
+   "latar": "homeyard",
+   "permukaan": "ground",
+   "jangkar": "bottom-center",
+   "x": [
+    0.17,
+    0.73
+   ],
+   "y": [
+    0.58,
+    0.9
+   ]
+  },
+  "kunci-inggris": {
+   "latar": "homeyard",
+   "permukaan": "ground",
+   "jangkar": "bottom-center",
+   "x": [
+    0.17,
+    0.73
+   ],
+   "y": [
+    0.58,
+    0.9
+   ]
+  },
+  "kapak": {
+   "latar": "homeyard",
+   "permukaan": "ground",
+   "jangkar": "bottom-center",
+   "x": [
+    0.17,
+    0.73
+   ],
+   "y": [
+    0.58,
+    0.9
+   ]
+  },
+  "biskuit": {
+   "latar": "kitchen",
+   "permukaan": "table",
+   "jangkar": "bottom-center",
+   "x": [
+    0.5,
+    0.85
+   ],
+   "y": [
+    0.62,
+    0.87
+   ]
+  },
+  "cokelat": {
+   "latar": "kitchen",
+   "permukaan": "table",
+   "jangkar": "bottom-center",
+   "x": [
+    0.5,
+    0.85
+   ],
+   "y": [
+    0.62,
+    0.87
+   ]
+  },
+  "keripik-kentang": {
+   "latar": "kitchen",
+   "permukaan": "table",
+   "jangkar": "bottom-center",
+   "x": [
+    0.5,
+    0.85
+   ],
+   "y": [
+    0.62,
+    0.87
+   ]
+  },
+  "puding": {
+   "latar": "kitchen",
+   "permukaan": "table",
+   "jangkar": "bottom-center",
+   "x": [
+    0.5,
+    0.85
+   ],
+   "y": [
+    0.62,
+    0.87
+   ]
+  },
+  "sosis": {
+   "latar": "kitchen",
+   "permukaan": "table",
+   "jangkar": "bottom-center",
+   "x": [
+    0.5,
+    0.85
+   ],
+   "y": [
+    0.62,
+    0.87
+   ]
+  },
+  "berondong-jagung": {
+   "latar": "kitchen",
+   "permukaan": "table",
+   "jangkar": "bottom-center",
+   "x": [
+    0.5,
+    0.85
+   ],
+   "y": [
+    0.62,
+    0.87
+   ]
+  },
+  "es-serut": {
+   "latar": "kitchen",
+   "permukaan": "table",
+   "jangkar": "bottom-center",
+   "x": [
+    0.5,
+    0.85
+   ],
+   "y": [
+    0.62,
+    0.87
+   ]
+  },
+  "martabak-manis": {
+   "latar": "kitchen",
+   "permukaan": "table",
+   "jangkar": "bottom-center",
+   "x": [
+    0.5,
+    0.85
+   ],
+   "y": [
+    0.62,
+    0.87
+   ]
+  },
+  "permen-lolipop": {
+   "latar": "kitchen",
+   "permukaan": "table",
+   "jangkar": "bottom-center",
+   "x": [
+    0.5,
+    0.85
+   ],
+   "y": [
+    0.62,
+    0.87
+   ]
+  },
+  "kerupuk-udang": {
+   "latar": "kitchen",
+   "permukaan": "table",
+   "jangkar": "bottom-center",
+   "x": [
+    0.5,
+    0.85
+   ],
+   "y": [
+    0.62,
+    0.87
+   ]
+  },
+  "gulali": {
+   "latar": "kitchen",
+   "permukaan": "table",
+   "jangkar": "bottom-center",
+   "x": [
+    0.5,
+    0.85
+   ],
+   "y": [
+    0.62,
+    0.87
+   ]
+  },
+  "donat-jajanan": {
+   "latar": "kitchen",
+   "permukaan": "table",
+   "jangkar": "bottom-center",
+   "x": [
+    0.5,
+    0.85
+   ],
+   "y": [
+    0.62,
+    0.87
+   ]
+  },
+  "uang-kertas": {
+   "latar": "fruit-market",
+   "permukaan": "table",
+   "jangkar": "bottom-center",
+   "x": [
+    0.12,
+    0.84
+   ],
+   "y": [
+    0.61,
+    0.79
+   ]
+  },
+  "dompet": {
+   "latar": "fruit-market",
+   "permukaan": "table",
+   "jangkar": "bottom-center",
+   "x": [
+    0.12,
+    0.84
+   ],
+   "y": [
+    0.61,
+    0.79
+   ]
+  },
+  "troli-belanja": {
+   "latar": "fruit-market",
+   "permukaan": "table",
+   "jangkar": "bottom-center",
+   "x": [
+    0.12,
+    0.84
+   ],
+   "y": [
+    0.61,
+    0.79
+   ]
+  },
+  "keranjang-belanja": {
+   "latar": "fruit-market",
+   "permukaan": "table",
+   "jangkar": "bottom-center",
+   "x": [
+    0.12,
+    0.84
+   ],
+   "y": [
+    0.61,
+    0.79
+   ]
+  },
+  "tas-belanja": {
+   "latar": "fruit-market",
+   "permukaan": "table",
+   "jangkar": "bottom-center",
+   "x": [
+    0.12,
+    0.84
+   ],
+   "y": [
+    0.61,
+    0.79
+   ]
+  },
+  "paket": {
+   "latar": "fruit-market",
+   "permukaan": "table",
+   "jangkar": "bottom-center",
+   "x": [
+    0.12,
+    0.84
+   ],
+   "y": [
+    0.61,
+    0.79
+   ]
+  },
+  "mesin-kasir": {
+   "latar": "fruit-market",
+   "permukaan": "table",
+   "jangkar": "bottom-center",
+   "x": [
+    0.12,
+    0.84
+   ],
+   "y": [
+    0.61,
+    0.79
+   ]
+  },
+  "timbangan": {
+   "latar": "fruit-market",
+   "permukaan": "table",
+   "jangkar": "bottom-center",
+   "x": [
+    0.12,
+    0.84
+   ],
+   "y": [
+    0.61,
+    0.79
+   ]
+  },
+  "celengan": {
+   "latar": "fruit-market",
+   "permukaan": "table",
+   "jangkar": "bottom-center",
+   "x": [
+    0.12,
+    0.84
+   ],
+   "y": [
+    0.61,
+    0.79
+   ]
+  },
+  "kartu-kredit": {
+   "latar": "fruit-market",
+   "permukaan": "table",
+   "jangkar": "bottom-center",
+   "x": [
+    0.12,
+    0.84
+   ],
+   "y": [
+    0.61,
+    0.79
+   ]
+  },
+  "mesin-atm": {
+   "latar": "fruit-market",
+   "permukaan": "table",
+   "jangkar": "bottom-center",
+   "x": [
+    0.12,
+    0.84
+   ],
+   "y": [
+    0.61,
+    0.79
+   ]
+  },
+  "jam-tangan": {
+   "latar": "dressing-room",
+   "permukaan": "ground",
+   "jangkar": "bottom-center",
+   "x": [
+    0.17,
+    0.73
+   ],
+   "y": [
+    0.58,
+    0.9
+   ]
+  },
+  "cincin": {
+   "latar": "dressing-room",
+   "permukaan": "ground",
+   "jangkar": "bottom-center",
+   "x": [
+    0.17,
+    0.73
+   ],
+   "y": [
+    0.58,
+    0.9
+   ]
+  },
+  "gelang": {
+   "latar": "dressing-room",
+   "permukaan": "ground",
+   "jangkar": "bottom-center",
+   "x": [
+    0.17,
+    0.73
+   ],
+   "y": [
+    0.58,
+    0.9
+   ]
+  },
+  "kalung": {
+   "latar": "dressing-room",
+   "permukaan": "ground",
+   "jangkar": "bottom-center",
+   "x": [
+    0.17,
+    0.73
+   ],
+   "y": [
+    0.58,
+    0.9
+   ]
+  },
+  "anting": {
+   "latar": "dressing-room",
+   "permukaan": "ground",
+   "jangkar": "bottom-center",
+   "x": [
+    0.17,
+    0.73
+   ],
+   "y": [
+    0.58,
+    0.9
+   ]
+  },
+  "ikat-pinggang": {
+   "latar": "dressing-room",
+   "permukaan": "ground",
+   "jangkar": "bottom-center",
+   "x": [
+    0.17,
+    0.73
+   ],
+   "y": [
+    0.58,
+    0.9
+   ]
+  },
+  "dasi": {
+   "latar": "dressing-room",
+   "permukaan": "ground",
+   "jangkar": "bottom-center",
+   "x": [
+    0.17,
+    0.73
+   ],
+   "y": [
+    0.58,
+    0.9
+   ]
+  },
+  "pita-rambut": {
+   "latar": "dressing-room",
+   "permukaan": "ground",
+   "jangkar": "bottom-center",
+   "x": [
+    0.17,
+    0.73
+   ],
+   "y": [
+    0.58,
+    0.9
+   ]
+  },
+  "jepit-rambut": {
+   "latar": "dressing-room",
+   "permukaan": "ground",
+   "jangkar": "bottom-center",
+   "x": [
+    0.17,
+    0.73
+   ],
+   "y": [
+    0.58,
+    0.9
+   ]
+  },
+  "bando": {
+   "latar": "dressing-room",
+   "permukaan": "ground",
+   "jangkar": "bottom-center",
+   "x": [
+    0.17,
+    0.73
+   ],
+   "y": [
+    0.58,
+    0.9
+   ]
+  },
+  "kacamata-hitam": {
+   "latar": "dressing-room",
+   "permukaan": "ground",
+   "jangkar": "bottom-center",
+   "x": [
+    0.17,
+    0.73
+   ],
+   "y": [
+    0.58,
+    0.9
+   ]
+  },
+  "sepeda-roda-tiga": {
+   "latar": "city-road",
+   "permukaan": "road",
+   "jangkar": "bottom-center",
+   "x": [
+    0.14,
+    0.8
+   ],
+   "y": [
+    0.63,
+    0.89
+   ]
+  },
+  "skuter": {
+   "latar": "city-road",
+   "permukaan": "road",
+   "jangkar": "bottom-center",
+   "x": [
+    0.14,
+    0.8
+   ],
+   "y": [
+    0.63,
+    0.89
+   ]
+  },
+  "becak": {
+   "latar": "city-road",
+   "permukaan": "road",
+   "jangkar": "bottom-center",
+   "x": [
+    0.14,
+    0.8
+   ],
+   "y": [
+    0.63,
+    0.89
+   ]
+  },
+  "delman": {
+   "latar": "farm",
+   "permukaan": "ground",
+   "jangkar": "bottom-center",
+   "x": [
+    0.17,
+    0.73
+   ],
+   "y": [
+    0.58,
+    0.9
+   ]
+  },
+  "gerobak": {
+   "latar": "city-road",
+   "permukaan": "road",
+   "jangkar": "bottom-center",
+   "x": [
+    0.14,
+    0.8
+   ],
+   "y": [
+    0.63,
+    0.89
+   ]
+  },
+  "traktor": {
+   "latar": "farm",
+   "permukaan": "ground",
+   "jangkar": "bottom-center",
+   "x": [
+    0.17,
+    0.73
+   ],
+   "y": [
+    0.58,
+    0.9
+   ]
+  },
+  "ekskavator": {
+   "latar": "city-road",
+   "permukaan": "road",
+   "jangkar": "bottom-center",
+   "x": [
+    0.14,
+    0.8
+   ],
+   "y": [
+    0.63,
+    0.89
+   ]
+  },
+  "bajaj": {
+   "latar": "city-road",
+   "permukaan": "road",
+   "jangkar": "bottom-center",
+   "x": [
+    0.14,
+    0.8
+   ],
+   "y": [
+    0.63,
+    0.89
+   ]
+  },
+  "balon-udara": {
+   "latar": "open-sky",
+   "permukaan": "air",
+   "jangkar": "bottom-center",
+   "x": [
+    0.15,
+    0.7
+   ],
+   "y": [
+    0.18,
+    0.65
+   ]
+  },
+  "rakit": {
+   "latar": "river",
+   "permukaan": "water",
+   "jangkar": "bottom-center",
+   "x": [
+    0.55,
+    0.86
+   ],
+   "y": [
+    0.55,
+    0.8
+   ]
+  },
+  "kapal-selam": {
+   "latar": "deep-ocean",
+   "permukaan": "water",
+   "jangkar": "bottom-center",
+   "x": [
+    0.15,
+    0.72
+   ],
+   "y": [
+    0.3,
+    0.78
+   ]
+  },
+  "kereta-gantung": {
+   "latar": "mountains",
+   "permukaan": "ground",
+   "jangkar": "bottom-center",
+   "x": [
+    0.17,
+    0.73
+   ],
+   "y": [
+    0.58,
+    0.9
+   ]
+  },
+  "panci": {
+   "latar": "kitchen",
+   "permukaan": "table",
+   "jangkar": "bottom-center",
+   "x": [
+    0.5,
+    0.85
+   ],
+   "y": [
+    0.62,
+    0.87
+   ]
+  },
+  "wajan": {
+   "latar": "kitchen",
+   "permukaan": "table",
+   "jangkar": "bottom-center",
+   "x": [
+    0.5,
+    0.85
+   ],
+   "y": [
+    0.62,
+    0.87
+   ]
+  },
+  "ketel": {
+   "latar": "kitchen",
+   "permukaan": "table",
+   "jangkar": "bottom-center",
+   "x": [
+    0.5,
+    0.85
+   ],
+   "y": [
+    0.62,
+    0.87
+   ]
+  },
+  "pisau": {
+   "latar": "kitchen",
+   "permukaan": "table",
+   "jangkar": "bottom-center",
+   "x": [
+    0.5,
+    0.85
+   ],
+   "y": [
+    0.62,
+    0.87
+   ]
+  },
+  "talenan": {
+   "latar": "kitchen",
+   "permukaan": "table",
+   "jangkar": "bottom-center",
+   "x": [
+    0.5,
+    0.85
+   ],
+   "y": [
+    0.62,
+    0.87
+   ]
+  },
+  "mangkuk": {
+   "latar": "kitchen",
+   "permukaan": "table",
+   "jangkar": "bottom-center",
+   "x": [
+    0.5,
+    0.85
+   ],
+   "y": [
+    0.62,
+    0.87
+   ]
+  },
+  "parutan": {
+   "latar": "kitchen",
+   "permukaan": "table",
+   "jangkar": "bottom-center",
+   "x": [
+    0.5,
+    0.85
+   ],
+   "y": [
+    0.62,
+    0.87
+   ]
+  },
+  "spatula": {
+   "latar": "kitchen",
+   "permukaan": "table",
+   "jangkar": "bottom-center",
+   "x": [
+    0.5,
+    0.85
+   ],
+   "y": [
+    0.62,
+    0.87
+   ]
+  },
+  "sumpit": {
+   "latar": "kitchen",
+   "permukaan": "table",
+   "jangkar": "bottom-center",
+   "x": [
+    0.5,
+    0.85
+   ],
+   "y": [
+    0.62,
+    0.87
+   ]
+  },
+  "termos": {
+   "latar": "kitchen",
+   "permukaan": "table",
+   "jangkar": "bottom-center",
+   "x": [
+    0.5,
+    0.85
+   ],
+   "y": [
+    0.62,
+    0.87
+   ]
+  },
+  "peta": {
+   "latar": "classroom",
+   "permukaan": "table",
+   "jangkar": "bottom-center",
+   "x": [
+    0.5,
+    0.85
+   ],
+   "y": [
+    0.62,
+    0.87
+   ]
+  },
+  "kalender": {
+   "latar": "classroom",
+   "permukaan": "table",
+   "jangkar": "bottom-center",
+   "x": [
+    0.5,
+    0.85
+   ],
+   "y": [
+    0.62,
+    0.87
+   ]
+  },
+  "penghapus-papan": {
+   "latar": "classroom",
+   "permukaan": "table",
+   "jangkar": "bottom-center",
+   "x": [
+    0.5,
+    0.85
+   ],
+   "y": [
+    0.62,
+    0.87
+   ]
+  },
+  "spidol": {
+   "latar": "classroom",
+   "permukaan": "table",
+   "jangkar": "bottom-center",
+   "x": [
+    0.5,
+    0.85
+   ],
+   "y": [
+    0.62,
+    0.87
+   ]
+  },
+  "rak-buku": {
+   "latar": "classroom",
+   "permukaan": "table",
+   "jangkar": "bottom-center",
+   "x": [
+    0.5,
+    0.85
+   ],
+   "y": [
+    0.62,
+    0.87
+   ]
+  },
+  "tempat-sampah-kelas": {
+   "latar": "classroom",
+   "permukaan": "table",
+   "jangkar": "bottom-center",
+   "x": [
+    0.5,
+    0.85
+   ],
+   "y": [
+    0.62,
+    0.87
+   ]
+  },
+  "jam-sekolah": {
+   "latar": "classroom",
+   "permukaan": "table",
+   "jangkar": "bottom-center",
+   "x": [
+    0.5,
+    0.85
+   ],
+   "y": [
+    0.62,
+    0.87
+   ]
+  },
+  "kapur": {
+   "latar": "classroom",
+   "permukaan": "table",
+   "jangkar": "bottom-center",
+   "x": [
+    0.5,
+    0.85
+   ],
+   "y": [
+    0.62,
+    0.87
+   ]
+  },
+  "rautan": {
+   "latar": "classroom",
+   "permukaan": "table",
+   "jangkar": "bottom-center",
+   "x": [
+    0.5,
+    0.85
+   ],
+   "y": [
+    0.62,
+    0.87
+   ]
+  },
+  "kotak-pensil": {
+   "latar": "classroom",
+   "permukaan": "table",
+   "jangkar": "bottom-center",
+   "x": [
+    0.5,
+    0.85
+   ],
+   "y": [
+    0.62,
+    0.87
+   ]
+  },
+  "lampu-lalu-lintas": {
+   "latar": "city-road",
+   "permukaan": "road",
+   "jangkar": "bottom-center",
+   "x": [
+    0.14,
+    0.8
+   ],
+   "y": [
+    0.63,
+    0.89
+   ]
+  },
+  "tiang-listrik": {
+   "latar": "city-road",
+   "permukaan": "road",
+   "jangkar": "bottom-center",
+   "x": [
+    0.14,
+    0.8
+   ],
+   "y": [
+    0.63,
+    0.89
+   ]
+  },
+  "bedug": {
+   "latar": "community",
+   "permukaan": "ground",
+   "jangkar": "bottom-center",
+   "x": [
+    0.17,
+    0.73
+   ],
+   "y": [
+    0.58,
+    0.9
+   ]
+  },
+  "tenda": {
+   "latar": "nature",
+   "permukaan": "ground",
+   "jangkar": "bottom-center",
+   "x": [
+    0.17,
+    0.73
+   ],
+   "y": [
+    0.58,
+    0.9
+   ]
+  },
+  "api-unggun": {
+   "latar": "nature",
+   "permukaan": "ground",
+   "jangkar": "bottom-center",
+   "x": [
+    0.17,
+    0.73
+   ],
+   "y": [
+    0.58,
+    0.9
+   ]
+  },
+  "batu-karang": {
+   "latar": "beach",
+   "permukaan": "ground",
+   "jangkar": "bottom-center",
+   "x": [
+    0.17,
+    0.73
+   ],
+   "y": [
+    0.58,
+    0.9
+   ]
+  },
+  "cangkang-kerang": {
+   "latar": "beach",
+   "permukaan": "ground",
+   "jangkar": "bottom-center",
+   "x": [
+    0.17,
+    0.73
+   ],
+   "y": [
+    0.58,
+    0.9
+   ]
+  },
+  "sarang-burung": {
+   "latar": "woodland",
+   "permukaan": "branch",
+   "jangkar": "bottom-center",
+   "x": [
+    0.61,
+    0.82
+   ],
+   "y": [
+    0.36,
+    0.47
+   ]
+  },
+  "sarang-lebah": {
+   "latar": "flower-garden",
+   "permukaan": "ground",
+   "jangkar": "bottom-center",
+   "x": [
+    0.17,
+    0.73
+   ],
+   "y": [
+    0.58,
+    0.9
+   ]
+  },
+  "es-batu": {
+   "latar": "polar",
+   "permukaan": "ground",
+   "jangkar": "bottom-center",
+   "x": [
+    0.17,
+    0.73
+   ],
+   "y": [
+    0.58,
+    0.9
+   ]
+  },
+  "kaktus-pot": {
+   "latar": "nature",
+   "permukaan": "ground",
+   "jangkar": "bottom-center",
+   "x": [
+    0.17,
+    0.73
+   ],
+   "y": [
+    0.58,
+    0.9
+   ]
+  },
+  "daun-kering": {
+   "latar": "woodland",
+   "permukaan": "branch",
+   "jangkar": "bottom-center",
+   "x": [
+    0.61,
+    0.82
+   ],
+   "y": [
+    0.36,
+    0.47
+   ]
+  },
+  "ranting": {
+   "latar": "woodland",
+   "permukaan": "branch",
+   "jangkar": "bottom-center",
+   "x": [
+    0.61,
+    0.82
+   ],
+   "y": [
+    0.36,
+    0.47
+   ]
+  },
+  "tumpukan-pasir": {
+   "latar": "beach",
+   "permukaan": "ground",
+   "jangkar": "bottom-center",
+   "x": [
+    0.17,
+    0.73
+   ],
+   "y": [
+    0.58,
+    0.9
+   ]
+  },
+  "genangan-lumpur": {
+   "latar": "wetland",
+   "permukaan": "water",
+   "jangkar": "bottom-center",
+   "x": [
+    0.15,
+    0.72
+   ],
+   "y": [
+    0.3,
+    0.78
+   ]
+  },
+  "jaring-laba-laba": {
+   "latar": "woodland",
+   "permukaan": "branch",
+   "jangkar": "bottom-center",
+   "x": [
+    0.61,
+    0.82
+   ],
+   "y": [
+    0.36,
+    0.47
+   ]
+  },
+  "jamur-merah": {
+   "latar": "woodland",
+   "permukaan": "branch",
+   "jangkar": "bottom-center",
+   "x": [
+    0.61,
+    0.82
+   ],
+   "y": [
+    0.36,
+    0.47
+   ]
+  },
+  "bayi-perempuan": {
+   "latar": "living-room",
+   "permukaan": "ground",
+   "jangkar": "bottom-center",
+   "x": [
+    0.17,
+    0.73
+   ],
+   "y": [
+    0.58,
+    0.9
+   ]
+  },
+  "balita-laki-laki": {
+   "latar": "homeyard",
+   "permukaan": "ground",
+   "jangkar": "bottom-center",
+   "x": [
+    0.17,
+    0.73
+   ],
+   "y": [
+    0.58,
+    0.9
+   ]
+  },
+  "remaja-laki-laki": {
+   "latar": "homeyard",
+   "permukaan": "ground",
+   "jangkar": "bottom-center",
+   "x": [
+    0.17,
+    0.73
+   ],
+   "y": [
+    0.58,
+    0.9
+   ]
+  },
+  "remaja-perempuan": {
+   "latar": "homeyard",
+   "permukaan": "ground",
+   "jangkar": "bottom-center",
+   "x": [
+    0.17,
+    0.73
+   ],
+   "y": [
+    0.58,
+    0.9
+   ]
+  },
+  "ibu-hamil": {
+   "latar": "homeyard",
+   "permukaan": "ground",
+   "jangkar": "bottom-center",
+   "x": [
+    0.17,
+    0.73
+   ],
+   "y": [
+    0.58,
+    0.9
+   ]
+  },
+  "ayah-menggendong-bayi": {
+   "latar": "homeyard",
+   "permukaan": "ground",
+   "jangkar": "bottom-center",
+   "x": [
+    0.17,
+    0.73
+   ],
+   "y": [
+    0.58,
+    0.9
+   ]
+  },
+  "guru-berhijab": {
+   "latar": "classroom",
+   "permukaan": "table",
+   "jangkar": "bottom-center",
+   "x": [
+    0.5,
+    0.85
+   ],
+   "y": [
+    0.62,
+    0.87
+   ]
+  },
+  "perawat": {
+   "latar": "clinic",
+   "permukaan": "ground",
+   "jangkar": "bottom-center",
+   "x": [
+    0.17,
+    0.73
+   ],
+   "y": [
+    0.58,
+    0.9
+   ]
+  },
+  "pekerja-bangunan": {
+   "latar": "community",
+   "permukaan": "ground",
+   "jangkar": "bottom-center",
+   "x": [
+    0.17,
+    0.73
+   ],
+   "y": [
+    0.58,
+    0.9
+   ]
+  },
+  "petugas-pos": {
+   "latar": "community",
+   "permukaan": "ground",
+   "jangkar": "bottom-center",
+   "x": [
+    0.17,
+    0.73
+   ],
+   "y": [
+    0.58,
+    0.9
+   ]
+  },
+  "pramugari": {
+   "latar": "airport",
+   "permukaan": "ground",
+   "jangkar": "bottom-center",
+   "x": [
+    0.2,
+    0.5
+   ],
+   "y": [
+    0.65,
+    0.9
+   ]
+  },
+  "astronaut": {
+   "latar": "space",
+   "permukaan": "air",
+   "jangkar": "bottom-center",
+   "x": [
+    0.15,
+    0.7
+   ],
+   "y": [
+    0.18,
+    0.65
+   ]
+  },
+  "ilmuwan": {
+   "latar": "classroom",
+   "permukaan": "table",
+   "jangkar": "bottom-center",
+   "x": [
+    0.5,
+    0.85
+   ],
+   "y": [
+    0.62,
+    0.87
+   ]
+  },
+  "mekanik": {
+   "latar": "homeyard",
+   "permukaan": "ground",
+   "jangkar": "bottom-center",
+   "x": [
+    0.17,
+    0.73
+   ],
+   "y": [
+    0.58,
+    0.9
+   ]
+  },
+  "atlet": {
+   "latar": "playground",
+   "permukaan": "ground",
+   "jangkar": "bottom-center",
+   "x": [
+    0.17,
+    0.73
+   ],
+   "y": [
+    0.58,
+    0.9
+   ]
+  },
+  "hakim": {
+   "latar": "community",
+   "permukaan": "ground",
+   "jangkar": "bottom-center",
+   "x": [
+    0.17,
+    0.73
+   ],
+   "y": [
+    0.58,
+    0.9
+   ]
+  },
+  "satpam": {
+   "latar": "community",
+   "permukaan": "ground",
+   "jangkar": "bottom-center",
+   "x": [
+    0.17,
+    0.73
+   ],
+   "y": [
+    0.58,
+    0.9
+   ]
+  },
+  "musisi": {
+   "latar": "classroom",
+   "permukaan": "table",
+   "jangkar": "bottom-center",
+   "x": [
+    0.5,
+    0.85
+   ],
+   "y": [
+    0.62,
+    0.87
+   ]
+  },
+  "pelukis": {
+   "latar": "classroom",
+   "permukaan": "table",
+   "jangkar": "bottom-center",
+   "x": [
+    0.5,
+    0.85
+   ],
+   "y": [
+    0.62,
+    0.87
+   ]
+  },
+  "petugas-kebersihan": {
+   "latar": "classroom",
+   "permukaan": "table",
+   "jangkar": "bottom-center",
+   "x": [
+    0.5,
+    0.85
+   ],
+   "y": [
+    0.62,
+    0.87
+   ]
+  },
+  "reporter": {
+   "latar": "community",
+   "permukaan": "ground",
+   "jangkar": "bottom-center",
+   "x": [
+    0.17,
+    0.73
+   ],
+   "y": [
+    0.58,
+    0.9
+   ]
+  },
+  "anak-bertongkat-kruk": {
+   "latar": "playground",
+   "permukaan": "ground",
+   "jangkar": "bottom-center",
+   "x": [
+    0.17,
+    0.73
+   ],
+   "y": [
+    0.58,
+    0.9
+   ]
+  },
+  "pria-tunanetra": {
+   "latar": "community",
+   "permukaan": "ground",
+   "jangkar": "bottom-center",
+   "x": [
+    0.17,
+    0.73
+   ],
+   "y": [
+    0.58,
+    0.9
+   ]
+  },
+  "anak-sindrom-down": {
+   "latar": "playground",
+   "permukaan": "ground",
+   "jangkar": "bottom-center",
+   "x": [
+    0.17,
+    0.73
+   ],
+   "y": [
+    0.58,
+    0.9
+   ]
+  },
+  "anak-berkaki-prostetik": {
+   "latar": "playground",
+   "permukaan": "ground",
+   "jangkar": "bottom-center",
+   "x": [
+    0.17,
+    0.73
+   ],
+   "y": [
+    0.58,
+    0.9
+   ]
+  },
+  "anak-membaca-braille": {
+   "latar": "classroom",
+   "permukaan": "table",
+   "jangkar": "bottom-center",
+   "x": [
+    0.5,
+    0.85
+   ],
+   "y": [
+    0.62,
+    0.87
+   ]
+  },
+  "pengguna-kursi-elektrik": {
+   "latar": "community",
+   "permukaan": "ground",
+   "jangkar": "bottom-center",
+   "x": [
+    0.17,
+    0.73
+   ],
+   "y": [
+    0.58,
+    0.9
+   ]
+  },
+  "tunanetra-anjing-pemandu": {
+   "latar": "community",
+   "permukaan": "ground",
+   "jangkar": "bottom-center",
+   "x": [
+    0.17,
+    0.73
+   ],
+   "y": [
+    0.58,
+    0.9
+   ]
+  },
+  "anak-memakai-headphone": {
+   "latar": "playground",
+   "permukaan": "ground",
+   "jangkar": "bottom-center",
+   "x": [
+    0.17,
+    0.73
+   ],
+   "y": [
+    0.58,
+    0.9
+   ]
+  },
+  "anak-berisyarat": {
+   "latar": "playground",
+   "permukaan": "ground",
+   "jangkar": "bottom-center",
+   "x": [
+    0.17,
+    0.73
+   ],
+   "y": [
+    0.58,
+    0.9
+   ]
+  },
+  "kakek-memakai-walker": {
+   "latar": "community",
+   "permukaan": "ground",
+   "jangkar": "bottom-center",
+   "x": [
+    0.17,
+    0.73
+   ],
+   "y": [
+    0.58,
+    0.9
+   ]
+  },
+  "murid-angkat-tangan": {
+   "latar": "classroom",
+   "permukaan": "table",
+   "jangkar": "bottom-center",
+   "x": [
+    0.5,
+    0.85
+   ],
+   "y": [
+    0.62,
+    0.87
+   ]
+  },
+  "anak-makan": {
+   "latar": "kitchen",
+   "permukaan": "table",
+   "jangkar": "bottom-center",
+   "x": [
+    0.5,
+    0.85
+   ],
+   "y": [
+    0.62,
+    0.87
+   ]
+  },
+  "anak-minum": {
+   "latar": "kitchen",
+   "permukaan": "table",
+   "jangkar": "bottom-center",
+   "x": [
+    0.5,
+    0.85
+   ],
+   "y": [
+    0.62,
+    0.87
+   ]
+  },
+  "anak-bermain-layangan": {
+   "latar": "playground",
+   "permukaan": "ground",
+   "jangkar": "bottom-center",
+   "x": [
+    0.17,
+    0.73
+   ],
+   "y": [
+    0.58,
+    0.9
+   ]
+  },
+  "anak-lompat-tali": {
+   "latar": "playground",
+   "permukaan": "ground",
+   "jangkar": "bottom-center",
+   "x": [
+    0.17,
+    0.73
+   ],
+   "y": [
+    0.58,
+    0.9
+   ]
+  },
+  "anak-melukis": {
+   "latar": "classroom",
+   "permukaan": "table",
+   "jangkar": "bottom-center",
+   "x": [
+    0.5,
+    0.85
+   ],
+   "y": [
+    0.62,
+    0.87
+   ]
+  },
+  "anak-tidur": {
+   "latar": "classroom",
+   "permukaan": "table",
+   "jangkar": "bottom-center",
+   "x": [
+    0.5,
+    0.85
+   ],
+   "y": [
+    0.62,
+    0.87
+   ]
+  },
+  "anak-menyapu": {
+   "latar": "homeyard",
+   "permukaan": "ground",
+   "jangkar": "bottom-center",
+   "x": [
+    0.17,
+    0.73
+   ],
+   "y": [
+    0.58,
+    0.9
+   ]
+  },
+  "anak-membawa-tas": {
+   "latar": "classroom",
+   "permukaan": "table",
+   "jangkar": "bottom-center",
+   "x": [
+    0.5,
+    0.85
+   ],
+   "y": [
+    0.62,
+    0.87
+   ]
+  },
+  "anak-tertawa": {
+   "latar": "playground",
+   "permukaan": "ground",
+   "jangkar": "bottom-center",
+   "x": [
+    0.17,
+    0.73
+   ],
+   "y": [
+    0.58,
+    0.9
+   ]
+  },
+  "anak-berambut-keriting": {
+   "latar": "community",
+   "permukaan": "ground",
+   "jangkar": "bottom-center",
+   "x": [
+    0.17,
+    0.73
+   ],
+   "y": [
+    0.58,
+    0.9
+   ]
+  },
+  "anak-perempuan-pirang": {
+   "latar": "community",
+   "permukaan": "ground",
+   "jangkar": "bottom-center",
+   "x": [
+    0.17,
+    0.73
+   ],
+   "y": [
+    0.58,
+    0.9
+   ]
+  },
+  "anak-berambut-merah": {
+   "latar": "community",
+   "permukaan": "ground",
+   "jangkar": "bottom-center",
+   "x": [
+    0.17,
+    0.73
+   ],
+   "y": [
+    0.58,
+    0.9
+   ]
+  },
+  "anak-berkepang": {
+   "latar": "community",
+   "permukaan": "ground",
+   "jangkar": "bottom-center",
+   "x": [
+    0.17,
+    0.73
+   ],
+   "y": [
+    0.58,
+    0.9
+   ]
+  },
+  "pria-tinggi": {
+   "latar": "community",
+   "permukaan": "ground",
+   "jangkar": "bottom-center",
+   "x": [
+    0.17,
+    0.73
+   ],
+   "y": [
+    0.58,
+    0.9
+   ]
+  },
+  "wanita-bertubuh-berisi": {
+   "latar": "community",
+   "permukaan": "ground",
+   "jangkar": "bottom-center",
+   "x": [
+    0.17,
+    0.73
+   ],
+   "y": [
+    0.58,
+    0.9
+   ]
+  },
+  "pria-berjenggot": {
+   "latar": "community",
+   "permukaan": "ground",
+   "jangkar": "bottom-center",
+   "x": [
+    0.17,
+    0.73
+   ],
+   "y": [
+    0.58,
+    0.9
+   ]
+  },
+  "wanita-bertopi": {
+   "latar": "community",
+   "permukaan": "ground",
+   "jangkar": "bottom-center",
+   "x": [
+    0.17,
+    0.73
+   ],
+   "y": [
+    0.58,
+    0.9
+   ]
+  },
+  "anak-bergigi-tanggal": {
+   "latar": "community",
+   "permukaan": "ground",
+   "jangkar": "bottom-center",
+   "x": [
+    0.17,
+    0.73
+   ],
+   "y": [
+    0.58,
+    0.9
+   ]
+  },
+  "remaja-berkawat-gigi": {
+   "latar": "community",
+   "permukaan": "ground",
+   "jangkar": "bottom-center",
+   "x": [
+    0.17,
+    0.73
+   ],
+   "y": [
+    0.58,
+    0.9
+   ]
+  },
+  "pria-botak": {
+   "latar": "community",
+   "permukaan": "ground",
+   "jangkar": "bottom-center",
+   "x": [
+    0.17,
+    0.73
+   ],
+   "y": [
+    0.58,
+    0.9
+   ]
+  },
+  "wanita-berambut-keriting": {
+   "latar": "community",
+   "permukaan": "ground",
+   "jangkar": "bottom-center",
+   "x": [
+    0.17,
+    0.73
+   ],
+   "y": [
+    0.58,
+    0.9
+   ]
+  },
+  "pria-berbatik": {
+   "latar": "community",
+   "permukaan": "ground",
+   "jangkar": "bottom-center",
+   "x": [
+    0.17,
+    0.73
+   ],
+   "y": [
+    0.58,
+    0.9
+   ]
+  },
+  "wanita-berkebaya": {
+   "latar": "community",
+   "permukaan": "ground",
+   "jangkar": "bottom-center",
+   "x": [
+    0.17,
+    0.73
+   ],
+   "y": [
+    0.58,
+    0.9
+   ]
+  },
+  "pria-berpeci": {
+   "latar": "community",
+   "permukaan": "ground",
+   "jangkar": "bottom-center",
+   "x": [
+    0.17,
+    0.73
+   ],
+   "y": [
+    0.58,
+    0.9
+   ]
+  },
+  "wanita-berabaya": {
+   "latar": "community",
+   "permukaan": "ground",
+   "jangkar": "bottom-center",
+   "x": [
+    0.17,
+    0.73
+   ],
+   "y": [
+    0.58,
+    0.9
+   ]
+  },
+  "pria-berudeng": {
+   "latar": "community",
+   "permukaan": "ground",
+   "jangkar": "bottom-center",
+   "x": [
+    0.17,
+    0.73
+   ],
+   "y": [
+    0.58,
+    0.9
+   ]
+  },
+  "wanita-bali": {
+   "latar": "community",
+   "permukaan": "ground",
+   "jangkar": "bottom-center",
+   "x": [
+    0.17,
+    0.73
+   ],
+   "y": [
+    0.58,
+    0.9
+   ]
+  },
+  "pria-papua": {
+   "latar": "community",
+   "permukaan": "ground",
+   "jangkar": "bottom-center",
+   "x": [
+    0.17,
+    0.73
+   ],
+   "y": [
+    0.58,
+    0.9
+   ]
+  },
+  "wanita-dayak": {
+   "latar": "community",
+   "permukaan": "ground",
+   "jangkar": "bottom-center",
+   "x": [
+    0.17,
+    0.73
+   ],
+   "y": [
+    0.58,
+    0.9
+   ]
+  },
+  "pria-berjubah": {
+   "latar": "community",
+   "permukaan": "ground",
+   "jangkar": "bottom-center",
+   "x": [
+    0.17,
+    0.73
+   ],
+   "y": [
+    0.58,
+    0.9
+   ]
+  },
+  "anak-memakai-hoodie": {
+   "latar": "community",
+   "permukaan": "ground",
+   "jangkar": "bottom-center",
+   "x": [
+    0.17,
+    0.73
+   ],
+   "y": [
+    0.58,
+    0.9
+   ]
+  },
+  "anak-bermantel": {
+   "latar": "community",
+   "permukaan": "ground",
+   "jangkar": "bottom-center",
+   "x": [
+    0.17,
+    0.73
+   ],
+   "y": [
+    0.58,
+    0.9
+   ]
+  },
+  "anak-berjas-hujan": {
+   "latar": "community",
+   "permukaan": "ground",
+   "jangkar": "bottom-center",
+   "x": [
+    0.17,
+    0.73
+   ],
+   "y": [
+    0.58,
+    0.9
+   ]
   }
  }
 }

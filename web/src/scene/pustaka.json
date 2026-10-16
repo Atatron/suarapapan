@@ -102,7 +102,7 @@
   },
   "lumba-lumba": {
    "k": "hewan-laut",
-   "n": "lumba-lumba"
+   "n": "lumba lumba"
   },
   "paus": {
    "k": "hewan-laut",
@@ -130,7 +130,7 @@
   },
   "ubur-ubur": {
    "k": "hewan-laut",
-   "n": "ubur-ubur"
+   "n": "ubur ubur"
   },
   "bintang-laut": {
    "k": "hewan-laut",
@@ -142,7 +142,7 @@
   },
   "cumi-cumi": {
    "k": "hewan-laut",
-   "n": "cumi-cumi"
+   "n": "cumi cumi"
   },
   "burung": {
    "k": "burung",
@@ -194,7 +194,7 @@
   },
   "kupu-kupu": {
    "k": "serangga",
-   "n": "kupu-kupu"
+   "n": "kupu kupu"
   },
   "lebah": {
    "k": "serangga",
@@ -222,7 +222,7 @@
   },
   "laba-laba": {
    "k": "serangga",
-   "n": "laba-laba"
+   "n": "laba laba"
   },
   "siput": {
    "k": "serangga",
@@ -238,62 +238,62 @@
   },
   "kura-kura": {
    "k": "serangga",
-   "n": "kura-kura"
+   "n": "kura kura"
   },
   "anak-laki-laki": {
    "k": "orang-1",
    "n": "anak laki-laki"
   },
   "anak-perempuan": {
-   "k": "orang-1",
+   "k": "orang-keluarga-usia",
    "n": "anak perempuan"
   },
   "bayi": {
-   "k": "orang-1",
+   "k": "orang-keluarga-usia",
    "n": "bayi"
   },
   "ibu": {
-   "k": "orang-1",
+   "k": "orang-keluarga-usia",
    "n": "ibu"
   },
   "ayah": {
-   "k": "orang-1",
+   "k": "orang-keluarga-usia",
    "n": "ayah"
   },
   "nenek": {
-   "k": "orang-1",
+   "k": "orang-keluarga-usia",
    "n": "nenek"
   },
   "kakek": {
-   "k": "orang-1",
+   "k": "orang-keluarga-usia",
    "n": "kakek"
   },
   "guru": {
-   "k": "orang-1",
+   "k": "orang-profesi-1",
    "n": "guru"
   },
   "siswa-berhijab": {
-   "k": "orang-1",
+   "k": "orang-aktivitas",
    "n": "siswa berhijab"
   },
   "dokter": {
-   "k": "orang-1",
+   "k": "orang-profesi-1",
    "n": "dokter"
   },
   "polisi": {
-   "k": "orang-1",
+   "k": "orang-profesi-1",
    "n": "polisi"
   },
   "petani": {
-   "k": "orang-1",
+   "k": "orang-profesi-1",
    "n": "petani"
   },
   "nelayan": {
-   "k": "orang-2",
+   "k": "orang-profesi-2",
    "n": "nelayan"
   },
   "koki": {
-   "k": "orang-2",
+   "k": "orang-profesi-1",
    "n": "koki"
   },
   "pak-pos": {
@@ -301,11 +301,11 @@
    "n": "pak pos"
   },
   "pemadam-kebakaran": {
-   "k": "orang-2",
+   "k": "orang-profesi-1",
    "n": "pemadam kebakaran"
   },
   "pilot": {
-   "k": "orang-2",
+   "k": "orang-profesi-1",
    "n": "pilot"
   },
   "sopir": {
@@ -313,15 +313,15 @@
    "n": "sopir"
   },
   "penjual": {
-   "k": "orang-2",
+   "k": "orang-profesi-2",
    "n": "penjual"
   },
   "anak-kursi-roda": {
-   "k": "orang-2",
+   "k": "orang-inklusi-disabilitas",
    "n": "anak kursi roda"
   },
   "anak-dengan-alat-bantu-dengar": {
-   "k": "orang-2",
+   "k": "orang-inklusi-disabilitas",
    "n": "anak dengan alat bantu dengar"
   },
   "anak-tunanetra-dengan-tongkat": {
@@ -329,7 +329,7 @@
    "n": "anak tunanetra dengan tongkat"
   },
   "anak-bermain-bola": {
-   "k": "orang-2",
+   "k": "orang-aktivitas",
    "n": "anak bermain bola"
   },
   "anak-membaca": {
@@ -433,51 +433,51 @@
    "n": "bayam"
   },
   "nasi": {
-   "k": "makanan",
+   "k": "makanan-minuman",
    "n": "nasi"
   },
   "roti": {
-   "k": "makanan",
+   "k": "makanan-minuman",
    "n": "roti"
   },
   "kue": {
-   "k": "makanan",
+   "k": "makanan-minuman",
    "n": "kue"
   },
   "pizza": {
-   "k": "makanan",
+   "k": "makanan-minuman",
    "n": "pizza"
   },
   "donat": {
-   "k": "makanan",
+   "k": "makanan-minuman",
    "n": "donat"
   },
   "telur": {
-   "k": "makanan",
+   "k": "makanan-minuman",
    "n": "telur"
   },
   "es-krim": {
-   "k": "makanan",
+   "k": "makanan-minuman",
    "n": "es krim"
   },
   "permen": {
-   "k": "makanan",
+   "k": "makanan-minuman",
    "n": "permen"
   },
   "susu": {
-   "k": "makanan",
+   "k": "makanan-minuman",
    "n": "susu"
   },
   "air": {
-   "k": "makanan",
+   "k": "makanan-minuman",
    "n": "air"
   },
   "bakso": {
-   "k": "makanan",
+   "k": "makanan-minuman",
    "n": "bakso"
   },
   "sate": {
-   "k": "makanan",
+   "k": "makanan-minuman",
    "n": "sate"
   },
   "pensil": {
@@ -513,15 +513,15 @@
    "n": "krayon"
   },
   "jam": {
-   "k": "alat-sekolah",
+   "k": "elektronik",
    "n": "jam"
   },
   "globe": {
-   "k": "alat-sekolah",
+   "k": "benda-kelas",
    "n": "globe"
   },
   "papan-tulis-kecil": {
-   "k": "alat-sekolah",
+   "k": "benda-kelas",
    "n": "papan tulis kecil"
   },
   "pulpen": {
@@ -557,11 +557,11 @@
    "n": "sofa"
   },
   "piring": {
-   "k": "benda-rumah",
+   "k": "alat-dapur",
    "n": "piring"
   },
   "gelas": {
-   "k": "benda-rumah",
+   "k": "alat-dapur",
    "n": "gelas"
   },
   "sendok": {
@@ -569,7 +569,7 @@
    "n": "sendok"
   },
   "ember": {
-   "k": "benda-rumah",
+   "k": "alat-kebersihan",
    "n": "ember"
   },
   "keranjang": {
@@ -685,7 +685,7 @@
    "n": "rok"
   },
   "topi": {
-   "k": "pakaian",
+   "k": "aksesoris",
    "n": "topi"
   },
   "sepatu": {
@@ -721,7 +721,7 @@
    "n": "jaket"
   },
   "bola": {
-   "k": "mainan-bentuk",
+   "k": "alat-olahraga",
    "n": "bola"
   },
   "balon": {
@@ -757,7 +757,7 @@
    "n": "hati"
   },
   "koin": {
-   "k": "mainan-bentuk",
+   "k": "uang-belanja",
    "n": "koin"
   },
   "kado": {
@@ -767,96 +767,1388 @@
   "bendera": {
    "k": "mainan-bentuk",
    "n": "bendera"
+  },
+  "piyik-ayam": {
+   "k": "burung",
+   "n": "piyik ayam"
+  },
+  "kelereng": {
+   "k": "mainan",
+   "n": "kelereng"
+  },
+  "yoyo": {
+   "k": "mainan",
+   "n": "yoyo"
+  },
+  "robot-mainan": {
+   "k": "mainan",
+   "n": "robot mainan"
+  },
+  "mobil-mainan": {
+   "k": "mainan",
+   "n": "mobil mainan"
+  },
+  "balok-mainan": {
+   "k": "mainan",
+   "n": "balok mainan"
+  },
+  "keping-puzel": {
+   "k": "mainan",
+   "n": "keping puzel"
+  },
+  "kubus-rubik": {
+   "k": "mainan",
+   "n": "kubus rubik"
+  },
+  "pistol-air": {
+   "k": "mainan",
+   "n": "pistol air"
+  },
+  "plastisin": {
+   "k": "mainan",
+   "n": "plastisin"
+  },
+  "ketapel": {
+   "k": "mainan",
+   "n": "ketapel"
+  },
+  "boneka-beruang": {
+   "k": "mainan",
+   "n": "boneka beruang"
+  },
+  "figur-aksi": {
+   "k": "mainan",
+   "n": "figur aksi"
+  },
+  "sapu": {
+   "k": "alat-kebersihan",
+   "n": "sapu"
+  },
+  "pel": {
+   "k": "alat-kebersihan",
+   "n": "pel"
+  },
+  "kemoceng": {
+   "k": "alat-kebersihan",
+   "n": "kemoceng"
+  },
+  "tempat-sampah": {
+   "k": "alat-kebersihan",
+   "n": "tempat sampah"
+  },
+  "sabun": {
+   "k": "alat-kebersihan",
+   "n": "sabun"
+  },
+  "sikat-gigi": {
+   "k": "alat-kebersihan",
+   "n": "sikat gigi"
+  },
+  "pasta-gigi": {
+   "k": "alat-kebersihan",
+   "n": "pasta gigi"
+  },
+  "sampo": {
+   "k": "alat-kebersihan",
+   "n": "sampo"
+  },
+  "handuk": {
+   "k": "alat-kebersihan",
+   "n": "handuk"
+  },
+  "spons": {
+   "k": "alat-kebersihan",
+   "n": "spons"
+  },
+  "sikat-lantai": {
+   "k": "alat-kebersihan",
+   "n": "sikat lantai"
+  },
+  "televisi": {
+   "k": "elektronik",
+   "n": "televisi"
+  },
+  "radio": {
+   "k": "elektronik",
+   "n": "radio"
+  },
+  "ponsel": {
+   "k": "elektronik",
+   "n": "ponsel"
+  },
+  "laptop": {
+   "k": "elektronik",
+   "n": "laptop"
+  },
+  "kipas-angin": {
+   "k": "elektronik",
+   "n": "kipas angin"
+  },
+  "kulkas": {
+   "k": "elektronik",
+   "n": "kulkas"
+  },
+  "setrika": {
+   "k": "elektronik",
+   "n": "setrika"
+  },
+  "senter": {
+   "k": "elektronik",
+   "n": "senter"
+  },
+  "mesin-cuci": {
+   "k": "elektronik",
+   "n": "mesin cuci"
+  },
+  "oven-microwave": {
+   "k": "elektronik",
+   "n": "oven microwave"
+  },
+  "kamera": {
+   "k": "elektronik",
+   "n": "kamera"
+  },
+  "gitar": {
+   "k": "alat-musik",
+   "n": "gitar"
+  },
+  "piano": {
+   "k": "alat-musik",
+   "n": "piano"
+  },
+  "drum": {
+   "k": "alat-musik",
+   "n": "drum"
+  },
+  "seruling": {
+   "k": "alat-musik",
+   "n": "seruling"
+  },
+  "biola": {
+   "k": "alat-musik",
+   "n": "biola"
+  },
+  "terompet": {
+   "k": "alat-musik",
+   "n": "terompet"
+  },
+  "harmonika": {
+   "k": "alat-musik",
+   "n": "harmonika"
+  },
+  "angklung": {
+   "k": "alat-musik",
+   "n": "angklung"
+  },
+  "tamborin": {
+   "k": "alat-musik",
+   "n": "tamborin"
+  },
+  "pianika": {
+   "k": "alat-musik",
+   "n": "pianika"
+  },
+  "saksofon": {
+   "k": "alat-musik",
+   "n": "saksofon"
+  },
+  "harpa": {
+   "k": "alat-musik",
+   "n": "harpa"
+  },
+  "bola-basket": {
+   "k": "alat-olahraga",
+   "n": "bola basket"
+  },
+  "raket-tenis": {
+   "k": "alat-olahraga",
+   "n": "raket tenis"
+  },
+  "kok": {
+   "k": "alat-olahraga",
+   "n": "kok"
+  },
+  "peluit": {
+   "k": "alat-olahraga",
+   "n": "peluit"
+  },
+  "piala": {
+   "k": "alat-olahraga",
+   "n": "piala"
+  },
+  "medali": {
+   "k": "alat-olahraga",
+   "n": "medali"
+  },
+  "kacamata-renang": {
+   "k": "alat-olahraga",
+   "n": "kacamata renang"
+  },
+  "sepatu-roda": {
+   "k": "alat-olahraga",
+   "n": "sepatu roda"
+  },
+  "pemukul-bisbol": {
+   "k": "alat-olahraga",
+   "n": "pemukul bisbol"
+  },
+  "sarung-tinju": {
+   "k": "alat-olahraga",
+   "n": "sarung tinju"
+  },
+  "papan-selancar": {
+   "k": "alat-olahraga",
+   "n": "papan selancar"
+  },
+  "palu": {
+   "k": "perkakas",
+   "n": "palu"
+  },
+  "paku": {
+   "k": "perkakas",
+   "n": "paku"
+  },
+  "obeng": {
+   "k": "perkakas",
+   "n": "obeng"
+  },
+  "gergaji": {
+   "k": "perkakas",
+   "n": "gergaji"
+  },
+  "tang": {
+   "k": "perkakas",
+   "n": "tang"
+  },
+  "kuas": {
+   "k": "perkakas",
+   "n": "kuas"
+  },
+  "meteran": {
+   "k": "perkakas",
+   "n": "meteran"
+  },
+  "sekrup": {
+   "k": "perkakas",
+   "n": "sekrup"
+  },
+  "bor": {
+   "k": "perkakas",
+   "n": "bor"
+  },
+  "tangga": {
+   "k": "perkakas",
+   "n": "tangga"
+  },
+  "kunci-inggris": {
+   "k": "perkakas",
+   "n": "kunci inggris"
+  },
+  "kapak": {
+   "k": "perkakas",
+   "n": "kapak"
+  },
+  "biskuit": {
+   "k": "jajanan",
+   "n": "biskuit"
+  },
+  "cokelat": {
+   "k": "jajanan",
+   "n": "cokelat"
+  },
+  "keripik-kentang": {
+   "k": "jajanan",
+   "n": "keripik kentang"
+  },
+  "puding": {
+   "k": "jajanan",
+   "n": "puding"
+  },
+  "sosis": {
+   "k": "jajanan",
+   "n": "sosis"
+  },
+  "berondong-jagung": {
+   "k": "jajanan",
+   "n": "berondong jagung"
+  },
+  "es-serut": {
+   "k": "jajanan",
+   "n": "es serut"
+  },
+  "martabak-manis": {
+   "k": "jajanan",
+   "n": "martabak manis"
+  },
+  "permen-lolipop": {
+   "k": "jajanan",
+   "n": "permen lolipop"
+  },
+  "kerupuk-udang": {
+   "k": "jajanan",
+   "n": "kerupuk udang"
+  },
+  "gulali": {
+   "k": "jajanan",
+   "n": "gulali"
+  },
+  "donat-jajanan": {
+   "k": "jajanan",
+   "n": "donat jajanan"
+  },
+  "uang-kertas": {
+   "k": "uang-belanja",
+   "n": "uang kertas"
+  },
+  "dompet": {
+   "k": "uang-belanja",
+   "n": "dompet"
+  },
+  "troli-belanja": {
+   "k": "uang-belanja",
+   "n": "troli belanja"
+  },
+  "keranjang-belanja": {
+   "k": "uang-belanja",
+   "n": "keranjang belanja"
+  },
+  "tas-belanja": {
+   "k": "uang-belanja",
+   "n": "tas belanja"
+  },
+  "paket": {
+   "k": "uang-belanja",
+   "n": "paket"
+  },
+  "mesin-kasir": {
+   "k": "uang-belanja",
+   "n": "mesin kasir"
+  },
+  "timbangan": {
+   "k": "uang-belanja",
+   "n": "timbangan"
+  },
+  "celengan": {
+   "k": "uang-belanja",
+   "n": "celengan"
+  },
+  "kartu-kredit": {
+   "k": "uang-belanja",
+   "n": "kartu kredit"
+  },
+  "mesin-atm": {
+   "k": "uang-belanja",
+   "n": "mesin ATM"
+  },
+  "jam-tangan": {
+   "k": "aksesoris",
+   "n": "jam tangan"
+  },
+  "cincin": {
+   "k": "aksesoris",
+   "n": "cincin"
+  },
+  "gelang": {
+   "k": "aksesoris",
+   "n": "gelang"
+  },
+  "kalung": {
+   "k": "aksesoris",
+   "n": "kalung"
+  },
+  "anting": {
+   "k": "aksesoris",
+   "n": "anting"
+  },
+  "ikat-pinggang": {
+   "k": "aksesoris",
+   "n": "ikat pinggang"
+  },
+  "dasi": {
+   "k": "aksesoris",
+   "n": "dasi"
+  },
+  "pita-rambut": {
+   "k": "aksesoris",
+   "n": "pita rambut"
+  },
+  "jepit-rambut": {
+   "k": "aksesoris",
+   "n": "jepit rambut"
+  },
+  "bando": {
+   "k": "aksesoris",
+   "n": "bando"
+  },
+  "kacamata-hitam": {
+   "k": "aksesoris",
+   "n": "kacamata hitam"
+  },
+  "sepeda-roda-tiga": {
+   "k": "kendaraan-ekstra",
+   "n": "sepeda roda tiga"
+  },
+  "skuter": {
+   "k": "kendaraan-ekstra",
+   "n": "skuter"
+  },
+  "becak": {
+   "k": "kendaraan-ekstra",
+   "n": "becak"
+  },
+  "delman": {
+   "k": "kendaraan-ekstra",
+   "n": "delman"
+  },
+  "gerobak": {
+   "k": "kendaraan-ekstra",
+   "n": "gerobak"
+  },
+  "traktor": {
+   "k": "kendaraan-ekstra",
+   "n": "traktor"
+  },
+  "ekskavator": {
+   "k": "kendaraan-ekstra",
+   "n": "ekskavator"
+  },
+  "bajaj": {
+   "k": "kendaraan-ekstra",
+   "n": "bajaj"
+  },
+  "balon-udara": {
+   "k": "kendaraan-ekstra",
+   "n": "balon udara"
+  },
+  "rakit": {
+   "k": "kendaraan-ekstra",
+   "n": "rakit"
+  },
+  "kapal-selam": {
+   "k": "kendaraan-ekstra",
+   "n": "kapal selam"
+  },
+  "kereta-gantung": {
+   "k": "kendaraan-ekstra",
+   "n": "kereta gantung"
+  },
+  "panci": {
+   "k": "alat-dapur",
+   "n": "panci"
+  },
+  "wajan": {
+   "k": "alat-dapur",
+   "n": "wajan"
+  },
+  "ketel": {
+   "k": "alat-dapur",
+   "n": "ketel"
+  },
+  "pisau": {
+   "k": "alat-dapur",
+   "n": "pisau"
+  },
+  "talenan": {
+   "k": "alat-dapur",
+   "n": "talenan"
+  },
+  "mangkuk": {
+   "k": "alat-dapur",
+   "n": "mangkuk"
+  },
+  "parutan": {
+   "k": "alat-dapur",
+   "n": "parutan"
+  },
+  "spatula": {
+   "k": "alat-dapur",
+   "n": "spatula"
+  },
+  "sumpit": {
+   "k": "alat-dapur",
+   "n": "sumpit"
+  },
+  "termos": {
+   "k": "alat-dapur",
+   "n": "termos"
+  },
+  "peta": {
+   "k": "benda-kelas",
+   "n": "peta"
+  },
+  "kalender": {
+   "k": "benda-kelas",
+   "n": "kalender"
+  },
+  "penghapus-papan": {
+   "k": "benda-kelas",
+   "n": "penghapus papan"
+  },
+  "spidol": {
+   "k": "benda-kelas",
+   "n": "spidol"
+  },
+  "rak-buku": {
+   "k": "benda-kelas",
+   "n": "rak buku"
+  },
+  "tempat-sampah-kelas": {
+   "k": "benda-kelas",
+   "n": "tempat sampah kelas"
+  },
+  "jam-sekolah": {
+   "k": "benda-kelas",
+   "n": "jam sekolah"
+  },
+  "kapur": {
+   "k": "benda-kelas",
+   "n": "kapur"
+  },
+  "rautan": {
+   "k": "benda-kelas",
+   "n": "rautan"
+  },
+  "kotak-pensil": {
+   "k": "benda-kelas",
+   "n": "kotak pensil"
+  },
+  "lampu-lalu-lintas": {
+   "k": "infrastruktur",
+   "n": "lampu lalu lintas"
+  },
+  "tiang-listrik": {
+   "k": "infrastruktur",
+   "n": "tiang listrik"
+  },
+  "bedug": {
+   "k": "tempat-ibadah",
+   "n": "bedug"
+  },
+  "tenda": {
+   "k": "alam-struktur",
+   "n": "tenda"
+  },
+  "api-unggun": {
+   "k": "alam-struktur",
+   "n": "api unggun"
+  },
+  "batu-karang": {
+   "k": "alam-ekstra",
+   "n": "batu karang"
+  },
+  "cangkang-kerang": {
+   "k": "alam-ekstra",
+   "n": "cangkang kerang"
+  },
+  "sarang-burung": {
+   "k": "alam-ekstra",
+   "n": "sarang burung"
+  },
+  "sarang-lebah": {
+   "k": "alam-ekstra",
+   "n": "sarang lebah"
+  },
+  "es-batu": {
+   "k": "alam-ekstra",
+   "n": "es batu"
+  },
+  "kaktus-pot": {
+   "k": "alam-ekstra",
+   "n": "kaktus pot"
+  },
+  "daun-kering": {
+   "k": "alam-ekstra",
+   "n": "daun kering"
+  },
+  "ranting": {
+   "k": "alam-ekstra",
+   "n": "ranting"
+  },
+  "tumpukan-pasir": {
+   "k": "alam-ekstra",
+   "n": "tumpukan pasir"
+  },
+  "genangan-lumpur": {
+   "k": "alam-ekstra",
+   "n": "genangan lumpur"
+  },
+  "jaring-laba-laba": {
+   "k": "alam-ekstra",
+   "n": "jaring laba laba"
+  },
+  "jamur-merah": {
+   "k": "alam-ekstra",
+   "n": "jamur merah"
+  },
+  "bayi-perempuan": {
+   "k": "orang-keluarga-usia",
+   "n": "bayi perempuan"
+  },
+  "balita-laki-laki": {
+   "k": "orang-keluarga-usia",
+   "n": "balita laki laki"
+  },
+  "remaja-laki-laki": {
+   "k": "orang-keluarga-usia",
+   "n": "remaja laki laki"
+  },
+  "remaja-perempuan": {
+   "k": "orang-keluarga-usia",
+   "n": "remaja perempuan"
+  },
+  "ibu-hamil": {
+   "k": "orang-keluarga-usia",
+   "n": "ibu hamil"
+  },
+  "ayah-menggendong-bayi": {
+   "k": "orang-keluarga-usia",
+   "n": "ayah menggendong bayi"
+  },
+  "guru-berhijab": {
+   "k": "orang-profesi-1",
+   "n": "guru berhijab"
+  },
+  "perawat": {
+   "k": "orang-profesi-1",
+   "n": "perawat"
+  },
+  "pekerja-bangunan": {
+   "k": "orang-profesi-1",
+   "n": "pekerja bangunan"
+  },
+  "petugas-pos": {
+   "k": "orang-profesi-1",
+   "n": "petugas pos"
+  },
+  "pramugari": {
+   "k": "orang-profesi-1",
+   "n": "pramugari"
+  },
+  "astronaut": {
+   "k": "orang-profesi-2",
+   "n": "astronaut"
+  },
+  "ilmuwan": {
+   "k": "orang-profesi-2",
+   "n": "ilmuwan"
+  },
+  "mekanik": {
+   "k": "orang-profesi-2",
+   "n": "mekanik"
+  },
+  "atlet": {
+   "k": "orang-profesi-2",
+   "n": "atlet"
+  },
+  "hakim": {
+   "k": "orang-profesi-2",
+   "n": "hakim"
+  },
+  "satpam": {
+   "k": "orang-profesi-2",
+   "n": "satpam"
+  },
+  "musisi": {
+   "k": "orang-profesi-2",
+   "n": "musisi"
+  },
+  "pelukis": {
+   "k": "orang-profesi-2",
+   "n": "pelukis"
+  },
+  "petugas-kebersihan": {
+   "k": "orang-profesi-2",
+   "n": "petugas kebersihan"
+  },
+  "reporter": {
+   "k": "orang-profesi-2",
+   "n": "reporter"
+  },
+  "anak-bertongkat-kruk": {
+   "k": "orang-inklusi-disabilitas",
+   "n": "anak bertongkat kruk"
+  },
+  "pria-tunanetra": {
+   "k": "orang-inklusi-disabilitas",
+   "n": "pria tunanetra"
+  },
+  "anak-sindrom-down": {
+   "k": "orang-inklusi-disabilitas",
+   "n": "anak sindrom down"
+  },
+  "anak-berkaki-prostetik": {
+   "k": "orang-inklusi-disabilitas",
+   "n": "anak berkaki prostetik"
+  },
+  "anak-membaca-braille": {
+   "k": "orang-inklusi-disabilitas",
+   "n": "anak membaca braille"
+  },
+  "pengguna-kursi-elektrik": {
+   "k": "orang-inklusi-disabilitas",
+   "n": "pengguna kursi elektrik"
+  },
+  "tunanetra-anjing-pemandu": {
+   "k": "orang-inklusi-disabilitas",
+   "n": "tunanetra anjing pemandu"
+  },
+  "anak-memakai-headphone": {
+   "k": "orang-inklusi-disabilitas",
+   "n": "anak memakai headphone"
+  },
+  "anak-berisyarat": {
+   "k": "orang-inklusi-disabilitas",
+   "n": "anak berisyarat"
+  },
+  "kakek-memakai-walker": {
+   "k": "orang-inklusi-disabilitas",
+   "n": "kakek memakai walker"
+  },
+  "murid-angkat-tangan": {
+   "k": "orang-aktivitas",
+   "n": "murid angkat tangan"
+  },
+  "anak-makan": {
+   "k": "orang-aktivitas",
+   "n": "anak makan"
+  },
+  "anak-minum": {
+   "k": "orang-aktivitas",
+   "n": "anak minum"
+  },
+  "anak-bermain-layangan": {
+   "k": "orang-aktivitas",
+   "n": "anak bermain layangan"
+  },
+  "anak-lompat-tali": {
+   "k": "orang-aktivitas",
+   "n": "anak lompat tali"
+  },
+  "anak-melukis": {
+   "k": "orang-aktivitas",
+   "n": "anak melukis"
+  },
+  "anak-tidur": {
+   "k": "orang-aktivitas",
+   "n": "anak tidur"
+  },
+  "anak-menyapu": {
+   "k": "orang-aktivitas",
+   "n": "anak menyapu"
+  },
+  "anak-membawa-tas": {
+   "k": "orang-aktivitas",
+   "n": "anak membawa tas"
+  },
+  "anak-tertawa": {
+   "k": "orang-aktivitas",
+   "n": "anak tertawa"
+  },
+  "anak-berambut-keriting": {
+   "k": "orang-fisik-keberagaman",
+   "n": "anak berambut keriting"
+  },
+  "anak-perempuan-pirang": {
+   "k": "orang-fisik-keberagaman",
+   "n": "anak perempuan pirang"
+  },
+  "anak-berambut-merah": {
+   "k": "orang-fisik-keberagaman",
+   "n": "anak berambut merah"
+  },
+  "anak-berkepang": {
+   "k": "orang-fisik-keberagaman",
+   "n": "anak berkepang"
+  },
+  "pria-tinggi": {
+   "k": "orang-fisik-keberagaman",
+   "n": "pria tinggi"
+  },
+  "wanita-bertubuh-berisi": {
+   "k": "orang-fisik-keberagaman",
+   "n": "wanita bertubuh berisi"
+  },
+  "pria-berjenggot": {
+   "k": "orang-fisik-keberagaman",
+   "n": "pria berjenggot"
+  },
+  "wanita-bertopi": {
+   "k": "orang-fisik-keberagaman",
+   "n": "wanita bertopi"
+  },
+  "anak-bergigi-tanggal": {
+   "k": "orang-fisik-keberagaman",
+   "n": "anak bergigi tanggal"
+  },
+  "remaja-berkawat-gigi": {
+   "k": "orang-fisik-keberagaman",
+   "n": "remaja berkawat gigi"
+  },
+  "pria-botak": {
+   "k": "orang-fisik-keberagaman",
+   "n": "pria botak"
+  },
+  "wanita-berambut-keriting": {
+   "k": "orang-fisik-keberagaman",
+   "n": "wanita berambut keriting"
+  },
+  "pria-berbatik": {
+   "k": "orang-pakaian-budaya",
+   "n": "pria berbatik"
+  },
+  "wanita-berkebaya": {
+   "k": "orang-pakaian-budaya",
+   "n": "wanita berkebaya"
+  },
+  "pria-berpeci": {
+   "k": "orang-pakaian-budaya",
+   "n": "pria berpeci"
+  },
+  "wanita-berabaya": {
+   "k": "orang-pakaian-budaya",
+   "n": "wanita berabaya"
+  },
+  "pria-berudeng": {
+   "k": "orang-pakaian-budaya",
+   "n": "pria berudeng"
+  },
+  "wanita-bali": {
+   "k": "orang-pakaian-budaya",
+   "n": "wanita bali"
+  },
+  "pria-papua": {
+   "k": "orang-pakaian-budaya",
+   "n": "pria papua"
+  },
+  "wanita-dayak": {
+   "k": "orang-pakaian-budaya",
+   "n": "wanita dayak"
+  },
+  "pria-berjubah": {
+   "k": "orang-pakaian-budaya",
+   "n": "pria berjubah"
+  },
+  "anak-memakai-hoodie": {
+   "k": "orang-pakaian-budaya",
+   "n": "anak memakai hoodie"
+  },
+  "anak-bermantel": {
+   "k": "orang-pakaian-budaya",
+   "n": "anak bermantel"
+  },
+  "anak-berjas-hujan": {
+   "k": "orang-pakaian-budaya",
+   "n": "anak berjas hujan"
   }
  },
  "tempat": {
   "rumput": {
-   "w": 492,
-   "h": 318
+   "w": 288,
+   "h": 243
   },
   "hutan": {
-   "w": 478,
-   "h": 478
+   "w": 288,
+   "h": 278
   },
   "kebun": {
-   "w": 470,
-   "h": 462
+   "w": 288,
+   "h": 250
   },
   "sawah": {
-   "w": 504,
-   "h": 422
+   "w": 288,
+   "h": 276
   },
   "peternakan": {
-   "w": 510,
-   "h": 420
+   "w": 288,
+   "h": 255
   },
   "gunung": {
-   "w": 494,
-   "h": 452
+   "w": 288,
+   "h": 277
   },
   "sungai": {
-   "w": 464,
-   "h": 432
+   "w": 288,
+   "h": 277
   },
   "danau": {
-   "w": 516,
-   "h": 386
+   "w": 288,
+   "h": 250
   },
   "kolam": {
-   "w": 492,
-   "h": 360
+   "w": 288,
+   "h": 255
   },
   "laut": {
-   "w": 484,
-   "h": 390
+   "w": 288,
+   "h": 247
   },
   "bawah-laut": {
-   "w": 472,
-   "h": 408
+   "w": 288,
+   "h": 262
   },
   "pantai": {
-   "w": 500,
-   "h": 510
+   "w": 288,
+   "h": 300
   },
   "dapur": {
-   "w": 486,
-   "h": 530
+   "w": 288,
+   "h": 297
   },
   "kamar": {
-   "w": 492,
-   "h": 532
+   "w": 288,
+   "h": 282
   },
   "kelas": {
-   "w": 496,
-   "h": 532
+   "w": 288,
+   "h": 273
   },
   "sekolah": {
-   "w": 518,
-   "h": 510
+   "w": 288,
+   "h": 237
   },
   "pasar": {
-   "w": 502,
-   "h": 540
+   "w": 288,
+   "h": 209
   },
   "kota": {
-   "w": 514,
-   "h": 546
+   "w": 288,
+   "h": 281
   },
   "jalan-desa": {
-   "w": 508,
-   "h": 520
+   "w": 288,
+   "h": 249
   },
   "gurun": {
-   "w": 506,
-   "h": 474
+   "w": 288,
+   "h": 220
   },
   "salju": {
-   "w": 500,
-   "h": 554
+   "w": 288,
+   "h": 259
   },
   "kebun-binatang": {
-   "w": 498,
-   "h": 576
+   "w": 288,
+   "h": 281
+  },
+  "taman-kota": {
+   "w": 288,
+   "h": 245
+  },
+  "halaman-rumah": {
+   "w": 288,
+   "h": 266
+  },
+  "rumah-sakit": {
+   "w": 288,
+   "h": 233
+  },
+  "kantor-polisi": {
+   "w": 288,
+   "h": 283
+  },
+  "halte-bus": {
+   "w": 288,
+   "h": 215
+  },
+  "stasiun-kereta": {
+   "w": 288,
+   "h": 197
+  },
+  "bandara": {
+   "w": 288,
+   "h": 245
+  },
+  "kantor-pos": {
+   "w": 288,
+   "h": 220
+  },
+  "bank": {
+   "w": 288,
+   "h": 244
+  },
+  "pom-bensin": {
+   "w": 288,
+   "h": 197
+  },
+  "markas-pemadam": {
+   "w": 288,
+   "h": 256
+  },
+  "klinik": {
+   "w": 288,
+   "h": 205
+  },
+  "balai-kota": {
+   "w": 288,
+   "h": 279
+  },
+  "perpustakaan": {
+   "w": 288,
+   "h": 196
+  },
+  "warung-makan": {
+   "w": 288,
+   "h": 279
+  },
+  "minimarket": {
+   "w": 288,
+   "h": 245
+  },
+  "supermarket": {
+   "w": 288,
+   "h": 238
+  },
+  "apotek": {
+   "w": 288,
+   "h": 287
+  },
+  "toko-buku": {
+   "w": 288,
+   "h": 277
+  },
+  "restoran": {
+   "w": 288,
+   "h": 285
+  },
+  "kafe": {
+   "w": 288,
+   "h": 286
+  },
+  "toko-roti": {
+   "w": 288,
+   "h": 276
+  },
+  "toko-mainan": {
+   "w": 288,
+   "h": 289
+  },
+  "tenda-pasar-malam": {
+   "w": 288,
+   "h": 305
+  },
+  "kios-buah": {
+   "w": 288,
+   "h": 260
+  },
+  "butik": {
+   "w": 288,
+   "h": 280
+  },
+  "ruang-tamu": {
+   "w": 288,
+   "h": 285
+  },
+  "kamar-rumah": {
+   "w": 288,
+   "h": 269
+  },
+  "dapur-rumah": {
+   "w": 288,
+   "h": 232
+  },
+  "kamar-mandi": {
+   "w": 288,
+   "h": 269
+  },
+  "garasi": {
+   "w": 288,
+   "h": 248
+  },
+  "halaman-depan": {
+   "w": 288,
+   "h": 251
+  },
+  "teras": {
+   "w": 288,
+   "h": 259
+  },
+  "ruang-makan-rumah": {
+   "w": 288,
+   "h": 289
+  },
+  "loteng": {
+   "w": 288,
+   "h": 234
+  },
+  "atap-rumah": {
+   "w": 288,
+   "h": 189
+  },
+  "balkon": {
+   "w": 288,
+   "h": 253
+  },
+  "ruang-cuci": {
+   "w": 288,
+   "h": 248
+  },
+  "kelas-sekolah": {
+   "w": 288,
+   "h": 273
+  },
+  "perpustakaan-sekolah": {
+   "w": 288,
+   "h": 282
+  },
+  "kantin": {
+   "w": 288,
+   "h": 255
+  },
+  "lapangan-olahraga": {
+   "w": 288,
+   "h": 242
+  },
+  "ruang-guru": {
+   "w": 288,
+   "h": 265
+  },
+  "uks": {
+   "w": 288,
+   "h": 248
+  },
+  "gerbang-sekolah": {
+   "w": 288,
+   "h": 228
+  },
+  "toilet-sekolah": {
+   "w": 288,
+   "h": 236
+  },
+  "koridor-sekolah": {
+   "w": 288,
+   "h": 279
+  },
+  "aula-sekolah": {
+   "w": 288,
+   "h": 259
+  },
+  "laboratorium-komputer": {
+   "w": 288,
+   "h": 239
+  },
+  "laboratorium-sains": {
+   "w": 288,
+   "h": 277
+  },
+  "taman-bermain": {
+   "w": 288,
+   "h": 225
+  },
+  "kolam-renang": {
+   "w": 288,
+   "h": 257
+  },
+  "bioskop": {
+   "w": 288,
+   "h": 244
+  },
+  "museum": {
+   "w": 288,
+   "h": 246
+  },
+  "alun-alun": {
+   "w": 288,
+   "h": 239
+  },
+  "stadion": {
+   "w": 288,
+   "h": 238
+  },
+  "sirkus": {
+   "w": 288,
+   "h": 276
+  },
+  "akuarium": {
+   "w": 288,
+   "h": 246
+  },
+  "komidi-putar": {
+   "w": 288,
+   "h": 315
+  },
+  "panggung-konser": {
+   "w": 288,
+   "h": 235
+  },
+  "gerbang-kebun-binatang": {
+   "w": 288,
+   "h": 250
+  },
+  "bianglala": {
+   "w": 288,
+   "h": 352
+  },
+  "saung": {
+   "w": 288,
+   "h": 247
+  },
+  "kandang-ayam": {
+   "w": 288,
+   "h": 246
+  },
+  "lumbung": {
+   "w": 288,
+   "h": 325
+  },
+  "sumur": {
+   "w": 288,
+   "h": 302
+  },
+  "pagar-kayu": {
+   "w": 288,
+   "h": 184
+  },
+  "kincir-angin": {
+   "w": 272,
+   "h": 354
+  },
+  "kincir-air": {
+   "w": 288,
+   "h": 282
+  },
+  "dermaga": {
+   "w": 288,
+   "h": 218
+  },
+  "jembatan-bambu": {
+   "w": 288,
+   "h": 186
+  },
+  "pos-ronda": {
+   "w": 288,
+   "h": 335
+  },
+  "silo": {
+   "w": 288,
+   "h": 281
+  },
+  "kandang-kuda": {
+   "w": 288,
+   "h": 192
+  },
+  "jembatan": {
+   "w": 288,
+   "h": 219
+  },
+  "rel-kereta": {
+   "w": 288,
+   "h": 249
+  },
+  "trotoar": {
+   "w": 288,
+   "h": 245
+  },
+  "terowongan": {
+   "w": 288,
+   "h": 279
+  },
+  "jembatan-penyeberangan": {
+   "w": 288,
+   "h": 153
+  },
+  "zebra-cross": {
+   "w": 288,
+   "h": 180
+  },
+  "gang": {
+   "w": 288,
+   "h": 338
+  },
+  "gardu-tol": {
+   "w": 288,
+   "h": 238
+  },
+  "bundaran-air-mancur": {
+   "w": 288,
+   "h": 223
+  },
+  "halte-trem": {
+   "w": 288,
+   "h": 223
+  },
+  "masjid": {
+   "w": 288,
+   "h": 302
+  },
+  "gereja": {
+   "w": 288,
+   "h": 353
+  },
+  "pura": {
+   "w": 288,
+   "h": 267
+  },
+  "wihara": {
+   "w": 288,
+   "h": 265
+  },
+  "kelenteng": {
+   "w": 288,
+   "h": 250
+  },
+  "musala": {
+   "w": 288,
+   "h": 282
+  },
+  "kapel": {
+   "w": 288,
+   "h": 332
+  },
+  "menara-lonceng": {
+   "w": 136,
+   "h": 354
+  },
+  "kubah": {
+   "w": 288,
+   "h": 285
+  },
+  "gapura-candi": {
+   "w": 288,
+   "h": 309
+  },
+  "altar": {
+   "w": 288,
+   "h": 287
+  },
+  "jembatan-gantung": {
+   "w": 288,
+   "h": 188
+  },
+  "gua": {
+   "w": 288,
+   "h": 239
+  },
+  "rumah-pohon": {
+   "w": 288,
+   "h": 327
+  },
+  "bendungan": {
+   "w": 288,
+   "h": 232
+  },
+  "mercusuar": {
+   "w": 266,
+   "h": 354
+  },
+  "tambang": {
+   "w": 288,
+   "h": 248
+  },
+  "menara-pengawas": {
+   "w": 288,
+   "h": 354
+  },
+  "jalur-tanah": {
+   "w": 288,
+   "h": 302
+  },
+  "air-terjun": {
+   "w": 288,
+   "h": 273
+  },
+  "anjungan-minyak": {
+   "w": 288,
+   "h": 346
   }
  }
 }

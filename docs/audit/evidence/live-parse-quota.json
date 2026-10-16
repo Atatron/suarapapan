@@ -1,0 +1,8 @@
+{
+  "status": 503,
+  "input": {
+    "kalimat": "Ada tiga apel.",
+    "konteks": "kosong"
+  },
+  "body": "{\"detail\":\"Kuota gratis Gemini habis untuk saat ini. Tunggu sebentar atau ketik kalimat lagi nanti.\"}"
+}

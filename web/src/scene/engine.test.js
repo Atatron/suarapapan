@@ -9,6 +9,8 @@ import { pilihAlternatif } from '../lib/suara.js';
 import { bersihkanTranskrip, pecahKalimat, transkripsiGemini, sistemSuara, kosakata as kosakataServer } from '../../api/_suara.js';
 import { cariGambar, cariTempat, urlPose, _untukTes } from './pustaka.js';
 import POSE_AKSI from './aksi.json' with { type: 'json' };
+import UKURAN from './ukuran.json' with { type: 'json' };
+import ASET_TAMPILAN from '../../../tools/aset_tampilan_39.json' with { type: 'json' };
 import { existsSync } from 'node:fs';
 import { rapikan, urutkanModel, uraiGemini, _setelUlangUntukTes, emojiSah } from '../../api/_urai.js';
 
@@ -239,8 +241,20 @@ test('emoji: hanya emoji asli yang diterima, dan ikut ke benda yang ditambahkan'
 
 test('pustaka: semua file gambar ada dan semua alias menunjuk ke gambar yang ada', () => {
   const { OBJ, TEMPAT, ALIAS_OBJ, ALIAS_TEMPAT } = _untukTes;
-  assert.equal(Object.keys(OBJ).length, 192);
-  assert.equal(Object.keys(TEMPAT).length, 22);
+  assert.ok(Object.keys(OBJ).length >= 192, 'pustaka karakter lama tetap tersedia');
+  assert.ok(Object.keys(TEMPAT).length >= 22, 'pustaka tempat lama tetap tersedia');
+  for (const [id, v] of Object.entries(OBJ)) {
+    assert.match(id, /^[a-z0-9]+(?:-[a-z0-9]+)*$/);
+    assert.equal(typeof v.n, 'string', `label ${id}`);
+    assert.ok(v.n.trim(), `label ${id} tidak kosong`);
+    assert.equal(typeof v.k, 'string', `kategori ${id}`);
+    assert.ok(v.k.trim(), `kategori ${id} tidak kosong`);
+  }
+  for (const [id, v] of Object.entries(TEMPAT)) {
+    assert.match(id, /^[a-z0-9]+(?:-[a-z0-9]+)*$/);
+    assert.ok(Number.isInteger(v.w) && v.w > 0, `lebar tempat ${id}`);
+    assert.ok(Number.isInteger(v.h) && v.h > 0, `tinggi tempat ${id}`);
+  }
   for (const n of Object.keys(OBJ)) assert.ok(existsSync(new URL(`../../public/aset/obj/${n}.webp`, import.meta.url)), `obj/${n}`);
   for (const n of Object.keys(TEMPAT)) assert.ok(existsSync(new URL(`../../public/aset/tempat/${n}.webp`, import.meta.url)), `tempat/${n}`);
   for (const [a, v] of Object.entries(ALIAS_OBJ)) assert.ok(OBJ[v], `alias ${a} → ${v}`);
@@ -254,11 +268,38 @@ test('pustaka: pencarian benda dan tempat', () => {
   assert.equal(cariGambar('anak kucing'), 'kucing');
   assert.equal(cariGambar('apel merah'), 'apel');
   assert.equal(cariGambar('macan'), 'harimau');
-  assert.equal(cariGambar('bajaj'), null);
+  assert.equal(cariGambar('benda-tidak-dikenal'), null);
   assert.equal(cariTempat('di hutan lebat'), 'hutan');
   assert.equal(cariTempat('kebun binatang'), 'kebun-binatang');
   assert.equal(cariTempat('langit'), null, 'tanpa gambar → tetap pakai latar CSS');
   assert.equal(cariTempat(''), null);
+});
+
+test('pustaka: seluruh 468 aset dari 39 sheet terdaftar dan ditemukan dengan nama Indonesia', () => {
+  assert.equal(ASET_TAMPILAN.sheets.length, 39);
+  const ditemukan = new Set();
+  const kataServer = new Set(kosakataServer());
+  for (const sheet of ASET_TAMPILAN.sheets) {
+    assert.equal(sheet.items.length, 12, `isi sheet ${sheet.number}`);
+    for (const item of sheet.items) {
+      const jenis = item.kind || sheet.kind;
+      assert.ok(['obj', 'tempat'].includes(jenis), `${item.id}: jenis aset`);
+      const kunci = `${jenis}/${item.id}`;
+      assert.equal(ditemukan.has(kunci), false, `id ganda ${kunci}`);
+      ditemukan.add(kunci);
+      const daftar = jenis === 'obj' ? _untukTes.OBJ : _untukTes.TEMPAT;
+      const cari = jenis === 'obj' ? cariGambar : cariTempat;
+      assert.ok(daftar[item.id], `terdaftar ${kunci}`);
+      assert.equal(cari(item.id), item.id, `pencarian id ${kunci}`);
+      assert.equal(cari(item.name), item.id, `pencarian nama ${item.name}`);
+      assert.ok(kataServer.has(item.id.replace(/-/g, ' ')), `kosakata suara ${item.id}`);
+      if (sheet.slug.startsWith('orang')) assert.equal(kategoriJenis(item.id), 'manusia', item.id);
+    }
+  }
+  assert.equal(ditemukan.size, 468);
+  assert.equal(cariGambar('donat'), 'donat');
+  assert.equal(cariGambar('donat jajanan'), 'donat-jajanan', 'dua varian sumber tetap terpisah');
+  assert.equal(cariGambar('bajaj'), 'bajaj');
 });
 
 // ---------- pengenalan suara ----------
@@ -535,7 +576,15 @@ test('latar: data lengkap — setiap benda ada di pustaka, setiap file latar ada
     assert.ok(OBJ[nama], `benda ${nama} tidak ada di pustaka gambar`);
     assert.ok(LATAR[b.latar], `latar ${b.latar} untuk ${nama} tidak ada`);
   }
-  assert.equal(Object.keys(_latar.BENDA).length, 192);
+  assert.deepEqual(Object.keys(_latar.BENDA).sort(), Object.keys(OBJ).sort(), 'setiap karakter memiliki pasangan latar');
+  for (const [id, b] of [...Object.entries(LATAR), ...Object.entries(_latar.BENDA)]) {
+    for (const sumbu of ['x', 'y']) {
+      const rentang = b[sumbu];
+      assert.ok(Array.isArray(rentang) && rentang.length === 2, `${id}.${sumbu} berupa rentang`);
+      assert.ok(rentang.every(Number.isFinite), `${id}.${sumbu} berisi angka`);
+      assert.ok(rentang[0] >= 0 && rentang[0] < rentang[1] && rentang[1] <= 1, `${id}.${sumbu} di dalam papan`);
+    }
+  }
   for (const id of Object.keys(LATAR)) assert.ok(existsSync(new URL(`../../public/aset/latar/${id}.webp`, import.meta.url)), id);
   for (const [k, daftar] of Object.entries(_latar.KANDIDAT)) for (const id of daftar) assert.ok(LATAR[id], `kandidat ${k} → ${id}`);
 });
@@ -552,14 +601,14 @@ test('latar: dipilih dari benda saat guru tidak menyebut tempat', () => {
 
 test('latar: yang paling banyak cocok menang; benda tak dikenal diabaikan', () => {
   assert.equal(pilihLatar(ob('singa', 'gajah', 'harimau')).id, 'savanna', 'benda pertama menentukan');
-  assert.equal(pilihLatar(ob('bajaj', 'bajaj', 'ikan')).id, 'underwater');
-  assert.equal(pilihLatar(ob('bajaj')).id, 'classroom', 'tak ada yang dikenal dan tak ada tempat → ruang kelas');
+  assert.equal(pilihLatar(ob('benda-tidak-dikenal', 'benda-tidak-dikenal', 'ikan')).id, 'underwater');
+  assert.equal(pilihLatar(ob('benda-tidak-dikenal')).id, 'classroom', 'tak ada yang dikenal dan tak ada tempat → ruang kelas');
 });
 
 test('latar: tempat yang disebut guru didahulukan, tetapi calon yang cocok dengan benda dipilih', () => {
   assert.equal(pilihLatar({ ...ob('ayam'), latar: 'sawah' }).id, 'rice-fields');
   assert.equal(pilihLatar({ ...ob('kelinci', 'kelinci', 'kelinci'), latar: 'rumput' }).id, 'farm', 'rumput → peternakan karena kelinci cocok');
-  assert.equal(pilihLatar({ ...ob('bajaj'), latar: 'rumput' }).id, 'nature', 'tanpa benda yang cocok → calon pertama');
+  assert.equal(pilihLatar({ ...ob('benda-tidak-dikenal'), latar: 'rumput' }).id, 'nature', 'tanpa benda yang cocok → calon pertama');
   assert.equal(pilihLatar({ ...ob('ikan'), latar: 'laut' }).id, 'underwater');
   assert.equal(pilihLatar({ ...ob('kucing'), latar: 'dapur' }).id, 'kitchen');
 });
@@ -582,6 +631,21 @@ test('latar: calonLatar membaca kata tempat dengan imbuhan dan sinonim', () => {
   assert.deepEqual(calonLatar('padang rumput'), _latar.KANDIDAT.rumput);
   assert.deepEqual(calonLatar(''), []);
   assert.deepEqual(calonLatar('xyz'), []);
+});
+
+test('latar: seluruh tempat baru mempunyai calon latar yang tersedia', () => {
+  for (const sheet of ASET_TAMPILAN.sheets) {
+    for (const item of sheet.items) {
+      if ((item.kind || sheet.kind) !== 'tempat') continue;
+      const calon = calonLatar(`di ${item.name}`);
+      assert.ok(calon.length, `calon latar ${item.id}`);
+      assert.deepEqual(calon, _latar.KANDIDAT[item.id], `pemetaan tempat ${item.id}`);
+      assert.ok(calon.every((id) => LATAR[id]), `file latar tersedia untuk ${item.id}`);
+    }
+  }
+  assert.equal(pilihLatar({ objek: [], latar: 'di perpustakaan sekolah' }).id, 'classroom');
+  assert.equal(pilihLatar({ objek: [], latar: 'di stasiun kereta' }).id, 'railway');
+  assert.equal(pilihLatar({ objek: [], latar: 'di kolam renang' }).id, 'wetland');
 });
 
 test('rapikan: "di dalam laut" adalah tempat, bukan pelajaran posisi; "di bawah meja" tetap posisi', () => {
@@ -908,6 +972,20 @@ const adeganDari = (...pasang) => {
   for (const [jenis, jumlah] of pasang) a = terapkan(a, { entitas: [{ jenis, jumlah }], peristiwa: [] }, { gabung: true }).adegan;
   return a;
 };
+
+test('proporsi: setiap karakter di pustaka memiliki tinggi nyata dan kotak isi yang sah', () => {
+  assert.deepEqual(Object.keys(UKURAN).sort(), Object.keys(_untukTes.OBJ).sort());
+  for (const [id, d] of Object.entries(UKURAN)) {
+    assert.ok(Number.isFinite(d.t) && d.t > 0, `tinggi nyata ${id}`);
+    for (const k of ['x', 'y', 'w', 'h']) assert.ok(Number.isFinite(d[k]), `${id}.${k} berupa angka`);
+    assert.ok(d.x >= 0 && d.y >= 0 && d.w > 0 && d.h > 0, `kotak isi ${id} tidak kosong`);
+    assert.ok(d.x + d.w <= 1.0001 && d.y + d.h <= 1.0001, `kotak isi ${id} di dalam sel`);
+    const ukuran = ukuranKarakter(id, 0.8, 1);
+    assert.equal(ukuran.punyaGambar, true, `pengukuran ${id} dipakai tata letak`);
+    assert.ok(Number.isFinite(ukuran.lebar) && ukuran.lebar > 0, `lebar tampil ${id}`);
+    assert.ok(ukuran.kakiX > 0 && ukuran.kakiX <= 1 && ukuran.kakiY > 0 && ukuran.kakiY <= 1.0001, `jangkar ${id}`);
+  }
+});
 
 test('proporsi: guru lebih tinggi dari murid; gajah lebih tinggi dari kelinci; semut tetap terbaca', () => {
   const t = (jenis) => ukuranKarakter(jenis, 0.8, 1).isi;

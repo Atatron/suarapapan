@@ -1,0 +1,247 @@
+{
+  "scope": "Local deterministic probes; Gemini calls stubbed; no hardware/browser claims. Production family e0c7cb3/aa16d88, prospective main 62b5fa6.",
+  "vadBurstNoise": {
+    "originalRms": 0.02185094602069736,
+    "clientGate": {
+      "ada": true,
+      "bingkaiUcapan": 60,
+      "terpanjang": 30
+    },
+    "serverGate": {
+      "ada": true,
+      "bingkaiUcapan": 60,
+      "terpanjang": 30
+    },
+    "modelCalls": 1,
+    "actual": "Pure amplitude-modulated white noise passes both gates and reaches mocked model."
+  },
+  "vadDigitalSilenceGuard": {
+    "modelCalls": 0
+  },
+  "asrOutOfOrder": {
+    "spokenOrder": [
+      "A",
+      "B"
+    ],
+    "actualEnqueueOrder": [
+      "B: lalu satu apel dimakan.",
+      "A: ada tiga apel."
+    ],
+    "implementation": "Exact production selesaikan closure with deferred transcription promises."
+  },
+  "llmInjectedAction": {
+    "input": "Kelinci itu menari salsa.",
+    "injectedModelAction": "terbang",
+    "sanitizedAction": "terbang",
+    "renderedActions": [
+      "terbang"
+    ],
+    "evidence": "Injected LLM response, not observed Gemini hallucination."
+  },
+  "unknownActionGuard": [
+    {
+      "tipe": "ubah_aksi",
+      "target": "kelinci",
+      "jumlah": 0,
+      "posisi": "",
+      "aksi": "diam",
+      "aksi_awal": ""
+    }
+  ],
+  "malformedShape": {
+    "injected": {
+      "entitas": {}
+    },
+    "error": "TypeError: (hasil.entitas || []).map is not a function",
+    "evidence": "Injected shape; JSON-only provider fallback makes runtime validation necessary."
+  },
+  "prospectiveMain62b": [
+    {
+      "text": "Jangan tambahkan dua kelinci.",
+      "confidence": "tinggi",
+      "fetched": 0,
+      "source": "aturan lokal",
+      "parsed": {
+        "entitas": [],
+        "latar": "",
+        "konsep": "penjumlahan",
+        "peristiwa": [
+          {
+            "tipe": "tambah",
+            "target": "kelinci",
+            "jumlah": 2,
+            "posisi": ""
+          }
+        ],
+        "pertanyaan": "",
+        "tanya_benda": "",
+        "tanya_jenis": "tidak_ada",
+        "gabung": true,
+        "tambahEksplisit": false
+      },
+      "activeCount": 5,
+      "activeKinds": [
+        "kelinci"
+      ]
+    },
+    {
+      "text": "Tidak ada dua burung.",
+      "confidence": "tinggi",
+      "fetched": 0,
+      "source": "aturan lokal",
+      "parsed": {
+        "entitas": [
+          {
+            "jenis": "burung",
+            "jumlah": 2,
+            "aksi": "diam",
+            "posisi": "",
+            "bagi": 0,
+            "emoji": "",
+            "emoji_acuan": ""
+          }
+        ],
+        "latar": "",
+        "konsep": "membilang",
+        "peristiwa": [],
+        "pertanyaan": "",
+        "tanya_benda": "",
+        "tanya_jenis": "tidak_ada",
+        "gabung": false,
+        "tambahEksplisit": false
+      },
+      "activeCount": 2,
+      "activeKinds": [
+        "burung"
+      ]
+    },
+    {
+      "text": "Ada tiga kelinci, eh salah, lima kelinci.",
+      "confidence": "rendah",
+      "fetched": 1,
+      "source": "aturan lokal (Gemini tidak tersedia)",
+      "parsed": {
+        "entitas": [
+          {
+            "jenis": "kelinci",
+            "jumlah": 3,
+            "aksi": "diam",
+            "posisi": "",
+            "bagi": 0,
+            "emoji": "",
+            "emoji_acuan": ""
+          },
+          {
+            "jenis": "kelinci",
+            "jumlah": 5,
+            "aksi": "diam",
+            "posisi": "",
+            "bagi": 0,
+            "emoji": "",
+            "emoji_acuan": ""
+          }
+        ],
+        "latar": "",
+        "konsep": "membilang",
+        "peristiwa": [],
+        "pertanyaan": "",
+        "tanya_benda": "",
+        "tanya_jenis": "tidak_ada",
+        "gabung": false,
+        "tambahEksplisit": false
+      },
+      "activeCount": 8,
+      "activeKinds": [
+        "kelinci"
+      ]
+    },
+    {
+      "text": "Wah, pintar sekali anak-anak! Nah, sekarang ada dua burung.",
+      "confidence": "tinggi",
+      "fetched": 0,
+      "source": "aturan lokal",
+      "parsed": {
+        "entitas": [
+          {
+            "jenis": "burung",
+            "jumlah": 2,
+            "aksi": "diam",
+            "posisi": "",
+            "bagi": 0,
+            "emoji": "",
+            "emoji_acuan": ""
+          }
+        ],
+        "latar": "",
+        "konsep": "membilang",
+        "peristiwa": [],
+        "pertanyaan": "",
+        "tanya_benda": "",
+        "tanya_jenis": "tidak_ada",
+        "gabung": false,
+        "tambahEksplisit": false
+      },
+      "activeCount": 2,
+      "activeKinds": [
+        "burung"
+      ]
+    },
+    {
+      "text": "Tiga apel itu dimakan satu.",
+      "confidence": "rendah",
+      "fetched": 1,
+      "source": "aturan lokal (Gemini tidak tersedia)",
+      "parsed": {
+        "entitas": [],
+        "latar": "",
+        "konsep": "pengurangan",
+        "peristiwa": [
+          {
+            "tipe": "hapus",
+            "target": "apel",
+            "jumlah": 3,
+            "posisi": ""
+          }
+        ],
+        "pertanyaan": "",
+        "tanya_benda": "",
+        "tanya_jenis": "tidak_ada",
+        "gabung": false,
+        "tambahEksplisit": false
+      },
+      "activeCount": 0,
+      "activeKinds": []
+    },
+    {
+      "text": "Ada dua burung dan tiga naga kosmik.",
+      "confidence": "rendah",
+      "fetched": 1,
+      "source": "aturan lokal (Gemini tidak tersedia)",
+      "parsed": {
+        "entitas": [
+          {
+            "jenis": "burung",
+            "jumlah": 2,
+            "aksi": "diam",
+            "posisi": "",
+            "bagi": 0,
+            "emoji": "",
+            "emoji_acuan": ""
+          }
+        ],
+        "latar": "",
+        "konsep": "membilang",
+        "peristiwa": [],
+        "pertanyaan": "",
+        "tanya_benda": "",
+        "tanya_jenis": "tidak_ada",
+        "gabung": false,
+        "tambahEksplisit": false
+      },
+      "activeCount": 2,
+      "activeKinds": [
+        "burung"
+      ]
+    }
+  ]
+}

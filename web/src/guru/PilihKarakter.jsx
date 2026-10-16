@@ -9,6 +9,15 @@ const JUDUL = {
   serangga: 'Serangga dan kecil', 'orang-1': 'Orang', 'orang-2': 'Orang (pekerjaan dan inklusi)', buah: 'Buah',
   sayur: 'Sayur', makanan: 'Makanan', 'alat-sekolah': 'Alat sekolah', 'benda-rumah': 'Benda rumah', kendaraan: 'Kendaraan',
   alam: 'Alam', pakaian: 'Pakaian', 'mainan-bentuk': 'Mainan dan bentuk',
+  'makanan-minuman': 'Makanan dan minuman', mainan: 'Mainan', 'alat-kebersihan': 'Alat kebersihan',
+  elektronik: 'Elektronik', 'alat-musik': 'Alat musik', 'alat-olahraga': 'Alat olahraga', perkakas: 'Perkakas',
+  jajanan: 'Jajanan', 'uang-belanja': 'Uang dan belanja', aksesoris: 'Aksesori', 'kendaraan-ekstra': 'Kendaraan lainnya',
+  'alat-dapur': 'Alat dapur', 'benda-kelas': 'Benda kelas', 'pedesaan-struktur': 'Bangunan dan benda pedesaan',
+  'infrastruktur': 'Infrastruktur', 'tempat-ibadah': 'Tempat ibadah', 'alam-struktur': 'Bangunan dan benda alam',
+  'alam-ekstra': 'Benda alam lainnya', 'orang-keluarga-usia': 'Keluarga dan usia',
+  'orang-profesi-1': 'Pekerjaan', 'orang-profesi-2': 'Pekerjaan lainnya',
+  'orang-inklusi-disabilitas': 'Orang dan keberagaman disabilitas', 'orang-aktivitas': 'Kegiatan sehari-hari',
+  'orang-fisik-keberagaman': 'Keberagaman penampilan', 'orang-pakaian-budaya': 'Pakaian dan budaya',
 };
 
 export default function PilihKarakter({ onPilih }) {

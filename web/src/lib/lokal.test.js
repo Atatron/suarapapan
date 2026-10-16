@@ -4,6 +4,7 @@ import { readFileSync } from 'node:fs';
 import { uraiLokal, bacaKonteks } from './lokal.js';
 import { cariGambar } from '../scene/pustaka.js';
 import { ADEGAN_KOSONG, terapkan, konteks, yangAda } from '../scene/engine.js';
+import { cariGambar } from '../scene/pustaka.js';
 
 const baca = (nama) => JSON.parse(readFileSync(new URL(`../../../tests/${nama}.json`, import.meta.url), 'utf8'));
 
@@ -78,11 +79,35 @@ test('sapaan dan instruksi tanpa benda berangka tidak mengubah papan dan tidak p
 });
 
 test('benda di luar pustaka dan kalimat ambigu diserahkan ke Gemini (null atau yakin rendah)', () => {
-  assert.equal(uraiLokal('Budi punya 6 kelereng', 'kosong'), null);
+  assert.equal(uraiLokal('Budi punya 6 unicorn', 'kosong'), null);
   const ambigu = uraiLokal('Tiga balon terbang', 'balon: 7');
   assert.notEqual(ambigu?.yakin, 'tinggi');
   const koreksi = uraiLokal('Eh bukan empat, maksudnya lima jeruk', 'kosong');
   assert.notEqual(koreksi?.yakin, 'tinggi');
+});
+
+test('koleksi baru dikenali aturan lokal tanpa menunggu Gemini', () => {
+  const r = uraiLokal('Budi punya 6 kelereng', 'kosong');
+  assert.equal(r?.yakin, 'tinggi');
+  assert.deepEqual(r.hasil.entitas.map(({ jenis, jumlah }) => ({ jenis, jumlah })), [{ jenis: 'kelereng', jumlah: 6 }]);
+});
+
+test('subjek manusia dan frasa inklusi tetap mendapat sprite dalam jalur lokal', () => {
+  for (const [kalimat, sprite] of [
+    ['Ada satu manusia di samping meja.', 'anak-laki-laki'],
+    ['Ada dua orang di samping meja.', 'anak-laki-laki'],
+    ['Ada seorang di samping meja.', 'anak-laki-laki'],
+    ['Ada satu anak menggunakan kursi roda.', 'anak-kursi-roda'],
+    ['Ada satu anak dengan alat bantu dengar.', 'anak-dengan-alat-bantu-dengar'],
+  ]) {
+    const r = uraiLokal(kalimat, 'kosong');
+    assert.ok(r, kalimat);
+    assert.equal(r.hasil.entitas.length, 1, kalimat);
+    assert.equal(cariGambar(r.hasil.entitas[0].jenis), sprite, kalimat);
+  }
+  const guru = uraiLokal('Ada dua orang guru.', 'kosong');
+  assert.equal(guru.hasil.entitas[0].jenis, 'guru', 'penggolong orang tidak mengganti profesi');
+  assert.equal(guru.hasil.entitas[0].jumlah, 2);
 });
 
 test('kalimat berangka tanpa benda di papan tidak membuat perubahan liar', () => {
