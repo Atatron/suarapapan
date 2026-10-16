@@ -1019,3 +1019,105 @@ test('suara pelan (puncak 0,01) tetap terdeteksi sebagai ucapan setelah diperkua
   assert.equal(adaUcapan(normalkan(dengung)).ada, false, 'dengung stabil bukan ucapan');
   assert.equal(adaUcapan(new Float32Array(laju * 2)).ada, false, 'hening bukan ucapan');
 });
+
+// ---------- audit gerak 2026-10-16 (MOV-001..006): diverifikasi terhadap kode sekarang ----------
+const papanKelinci = (...kelompok) => {
+  let a = ADEGAN_KOSONG;
+  for (const [jumlah, aksi, posisi] of kelompok) {
+    a = terapkan(a, { entitas: [{ jenis: 'kelinci', jumlah, aksi, posisi: posisi || '' }], peristiwa: [] }, { gabung: true }).adegan;
+  }
+  return a;
+};
+
+test('MOV-005: pindah memakai jumlah — "dua dari lima kelinci" hanya memindah dua', () => {
+  const a = papanKelinci([5, 'diam', 'di bawah meja']);
+  const r = terapkan(a, { entitas: [], peristiwa: [{ tipe: 'pindah', target: 'kelinci', jumlah: 2, posisi: 'di atas meja' }] });
+  const atas = yangAda(r.adegan, 'kelinci').filter((o) => o.posisi === 'di atas meja');
+  const bawah = yangAda(r.adegan, 'kelinci').filter((o) => o.posisi === 'di bawah meja');
+  assert.equal(atas.length, 2);
+  assert.equal(bawah.length, 3);
+  assert.deepEqual(r.adegan.objek.map((o) => o.id), a.objek.map((o) => o.id), 'identitas tetap');
+});
+
+test('MOV-005: jumlah 0 = semuanya; jumlah melebihi yang ada = semuanya + catatan; yang sudah di tujuan dilewati', () => {
+  const a = papanKelinci([2, 'diam', 'di atas meja'], [3, 'diam', 'di bawah meja']);
+  const semua = terapkan(a, { entitas: [], peristiwa: [{ tipe: 'pindah', target: 'kelinci', jumlah: 0, posisi: 'di atas meja' }] });
+  assert.equal(yangAda(semua.adegan, 'kelinci').filter((o) => o.posisi === 'di atas meja').length, 5);
+  const dua = terapkan(a, { entitas: [], peristiwa: [{ tipe: 'pindah', target: 'kelinci', jumlah: 2, posisi: 'di atas meja' }] });
+  assert.equal(yangAda(dua.adegan, 'kelinci').filter((o) => o.posisi === 'di atas meja').length, 4, 'dua yang belum di atas ikut pindah');
+  const lebih = terapkan(a, { entitas: [], peristiwa: [{ tipe: 'pindah', target: 'kelinci', jumlah: 9, posisi: 'di atas meja' }] });
+  assert.equal(yangAda(lebih.adegan, 'kelinci').filter((o) => o.posisi === 'di atas meja').length, 5);
+  assert.ok(lebih.catatan.some((c) => /hanya ada 5/i.test(c)), lebih.catatan.join('|'));
+});
+
+test('MOV-006: deskripsi memisahkan kelompok yang gerakannya berbeda', () => {
+  const a = papanKelinci([2, 'lari'], [3, 'lompat']);
+  assert.match(deskripsi(a), /2 kelinci berlari; 3 kelinci melompat/);
+  assert.doesNotMatch(deskripsi(a), /5 kelinci/);
+  const seragam = papanKelinci([3, 'lari']);
+  assert.match(deskripsi(seragam), /^3 kelinci berlari/);
+  const tiga = papanKelinci([1, 'lompat'], [3, 'diam'], [2, 'lari']);
+  assert.match(deskripsi(tiga), /1 kelinci melompat; 3 kelinci; 2 kelinci berlari/);
+});
+
+test('MOV-004: konteks untuk LLM memuat gerakan hanya bila kelompok berbeda; konteks seragam tidak berubah', () => {
+  assert.equal(konteks(papanKelinci([2, 'lari'], [3, 'lompat'])), 'kelinci: 5 (2 berlari dan 3 melompat)');
+  assert.equal(konteks(papanKelinci([3, 'lari'])), 'kelinci: 3');
+  assert.equal(konteks(papanKelinci([3, 'diam', 'di bawah meja'])), 'kelinci: 3 (di bawah meja)');
+});
+
+test('MOV-002/003: ubah_aksi mengganti gerakan di tempat; jumlah dan identitas tetap', () => {
+  const a = papanKelinci([3, 'lari']);
+  const r = terapkan(a, { entitas: [], peristiwa: [{ tipe: 'ubah_aksi', target: 'kelinci', jumlah: 3, aksi: 'diam' }] });
+  assert.equal(r.berubah, true);
+  assert.deepEqual(yangAda(r.adegan, 'kelinci').map((o) => o.aksi), ['diam', 'diam', 'diam']);
+  assert.deepEqual(r.adegan.objek.map((o) => o.id), a.objek.map((o) => o.id));
+  assert.equal(r.adegan.soal ?? null, a.soal ?? null, 'bukan soal hitung');
+  const lompat = terapkan(a, { entitas: [], peristiwa: [{ tipe: 'ubah_aksi', target: 'kelinci', jumlah: 0, aksi: 'lompat' }] });
+  assert.deepEqual(yangAda(lompat.adegan, 'kelinci').map((o) => o.aksi), ['lompat', 'lompat', 'lompat']);
+});
+
+test('MOV-004: ubah_aksi dengan aksi_awal hanya mengubah kelompok itu', () => {
+  const a = papanKelinci([2, 'lari'], [3, 'lompat']);
+  const r = terapkan(a, { entitas: [], peristiwa: [{ tipe: 'ubah_aksi', target: 'kelinci', jumlah: 2, aksi_awal: 'lari', aksi: 'diam' }] });
+  const aksi = yangAda(r.adegan, 'kelinci').map((o) => o.aksi);
+  assert.equal(aksi.filter((x) => x === 'diam').length, 2);
+  assert.equal(aksi.filter((x) => x === 'lompat').length, 3);
+  assert.equal(aksi.filter((x) => x === 'lari').length, 0);
+});
+
+test('ubah_aksi: aksi tak dikenal → diam; benda tidak ada → catatan, papan tak berubah', () => {
+  const a = papanKelinci([1, 'lari']);
+  const r = terapkan(a, { entitas: [], peristiwa: [{ tipe: 'ubah_aksi', target: 'kelinci', jumlah: 1, aksi: 'menari' }] });
+  assert.equal(yangAda(r.adegan, 'kelinci')[0].aksi, 'diam');
+  const tak = terapkan(a, { entitas: [], peristiwa: [{ tipe: 'ubah_aksi', target: 'gajah', jumlah: 1, aksi: 'diam' }] });
+  assert.ok(tak.catatan.some((c) => /gajah/.test(c)));
+  assert.equal(yangAda(tak.adegan, 'kelinci')[0].aksi, 'lari');
+});
+
+test('MOV-002: rapikan menjaga ubah_aksi dan mengubah "pindah" tanpa tujuan yang berarti berhenti menjadi ubah_aksi diam', () => {
+  const sah = rapikan({ peristiwa: [{ tipe: 'ubah_aksi', target: 'kelinci', jumlah: 2, aksi: 'lari', aksi_awal: 'diam', posisi: '' }] },
+    'Dua kelinci mulai berlari.', 'kelinci: 5');
+  assert.deepEqual(sah.peristiwa, [{ tipe: 'ubah_aksi', target: 'kelinci', jumlah: 2, posisi: '', aksi: 'lari', aksi_awal: 'diam' }]);
+  const aneh = rapikan({ peristiwa: [{ tipe: 'ubah_aksi', target: 'kelinci', jumlah: 1, aksi: 'menari', aksi_awal: '' }] }, 'Kelinci menari.', 'kelinci: 1');
+  assert.equal(aneh.peristiwa[0].aksi, 'diam');
+  for (const posisi of ['', 'diam']) {
+    const r = rapikan({ peristiwa: [{ tipe: 'pindah', target: 'kelinci', jumlah: 3, posisi }] },
+      'Tiga kelinci yang sedang berlari sekarang berhenti.', 'kelinci: 3');
+    assert.equal(r.peristiwa[0].tipe, 'ubah_aksi', `posisi ${JSON.stringify(posisi)}`);
+    assert.equal(r.peristiwa[0].aksi, 'diam');
+    assert.equal(r.peristiwa[0].jumlah, 3);
+  }
+  const nyata = rapikan({ peristiwa: [{ tipe: 'pindah', target: 'kucing', jumlah: 1, posisi: 'di atas meja' }] }, 'Kucing naik ke atas meja.', 'kucing: 1');
+  assert.equal(nyata.peristiwa[0].tipe, 'pindah');
+});
+
+test('ringkasBeda menampilkan perubahan gerakan walau jumlah tetap', () => {
+  const a = papanKelinci([3, 'lari']);
+  const b = terapkan(a, { entitas: [], peristiwa: [{ tipe: 'ubah_aksi', target: 'kelinci', jumlah: 0, aksi: 'diam' }] }).adegan;
+  assert.deepEqual(Sej.ringkasBeda(a, b), ['gerakan kelinci: 3 diam']);
+  const c = papanKelinci([2, 'lari'], [3, 'lompat']);
+  const d = terapkan(c, { entitas: [], peristiwa: [{ tipe: 'ubah_aksi', target: 'kelinci', jumlah: 2, aksi_awal: 'lari', aksi: 'diam' }] }).adegan;
+  assert.deepEqual(Sej.ringkasBeda(c, d), ['gerakan kelinci: 2 diam dan 3 melompat']);
+  assert.deepEqual(Sej.ringkasBeda(a, a), []);
+});

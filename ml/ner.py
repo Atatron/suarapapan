@@ -4,6 +4,7 @@ Model hanya menandai peran setiap kata (JUMLAH, BENDA, …). Aturan di sini
 merangkai label itu menjadi JSON yang sama dengan keluaran LLM, sehingga
 mesin adegan tidak perlu tahu sumbernya.
 """
+import re
 import time
 from pathlib import Path
 
@@ -93,7 +94,8 @@ def susun_json(kata, label, prob, konteks: str) -> dict:
         if not pasangan:
             # "lalu dua pergi": benda diambil dari konteks jika hanya ada satu jenis
             # konteks dari web: "kelinci: 3, apel: 2"; dari dataset: "kelinci 3"
-            jenis_konteks = [b.strip().rsplit(" ", 1)[0].replace(":", "").strip()
+            # catatan dalam kurung ("kelinci: 5 (2 berlari dan 3 melompat)") dibuang dulu
+            jenis_konteks = [re.sub(r"\s*\(.*?\)", "", b).strip().rsplit(" ", 1)[0].replace(":", "").strip()
                              for b in konteks.split(",") if b.strip() and b.strip() != "kosong"]
             jml = next((kata_ke_angka(x[1]) for x in r if x[0] == "JUMLAH"), None)
             if len(jenis_konteks) == 1:

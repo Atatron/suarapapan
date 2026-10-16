@@ -5,7 +5,7 @@
 
 export const AKSI = ['diam', 'lari', 'lompat', 'terbang', 'berenang', 'jatuh'];
 export const KONSEP = ['membilang', 'penjumlahan', 'pengurangan', 'pecahan', 'posisi', 'tidak_ada'];
-export const TIPE_PERISTIWA = ['hapus', 'tambah', 'bagi', 'ambil', 'pindah'];
+export const TIPE_PERISTIWA = ['hapus', 'tambah', 'bagi', 'ambil', 'pindah', 'ubah_aksi'];
 export const TANYA_JENIS = ['tidak_ada', 'benda', 'total', 'selisih', 'terbanyak', 'tersedikit'];
 
 // Format skema Gemini (subset OpenAPI). propertyOrdering membuat model menulis
@@ -41,9 +41,11 @@ export const SKEMA = {
           target: { type: 'STRING' },
           jumlah: { type: 'INTEGER' },
           posisi: { type: 'STRING' },
+          aksi: { type: 'STRING', enum: ['', ...AKSI] },
+          aksi_awal: { type: 'STRING', enum: ['', ...AKSI] },
         },
-        required: ['tipe', 'target', 'jumlah', 'posisi'],
-        propertyOrdering: ['tipe', 'target', 'jumlah', 'posisi'],
+        required: ['tipe', 'target', 'jumlah', 'posisi', 'aksi', 'aksi_awal'],
+        propertyOrdering: ['tipe', 'target', 'jumlah', 'posisi', 'aksi', 'aksi_awal'],
       },
     },
     pertanyaan: { type: 'STRING' },
@@ -74,6 +76,16 @@ Ubah SATU kalimat guru menjadi JSON adegan. Aturan:
   "ambil" jika beberapa POTONG dari benda yang sudah dibagi diambil atau dimakan; "jumlah" = banyak potongan.
   "pindah" jika benda dipindah ke letak lain; isi "posisi" dengan letak barunya.
   "posisi" pada peristiwa selain "pindah" diisi "".
+  "pindah" hanya untuk LETAK. "jumlah" = berapa yang pindah ("dua dari lima kelinci pindah ke atas meja" → 2); 0 jika semuanya.
+  "ubah_aksi" jika benda yang SUDAH ADA berganti GERAKAN: berhenti, mulai berlari/melompat, tidak berlari lagi.
+    "aksi" = gerakan barunya: diam, lari, lompat, terbang, berenang, atau jatuh. Gerakan di luar daftar
+    (berjalan, menari, tidur, bersembunyi, berputar) → "diam". Gerakan yang dilarang ("tidak berlari, tapi berjalan") tidak
+    boleh dipertahankan: isi gerakan penggantinya (atau "diam").
+    "jumlah" = berapa yang berganti gerakan; 0 jika semuanya atau tidak disebut.
+    "aksi_awal" = gerakan lama jika kalimat memilih kelompok ("yang berlari sekarang berhenti" → "lari"; konteks
+    "kelinci: 5 (2 berlari dan 3 melompat)" menunjukkan banyaknya per gerakan), selain itu "".
+    JANGAN memakai "pindah" untuk perubahan gerakan.
+  "aksi" dan "aksi_awal" pada peristiwa selain "ubah_aksi" diisi "".
   Jika kalimat mengubah benda yang sudah ada, isi "peristiwa" dan biarkan "entitas" kosong.
 - "gabung" = true jika kalimat MEMASUKKAN benda baru ke adegan yang sudah ada tanpa mengganti adegannya, misalnya
   "ada juga tiga kelinci", "tiga kelinci datang", "kelinci ikut bergabung", "tambahkan seekor kelinci", "masukkan
@@ -114,6 +126,18 @@ export const CONTOH = [
     j({ entitas: [{ jenis: 'kucing', jumlah: 1, aksi: 'diam', posisi: 'di bawah meja', bagi: 0, emoji: '🐈', emoji_acuan: '' }], konsep: 'posisi' })],
   ['kucing: 1 (di bawah meja)', 'Sekarang kucingnya naik ke atas meja.',
     j({ konsep: 'posisi', peristiwa: [{ tipe: 'pindah', target: 'kucing', jumlah: 1, posisi: 'di atas meja' }] })],
+  ['kelinci: 3', 'Tiga kelinci yang sedang berlari sekarang berhenti.',
+    j({ konsep: 'tidak_ada', peristiwa: [{ tipe: 'ubah_aksi', target: 'kelinci', jumlah: 0, posisi: '', aksi: 'diam', aksi_awal: '' }] })],
+  ['kelinci: 5 (2 berlari dan 3 melompat)', 'Kelinci yang berlari sekarang berhenti, yang melompat tetap melompat.',
+    j({ konsep: 'tidak_ada', peristiwa: [{ tipe: 'ubah_aksi', target: 'kelinci', jumlah: 2, posisi: '', aksi: 'diam', aksi_awal: 'lari' }] })],
+  ['kelinci: 1', 'Kelinci itu tidak berlari, tapi berjalan.',
+    j({ konsep: 'tidak_ada', peristiwa: [{ tipe: 'ubah_aksi', target: 'kelinci', jumlah: 0, posisi: '', aksi: 'diam', aksi_awal: '' }] })],
+  ['kelinci: 5 (di bawah meja)', 'Dua dari lima kelinci pindah ke atas meja.',
+    j({ konsep: 'posisi', peristiwa: [{ tipe: 'pindah', target: 'kelinci', jumlah: 2, posisi: 'di atas meja', aksi: '', aksi_awal: '' }] })],
+  ['kosong', 'Ada lima kelinci. Dua berlari, tiga melompat.',
+    j({ entitas: [
+      { jenis: 'kelinci', jumlah: 2, aksi: 'lari', posisi: '', bagi: 0, emoji: '🐇', emoji_acuan: '' },
+      { jenis: 'kelinci', jumlah: 3, aksi: 'lompat', posisi: '', bagi: 0, emoji: '🐇', emoji_acuan: '' }], konsep: 'membilang' })],
   ['ikan: 7', 'Coba hitung, ada berapa ikan di kolam?',
     j({ konsep: 'membilang', pertanyaan: 'Ada berapa ikan di kolam?', tanya_benda: 'ikan', tanya_jenis: 'benda' })],
   ['kosong', 'Di hutan ada tiga kelinci dan dua harimau.',
@@ -142,6 +166,7 @@ const TEMPAT_BUKAN_ACUAN = new Set(['laut', 'sungai', 'kolam', 'danau', 'hutan',
   'gunung', 'langit', 'taman', 'kota', 'pasar', 'dapur', 'kamar', 'sekolah', 'peternakan', 'desa', 'gurun', 'salju', 'udara', 'air']);
 // Kata yang berarti "masukkan ke adegan yang ada", bukan "mulai adegan baru".
 const KATA_GABUNG = /\b(datang|muncul|juga|bersama|ikut|menyusul|bergabung|masuk|tambahkan|menambahkan|masukkan|memasukkan|ditambahkan|ditambah|menambah|bertambah|tambah|plus)\b/i;
+const KATA_BERHENTI = /\b(berhenti|diam|tidak bergerak|tak bergerak|istirahat|tidur|duduk)\b/i;
 const KATA_TAMBAH_EKSPLISIT = /\b(lagi|tambahan|lainnya|lain)\b/i;
 const KATA_DUA_PERISTIWA = /\b(lagi|lalu|kemudian|setelah itu|serta)\b/i;
 const KATA_ULANG_TETAP = new Set(['kupu-kupu', 'kura-kura', 'laba-laba', 'biri-biri', 'undur-undur', 'ubur-ubur', 'lumba-lumba']);
@@ -194,13 +219,33 @@ export function rapikan(h, kalimat, konteks = '') {
 
   hasil.peristiwa = (hasil.peristiwa || [])
     .filter((p) => TIPE_PERISTIWA.includes(p.tipe))
-    .map((p) => ({
-      tipe: p.tipe,
-      target: normalkanJenis(p.target),
-      jumlah: batasi(p.jumlah, 1, 20),
-      posisi: p.tipe === 'pindah' ? String(p.posisi || '').trim().toLowerCase() : '',
-    }))
+    .map((p) => {
+      const gerak = p.tipe === 'pindah' || p.tipe === 'ubah_aksi'; // jumlah 0 = semuanya
+      const lagi = {
+        tipe: p.tipe,
+        target: normalkanJenis(p.target),
+        jumlah: batasi(p.jumlah, gerak ? 0 : 1, 20),
+        posisi: p.tipe === 'pindah' ? String(p.posisi || '').trim().toLowerCase() : '',
+      };
+      if (p.tipe === 'ubah_aksi') {
+        // Gerakan di luar daftar menjadi "diam"; "menari" tidak boleh lolos sebagai aksi yang tidak bisa digambar.
+        lagi.aksi = AKSI.includes(p.aksi) ? p.aksi : 'diam';
+        lagi.aksi_awal = AKSI.includes(p.aksi_awal) ? p.aksi_awal : '';
+      }
+      return lagi;
+    })
     .filter((p) => p.target);
+
+  // "Tiga kelinci yang berlari sekarang berhenti": model kadang memakai "pindah" tanpa letak yang berarti.
+  // Itu perubahan gerakan, bukan letak: ubah menjadi ubah_aksi dan hindari "Letak baru tidak jelas".
+  hasil.peristiwa = hasil.peristiwa.map((p) => {
+    const letakSah = /^(?:di|ke)\s+(atas|bawah|samping|sebelah|depan|belakang|dalam)\s+\S+/.test(p.posisi);
+    if (p.tipe !== 'pindah' || letakSah) return p;
+    if ((p.posisi === '' || AKSI_KE_ENUM[p.posisi] || p.posisi === 'diam') && KATA_BERHENTI.test(String(kalimat))) {
+      return { tipe: 'ubah_aksi', target: p.target, jumlah: p.jumlah, posisi: '', aksi: AKSI_KE_ENUM[p.posisi] || 'diam', aksi_awal: '' };
+    }
+    return p;
+  });
 
   // Benda yang berubah sering ikut ditulis di "entitas" ("satu kelinci lagi datang").
   // Itu bukan benda baru jika benda itu memang sudah ada di papan. Jika belum ada

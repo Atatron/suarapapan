@@ -15,6 +15,7 @@ export const ADEGAN_KOSONG = Object.freeze({
 
 let nomor = 0;
 const idBaru = () => `o${Date.now().toString(36)}${(nomor++).toString(36)}`;
+const AKSI_SAH = ['diam', 'lari', 'lompat', 'terbang', 'berenang', 'jatuh'];
 const batasi = (n) => Math.max(1, Math.min(Number(n) || 1, BATAS_OBJEK));
 
 export const yangAda = (adegan, jenis) =>
@@ -177,8 +178,31 @@ export function terapkan(adegan, hasil, opsi = {}) {
       const tujuan = uraiPosisi(p.posisi);
       if (!tujuan) { catatan.push(`Letak baru ${p.target} tidak jelas.`); continue; }
       if (!yangAda({ objek }, p.target).length) { catatan.push(`Tidak ada ${p.target} di papan untuk dipindah.`); continue; }
-      objek = objek.map((o) => (o.jenis === p.target && o.status !== 'pergi' ? { ...o, posisi: tulisPosisi(tujuan.relasi, tujuan.acuan) } : o));
+      // Hanya sebanyak "jumlah" yang dipindah ("dua dari lima kelinci"); jumlah 0 atau kosong = semuanya.
+      // Yang belum di tujuan didahulukan, supaya yang sudah di sana tidak memakan jatah.
+      const tempat = tulisPosisi(tujuan.relasi, tujuan.acuan);
+      const ada = objek.map((o, i) => i).filter((i) => objek[i].jenis === p.target && objek[i].status !== 'pergi');
+      const belum = ada.filter((i) => objek[i].posisi !== tempat);
+      const mau = Number(p.jumlah) >= 1 ? Math.round(Number(p.jumlah)) : ada.length;
+      if (mau > ada.length) catatan.push(`Hanya ada ${ada.length} ${p.target}, jadi semuanya dipindah.`);
+      const pilih = new Set(belum.slice(0, Math.min(mau, ada.length)));
+      objek = objek.map((o, i) => (pilih.has(i) ? { ...o, posisi: tempat } : o));
       konsep = 'posisi';
+    }
+
+    // Ganti gerakan benda yang sudah ada ("sekarang berhenti", "mulai melompat"); jumlah dan identitas tetap.
+    if (p.tipe === 'ubah_aksi') {
+      const ada = objek.map((o, i) => i).filter((i) => objek[i].jenis === p.target && objek[i].status !== 'pergi');
+      if (!ada.length) { catatan.push(`Tidak ada ${p.target} di papan untuk diubah gerakannya.`); continue; }
+      const aksiBaru = AKSI_SAH.includes(p.aksi) ? p.aksi : 'diam';
+      // aksi_awal memilih kelompok ("yang berlari"); tanpa itu, yang gerakannya sudah sama dilewati.
+      const cocok = p.aksi_awal && AKSI_SAH.includes(p.aksi_awal)
+        ? ada.filter((i) => (objek[i].aksi || 'diam') === p.aksi_awal)
+        : ada.filter((i) => (objek[i].aksi || 'diam') !== aksiBaru);
+      const mau = Number(p.jumlah) >= 1 ? Math.round(Number(p.jumlah)) : cocok.length;
+      const pilih = new Set(cocok.slice(0, mau));
+      if (!pilih.size) catatan.push(`${p.target} sudah ${aksiBaru === 'diam' ? 'diam' : KATA_AKSI[aksiBaru]}; tidak ada yang berubah.`);
+      objek = objek.map((o, i) => (pilih.has(i) ? { ...o, aksi: aksiBaru } : o));
     }
 
     if (p.tipe === 'tambah') {
@@ -301,12 +325,19 @@ function jenisTambahan(adegan, hasil, gabung) {
 export function konteks(adegan) {
   const hitung = {};
   for (const o of yangAda(adegan)) {
-    const k = (hitung[o.jenis] ||= { n: 0, catatan: [] });
+    const k = (hitung[o.jenis] ||= { n: 0, catatan: [], aksi: {} });
     k.n++;
+    k.aksi[o.aksi || 'diam'] = (k.aksi[o.aksi || 'diam'] || 0) + 1;
     if (o.bagi && !k.catatan.length) k.catatan.push(`dibagi ${o.bagi}${o.diambil ? `, ${o.diambil} diambil` : ''}`);
     else if (o.posisi && !k.catatan.length) k.catatan.push(o.posisi);
   }
-  const isi = Object.entries(hitung).map(([j, k]) => `${j}: ${k.n}${k.catatan.length ? ` (${k.catatan[0]})` : ''}`).join(', ');
+  // Jenis yang gerakannya campur: sertakan banyaknya per gerakan, supaya "yang berlari" bisa dipilih.
+  // Tanpa koma di dalam kurung, karena konteks dipecah per koma oleh pembacanya.
+  for (const k of Object.values(hitung)) {
+    const macam = Object.entries(k.aksi);
+    if (macam.length > 1) k.catatan.push(macam.map(([a, n]) => `${n} ${KATA_AKSI[a] || 'diam'}`).join(' dan '));
+  }
+  const isi = Object.entries(hitung).map(([j, k]) => `${j}: ${k.n}${k.catatan.length ? ` (${k.catatan.join('; ')})` : ''}`).join(', ');
   return isi || 'kosong';
 }
 
@@ -315,12 +346,16 @@ const KATA_AKSI = { lari: 'berlari', lompat: 'melompat', terbang: 'terbang', ber
 /** Deskripsi teks untuk guru dan pembaca layar (dan nanti untuk audio siswa tunanetra). */
 export function deskripsi(adegan) {
   if (!adegan.objek.length) return 'Papan kosong.';
+  // Satu kelompok = benda yang jenis, gerakan, letak, dan keadaan potongannya sama; yang berbeda ditulis terpisah
+  // ("2 kelinci berlari; 3 kelinci melompat"), bukan digabung dengan gerakan benda pertama.
   const kelompok = {};
   for (const o of adegan.objek) {
-    const k = (kelompok[o.jenis] ||= { ada: 0, pergi: 0, aksi: o.aksi, posisi: o.posisi, bagi: o.bagi, diambil: o.diambil });
+    const kunci = [o.jenis, o.aksi || 'diam', o.posisi || '', o.bagi || 0, o.diambil || 0].join('|');
+    const k = (kelompok[kunci] ||= { jenis: o.jenis, ada: 0, pergi: 0, aksi: o.aksi, posisi: o.posisi, bagi: o.bagi, diambil: o.diambil });
     k[o.status === 'pergi' ? 'pergi' : 'ada']++;
   }
-  const bagian = Object.entries(kelompok).map(([jenis, k]) => {
+  const bagian = Object.values(kelompok).map((k) => {
+    const { jenis } = k;
     const aksi = KATA_AKSI[k.aksi] ? ` ${KATA_AKSI[k.aksi]}` : '';
     // "di rumput" sering terisi di posisi dan latar sekaligus; tulis sekali saja.
     const posisi = k.posisi && !k.posisi.endsWith(adegan.latar || '\u0000') ? ` ${k.posisi}` : '';

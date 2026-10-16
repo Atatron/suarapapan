@@ -7,6 +7,7 @@
 import { yangAda } from './engine.js';
 
 export const MAKS_RIWAYAT = 30;
+const AKSI_KATA = { lari: 'berlari', lompat: 'melompat', terbang: 'terbang', berenang: 'berenang', jatuh: 'jatuh', diam: 'diam' };
 
 export const awalSejarah = (adegan, label = '') => ({ lalu: [], sekarang: { adegan, label }, maju: [] });
 
@@ -56,6 +57,25 @@ export function ringkasBeda(sebelum, sesudah) {
   const a = potongDiambil(sebelum);
   const b = potongDiambil(sesudah);
   if (a !== b) daftar.push(`potongan diambil: ${a} → ${b}`);
+  // Gerakan berganti tanpa jumlah berubah ("3 kelinci berlari → berhenti") tetap harus tampak sebagai perubahan.
+  const gerak = (a) => {
+    const m = new Map();
+    for (const o of yangAda(a)) {
+      const k = `${o.jenis}|${o.aksi || 'diam'}`;
+      m.set(k, (m.get(k) || 0) + 1);
+    }
+    return m;
+  };
+  const g1 = gerak(sebelum);
+  const g2 = gerak(sesudah);
+  const jenisBeda = new Set();
+  for (const k of new Set([...g1.keys(), ...g2.keys()])) if ((g1.get(k) || 0) !== (g2.get(k) || 0)) jenisBeda.add(k.split('|')[0]);
+  const jumlahSama = (j) => (hitung(sebelum).get(j) || 0) === (hitung(sesudah).get(j) || 0);
+  for (const j of jenisBeda) {
+    if (!jumlahSama(j)) continue; // perubahan jumlah sudah ditulis di atas
+    const ke = [...g2.keys()].filter((k) => k.startsWith(`${j}|`)).map((k) => `${g2.get(k)} ${AKSI_KATA[k.split('|')[1]] || 'diam'}`);
+    daftar.push(`gerakan ${j}: ${ke.join(' dan ')}`);
+  }
   if (sesudah.latar && (sebelum.latar || '') !== sesudah.latar) daftar.push(`tempat: ${sebelum.latar || '—'} → ${sesudah.latar}`);
   return daftar;
 }
