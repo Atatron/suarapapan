@@ -23,6 +23,7 @@ const ALIAS_OBJ = {
   'mobil-mobilan': 'mobil', 'sepeda-motor': 'motor', 'kereta-api': 'kereta', 'pesawat-terbang': 'pesawat', ship: 'kapal',
   layang: 'layang-layang', hadiah: 'kado', 'bola-kaki': 'bola', pepohonan: 'pohon', 'bunga-bunga': 'bunga', mentari: 'matahari',
   gunung: 'gunung-kecil', bukit: 'gunung-kecil', kaos: 'baju', kemeja: 'baju', gaun: 'rok', kerudung: 'syal', 'kaus': 'baju',
+  'laki-laki': 'anak-laki-laki', laki: 'anak-laki-laki', perempuan: 'anak-perempuan', 'anak-laki': 'anak-laki-laki',
   lingkar: 'lingkaran', bulat: 'lingkaran', uang: 'koin',
 };
 

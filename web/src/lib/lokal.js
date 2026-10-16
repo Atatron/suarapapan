@@ -39,7 +39,7 @@ const token = (teks) => String(teks || '').toLowerCase().match(/\d+|[a-z]+(?:-[a
 function bendaTunggal(t) {
   if (!t) return null;
   const ulang = t.match(/^([a-z]+)-\1$/);
-  const dasar = ulang && !['kupu-kupu', 'kura-kura', 'laba-laba', 'biri-biri', 'lumba-lumba', 'ubur-ubur'].includes(t) ? ulang[1] : t;
+  const dasar = ulang && !['kupu-kupu', 'kura-kura', 'laba-laba', 'biri-biri', 'lumba-lumba', 'ubur-ubur', 'laki-laki'].includes(t) ? ulang[1] : t;
   if (adaBenda(dasar)) return dasar;
   const tanpaNya = dasar.replace(/nya$/, '');
   return tanpaNya !== dasar && adaBenda(tanpaNya) ? tanpaNya : null;

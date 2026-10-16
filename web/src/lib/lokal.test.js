@@ -2,6 +2,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { uraiLokal, bacaKonteks } from './lokal.js';
+import { cariGambar } from '../scene/pustaka.js';
 import { ADEGAN_KOSONG, terapkan, konteks, yangAda } from '../scene/engine.js';
 
 const baca = (nama) => JSON.parse(readFileSync(new URL(`../../../tests/${nama}.json`, import.meta.url), 'utf8'));
@@ -113,3 +114,10 @@ for (const nama of ['kalimat_uji', 'kalimat_uji_sulit', 'kalimat_uji_perintah', 
     assert.deepEqual(salah, [], `${benarTinggi}/${tinggi} benar`);
   });
 }
+
+test('"laki-laki" bukan kata ulang: tetap menjadi gambar anak laki-laki, bukan emoji berlabel "laki"', () => {
+  const r = uraiLokal('Ada dua laki-laki di sungai.', 'kosong');
+  assert.equal(r.hasil.entitas[0].jenis, 'laki-laki');
+  assert.equal(cariGambar('laki-laki'), 'anak-laki-laki');
+  assert.equal(cariGambar('laki'), 'anak-laki-laki'); // papan lama yang sudah berlabel "laki"
+});
