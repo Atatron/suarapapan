@@ -7,7 +7,7 @@ The starting point is merged `origin/main` at `af90d92` (PR #2), fetched from Gi
 - Nine presentation profiles distinguish adults, children, babies, ordinary animals, small animals/insects, vehicles, furniture, environmental objects and small props. The semantic sentence role does not change an asset's physical scale. A toy car uses a prop scale rather than a vehicle scale.
 - All 32 existing backgrounds have explicit usable surface areas in `web/src/scene/permukaan.js`. People and animals use floors, books/pencils can use tables, fish can use water, and flying objects use air. Regions are selected per object, including different actions of the same species.
 - The old layout ignored its horizontal region and spread every sprite across the full scene. It now respects bounded regions. This fixes a child appearing on the foreground classroom desk. Human scale in the garden is adjusted to the foreground path.
-- The original background artwork is retained. Exact named places continue to win over automatic subject-based background selection. A redundant miniature place badge is hidden when the full-size scene already depicts that place.
+- Classroom and park backgrounds use the replacement artwork supplied by the user on 16 October 2026. Originals are preserved in `tools/latar_override`, which the background builder prefers over the original pack. Classroom subjects use the open floor, classroom props use the teacher's desk on the right, and park subjects use the clear lawn away from the foreground flowers and benches. Exact named places continue to win over automatic subject-based background selection. A redundant miniature place badge is hidden when the full-size scene already depicts that place.
 - Bare phrases such as **anak di kelas** create one subject; later **anak di taman** changes the place without resetting its quantity. **Ganti latar ke kelas** changes only the background.
 - Arithmetic is computed by code, never accepted as a model-provided answer. Explicit `+`, `−`, `×`, `÷`, their common keyboard equivalents and Indonesian operator words are supported. Multiplication and sharing division display groups; integer division can display a remainder. Fraction cutting remains a separate lesson.
 - Sequential clauses are applied in order. **Ada lima apel, lalu dua apel dimakan dan tiga apel datang** produces six apples and `5 − 2 + 3 = ?`.
@@ -17,8 +17,8 @@ The starting point is merged `origin/main` at `af90d92` (PR #2), fetched from Gi
 
 | Input | Expected display |
 |---|---|
-| `anak di kelas` | One child on the floor beside the desk |
-| `anak di taman` | One child on the garden path |
+| `anak di kelas` | One child on the open classroom floor |
+| `anak di taman` / `anak di park` | One child on the park lawn |
 | `Ada satu guru dan dua buku di kelas` | Adult on the floor, books on the table |
 | `3 kali 2 apel` | Three groups of two apples; answer 6 |
 | `dua belas apel dibagi tiga kelompok` | Three groups of four apples; answer 4 |

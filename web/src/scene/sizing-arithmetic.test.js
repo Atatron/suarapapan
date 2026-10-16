@@ -23,15 +23,19 @@ test('every background has explicit placement surfaces and humans never inherit 
   const bg = pilihLatar({latar:'kelas',objek:objects});
   const layout = tataObjek(objects,bg);
   for (const i of [0,1]) {
-    assert.ok(layout[i].px <= .32 && layout[i].px >= .09, `human floor x: ${layout[i].px}`);
-    assert.ok(layout[i].py >= .72 && layout[i].py <= .93);
+    assert.ok(layout[i].px <= .78 && layout[i].px >= .16, `human floor x: ${layout[i].px}`);
+    assert.ok(layout[i].py >= .73 && layout[i].py <= .94);
   }
-  for (const i of [2,3]) assert.ok(layout[i].px >= .57, `prop table x: ${layout[i].px}`);
+  for (const i of [2,3]) {
+    assert.ok(layout[i].px >= .84, `prop table x: ${layout[i].px}`);
+    assert.ok(layout[i].py >= .51 && layout[i].py <= .53, `prop table y: ${layout[i].py}`);
+  }
   assert.equal(bg.id,'classroom');
 });
 
 test('explicit place survives changes of subject, while mixed actions use separate surfaces', () => {
   for (const noun of ['anak-laki-laki','kelinci','apel']) assert.equal(pilihLatar({latar:'kelas',objek:[{jenis:noun}]}).id,'classroom');
+  assert.equal(pilihLatar({latar:'park',objek:[{jenis:'anak'}]}).id,'flower-garden');
   const objects = [{id:'a',jenis:'burung',aksi:'diam'},{id:'b',jenis:'burung',aksi:'terbang'}];
   const bg = pilihLatar({latar:'taman',objek:objects});
   assert.ok(bg.perObjek.a.y[1] > bg.perObjek.b.y[1]);

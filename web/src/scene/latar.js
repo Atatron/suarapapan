@@ -43,6 +43,7 @@ const KANDIDAT = {
   'kebun-binatang': ['savanna', 'jungle'],
   langit: ['open-sky'],
   taman: ['flower-garden', 'playground', 'nature'],
+  park: ['flower-garden'],
   'taman-bermain': ['playground'],
   malam: ['night-forest'],
   rumah: ['homeyard', 'living-room'],
