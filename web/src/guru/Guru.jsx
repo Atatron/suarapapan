@@ -4,7 +4,7 @@ import { ADEGAN_KOSONG, terapkan, konteks, deskripsi, pindahkan } from '../scene
 import { kirim, dengar } from '../lib/saluran.js';
 import { suaraDidukung, buatPendengar } from '../lib/suara.js';
 import { uraikan, cekKesehatan, transkripsi } from '../lib/api.js';
-import { rekamDidukung, mulaiRekam, siapkanMik, mikSudahDiizinkan, pesanMik } from '../lib/rekam.js';
+import { rekamDidukung, mulaiRekam, siapkanMik, mikSudahDiizinkan, pesanMik, mulaiUkurLevel } from '../lib/rekam.js';
 import { kosakata } from '../scene/pustaka.js';
 import PilihKarakter from './PilihKarakter.jsx';
 import SebelumSesudah from './SebelumSesudah.jsx';
@@ -16,7 +16,7 @@ const TOMBOL_CLICKER = new Set(['PageDown', 'PageUp']);
 const KOSAKATA = kosakata();
 const TUNGGU_HASIL_CHROME_MS = 500; // hasil akhir Web Speech tiba sedikit setelah tombol dilepas
 const JEDA_MIN_DETIK = 0.35;        // lebih pendek dari ini = tombol tersentuh, bukan ucapan
-const RMS_MIN = 0.004;              // lebih pelan dari ini = hening
+const RMS_MIN = 0.0008;             // lebih pelan dari ini = hening (mikrofon laptop bisa sangat pelan; ucapan dinilai setelah diperkuat)
 const tunggu = (ms) => new Promise((r) => setTimeout(r, ms));
 
 const bacaPilihan = () => {
@@ -186,10 +186,18 @@ export default function Guru() {
     let pesanGagal = '';
     let abaikan = false;
     let awalPertama = null;
+    let alasanHening = '';
     try {
       const rek = await kontrol.berhenti();
       if (rek && (rek.durasi < JEDA_MIN_DETIK || rek.rms < RMS_MIN || !rek.ucapan)) {
-        abaikan = true; // tertekan tak sengaja, hening, atau hanya derau: jangan kirim apa pun
+        // Tertekan tak sengaja, hening, atau hanya derau: audio tidak dikirim ke Gemini (ia bisa mengarang kalimat).
+        // Tetapi jika Chrome sendiri mendengar ucapan, hasil Chrome dipakai; dan guru diberi tahu apa yang terukur.
+        abaikan = true;
+        alasanHening = rek.durasi < JEDA_MIN_DETIK
+          ? 'Tombol dilepas terlalu cepat. Tahan sampai selesai bicara.'
+          : `Suara tidak terdeteksi (level ${rek.rms.toFixed(4)}, puncak ${(rek.puncak ?? 0).toFixed(3)}). Dekatkan mikrofon, naikkan volume input di Windows, atau pakai tombol Tes mikrofon.`;
+      } else if (!rek) {
+        alasanHening = 'Rekaman kosong: mikrofon tidak menghasilkan data. Periksa mikrofon yang dipilih (ikon gembok di address bar, lalu Mikrofon).';
       } else if (rek) {
         try {
           const dasar = pratinjauRef.current?.adegan ?? papanRef.current;
@@ -202,12 +210,13 @@ export default function Guru() {
           pesanGagal = e.message;
         }
       }
-      if (!abaikan && !kalimat.length) {
-        // Gemini gagal atau kosong: pakai hasil Chrome (tunggu hasil akhirnya yang terlambat tiba).
+      if (!kalimat.length) {
+        // Gemini gagal/kosong, atau filter kami menyangka hening: pakai hasil Chrome (tunggu hasil akhirnya yang terlambat tiba).
         await tunggu(TUNGGU_HASIL_CHROME_MS);
         kalimat = cadanganRef.current.splice(0);
         if (pesanGagal && kalimat.length) setGalat(`${pesanGagal} Memakai hasil pengenalan Chrome.`);
         else if (pesanGagal) setGalat(pesanGagal);
+        else if (!kalimat.length && alasanHening) setGalat(alasanHening);
       }
       cadanganRef.current = [];
       kalimat.forEach((k, i) => masukkanRef.current(k, i === 0 ? awalPertama : null));
@@ -218,6 +227,25 @@ export default function Guru() {
   }, []);
 
   const pakaiAkurat = () => akuratRef.current && suaraSiapRef.current && rekamDidukung();
+
+  // Tes mikrofon: batang level langsung, supaya jelas apakah mikrofon yang benar menangkap suara.
+  const [tes, setTes] = useState(null); // { level, label, bisu, tenang } saat menyala
+  const tesRef = useRef(null);
+  const matikanTes = useCallback(() => { tesRef.current?.berhenti(); tesRef.current = null; setTes(null); }, []);
+  useEffect(() => matikanTes, [matikanTes]);
+  const nyalakanTes = async () => {
+    if (tesRef.current) { matikanTes(); return; }
+    setGalat('');
+    try {
+      let tenangSejak = Date.now();
+      const k = await mulaiUkurLevel((level) => {
+        if (level > 0.004) tenangSejak = Date.now();
+        setTes((t) => (t ? { ...t, level, tenang: Date.now() - tenangSejak > 3000 } : t));
+      });
+      tesRef.current = k;
+      setTes({ level: 0, label: k.label, bisu: k.bisu, tenang: false });
+    } catch (e) { setGalat(pesanMik(e)); }
+  };
 
   const mulai = async () => {
     if (tahanRef.current) return;
@@ -399,6 +427,18 @@ export default function Guru() {
             <p className="galat">Browser ini tidak mendukung pengenalan suara. Gunakan Google Chrome, atau ketik kalimat di bawah.</p>
           )}
           <p className="petunjuk">Tahan tombol Spasi atau tekan clicker presentasi untuk bicara.</p>
+          {rekamDidukung() ? (
+            <div className="tes-mik">
+              <button type="button" className="tombol tombol-kecil" onClick={nyalakanTes} aria-pressed={Boolean(tes)}>{tes ? 'Matikan tes' : 'Tes mikrofon'}</button>
+              {tes ? (
+                <div className="tes-mik-isi" role="status">
+                  <div className="meter" aria-hidden="true"><div className="meter-isi" style={{ width: `${Math.min(100, Math.sqrt(tes.level) * 220)}%` }} /></div>
+                  <small>Mikrofon: {tes.label}{tes.bisu ? ' (dibisukan)' : ''}</small>
+                  {tes.tenang ? <small className="galat">Tidak ada suara masuk. Bicara, atau periksa mikrofon yang dipilih dan volume input Windows.</small> : <small>Bicaralah: batang harus bergerak.</small>}
+                </div>
+              ) : null}
+            </div>
+          ) : null}
           <p className="transkrip" aria-live="polite">{sementara || (memeriksa ? 'Memeriksa ucapan…' : sibuk ? 'Memahami kalimat…' : 'Transkrip muncul di sini.')}</p>
           <form className="form-ketik" onSubmit={kirimKetik}>
             <label htmlFor="ketik-kalimat">Atau ketik kalimat</label>

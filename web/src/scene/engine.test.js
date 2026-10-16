@@ -1003,3 +1003,19 @@ test('sejarah.perbarui mengganti papan tanpa menambah langkah Batalkan', () => {
   assert.equal(s2.sekarang.adegan.objek[0].px, 0.4);
   assert.equal(s2.sekarang.label, 'dua kelinci');
 });
+
+// ---------- suara pelan dari mikrofon laptop ----------
+test('suara pelan (puncak 0,01) tetap terdeteksi sebagai ucapan setelah diperkuat; hening/dengung tidak', () => {
+  const laju = 16000;
+  const ucapanPelan = new Float32Array(laju * 2);
+  for (let i = 0; i < ucapanPelan.length; i++) {
+    const t = i / laju;
+    // dua "suku kata": 200 Hz berselimut naik-turun, puncak 0,01 (jauh lebih pelan dari contoh sintetis)
+    const selimut = (t > 0.3 && t < 0.7) || (t > 1.0 && t < 1.5) ? Math.sin(((t % 0.4) / 0.4) * Math.PI) : 0;
+    ucapanPelan[i] = 0.01 * selimut * Math.sin(2 * Math.PI * 200 * t) + 0.0004 * (((i * 7919) % 100) / 100 - 0.5);
+  }
+  assert.equal(adaUcapan(normalkan(ucapanPelan)).ada, true, 'ucapan pelan terdeteksi setelah diperkuat');
+  const dengung = new Float32Array(laju * 2).map((_, i) => 0.003 * Math.sin(2 * Math.PI * 100 * (i / laju)));
+  assert.equal(adaUcapan(normalkan(dengung)).ada, false, 'dengung stabil bukan ucapan');
+  assert.equal(adaUcapan(new Float32Array(laju * 2)).ada, false, 'hening bukan ucapan');
+});

@@ -87,10 +87,37 @@ export async function mulaiRekam() {
         if (!potongan.length) return null;
         const { pcm, durasi } = await dekode(new Blob(potongan, { type: rec.mimeType || mime }));
         const rms = hitungRms(pcm);
-        const ucapan = adaUcapan(pcm).ada;
-        return { audio: keBase64(pcmKeWav(normalkan(pcm))), mime: 'audio/wav', durasi, rms, ucapan };
-      })().catch(() => null);
+        // Mikrofon laptop sering pelan: ucapan dinilai SETELAH diperkuat (normalkan), bukan dari volume mentah.
+        const keras = normalkan(pcm);
+        let puncak = 0;
+        for (let i = 0; i < pcm.length; i++) puncak = Math.max(puncak, Math.abs(pcm[i]));
+        const ucapan = adaUcapan(keras).ada;
+        return { audio: keBase64(pcmKeWav(keras)), mime: 'audio/wav', durasi, rms, puncak, ucapan };
+      })().catch((e) => { console.error('Rekaman gagal diproses:', e); return null; });
       return hasil;
     },
+  };
+}
+
+/**
+ * Pengukur level mikrofon untuk tombol "Tes mikrofon": memanggil onLevel(rms) sekitar 12 kali per detik.
+ * Mengembalikan { berhenti(), label, bisu } supaya guru melihat mikrofon mana yang dipakai.
+ */
+export async function mulaiUkurLevel(onLevel) {
+  const s = await siapkanMik();
+  const Ctx = window.AudioContext || window.webkitAudioContext;
+  const ctx = new Ctx();
+  await ctx.resume?.();
+  const sumber = ctx.createMediaStreamSource(s);
+  const an = ctx.createAnalyser();
+  an.fftSize = 1024;
+  sumber.connect(an);
+  const buf = new Float32Array(an.fftSize);
+  const t = setInterval(() => { an.getFloatTimeDomainData(buf); onLevel(hitungRms(buf)); }, 80);
+  const trek = s.getAudioTracks()[0];
+  return {
+    label: trek?.label || 'mikrofon bawaan',
+    bisu: Boolean(trek?.muted),
+    berhenti() { clearInterval(t); try { sumber.disconnect(); } catch { /* sudah putus */ } ctx.close?.(); },
   };
 }
