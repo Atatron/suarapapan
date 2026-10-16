@@ -64,7 +64,7 @@ Latensi diukur pada laptop dengan GPU RTX 5060.
 | Uji | Hasil | Catatan |
 |---|---|---|
 | 8 kalimat × 2 putaran, suara sintetis Indonesia (`id-ID-ArdiNeural`, `id-ID-GadisNeural`), separuhnya diberi derau kelas (rasio 8 dB) | **0 kesalahan dari 124 kata** | Suara **sintetis**, lebih bersih daripada suara asli. Anak-anak, aksen daerah, dan gema belum diuji |
-| 12 klip derau (desis, gumam, dengung) dan hening | 0 klip menghasilkan kalimat | Setelah lapisan pengaman ditambahkan (lihat bagian 4) |
+| 12 klip derau (desis, gumam, dengung) dan hening | 0 klip menghasilkan kalimat | Setelah lapisan pengaman ditambahkan (lihat bagian 4). Satu klip kena batas waktu layanan. Derau buatan, bukan kelas sungguhan |
 | Kecepatan setelah tombol dilepas | ±3–7 detik, kadang lebih | Gemini tingkat gratis kadang lambat atau sibuk |
 | Uji dengan suara guru sungguhan | **Belum dilakukan** | Halaman `/uji` sudah siap; cara pakainya ada di README |
 
