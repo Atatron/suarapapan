@@ -900,7 +900,7 @@ test('"sekarang ditambah dengan 3 kucing": kelinci tetap ada, kucing bergabung',
 });
 
 // ---------- tata letak, proporsi, dan seret ----------
-import { tataObjek, perspektif, tinggiTampil, ukuranKarakter } from './tata.js';
+import { tataObjek, perspektif, tinggiTampil, ukuranKarakter, kategoriJenis } from './tata.js';
 import { pindahkan } from './engine.js';
 
 const adeganDari = (...pasang) => {
@@ -944,6 +944,29 @@ test('tata: tiga kelinci sebaris, berjarak, urut kiri ke kanan', () => {
   assert.equal(new Set(t.map((p) => p.py)).size, 1);
   assert.ok(t[0].px < t[1].px && t[1].px < t[2].px);
   assert.ok(t[1].px - t[0].px >= t[0].lebar * 0.99, 'tidak saling menimpa');
+});
+
+test('tata: banyak karakter tersebar di lebar dan kedalaman, tidak menumpuk di satu sisi', () => {
+  const t = tataObjek(adeganDari(['kelinci', 3], ['harimau', 2], ['gajah', 1], ['apel', 2]).objek);
+  const xs = t.map((p) => p.px);
+  assert.ok(Math.max(...xs) - Math.min(...xs) > 0.5, 'lebar sebaran');
+  assert.ok(new Set(t.map((p) => p.py.toFixed(2))).size >= 3, 'kedalaman bervariasi');
+  const ulang = tataObjek(adeganDari(['kelinci', 3], ['harimau', 2], ['gajah', 1], ['apel', 2]).objek);
+  assert.deepEqual(ulang.map((p) => [p.px, p.py]), t.map((p, i) => [p.px, p.py]).map((x, i) => [ulang[i].px, ulang[i].py]), 'deterministik');
+});
+
+test('ukuran dasar dibedakan: manusia, hewan, dan properti', () => {
+  assert.equal(kategoriJenis('guru'), 'manusia');
+  assert.equal(kategoriJenis('gajah'), 'hewan');
+  assert.equal(kategoriJenis('semut'), 'hewan');
+  assert.equal(kategoriJenis('apel'), 'properti');
+  assert.equal(kategoriJenis('meja'), 'properti');
+  const t = (j) => ukuranKarakter(j, 0.9, 1).isi;
+  assert.ok(t('apel') >= 14, 'buah kecil tetap terbaca dan bisa dihitung');
+  assert.ok(t('apel') < t('kelinci') + 6 && t('apel') > 10);
+  assert.ok(t('pensil') > t('apel'), 'selisih ukuran lembut: pensil lebih besar dari apel');
+  assert.ok(t('pohon') > t('guru'), 'properti sebesar pohon memakai skala nyata');
+  assert.ok(t('semut') < t('anjing') && t('anjing') < t('harimau') && t('harimau') < t('gajah'));
 });
 
 test('seret: pindahkan menyimpan px/py, membatasi, dan karakter lain tetap berpola susunan', () => {

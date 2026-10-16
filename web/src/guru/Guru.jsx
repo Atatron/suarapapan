@@ -9,6 +9,7 @@ import { kosakata } from '../scene/pustaka.js';
 import PilihKarakter from './PilihKarakter.jsx';
 import SebelumSesudah from './SebelumSesudah.jsx';
 import * as Sej from '../scene/sejarah.js';
+import { buangHurufLepas } from '../lib/teks.js';
 
 const KATA_ANGKA = 'satu dua tiga empat lima enam tujuh delapan sembilan sepuluh sebelas belas puluh seratus'.split(' ');
 const TOMBOL_CLICKER = new Set(['PageDown', 'PageUp']);
@@ -99,7 +100,9 @@ export default function Guru() {
 
   // `awal` = { konteks, janji }: hasil urai yang sudah dimulai lebih dulu dari teks Chrome.
   // Dipakai hanya jika konteks adegannya masih sama persis dengan sekarang.
-  const proses = useCallback(async (kalimat, awal = null) => {
+  const proses = useCallback(async (kalimatMentah, awal = null) => {
+    const kalimat = buangHurufLepas(kalimatMentah);
+    if (!kalimat) return;
     setSibuk((n) => n + 1);
     setGalat('');
     kirimCaption(kalimat, false);
@@ -259,7 +262,13 @@ export default function Guru() {
 
   // Spasi = tahan untuk bicara. Tombol clicker presentasi (PageDown/PageUp) = nyala/mati.
   useEffect(() => {
-    const diInput = (e) => ['INPUT', 'TEXTAREA', 'SELECT'].includes(e.target.tagName);
+    // Hanya kolom yang menerima ketikan yang memblokir pintasan. Kotak centang dan tombol yang masih
+    // fokus (setelah diklik) TIDAK boleh membuat Spasi menggulir halaman atau mengubah pilihan.
+    const diInput = (e) => {
+      const el = e.target;
+      if (el.isContentEditable || ['TEXTAREA', 'SELECT'].includes(el.tagName)) return true;
+      return el.tagName === 'INPUT' && !['checkbox', 'radio', 'button', 'submit', 'range'].includes(el.type);
+    };
     const turun = (e) => {
       if (diInput(e)) return;
       if ((e.ctrlKey || e.metaKey) && !e.altKey) {
@@ -268,7 +277,7 @@ export default function Guru() {
         if (k === 'y' || (k === 'z' && e.shiftKey)) { e.preventDefault(); ulangiRef.current(); return; }
       }
       if (e.repeat) return;
-      if (e.code === 'Space') { e.preventDefault(); mulai(); }
+      if (e.code === 'Space') { e.preventDefault(); document.activeElement?.blur?.(); mulai(); }
       if (TOMBOL_CLICKER.has(e.key)) { e.preventDefault(); mendengarRef.current ? berhenti() : mulai(); }
     };
     const naik = (e) => {
@@ -378,9 +387,10 @@ export default function Guru() {
             <button
               type="button"
               className={`tombol-mik${mendengar ? ' aktif' : ''}`}
-              onPointerDown={mulai}
+              onPointerDown={(e) => { e.preventDefault(); mulai(); }}
               onPointerUp={berhenti}
-              onPointerLeave={() => mendengar && berhenti()}
+              onPointerCancel={berhenti}
+              onContextMenu={(e) => e.preventDefault()}
             >
               <span className="tombol-mik-titik" aria-hidden="true" />
               {mendengar ? 'Mendengarkan… lepas jika selesai' : memeriksa ? 'Memeriksa ucapan…' : 'Tahan untuk bicara'}
@@ -456,8 +466,12 @@ export default function Guru() {
             <div className="sematan">
               <h3>Disematkan</h3>
               {sematan.map((s) => (
-                <button key={s.id} type="button" className="tombol tombol-teks" onClick={() => tampilkan({ ...s.adegan, versi: papanRef.current.versi + 1 }, 'Papan yang disematkan')}>{s.label}</button>
+                <div key={s.id} className="sematan-baris">
+                  <button type="button" className="tombol tombol-teks" onClick={() => tampilkan({ ...s.adegan, versi: papanRef.current.versi + 1 }, 'Papan yang disematkan')}>{s.label}</button>
+                  <button type="button" className="tombol tombol-kecil" onClick={() => setSematan((l) => l.filter((x) => x.id !== s.id))} aria-label={`Lepas sematan: ${s.label}`} title="Lepas sematan">Lepas</button>
+                </div>
               ))}
+              {sematan.length > 1 ? <button type="button" className="tombol tombol-kecil" onClick={() => setSematan([])}>Lepas semua</button> : null}
             </div>
           ) : null}
         </section>

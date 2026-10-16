@@ -328,3 +328,8 @@ button { font: inherit; }
 .rincian-gambar .benda-img, .rincian-gambar svg { width: 100%; height: auto; display: block; }
 .rincian-gambar .benda-emoji { font-size: clamp(22px, 3vw, 50px); }
 .rincian-gambar .benda-label { display: none; }
+
+/* Papan yang disematkan: tombol pemuatan + tombol lepas sematan */
+.sematan-baris { display: flex; gap: 8px; align-items: stretch; margin-bottom: 6px; }
+.sematan-baris .tombol-teks { flex: 1; width: auto; text-align: left; }
+.tombol-kecil { padding: 0.35em 0.8em; font-size: 0.9rem; white-space: nowrap; }

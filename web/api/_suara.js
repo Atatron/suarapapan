@@ -79,8 +79,15 @@ ${contoh}`;
 export const BATAS_BASE64 = 3_400_000; // ≈ 2,5 MB audio; batas badan permintaan Vercel 4,5 MB
 
 /** Teks hasil model → teks bersih satu baris, maksimal 600 karakter. */
+// Huruf tunggal liar dari pengenal suara ("ditambah y tiga kucing") dibuang; a/b/c/d/x tetap (pilihan jawaban, perkalian).
+const HURUF_SAH = new Set(['a', 'b', 'c', 'd', 'x']);
+const buangHurufLepas = (t) => t
+  .replace(/(^|[\s(])([A-Za-z])(?=$|[\s.,!?;:)])/g, (m, depan, huruf) => (HURUF_SAH.has(huruf.toLowerCase()) ? m : depan))
+  .replace(/\s+([.,!?;:])/g, '$1').replace(/\s{2,}/g, ' ').trim();
+
 export function bersihkanTranskrip(t) {
-  return String(t || '').replace(/\s+/g, ' ').trim().replace(/^["“”']+|["“”']+$/g, '').trim().slice(0, 600);
+  const rapi = String(t || '').replace(/\s+/g, ' ').trim().replace(/^["“”']+|["“”']+$/g, '').trim().slice(0, 600);
+  return buangHurufLepas(rapi);
 }
 
 /** "Ada tiga kelinci. Lalu dua pergi?" → ["Ada tiga kelinci.", "Lalu dua pergi?"] */
