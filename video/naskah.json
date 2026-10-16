@@ -1,0 +1,102 @@
+{
+ "_catatan": "Semua kalimat VO v2. voice: G = id-ID-GadisNeural (Bu Wulan), A = id-ID-ArdiNeural (narator). Angka hanya dari sumber terverifikasi (lihat SUMBER.md). Hanya statistik. \"tts\" = ejaan untuk suara (mis. AI dibaca ei-ai); \"text\" = yang tampil di caption.",
+ "lines": [
+  {
+   "id": "g_a",
+   "voice": "G",
+   "rate": "+4%",
+   "text": "Di rumput ada tiga kelinci."
+  },
+  {
+   "id": "g_b",
+   "voice": "G",
+   "rate": "+4%",
+   "text": "Lalu, dua kelinci pergi."
+  },
+  {
+   "id": "g_c",
+   "voice": "G",
+   "rate": "+4%",
+   "text": "Ada berapa kelinci sekarang?"
+  },
+  {
+   "id": "g_benar",
+   "voice": "G",
+   "rate": "+0%",
+   "text": "Benar! Satu!"
+  },
+  {
+   "id": "n_hook",
+   "voice": "A",
+   "rate": "+2%",
+   "text": "Satu kalimat. Empat anak. Empat pengalaman yang berbeda."
+  },
+  {
+   "id": "n_s1",
+   "voice": "A",
+   "rate": "+4%",
+   "text": "Di SLB saja, ada 166 ribu peserta didik berkebutuhan khusus."
+  },
+  {
+   "id": "n_s2",
+   "voice": "A",
+   "rate": "+4%",
+   "text": "Tapi 85 dari 100 sekolah dengan siswa berkebutuhan khusus belum punya guru pembimbing khusus."
+  },
+  {
+   "id": "n_s3",
+   "voice": "A",
+   "rate": "+4%",
+   "text": "Bukan hanya mereka. Delapan dari sepuluh siswa usia 15 tahun belum menguasai matematika dasar, dan tiga dari empat di bawah standar membaca."
+  },
+  {
+   "id": "n_s4",
+   "voice": "A",
+   "rate": "+4%",
+   "text": "Capaian antarwilayah pun timpang: 70 persen di satu wilayah, di bawah 40 persen di wilayah lain. Dan enam dari sepuluh ruang kelas SD rusak."
+  },
+  {
+   "id": "n_akar",
+   "voice": "A",
+   "rate": "+4%",
+   "text": "Masalahnya bukan pada anak-anaknya. Pelajaran hanya masuk lewat satu jalur: suara guru."
+  },
+  {
+   "id": "n_solusi",
+   "voice": "A",
+   "rate": "+0%",
+   "text": "Maka kami membuat Suara Papan: guru bicara, papan bercerita."
+  },
+  {
+   "id": "n_empat",
+   "voice": "A",
+   "rate": "+8%",
+   "text": "Bima membaca teksnya. Laras melihat gambarnya. Tara tak perlu memilah suara. Saat fokus Arka kembali, ceritanya masih di papan."
+  },
+  {
+   "id": "n_sampai",
+   "voice": "A",
+   "rate": "+2%",
+   "text": "Satu kalimat yang sama. Kali ini, sampai ke semuanya."
+  },
+  {
+   "id": "n_teknis",
+   "voice": "A",
+   "rate": "+8%",
+   "text": "Di baliknya, AI mengenali jumlah, benda, aksi, dan tempat.",
+   "tts": "Di baliknya, ei-ai mengenali jumlah, benda, aksi, dan tempat."
+  },
+  {
+   "id": "n_model",
+   "voice": "A",
+   "rate": "+8%",
+   "text": "Model IndoBERT kami: sama akurat, 96 kali lebih cepat dari LLM."
+  },
+  {
+   "id": "n_akhir",
+   "voice": "A",
+   "rate": "-2%",
+   "text": "Suara Papan. Karena setiap siswa berhak memahami pelajaran."
+  }
+ ]
+}

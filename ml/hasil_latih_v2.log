@@ -1,0 +1,39 @@
+Perangkat: cuda NVIDIA GeForce RTX 5060 Laptop GPU
+Loading weights:   0%|          | 0/197 [00:00<?, ?it/s]Loading weights: 100%|██████████| 197/197 [00:00<00:00, 24607.72it/s]
+[transformers] [1mBertForTokenClassification LOAD REPORT[0m from: indobenchmark/indobert-base-p1
+Key                 | Status     | 
+--------------------+------------+-
+pooler.dense.weight | UNEXPECTED | 
+pooler.dense.bias   | UNEXPECTED | 
+classifier.bias     | MISSING    | 
+classifier.weight   | MISSING    | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+C:\Users\ATA\suarapapan\ml\.venv\Lib\site-packages\torch\nn\modules\module.py:1370: UserWarning: expandable_segments not supported on this platform (Triggered internally at C:\actions-runner\_work\pytorch\pytorch\pytorch\c10/cuda/CUDAAllocatorConfig.h:39.)
+  return t.to(
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+epoch 1: loss 0.3843 · F1 validasi 0.9977 · 18 dtk
+Writing model shards:   0%|          | 0/1 [00:00<?, ?it/s]Writing model shards: 100%|██████████| 1/1 [00:01<00:00,  1.67s/it]Writing model shards: 100%|██████████| 1/1 [00:01<00:00,  1.67s/it]
+epoch 2: loss 0.0020 · F1 validasi 0.9989 · 33 dtk
+Writing model shards:   0%|          | 0/1 [00:00<?, ?it/s]Writing model shards: 100%|██████████| 1/1 [00:00<00:00,  1.81it/s]Writing model shards: 100%|██████████| 1/1 [00:00<00:00,  1.81it/s]
+epoch 3: loss 0.0005 · F1 validasi 1.0000 · 46 dtk
+Writing model shards:   0%|          | 0/1 [00:00<?, ?it/s]Writing model shards: 100%|██████████| 1/1 [00:01<00:00,  1.53s/it]Writing model shards: 100%|██████████| 1/1 [00:01<00:00,  1.53s/it]
+epoch 4: loss 0.0002 · F1 validasi 0.9989 · 61 dtk
+epoch 5: loss 0.0001 · F1 validasi 0.9989 · 74 dtk
+Loading weights:   0%|          | 0/199 [00:00<?, ?it/s]Loading weights:  14%|█▎        | 27/199 [00:00<00:00, 259.66it/s]Loading weights:  28%|██▊       | 56/199 [00:00<00:00, 271.06it/s]Loading weights:  43%|████▎     | 85/199 [00:00<00:00, 279.14it/s]Loading weights:  57%|█████▋    | 113/199 [00:00<00:00, 254.71it/s]Loading weights: 100%|██████████| 199/199 [00:00<00:00, 456.22it/s]
+              precision    recall  f1-score   support
+
+        AKSI      1.000     1.000     1.000        51
+       BENDA      1.000     1.000     1.000       285
+      JUMLAH      1.000     1.000     1.000       277
+   PERISTIWA      1.000     1.000     1.000       132
+      POSISI      1.000     0.935     0.967        31
+      TEMPAT      0.974     1.000     0.987        74
+
+   micro avg      0.998     0.998     0.998       850
+   macro avg      0.996     0.989     0.992       850
+weighted avg      0.998     0.998     0.998       850
+
+Model tersimpan di C:\Users\ATA\suarapapan\ml\model\indobert-suarapapan

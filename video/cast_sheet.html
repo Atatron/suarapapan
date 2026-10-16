@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="id"><head><meta charset="utf-8"><title>Model sheet</title>
+<style>
+@font-face { font-family: 'Fredoka'; src: url('assets/Fredoka.ttf') format('truetype'); font-weight: 300 700; }
+html,body{margin:0;background:#F3F1EA;font-family:Fredoka}
+svg{display:block}
+</style></head><body>
+<svg id="defs" width="0" height="0" style="position:absolute"><defs></defs></svg>
+<svg id="sheet" width="1920" height="1080" viewBox="0 0 1920 1080"></svg>
+<script src="cast.js"></script>
+<script>
+document.querySelector('#defs defs').innerHTML = CAST.DEFS;
+const page = new URLSearchParams(location.search).get('p') || '1';
+const lab = (x, y, t, s = 30, c = '#16302A', w = 700) => `<text x="${x}" y="${y}" font-family="Fredoka" font-size="${s}" font-weight="${w}" fill="${c}" text-anchor="middle">${t}</text>`;
+let s = '';
+if (page === '1') {
+  s += `<rect width="1920" height="1080" fill="#F3F1EA"/>` + lab(960, 60, 'SUARA PAPAN · model sheet pemeran', 40);
+  s += `<ellipse cx="250" cy="985" rx="150" ry="20" fill="rgba(0,0,0,.08)"/>` + CAST.wulan({ x: 250, y: 640, s: .9, expr: 'happy', armR: 'open', armL: 'hold', t: .3 });
+  const kids = [['bima', 'Bima', 'tunarungu'], ['arka', 'Arka', 'ADHD'], ['laras', 'Laras', 'disleksia'], ['tara', 'Tara', 'autisme']];
+  kids.forEach(([id, nm, cond], i) => {
+    const x = 620 + i * 340;
+    s += `<ellipse cx="${x}" cy="985" rx="110" ry="16" fill="rgba(0,0,0,.08)"/>`;
+    s += CAST.kid(id, { x, y: 815, s: 1.0, expr: 'happy', armR: 'down', armL: i % 2 ? 'wave' : 'hips', t: .4 + i });
+  });
+  s += lab(250, 1040, 'Bu Wulan · guru');
+  kids.forEach(([id, nm, cond], i) => s += lab(620 + i * 340, 1040, `${nm} · ${cond}`));
+} else if (page === '2') {
+  s += `<rect width="1920" height="1080" fill="#F3F1EA"/>` + lab(960, 56, 'Ekspresi', 40);
+  const exprs = ['neutral', 'happy', 'confused', 'worried', 'overwhelmed', 'surprised', 'joy', 'focus'];
+  const ids = ['bima', 'arka', 'laras', 'tara'];
+  exprs.forEach((e, j) => s += lab(250 + j * 215, 112, e, 24, '#6b6b6b', 600));
+  ids.forEach((id, i) => {
+    exprs.forEach((e, j) => {
+      const x = 250 + j * 215, y = 405 + i * 228;
+      s += `<g transform="translate(${x},${y}) scale(.62) translate(0,0)">` + CAST.kid(id, { x: 0, y: 0, expr: e, crop: 'bust', armR: e === 'overwhelmed' ? 'ears' : 'none', armL: e === 'overwhelmed' ? 'ears' : 'none' }) + `</g>`;
+    });
+  });
+} else if (page === '3') {
+  s += `<rect width="1920" height="1080" fill="#F3F1EA"/>` + lab(960, 56, 'Tampak belakang · teman sekelas · pose', 40);
+  ['bima', 'arka', 'laras', 'tara', 'x1', 'x2', 'x3', 'x4'].forEach((id, i) => {
+    const x = 140 + i * 235;
+    s += CAST.kid(id, { x, y: 470, s: .72, view: 'back', crop: 'seated', armR: 'desk', armL: 'desk' }) + lab(x, 560, id, 24, '#6b6b6b', 600);
+  });
+  const poses = [['bima', 'raise'], ['arka', 'point'], ['laras', 'chin'], ['tara', 'ears'], ['arka', 'cheer']];
+  poses.forEach(([id, ps], i) => {
+    const x = 220 + i * 370;
+    s += CAST.kid(id, { x, y: 1000, s: .78, crop: 'seated', expr: ps === 'ears' ? 'overwhelmed' : ps === 'cheer' ? 'joy' : 'happy', armR: ps, armL: ps === 'cheer' || ps === 'ears' ? ps : 'desk', t: 1 }) + lab(x, 1060, ps, 24, '#6b6b6b', 600);
+  });
+  s += CAST.wulan({ x: 1820, y: 700, s: .62, expr: 'talk', talk: .7, armR: 'point', armL: 'down' });
+}
+document.getElementById('sheet').innerHTML = s;
+</script></body></html>

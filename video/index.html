@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<title>Suara Papan Video v2</title>
+<style>
+@font-face { font-family: 'Fredoka'; src: url('assets/Fredoka.ttf') format('truetype'); font-weight: 300 700; }
+* { box-sizing: border-box; }
+html, body { margin: 0; background: #000; overflow: hidden; }
+#stage { position: relative; width: 1920px; height: 1080px; overflow: hidden; font-family: 'Fredoka', sans-serif; background: #000; }
+#stage svg { position: absolute; left: 0; top: 0; }
+</style>
+</head>
+<body>
+<div id="stage">
+  <svg id="defs" width="1" height="1" style="position:absolute;left:0;top:0"><defs id="defsInner"></defs></svg>
+  <svg id="main" width="1920" height="1080" viewBox="0 0 1920 1080"></svg>
+</div>
+<script src="cast.js"></script>
+<script src="world.js"></script>
+<script>
+// ---------------- core helpers shared by the scene files ----------------
+(function () {
+  const TLx = window.TL;
+  const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+  const H = {
+    clamp,
+    k: (t, a, b) => clamp((t - a) / (b - a), 0, 1),
+    lerp: (a, b, u) => a + (b - a) * u,
+    eo: u => 1 - Math.pow(1 - clamp(u, 0, 1), 3),               // ease out cubic
+    eio: u => { u = clamp(u, 0, 1); return u < .5 ? 4 * u * u * u : 1 - Math.pow(-2 * u + 2, 3) / 2; },
+    ei: u => Math.pow(clamp(u, 0, 1), 3),
+    back: u => { u = clamp(u, 0, 1); const c = 1.70158, c3 = c + 1; return 1 + c3 * Math.pow(u - 1, 3) + c * Math.pow(u - 1, 2); },
+    n: v => Math.round(v * 10) / 10,
+    // keyframe interpolation: kf = [[t, value], ...], eased between keys
+    kf(t, kf, ease) {
+      if (t <= kf[0][0]) return kf[0][1];
+      for (let i = 1; i < kf.length; i++) if (t <= kf[i][0]) {
+        const [t0, v0] = kf[i - 1], [t1, v1] = kf[i];
+        const u = (ease || H.eio)((t - t0) / (t1 - t0));
+        if (Array.isArray(v0)) return v0.map((a, j) => a + (v1[j] - a) * u);
+        return v0 + (v1 - v0) * u;
+      }
+      return kf[kf.length - 1][1];
+    },
+    // camera: look at (cx,cy) with zoom z and roll r (deg)
+    cam(svg, cx, cy, z, r = 0) {
+      return `<g transform="translate(960,540) rotate(${H.n(r)}) scale(${Math.round(z * 1000) / 1000}) translate(${H.n(-cx)},${H.n(-cy)})">${svg}</g>`;
+    },
+    // where a world point lands on screen for a given camera
+    toScreen(x, y, cx, cy, z) { return [960 + (x - cx) * z, 540 + (y - cy) * z]; },
+    // mouth openness for a VO line at local time tl since the line started
+    amp(line, tl) {
+      if (!TLx || !TLx.env[line] || tl < 0) return 0;
+      const i = Math.floor(tl * TLx.fps);
+      const e = TLx.env[line];
+      if (i >= e.length) return 0;
+      return Math.min(1, e[i] * 1.15);
+    },
+    // which of a scene's sentence parts is playing: returns {line, tl} or null
+    speaking(sent, lt) {
+      if (!sent) return null;
+      for (const [line, off] of sent) {
+        const dur = TLx.env[line].length / TLx.fps;
+        if (lt >= off && lt < off + dur) return { line, tl: lt - off };
+      }
+      return null;
+    },
+    // time (scene-local) when word index wi of a cue starts; cue given by line + its offset in the scene
+    wordAt(line, off, wi) { const w = TLx.words[line]; return off + (w[Math.min(wi, w.length - 1)] || [0])[0]; },
+    findWord(line, re, nth = 0) { const w = TLx.words[line]; let c = 0; for (let i = 0; i < w.length; i++) if (re.test(w[i][2])) { if (c === nth) return i; c++; } return -1; },
+    scene: id => TLx.scenes.find(s => s.id === id),
+    blink: (t, seed) => CAST.blink(t, seed),
+    noise: WORLD.noise,
+  };
+  window.H = H;
+  window.SC = {};
+})();
+</script>
+<script src="scenes_hook.js"></script>
+<script src="scenes_mid.js"></script>
+<script src="scenes_end.js"></script>
+<script>
+(function () {
+  const TLx = window.TL;
+  document.getElementById('defsInner').innerHTML = CAST.DEFS + WORLD.DEFS + (window.EXTRA_DEFS || '');
+  const main = document.getElementById('main');
+  const { k, eo, eio, n, clamp } = H;
+
+  function drawScene(sc, lt) {
+    const f = SC[sc.id];
+    if (!f) return `<rect width="1920" height="1080" fill="#400"/><text x="960" y="540" fill="#fff" font-size="60" text-anchor="middle">missing ${sc.id}</text>`;
+    return f(clamp(lt, 0, sc.dur), sc);
+  }
+
+  // burned-in captions for narrator lines (the hearing-impaired audience matters here)
+  function chunks(line) {
+    const w = TLx.words[line];
+    const out = []; let cur = [];
+    for (let i = 0; i < w.length; i++) {
+      cur.push(i);
+      const left = w.length - 1 - i;
+      const nextGap = i + 1 < w.length ? w[i + 1][0] - w[i][1] : 1;
+      // split at a pause or at 7 words, but never strand a 1-2 word tail on its own
+      const want = cur.length >= 7 || (cur.length >= 3 && nextGap > .22);
+      if (i === w.length - 1 || (want && left > 2) || cur.length >= 10) { out.push(cur); cur = []; }
+    }
+    return out;
+  }
+  const CH = {};
+  function displayWords(line) {
+    // reconstruct punctuation from the script text, matched word by word
+    const raw = TLx.text[line].split(/\s+/);
+    return raw;
+  }
+  // ?nocap hides the burned-in narrator captions (used for the voice-over package, where a human voice
+  // will not line up with captions that were timed to the AI voice)
+  const NOCAP = new URLSearchParams(location.search).has('nocap');
+  function caption(T) {
+    if (NOCAP) return '';
+    for (const c of TLx.cues) {
+      if (!c.caption) continue;
+      const tl = T - c.t;
+      if (tl < -0.05 || tl > c.dur + 0.25) continue;
+      const w = TLx.words[c.line];
+      const disp = displayWords(c.line);
+      CH[c.line] = CH[c.line] || chunks(c.line);
+      const ch = CH[c.line];
+      let ci = 0;
+      for (let j = 0; j < ch.length; j++) if (tl >= w[ch[j][0]][0] - 0.12) ci = j;
+      const idx = ch[ci];
+      // map boundary word indices onto display words (same count when tokenisation agrees)
+      const same = disp.length === w.length;
+      const text = idx.map(i => same ? disp[i] : w[i][2]).join(' ');
+      const fade = clamp(Math.min((tl + 0.05) / 0.12, (c.dur + 0.25 - tl) / 0.2), 0, 1);
+      const width = Math.min(1700, text.length * 23 + 90);
+      return `<g opacity="${n(fade * 100) / 100}">` +
+        `<rect x="${n(960 - width / 2)}" y="958" width="${n(width)}" height="78" rx="39" fill="rgba(22,30,28,.84)"/>` +
+        `<text x="960" y="1010" font-family="Fredoka" font-size="42" font-weight="600" fill="#FFFFFF" text-anchor="middle">${text.replace(/&/g, '&amp;')}</text></g>`;
+    }
+    return '';
+  }
+
+  window.renderAt = function (T) {
+    CAST.reset();
+    const sc = TLx.scenes;
+    let i = sc.findIndex(s => T >= s.start && T < s.start + s.dur);
+    if (i < 0) i = sc.length - 1;
+    const cur = sc[i], lt = T - cur.start;
+    let out = drawScene(cur, lt);
+    const trD = cur.trans === 'fade' ? .4 : cur.trans === 'push' ? .5 : 0;
+    if (trD && lt < trD && i > 0) {
+      const pv = sc[i - 1];
+      const prev = drawScene(pv, pv.dur);
+      const u = eio(lt / trD);
+      if (cur.trans === 'fade') out = `<g>${prev}</g><g opacity="${n(u * 1000) / 1000}">${out}</g>`;
+      else out = `<g transform="translate(${n(-1920 * u)},0)">${prev}</g><g transform="translate(${n(1920 * (1 - u))},0)">${out}</g>`;
+    }
+    // global finishing: soft vignette + a whisper of paper grain
+    out += `<rect width="1920" height="1080" fill="url(#vig)" opacity=".55" pointer-events="none"/>`;
+    out += caption(T);
+    main.innerHTML = out;
+  };
+  const imgs = ['assets/flower-garden.jpg', 'assets/kelinci.webp'];
+  window.ready = Promise.all([document.fonts.load('700 40px Fredoka'), document.fonts.load('500 40px Fredoka'), ...imgs.map(f => new Promise(r => { const im = new Image(); im.onload = r; im.onerror = r; im.src = f; }))]);
+  window.renderAt(0);
+})();
+</script>
+</body>
+</html>
