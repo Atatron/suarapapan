@@ -126,4 +126,3 @@ export function rapikan(h, kalimat, konteks = '') {
   hasil.tanya_benda = normalkanJenis(hasil.tanya_benda);
   return hasil;
 }
-

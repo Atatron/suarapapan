@@ -1,0 +1,14 @@
+{
+  "fixedSubject": {
+    "input": "Ada satu ayam di atas meja dan satu manusia di samping meja.",
+    "humanImage": "/aset/obj/anak-laki-laki.webp",
+    "loaded": true
+  },
+  "projectorRefresh": {
+    "beforeCaption": "Ada satu ayam di atas meja dan satu manusia di samping meja.",
+    "after": {
+      "caption": "",
+      "scene": "1 ayam di atas meja; 1 manusia di samping meja."
+    }
+  }
+}

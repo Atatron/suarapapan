@@ -1,0 +1,100 @@
+{
+  "baseline": "origin/main 62b5fa6 snapshot; production separately inspected by parent",
+  "fixedFeature": "working tree based on 39e9278; focused lookup fix, not deployed",
+  "counts": {
+    "baselineObjects": 192,
+    "featureObjects": 410
+  },
+  "lookup": [
+    {
+      "input": "manusia",
+      "baselineMain": null,
+      "fixedFeature": "anak-laki-laki"
+    },
+    {
+      "input": "orang",
+      "baselineMain": null,
+      "fixedFeature": "anak-laki-laki"
+    },
+    {
+      "input": "seseorang",
+      "baselineMain": null,
+      "fixedFeature": "anak-laki-laki"
+    },
+    {
+      "input": "teman",
+      "baselineMain": null,
+      "fixedFeature": "anak-laki-laki"
+    },
+    {
+      "input": "anak menggunakan kursi roda",
+      "baselineMain": "kursi",
+      "fixedFeature": "anak-kursi-roda"
+    },
+    {
+      "input": "anak dengan kursi roda",
+      "baselineMain": "kursi",
+      "fixedFeature": "anak-kursi-roda"
+    },
+    {
+      "input": "anak memakai alat bantu dengar",
+      "baselineMain": null,
+      "fixedFeature": "anak-dengan-alat-bantu-dengar"
+    },
+    {
+      "input": "si anak dengan alat bantu dengar yang baru",
+      "baselineMain": null,
+      "fixedFeature": "anak-dengan-alat-bantu-dengar"
+    },
+    {
+      "input": "si anak tunanetra dengan tongkat yang baru",
+      "baselineMain": null,
+      "fixedFeature": "anak-tunanetra-dengan-tongkat"
+    },
+    {
+      "input": "anak kucing",
+      "baselineMain": "kucing",
+      "fixedFeature": "kucing"
+    },
+    {
+      "input": "kuda nil",
+      "baselineMain": "kuda-nil",
+      "fixedFeature": "kuda-nil"
+    },
+    {
+      "input": "benda-tidak-dikenal",
+      "baselineMain": null,
+      "fixedFeature": null
+    },
+    {
+      "input": "manusia xylophor",
+      "baselineMain": null,
+      "fixedFeature": null
+    },
+    {
+      "input": "constructor",
+      "baselineMain": "constructor",
+      "fixedFeature": null
+    }
+  ],
+  "missingCataloguedObjectFilesLocally": [],
+  "contrast": {
+    "contrastOnGreen": {
+      "F3F4EE": 12.739347876954447,
+      "C9D8D1": 9.545904074551888,
+      "E9B949": 7.716765852691751,
+      "7FC4A8": 6.954039455311698,
+      "2E5A4C": 1.8002700523686703
+    },
+    "fullscreenButton14pxOpacityPoint6": 4.440520165959031,
+    "overlayOverWhiteWorstCase": {
+      "chalk": 7.186035122209342,
+      "yellow": 4.35288768176457
+    }
+  },
+  "limits": [
+    "No real microphone, production LLM, hardware permission, projector or live asset request performed by this subagent.",
+    "Overlay-on-white is an analytical bound, not an observed rendered-image failure.",
+    "Text color ratios are not a meaningful whole-sprite WCAG assessment."
+  ]
+}

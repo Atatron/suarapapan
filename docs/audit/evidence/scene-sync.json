@@ -1,0 +1,147 @@
+{
+  "baseline": "origin/main 62b5fa6 snapshot; critical scene/sync functions unchanged from aa16d88/e0c7cb3",
+  "results": [
+    {
+      "id": "PASS-apples-no-double-count",
+      "input": "3 apples existing; Tiga apel itu dimakan satu",
+      "cleaned": {
+        "entitas": [],
+        "latar": "",
+        "konsep": "tidak_ada",
+        "peristiwa": [
+          {
+            "tipe": "hapus",
+            "target": "apel",
+            "jumlah": 1,
+            "posisi": ""
+          }
+        ],
+        "pertanyaan": "",
+        "tanya_benda": "",
+        "tanya_jenis": "tidak_ada",
+        "gabung": false,
+        "tambahEksplisit": false
+      },
+      "actual": {
+        "alive": 2,
+        "groups": {
+          "apel": 2
+        },
+        "soal": {
+          "teks": "3 − 1 = ?",
+          "jawaban": 2,
+          "opsi": [
+            1,
+            2,
+            3
+          ]
+        },
+        "catatan": [],
+        "penjelasan": []
+      }
+    },
+    {
+      "id": "PASS-render-hard-cap",
+      "input": "entitas [{jenis:apel,jumlah:500}]",
+      "actual": {
+        "alive": 20,
+        "groups": {
+          "apel": 20
+        },
+        "soal": null,
+        "catatan": [],
+        "penjelasan": []
+      },
+      "note": "20-object total cap exists. No catatan warns that 500 was truncated."
+    },
+    {
+      "id": "BUG-mixed-add-remove-wrong-answer",
+      "input": "3 apples + 2 birds; remove 1 apple and add 2 birds",
+      "actual": {
+        "alive": 6,
+        "groups": {
+          "apel": 2,
+          "burung": 4
+        },
+        "soal": {
+          "teks": "5 − 1 = ?",
+          "jawaban": 4,
+          "rincian": [
+            {
+              "jenis": "apel",
+              "n": 3
+            },
+            {
+              "jenis": "burung",
+              "n": 2
+            }
+          ],
+          "opsi": [
+            3,
+            4,
+            5
+          ]
+        },
+        "catatan": [],
+        "penjelasan": [
+          "5 karakter di papan − 1 yang pergi = 4."
+        ]
+      },
+      "expected": "6 live objects; arithmetic must account for BOTH additions and removals."
+    },
+    {
+      "id": "BUG-departure-ghosts-consume-capacity",
+      "input": "20 apples; remove 10 then add 10 in one result",
+      "actual": {
+        "alive": 10,
+        "groups": {
+          "apel": 10
+        },
+        "soal": {
+          "teks": "10 + 0 = ?",
+          "jawaban": 10,
+          "opsi": [
+            9,
+            10,
+            11
+          ]
+        },
+        "catatan": [
+          "Papan dibatasi 20 benda."
+        ],
+        "penjelasan": [
+          "10 apel + 0 apel yang datang = 10."
+        ]
+      },
+      "expected": "20 live apples within the live-object cap."
+    },
+    {
+      "id": "BUG-undo-stale-api-completion",
+      "method": "Executed source-extracted Guru.proses callback with deferred uraikan; real engine/history modules.",
+      "duringUndo": {
+        "count": 0,
+        "redo": 2
+      },
+      "afterCompletion": {
+        "count": 4,
+        "context": "apel: 2, burung: 2",
+        "redo": 0,
+        "busy": 0,
+        "error": ""
+      },
+      "expected": "Undo must invalidate/cancel pending work or explicitly rebase it against the new scene, without resurrecting undone objects."
+    },
+    {
+      "id": "SYNC-refresh-contract",
+      "method": "Native Node BroadcastChannel protocol reproduction of source handlers; no browser/device assertion.",
+      "teacherOpen": {
+        "sceneRestored": 5,
+        "captionRestored": ""
+      },
+      "teacherClosed": {
+        "sceneRestored": 0
+      },
+      "note": "Normal refresh restores scene while Guru is alive. Caption is not part of handshake. No persistence without an active teacher."
+    }
+  ]
+}

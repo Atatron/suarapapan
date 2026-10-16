@@ -32,7 +32,9 @@ const REL = new Set(['atas', 'bawah', 'samping', 'sebelah', 'depan', 'belakang',
 // Sapaan: "anak-anak", "ibu" tanpa angka adalah menyapa, bukan benda di papan.
 const SAPAAN = new Set(['anak', 'anak-anak', 'ibu', 'bapak', 'guru', 'adik', 'kakak', 'teman', 'teman-teman', 'murid', 'siswa', 'bu', 'pak']);
 
-const adaBenda = (k) => Boolean(P.OBJ[k] || P.OBJ[P.ALIAS_OBJ[k]]);
+const adaBenda = (k) => Object.hasOwn(P.OBJ, k)
+  || (Object.hasOwn(P.ALIAS_OBJ, k) && Object.hasOwn(P.OBJ, P.ALIAS_OBJ[k]));
+const MAKS_KATA_BENDA = Math.max(...[...Object.keys(P.OBJ), ...Object.keys(P.ALIAS_OBJ)].map((k) => k.split('-').length));
 const token = (teks) => String(teks || '').toLowerCase().match(/\d+|[a-z]+(?:-[a-z]+)*/g) || [];
 
 /** Satu kata → benda di pustaka ("kucingnya" → "kucing", "kelinci-kelinci" → "kelinci"), atau null. */
@@ -44,10 +46,13 @@ function bendaTunggal(t) {
   const tanpaNya = dasar.replace(/nya$/, '');
   return tanpaNya !== dasar && adaBenda(tanpaNya) ? tanpaNya : null;
 }
-/** Benda di posisi i (dua kata lebih dulu: "kuda nil"). → { jenis, panjang } atau null. */
+/** Frasa benda terpanjang lebih dulu, termasuk "anak menggunakan kursi roda". */
 function bendaDi(t, i) {
   if (i >= t.length) return null;
-  if (i + 1 < t.length && adaBenda(`${t[i]}-${t[i + 1]}`)) return { jenis: `${t[i]}-${t[i + 1]}`, panjang: 2 };
+  for (let n = Math.min(MAKS_KATA_BENDA, t.length - i); n >= 2; n--) {
+    const jenis = t.slice(i, i + n).join('-');
+    if (adaBenda(jenis)) return { jenis, panjang: n };
+  }
   const b = bendaTunggal(t[i]);
   return b ? { jenis: b, panjang: 1 } : null;
 }
@@ -95,8 +100,13 @@ function cariKelompok(t) {
       if (b) j = b.akhir; else { i = j; continue; }
     }
     let potong = false;
+    const awalBenda = j;
     while (j < t.length && (KLASIFIKATOR.has(t[j]) || t[j] === 'potong')) { if (t[j] === 'potong') potong = true; j++; }
-    const b = bendaDi(t, j);
+    let b = bendaDi(t, j);
+    // "dua orang guru" memakai orang sebagai penggolong; "dua orang di samping
+    // meja" memakai orang sebagai subjek. "seorang" sendiri juga berarti manusia.
+    if (!b && t[awalBenda] === 'orang') { j = awalBenda; b = bendaDi(t, j); }
+    if (!b && t[a.akhir - 1] === 'seorang') b = { jenis: 'orang', panjang: 0 };
     if (b) hasil.push({ n, jenis: b.jenis, mulai: i, akhir: j + b.panjang });
     else if (potong) hasil.push({ n, jenis: null, potong: true, mulai: i, akhir: j }); // "makan satu potong"
     else hasil.push({ n, jenis: null, mulai: i, akhir: j, tanpaBenda: true });
