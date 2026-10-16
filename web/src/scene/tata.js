@@ -19,15 +19,15 @@ const adaGambar = (jenis) => { const n = cariGambar(jenis); return n && UKURAN[n
 /** Tinggi nyata (m) → tinggi tampil (m) setelah dimampatkan. */
 export const tinggiTampil = (meter) => Math.min(3.2, Math.max(MIN_METER, MANUSIA * (meter / MANUSIA) ** EKSPONEN));
 
-/** Skala perspektif di garis kaki py: atas wilayah 0,62, bawah 1,0 (boleh sedikit lewat saat diseret). */
+/** Skala perspektif di garis kaki py: atas wilayah 0,72, bawah 1,0 (boleh sedikit lewat saat diseret). */
 export function perspektif(py, wilayah = WILAYAH_BAWAAN) {
   const [y0, y1] = wilayah.y;
   const z = Math.min(1.3, Math.max(-0.3, (py - y0) / (y1 - y0)));
-  return 0.62 + 0.38 * z;
+  return 0.72 + 0.28 * z;
 }
 
 /** Makin banyak karakter, makin kecil, supaya semuanya muat. */
-export const kepadatan = (n) => (n <= 3 ? 1 : n <= 6 ? 0.8 : n <= 12 ? 0.62 : n <= 24 ? 0.5 : 0.4);
+export const kepadatan = (n) => (n <= 4 ? 1 : n <= 8 ? 0.86 : n <= 14 ? 0.72 : n <= 24 ? 0.58 : 0.46);
 
 /** Ukuran satu karakter di garis kaki py: tinggi isi (cqh), tinggi/lebar sel, dan sisi isi. */
 export function ukuranKarakter(jenis, py, n, wilayah) {
@@ -52,9 +52,10 @@ export function ukuranKarakter(jenis, py, n, wilayah) {
  */
 export function tataObjek(objek, wilayah = WILAYAH_BAWAAN) {
   const n = objek.length;
-  // Area yang disarankan latar bisa sempit (mis. tepi sungai); sebar sedikit lebih lebar supaya tidak menumpuk.
-  const x0 = Math.max(0.05, wilayah.x[0] - 0.25);
-  const x1 = Math.min(0.95, wilayah.x[1] + 0.25);
+  // Sebar di seluruh lebar papan (bukan hanya area sempit yang disarankan latar): karakter tidak
+  // menumpuk di satu sisi dan tidak perlu mengecil. Latar hanya menentukan kedalaman (tanah/air).
+  const x0 = 0.07;
+  const x1 = 0.93;
   const [y0, y1] = wilayah.y;
   const langkahY = 0.28 * (y1 - y0);
   const hasil = new Array(n);
@@ -95,13 +96,16 @@ export function tataObjek(objek, wilayah = WILAYAH_BAWAAN) {
       i, u: ukuranKarakter(objek[i].jenis, py, n, wilayah), sela: k ? selaAntara(arr[k - 1], i) : 0,
     }));
     const lebarBaris = isi.reduce((t, e) => t + e.sela + e.u.lebar, 0);
-    const slot = lebarBaris / isi.length;
-    const geser = baris % 2 ? (baris % 4 === 1 ? 1 : -1) * slot * 0.5 : 0;
-    let x = Math.min(x1 - lebarBaris, Math.max(x0, (x0 + x1) / 2 - lebarBaris / 2 + geser));
+    // Sisa ruang dibagi rata supaya baris terasa tersebar; jarak dibatasi agar tidak terlalu renggang.
+    const sisa = Math.max(0, x1 - x0 - lebarBaris);
+    const jarak = Math.min(0.1, sisa / (isi.length + 1));
+    const total = lebarBaris + jarak * (isi.length - 1);
+    const geser = baris % 2 ? (baris % 4 === 1 ? 1 : -1) * Math.min(0.5 * (lebarBaris / isi.length), jarak * 0.8 + 0.02) : 0;
+    let x = Math.min(x1 - total, Math.max(x0, (x0 + x1) / 2 - total / 2 + geser));
     for (const { i, u, sela } of isi) {
       x += sela;
       hasil[i] = { px: x + u.lebar / 2, py, ...u };
-      x += u.lebar;
+      x += u.lebar + jarak;
     }
   }
   return hasil;

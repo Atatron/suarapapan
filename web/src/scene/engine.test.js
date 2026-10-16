@@ -922,7 +922,7 @@ test('proporsi: orang dewasa ≈ 44% tinggi papan di depan; makin ke belakang ma
   const depan = ukuranKarakter('guru', 0.92, 1).isi;
   const belakang = ukuranKarakter('guru', 0.56, 1).isi;
   assert.ok(depan > 38 && depan < 50, `depan ${depan}`);
-  assert.ok(belakang < depan * 0.7, 'perspektif');
+  assert.ok(belakang < depan * 0.8, 'perspektif');
   assert.ok(perspektif(0.92) > perspektif(0.56));
   assert.ok(tinggiTampil(0.03) >= 0.55 && tinggiTampil(5) <= 3.2);
 });
