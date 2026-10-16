@@ -2,7 +2,7 @@
 
 Date: **16 October 2026, Asia/Bangkok**. Target: <https://suarapapan.vercel.app>.
 Original asset integration: [PR #1](https://github.com/Atatron/suarapapan/pull/1), now merged.
-The audit fixes are prepared as a separate follow-up PR against the updated main branch.
+Audit remediation: [PR #2](https://github.com/Atatron/suarapapan/pull/2), based on the updated main branch.
 
 The findings below describe the **audited baseline**, followed by the remediation
 status for this branch. Code fixes are verified locally; the live deployment has

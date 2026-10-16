@@ -245,8 +245,8 @@ Kami lebih suka juri mendengarnya dari kami:
 Gunakan **Buka papan kelas ini**. URL `?sesi=...` memisahkan kelas; panel guru
 terbaru pada sesi yang sama mengambil alih kendali. Sambungan memakai
 BroadcastChannel pada **browser, profil, origin, dan perangkat yang sama**.
-Papan, caption, serta riwayat disimpan secara lokal sampai tujuh hari untuk
-pemulihan saat muat ulang. Rekaman audio tidak ikut disimpan.
+Papan, caption, serta riwayat disimpan secara lokal untuk pemulihan saat muat ulang.
+Snapshot yang berusia lebih dari tujuh hari tidak dipakai untuk pemulihan. Rekaman audio tidak ikut disimpan.
 **Latar sederhana** menampilkan papan hijau dengan garis tepi sprite.
 
 Rekaman untuk transkripsi aplikasi melewati filter WAV lokal dan server.
