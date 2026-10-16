@@ -269,9 +269,8 @@ export function uraiLokal(kalimat, konteks = 'kosong') {
     } else if (ada && adaHapus && !tanya) {
       const potongan = ada.bagi;
       pernyataan.peristiwa.push({ tipe: potongan ? 'ambil' : 'hapus', target: k.jenis, jumlah: jumlahPeristiwa.get(k) ?? k.n, posisi: '', aksi: '', aksi_awal: '' });
-    } else if (!ada && papan.length === 0 && pastiHapus && !adaTambah) {
-      yakin = 'rendah'; // "dua kelinci pergi" padahal papan kosong: ambigu
-      pernyataan.entitas.push({ jenis: k.jenis, jumlah: k.n, aksi: 'diam', posisi: '', bagi: 0, emoji: '', emoji_acuan: '' });
+    } else if (!ada && pastiHapus) {
+      yakin = 'rendah'; // "dua kelinci pergi" padahal kelinci tidak ada di papan: tidak ada yang bisa dihapus, jangan menciptakan benda
     } else {
       const aksi = cariAksi(t, k.akhir, segmenAkhir);
       const posisi = cariPosisi(t, k.akhir, segmenAkhir)?.teks || '';
@@ -283,6 +282,18 @@ export function uraiLokal(kalimat, konteks = 'kosong') {
     }
   }
 
+  // --- "semua kelinci pergi" / "kelincinya pergi semua": tanpa angka, semua yang ada dihapus ---
+  if (!bendaKelompok.length && pastiHapus && kataKunci(new Set(['semua', 'semuanya', 'seluruh', 'seluruhnya']))) {
+    for (let i = 0; i < t.length; i++) {
+      const b = bendaDi(t, i);
+      const ada = b && adaDi(b.jenis);
+      if (ada) {
+        dipahami = true;
+        pernyataan.peristiwa.push({ tipe: 'hapus', target: b.jenis, jumlah: ada.n, posisi: '', aksi: '', aksi_awal: '' });
+        break;
+      }
+    }
+  }
   // --- "makan satu potong" (pecahan), tanpa nama benda ---
   const potong = kelompok.find((k) => k.potong && !k.jenis);
   if (potong && !bendaKelompok.length) {

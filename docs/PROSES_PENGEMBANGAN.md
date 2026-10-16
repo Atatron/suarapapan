@@ -70,7 +70,7 @@ Latensi diukur pada laptop dengan GPU RTX 5060.
 
 ### Pengujian otomatis
 
-`cd web && npm test` menjalankan **113 uji** (112 lulus, 1 dilewati karena butuh berkas audio).
+`cd web && npm test` menjalankan **117 uji** (116 lulus, 1 dilewati karena butuh berkas audio).
 Yang diuji: mesin adegan, aritmetika beberapa jenis karakter, riwayat Batalkan/Ulangi,
 pembersih hasil parser, pencarian gambar dan latar, pengkodean audio, pendeteksi ucapan,
 penghitung kesalahan kata, penguraian aturan lokal, dan batas laju API.

@@ -21,7 +21,7 @@ const KATA_GABUNG = /\b(datang|muncul|juga|bersama|ikut|menyusul|bergabung|masuk
 const KATA_BERHENTI = /\b(berhenti|diam|tidak bergerak|tak bergerak|istirahat|tidur|duduk)\b/i;
 const KATA_TAMBAH_EKSPLISIT = /\b(lagi|tambahan|lainnya|lain)\b/i;
 const KATA_DUA_PERISTIWA = /\b(lagi|lalu|kemudian|setelah itu|serta)\b/i;
-const KATA_ULANG_TETAP = new Set(['kupu-kupu', 'kura-kura', 'laba-laba', 'biri-biri', 'undur-undur', 'ubur-ubur', 'lumba-lumba', 'laki-laki']);
+export const KATA_ULANG_TETAP = new Set(['kupu-kupu', 'kura-kura', 'laba-laba', 'biri-biri', 'undur-undur', 'ubur-ubur', 'lumba-lumba', 'laki-laki', 'cumi-cumi', 'layang-layang']);
 const AKSI_KE_ENUM = {
   berlari: 'lari', lari: 'lari', berjalan: 'lari', berlarian: 'lari', berkejaran: 'lari',
   melompat: 'lompat', lompat: 'lompat', meloncat: 'lompat', bermain: 'lompat', 'melompat-lompat': 'lompat',

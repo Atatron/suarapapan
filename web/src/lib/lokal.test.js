@@ -124,7 +124,7 @@ function bandingkan(nama) {
     if (!r || r.yakin !== 'tinggi') continue;
     tinggi++;
     const harap = [...d.entitas.map(([j, n]) => `${j}+${n}`), ...d.peristiwa.map(([t, j, n]) => `${j}${t === 'hapus' ? '-' : '+'}${n}`)].sort().join(' ');
-    const dapat = [...r.hasil.entitas.map((e) => `${e.jenis}+${e.jumlah}`),
+    const dapat = [...r.hasil.entitas.map((e) => `${e.jenis}+${Math.min(e.jumlah, 20)}`) /* papan memuat 20 */,
       ...r.hasil.peristiwa.map((p) => `${p.target}${p.tipe === 'hapus' || p.tipe === 'ambil' ? '-' : '+'}${p.jumlah}`)].sort().join(' ');
     if (harap === dapat) benarTinggi++; else salah.push(`${d.kalimat} → ${dapat} (seharusnya ${harap})`);
   }
@@ -144,4 +144,22 @@ test('"laki-laki" bukan kata ulang: tetap menjadi gambar anak laki-laki, bukan e
   assert.equal(r.hasil.entitas[0].jenis, 'laki-laki');
   assert.equal(cariGambar('laki-laki'), 'anak-laki-laki');
   assert.equal(cariGambar('laki'), 'anak-laki-laki'); // papan lama yang sudah berlabel "laki"
+});
+
+test('jumlah di atas batas papan: guru diberi tahu, bukan dipotong diam-diam', () => {
+  const r = ucap(ADEGAN_KOSONG, 'Ada 50 kelinci.');
+  assert.equal(hitung(r.adegan, 'kelinci'), 20);
+  assert.ok(r.catatan.some((c) => /20 gambar/.test(c)), r.catatan.join('|'));
+});
+
+test('menghapus benda yang tidak ada di papan tidak menciptakan benda; "semua X pergi" menghapus semuanya', () => {
+  assert.equal(uraiLokal('Dua kelinci pergi lagi.', 'kosong'), null);
+  const r = ucap(ucap(ADEGAN_KOSONG, 'Ada empat kucing.').adegan, 'Semua kucing pergi.');
+  assert.equal(hitung(r.adegan, 'kucing'), 0);
+});
+
+test('nama benda panjang, kata ulang tetap, dan tempat dua kata dikenali', () => {
+  assert.equal(uraiLokal('Ada dua anak kursi roda.', 'kosong').hasil.entitas[0].jenis, 'anak-kursi-roda');
+  assert.equal(uraiLokal('Ada tiga cumi cumi di laut.', 'kosong').hasil.entitas[0].jenis, 'cumi-cumi');
+  assert.equal(uraiLokal('Ada tiga ikan di bawah laut.', 'kosong').hasil.latar, 'bawah-laut');
 });
