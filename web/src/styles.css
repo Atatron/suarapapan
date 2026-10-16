@@ -180,6 +180,14 @@ button { font: inherit; }
 .adegan-tempat-tepat { position: absolute; z-index: 2; top: 2%; right: 2%; margin: 0; width: 19%; max-height: 35%; text-align: center; pointer-events: none; }
 .adegan-tempat-tepat img { display: block; width: 100%; height: 17cqh; object-fit: contain; }
 .adegan-tempat-tepat figcaption { display: inline-block; max-width: 100%; padding: .15em .55em; border-radius: .5em; background: #fffdf2ed; color: #16302a; font-size: clamp(.6rem, 2.3cqh, 1.1rem); line-height: 1.25; }
+.kelompok-grid { position: absolute; inset: 7%; display: grid; grid-template-columns: repeat(var(--kolom), minmax(0, 1fr)); gap: 2cqh; }
+.kelompok-kartu { display: flex; flex-direction: column; justify-content: center; min-height: 0; border: 2px solid #7e9a8c; border-radius: 2cqh; background: #fffdf2ec; padding: 1cqh; }
+.kelompok-label { color: #16302a; font-size: 2.5cqh; text-align: center; }
+.kelompok-isi { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: .4cqh; min-height: 0; }
+.kelompok-sprite { position: relative; max-width: 28%; padding: 0; border: 0; background: transparent; }
+.kelompok-sprite:disabled { opacity: 1; }
+.kelompok-sprite .benda-img { width: 100%; height: auto; }
+.operasi-bilangan { position: absolute; inset: 30% 8%; display: grid; place-items: center; border-radius: 3cqh; background: #fffdf2eb; color: #16302a; font-size: 12cqh; margin: 0; }
 .papan-jelas .benda-img { filter: drop-shadow(1px 0 0 var(--kapur)) drop-shadow(-1px 0 0 var(--kapur)) drop-shadow(0 1px 0 var(--kapur)) drop-shadow(0 -1px 0 var(--kapur)); }
 @media (max-width: 700px) {
   .papan { padding-top: 112px; }

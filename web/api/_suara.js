@@ -28,6 +28,7 @@ export const SKEMA_GABUNGAN = {
 };
 
 const KATA_KERJA = [
+  'tambah', 'kurang', 'kali', 'dikali', 'dikalikan', 'dibagi', 'kelompok', 'masing-masing', 'sisa', 'perkalian', 'pembagian',
   'berlari', 'melompat', 'terbang', 'berenang', 'jatuh', 'pergi', 'datang', 'bertambah', 'dimakan', 'meletus',
   'diambil', 'dibagi', 'dipotong', 'sama besar', 'potong', 'lagi', 'tersisa', 'tinggal', 'semuanya', 'berapa',
   'di atas', 'di bawah', 'di samping', 'di depan', 'di belakang', 'di dalam',

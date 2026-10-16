@@ -6,7 +6,7 @@ saat aplikasi berjalan.
 import re
 from katalog import id_aset
 
-LABEL_JENIS = ["JUMLAH", "BENDA", "AKSI", "TEMPAT", "POSISI", "PERISTIWA"]
+LABEL_JENIS = ["JUMLAH", "BENDA", "AKSI", "TEMPAT", "POSISI", "PERISTIWA", "OPERATOR"]
 LABEL = ["O"] + [f"{p}-{j}" for j in LABEL_JENIS for p in ("B", "I")]
 LABEL2ID = {l: i for i, l in enumerate(LABEL)}
 

@@ -6,7 +6,8 @@ the board unchanged and asks the teacher to rewrite the sentence.
 import copy
 import re
 
-from bahasa import AKSI_KE_ENUM
+from bahasa import AKSI_KE_ENUM, kata_ke_angka, tokenisasi
+from aritmetika import urai_operasi, hitung_operasi
 
 from katalog import ASET as KATALOG, INDEKS as DATA_INDEKS, normal, temukan
 
@@ -49,16 +50,39 @@ def amankan(raw, kalimat, konteks=''):
         return perlu_tinjau('UNSUPPORTED_SCOPE', 'Penyangkalan, kutipan, atau kalimat bersyarat perlu diperjelas.', [kalimat])
     if re.search(r'\b(eh\s+salah|ralat|maksudnya)\b', kalimat, re.I):
         return perlu_tinjau('SELF_CORRECTION', 'Tulis ulang jumlah akhir yang dimaksud.', [kalimat])
+    operasi = urai_operasi(kalimat)
+    if operasi:
+        math = hitung_operasi(operasi)
+        if math.get('error'):
+            return perlu_tinjau('UNSUPPORTED_ARITHMETIC', math['error'], [kalimat])
+        return {**copy.deepcopy(KOSONG), 'operasi': operasi, 'konsep': math['concept']}
+    if raw.get('operasi'):
+        return perlu_tinjau('UNSUPPORTED_ARITHMETIC', 'Tulis satu operasi lengkap dengan dua bilangan.', [kalimat])
     result = {**copy.deepcopy(KOSONG), **{k: copy.deepcopy(raw[k]) for k in KOSONG if k in raw}}
     uttered = disebut(kalimat)
+    if result['entitas']:
+        all_spans = temukan(kalimat) + temukan(kalimat,'tempat') + temukan(kalimat,'latar')
+        for word in re.finditer(r'\b(merah|biru|hijau|kuning|putih|hitam|coklat|cokelat|ungu|oranye|pink|red|blue|green|yellow|white|black|purple|orange)\b',kalimat,re.I):
+            if not any(a['start'] <= word.start() and a['end'] >= word.end() for a in all_spans):
+                return perlu_tinjau('ASSET_GROUNDING','Variasi warna tersebut belum tersedia dalam aset.',[word[0]])
     previous = {}
     for part in re.split(r',\s*(?![^()]*\))', konteks):
-        m = re.match(r'\s*(.+?)\s*:\s*\d+', part)
+        m = re.match(r'\s*(.+?)\s*:?\s+\d+', part)
         if m:
-            previous[m[1].strip()] = INDEKS['obj'].get(normal(m[1]))
+            previous[m[1].strip().rstrip(':')] = INDEKS['obj'].get(normal(m[1].strip().rstrip(':')))
     adjustments = []
     words = re.findall(r'\w+(?:-\w+)*', kalimat.lower())
     spoken_actions = {AKSI_KE_ENUM.get(w) for w in words}
+    # Explicit changes to an existing set must never become a replacement
+    # scene or a confident no-op when the tagger misses PERISTIWA/BENDA.
+    add = bool(set(words) & {'tambah', 'tambahkan', 'ditambah', 'menambah', 'menambahkan', 'bertambah'})
+    remove = bool(set(words) & {'hapus', 'hapuskan', 'hilangkan', 'kurangi', 'dikurangi', 'dimakan', 'makan', 'diambil', 'ambil', 'pergi', 'hilang', 'habis'})
+    existing_targets = uttered & set(previous.values())
+    if existing_targets and (add or remove) and not result['pertanyaan']:
+        expected = 'hapus' if remove else 'tambah'
+        covered = {INDEKS['obj'].get(normal(p.get('target', ''))) for p in result['peristiwa'] if p.get('tipe') == expected}
+        if add and remove or not existing_targets <= covered:
+            return perlu_tinjau('OPERATION_MISMATCH', 'Tindakan pada benda yang sudah ada belum sesuai kalimat. Periksa perintah.', [kalimat])
     for key, name_key in (('entitas', 'jenis'), ('peristiwa', 'target')):
         for item in result[key]:
             name = item.get(name_key, '')
@@ -66,6 +90,21 @@ def amankan(raw, kalimat, konteks=''):
             if not identity or identity not in uttered and not (key == 'peristiwa' and identity in previous.values()):
                 return perlu_tinjau('ASSET_GROUNDING', 'Benda belum tersedia atau tidak disebut dalam kalimat.', [name])
             item[name_key] = identity
+            # A high token score is not evidence for a quantity. Check an
+            # explicit noun-adjacent operand before accepting a model count.
+            if key == 'entitas' or item.get('tipe') in ('tambah', 'hapus'):
+                quantities = []
+                for match in temukan(kalimat):
+                    if match['id'] != identity:
+                        continue
+                    before = tokenisasi(kalimat[:match['start']])
+                    for width in range(min(5,len(before)),0,-1):
+                        value = kata_ke_angka(before[-width:])
+                        if value is not None:
+                            quantities.append(value)
+                            break
+                if len(quantities) == 1 and min(20,max(1,quantities[0])) != min(20,max(1,item.get('jumlah',1))):
+                    return perlu_tinjau('QUANTITY_MISMATCH', 'Jumlah dari model berbeda dengan bilangan yang disebut. Periksa kalimat.', [name])
             if key == 'peristiwa':
                 # Keep the scene's semantic label so aliases edit the existing set.
                 matches = [label for label, ident in previous.items() if ident == identity]
@@ -102,12 +141,12 @@ def amankan(raw, kalimat, konteks=''):
     target = {p['target'] for p in result['peristiwa']}
     result['entitas'] = [e for e in result['entitas'] if not (e['jenis'] in target and e['jenis'] in previous)]
     if result['latar']:
-        tempat = INDEKS['tempat'].get(normal(result['latar']))
-        if not tempat or tempat not in disebut(kalimat, 'tempat'):
+        tempat = INDEKS['tempat'].get(normal(result['latar'])) or INDEKS['latar'].get(normal(result['latar']))
+        if not tempat or tempat not in disebut(kalimat, 'tempat') | disebut(kalimat,'latar'):
             return perlu_tinjau('ASSET_GROUNDING', 'Tempat belum tersedia atau tidak disebut.', [result['latar']])
         result['latar'] = tempat
     result['gabung'] = bool(re.search(r'\b(datang|juga|bersama|ikut|menyusul|bergabung|tambahkan|ditambah|menambah|bertambah|tambah|plus)\b', kalimat, re.I))
-    if result['konsep'] not in {'membilang', 'penjumlahan', 'pengurangan', 'pecahan', 'posisi', 'tidak_ada'}:
+    if result['konsep'] not in {'membilang', 'penjumlahan', 'pengurangan', 'perkalian', 'pembagian', 'pecahan', 'posisi', 'tidak_ada'}:
         result['konsep'] = 'tidak_ada'
     if adjustments:
         result.update(needsConfirmation=True, notice={'code': 'ADJUSTED_RESULT', 'message': '; '.join(adjustments) + '. Periksa pratinjau.', 'unresolvedSpans': []})

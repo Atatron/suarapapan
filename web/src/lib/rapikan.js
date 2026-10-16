@@ -3,9 +3,10 @@
 // Pengaman jalur Python ada di ml/validasi.py; keduanya memakai katalog yang sama.
 import { idAset } from '../scene/katalog.js';
 import { landaskanAdegan } from './landasan.js';
+import { uraiOperasi, hitungOperasi } from './aritmetika.js';
 
 export const AKSI = ['diam', 'lari', 'lompat', 'terbang', 'berenang', 'jatuh'];
-export const KONSEP = ['membilang', 'penjumlahan', 'pengurangan', 'pecahan', 'posisi', 'tidak_ada'];
+export const KONSEP = ['membilang', 'penjumlahan', 'pengurangan', 'perkalian', 'pembagian', 'pecahan', 'posisi', 'tidak_ada'];
 export const TIPE_PERISTIWA = ['hapus', 'tambah', 'bagi', 'ambil', 'pindah', 'ubah_aksi'];
 export const TANYA_JENIS = ['tidak_ada', 'benda', 'total', 'selisih', 'terbanyak', 'tersedikit'];
 
@@ -65,6 +66,8 @@ export function validasiAdegan(h) {
   const record = (x) => x !== null && typeof x === 'object' && !Array.isArray(x);
   const scalar = (x, k, tipe) => x[k] === undefined || (typeof x[k] === tipe && (tipe !== 'number' || Number.isFinite(x[k]) && Number.isInteger(x[k])));
   if (!record(h)) throw new GalatFormatAdegan();
+  if (h.operasi != null && (!record(h.operasi) || !['operator', 'jenis'].every((k) => scalar(h.operasi, k, 'string'))
+    || !['kiri', 'kanan'].every((k) => scalar(h.operasi, k, 'number')))) throw new GalatFormatAdegan();
   for (const k of ['entitas', 'peristiwa']) {
     if (h[k] === undefined) continue;
     if (!Array.isArray(h[k]) || h[k].length > 200) throw new GalatFormatAdegan();
@@ -92,6 +95,15 @@ export function rapikan(h, kalimat, konteks = '') {
   validasiAdegan(h);
   const tinjau = alasanTinjau(kalimat);
   if (tinjau) return { ...kosong, entitas: [], peristiwa: [], needsConfirmation: true, notice: { ...tinjau, unresolvedSpans: [String(kalimat)] } };
+  const operasi = uraiOperasi(kalimat);
+  if (operasi) {
+    const math = hitungOperasi(operasi);
+    if (math.error) return { ...kosong, entitas: [], peristiwa: [], needsConfirmation: true,
+      notice: { code: 'UNSUPPORTED_ARITHMETIC', message: math.error, unresolvedSpans: [String(kalimat)] } };
+    return { ...kosong, entitas: [], peristiwa: [], operasi, konsep: math.concept };
+  }
+  if (h.operasi) return { ...kosong, entitas: [], peristiwa: [], needsConfirmation: true,
+    notice: { code: 'UNSUPPORTED_ARITHMETIC', message: 'Operasi belum jelas. Tulis satu operasi lengkap dengan dua bilangan.', unresolvedSpans: [String(kalimat)] } };
   const hasil = { ...kosong, ...h };
   const penyesuaian = [];
   const labelKonteks = String(konteks).split(/,\s*(?![^()]*\))/)

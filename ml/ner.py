@@ -15,7 +15,8 @@ KATA_HITUNG = {"hitung", "hitunglah", "menghitung", "dihitung", "cacah"}
 KATA_BAGI = {"dibagi", "membagi", "dibelah", "membelah", "dipotong", "memotong", "bagi"}
 
 from bahasa import AKSI_KE_ENUM, kata_ke_angka, normalkan_benda, tipe_peristiwa, tokenisasi
-from katalog import id_aset
+from katalog import id_aset, temukan
+from aritmetika import urai_operasi, hitung_operasi
 
 MODEL_DEFAULT = Path(__file__).parent / "model" / "indobert-suarapapan"
 BATAS = 20
@@ -41,6 +42,10 @@ def rentang(kata, label, prob):
 
 
 def susun_json(kata, label, prob, konteks: str) -> dict:
+    op = urai_operasi(' '.join(kata))
+    if op:
+        math = hitung_operasi(op)
+        return {**kosong(), 'operasi': op, 'konsep': math.get('concept', 'tidak_ada')}
     r = rentang(kata, label, prob)
     benda = [x for x in r if x[0] == "BENDA"]
     peristiwa = [x for x in r if x[0] == "PERISTIWA"]
@@ -62,7 +67,10 @@ def susun_json(kata, label, prob, konteks: str) -> dict:
             jumlah_tunggu = None
 
     awal = next((k for k in kata if k not in PENGISI), "")
-    if awal in PERTANYAAN_AWAL or (kata and kata[-1] == "?" and not peristiwa):
+    if (awal in PERTANYAAN_AWAL or 'berapa' in kata or (kata and kata[-1] == '?')) and not any(x[0] == 'JUMLAH' for x in r) and not peristiwa:
+        target = pasangan[0][0] if pasangan else ''
+        return {**kosong(), 'konsep': 'membilang', 'pertanyaan': ' '.join(kata), 'tanya_jenis': 'total' if any(w in kata for w in ['semua','semuanya','total']) else 'benda', 'tanya_benda': target}
+    if awal in PERTANYAAN_AWAL or (kata and kata[-1] == '?' and not peristiwa):
         return kosong()
 
     # "Ayo hitung semua apel yang ada di layar": meminta menghitung, bukan menambah benda.
@@ -154,6 +162,15 @@ class PengenalNER:
                 p, idx = prob[t].max(-1)
                 label[w], yakin[w] = self.id2label[int(idx)], float(p)
             sebelum = w if s == 0 else None
+        # A supported compound is one asset even when the tagger recognizes
+        # only part of its name. Repair only spans already proposed as nouns;
+        # an actor/salutation tagged O is not added as an extra object.
+        word_spans = list(re.finditer(r'\w+(?:-\w+)*|[^\w\s]', kalimat.lower()))
+        for match in temukan(kalimat):
+            indexes = [i for i,m in enumerate(word_spans) if m.start() >= match['start'] and m.end() <= match['end']]
+            if indexes and any(label[i].endswith('-BENDA') for i in indexes):
+                for order,i in enumerate(indexes):
+                    label[i] = ('B-' if order == 0 else 'I-') + 'BENDA'
         return kata, label, yakin
 
     def urai(self, kalimat: str, konteks: str = "kosong") -> dict:

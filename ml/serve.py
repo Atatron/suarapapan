@@ -20,7 +20,7 @@ OLLAMA_URL = "http://127.0.0.1:11434/api/chat"
 OLLAMA_MODEL = os.environ.get("SUARAPAPAN_LLM", "qwen2.5:7b-instruct")
 
 AKSI = ["diam", "lari", "lompat", "terbang", "berenang", "jatuh"]
-KONSEP = ["membilang", "penjumlahan", "pengurangan", "pecahan", "posisi", "tidak_ada"]
+KONSEP = ["membilang", "penjumlahan", "pengurangan", "perkalian", "pembagian", "pecahan", "posisi", "tidak_ada"]
 
 # Skema ini dipaksakan ke Ollama (structured output), jadi model tidak bisa
 # mengembalikan JSON dengan bentuk lain.
